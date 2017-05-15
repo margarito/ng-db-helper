@@ -1,4 +1,4 @@
-# NgSQLiteOrm
+# MgtoNgOrm
 library that help to buil complete modele for cordova or ionic project with database management.
 
 # Notes
