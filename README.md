@@ -8,7 +8,7 @@ library that help to buil complete modele for cordova or ionic project with data
 * It exposes only `lib` directory.  
 
 
-[TL;DR] See [@ns/ng-demo-app] and [live demo].
+[TL;DR] See [@mgto/mgto-ng-orm-demo-app] and [live demo].
 # Usage
  * create new [@angular/cli] project: `ng new ng-demo-app --style scss`
  * install library: `npm install --save git://git@github.com:nsmolenskii/ng-demo-lib.git`
