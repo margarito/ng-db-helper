@@ -1,1 +1,1 @@
-export * from './mgto-ng-orm.module';
+export * from './core.module';

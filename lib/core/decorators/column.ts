@@ -1,11 +1,12 @@
+import { DbHelperModel } from '../models/db-helper-model.model';
 import { ColumnConfig } from './../models/column-config';
 import { Clause } from './../models/clause';
 import { QueryEngine } from './../singletons/query-engine';
 import { Deferer } from './../../utils/models/deferer';
 
-export function Column(config?) {
-    return (target: any, key: string) => {
-        let column = {
+export function Column<T extends DbHelperModel>(config?) {
+    return (target: T, key: string) => {
+        const column = {
             name: key,
             field: key,
             type: 'string',

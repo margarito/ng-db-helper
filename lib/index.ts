@@ -1,1 +1,1 @@
-export * from './core';
+export * from './ng-db-helper.module';
