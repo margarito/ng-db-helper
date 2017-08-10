@@ -19,7 +19,7 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
                 if (!this.cache[i]) {
                     const entity = new this.model();
                     const item = this.result.rows.item(i);
-                    const table = ModelManager.getInstance().getTable(this.model);
+                    const table = ModelManager.getInstance().getModel(this.model);
                     for (const column of table.columnList) {
                         if (this.projection && this.projection.indexOf(column.name) < 0) {
                             continue;

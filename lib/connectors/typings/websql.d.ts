@@ -16,13 +16,13 @@ interface DOMString extends String { }
 interface ObjectArray extends Array<any> { }
 
 
-//[Supplemental, NoInterfaceObject]
+// [Supplemental, NoInterfaceObject]
 interface WindowDatabase {
     openDatabase(name: DOMString, version: DOMString, displayName: DOMString, estimatedSize: number,
         creationCallback?: DatabaseCallback): Database;
 }
 
-//[Supplemental, NoInterfaceObject]
+// [Supplemental, NoInterfaceObject]
 interface WorkerUtilsDatabase {
     openDatabase(name: DOMString, version: DOMString, displayName: DOMString, estimatedSize: number,
         creationCallback?: DatabaseCallback): Database;
@@ -31,10 +31,8 @@ interface WorkerUtilsDatabase {
         creationCallback?: DatabaseCallback): DatabaseSync;
 }
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface DatabaseCallback {
-    /*handleEvent*/(database: Database): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type DatabaseCallback = (database: Database) => void;
 
 
 /** 4.3 Asynchronous database API - The transaction() and readTransaction() methods takes
@@ -63,20 +61,17 @@ interface Database {
         errorCallback?: SQLTransactionErrorCallback, successCallback?: SQLVoidCallback): void;
 }
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface SQLVoidCallback {
-    /*handleEvent*/(): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type SQLVoidCallback =
+    /*handleEvent*/() => void;
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface SQLTransactionCallback {
-    /*handleEvent*/(transaction: SQLTransaction): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type SQLTransactionCallback =
+    /*handleEvent*/(transaction: SQLTransaction) => void;
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface SQLTransactionErrorCallback {
-    /*handleEvent*/(error: SQLError): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type SQLTransactionErrorCallback =
+    /*handleEvent*/(error: SQLError) => void;
 
 /** 4.3.1 Executing SQL statements
  */
@@ -85,15 +80,13 @@ interface SQLTransaction {
         errorCallback?: SQLStatementErrorCallback): void;
 }
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface SQLStatementCallback {
-    /*handleEvent*/(transaction: SQLTransaction, resultSet: SQLResultSet): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type SQLStatementCallback =
+    /*handleEvent*/(transaction: SQLTransaction, resultSet: SQLResultSet) => void;
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface SQLStatementErrorCallback {
-    /*handleEvent*/(transaction: SQLTransaction, error: SQLError): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type SQLStatementErrorCallback =
+    /*handleEvent*/(transaction: SQLTransaction, error: SQLError) => void;
 
 
 /** 4.4 Synchronous database API
@@ -108,10 +101,9 @@ interface DatabaseSync {
     changeVersion(oldVersion: DOMString, newVersion: DOMString, callback: SQLTransactionSyncCallback): void;
 }
 
-//[Callback = FunctionOnly, NoInterfaceObject]
-interface SQLTransactionSyncCallback {
-    /*handleEvent*/(transaction: SQLTransactionSync): void;
-}
+// [Callback = FunctionOnly, NoInterfaceObject]
+type SQLTransactionSyncCallback =
+    /*handleEvent*/(transaction: SQLTransactionSync) => void;
 
 /** 4.4.1 Executing SQL statements
  */

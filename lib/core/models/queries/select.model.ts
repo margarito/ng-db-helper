@@ -57,7 +57,7 @@ class QuerySelect<T extends DbHelperModel> {
         const dbQuery = new DbQuery();
         dbQuery.page = this.page;
         dbQuery.size = this.size;
-        dbQuery.table = ModelManager.getInstance().getTable(this.model);
+        dbQuery.table = ModelManager.getInstance().getModel(this.model).name;
         dbQuery.type = this.type;
         dbQuery.query += this.type;
         if (this.proj) {

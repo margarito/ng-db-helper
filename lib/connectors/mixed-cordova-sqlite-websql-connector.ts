@@ -8,6 +8,7 @@ import { DbQuery } from '../core/models/db-query.model';
 import { ModelMigration } from '../core/interfaces/model-migration.interface';
 import { QueryConnector } from '../core/interfaces/query-connector.interface';
 import { DataModel } from '../core/models/data-model.model';
+import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
 
 export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelMigration {
     private ready = false;
@@ -17,6 +18,9 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
     constructor(private config: CordovaSqliteConnectorConfiguration) {
         if (window.cordova) {
             document.addEventListener('deviceready', () => {
+                if (!window['device']) {
+                    throw(new UnsatisfiedRequirementError('Mixed connector need cordova-plugin-device to be installed'));
+                }
                 if (device.platform === 'Browser') {
                     this.setupWebsqlConnector();
                 } else {

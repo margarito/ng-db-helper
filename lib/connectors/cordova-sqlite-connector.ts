@@ -30,13 +30,37 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
             throw(new UnsatisfiedRequirementError('You use cordova connector but cordova is not present !'));
         }
         document.addEventListener('deviceready', () => {
-            this.ready = true;
+            if (this.checkRequirements()) {
+                this.ready = true;
+            } else {
+                this.ready = false;
+            }
+
             if (this.onReadyObserver) {
                 this.onReadyObserver.next(this.ready);
                 this.onReadyObserver.complete();
                 this.onReadyObserver = null;
             }
         });
+    }
+
+    private checkRequirements() {
+        let isRequirementVerified = true;
+        if (!window.resolveLocalFileSystemURL) {
+            const err =
+              new UnsatisfiedRequirementError('On device supporting cordova sqlite, cordova-plugin-file is mandatory !');
+            console.error(err);
+            isRequirementVerified = false;
+        }
+
+        if (!window.sqlitePlugin) {
+            const err =
+              new UnsatisfiedRequirementError('On device supporting cordova sqlite, cordova-sqlite-storage is mandatory !');
+            console.error(err);
+            isRequirementVerified = false;
+        }
+
+        return isRequirementVerified;
     }
 
     /**
@@ -130,7 +154,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
                     window.resolveLocalFileSystemURL(cordova.file.applicationStorageDirectory, (dir) => {
                         (dir as DirectoryEntry).getDirectory('databases', {create : true},
                         (entry) => onTargetDirResolved(entry), (error: any) => observer.error(error));
-                    }, (err) => observer.error(err));
+                    }, (error) => observer.error(error));
                 } else {
                     observer.error(err);
                 }

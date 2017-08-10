@@ -22,12 +22,12 @@ class QueryInsert<T extends DbHelperModel> {
         let table;
         if (Array.isArray(this.model)) {
             if (this.model.length) {
-                table = ModelManager.getInstance().getTable(this.model[0]);
+                table = ModelManager.getInstance().getModel(this.model[0]);
             } else {
                 return null;
             }
         } else {
-            table = ModelManager.getInstance().getTable(this.model);
+            table = ModelManager.getInstance().getModel(this.model);
         }
         const dbQuery = new DbQuery();
         dbQuery.page = this.page;
@@ -61,7 +61,7 @@ class QueryInsert<T extends DbHelperModel> {
         if (Array.isArray(this.model)) {
             let table;
             if (this.model.length) {
-                table = ModelManager.getInstance().getTable(this.model[0]);
+                table = ModelManager.getInstance().getModel(this.model[0]);
             } else {
                 throw(new QueryError('Try to insert empty array', null, null));
             }

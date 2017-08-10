@@ -1,3 +1,4 @@
+import { DbHelperModel } from '../models/db-helper-model.model';
 import { DataModel } from '../models/data-model.model';
 import {BadColumnDeclarationError} from '../errors/bad-column-declaration.error';
 import {BadTableDeclarationError} from '../errors/bad-table-declaration.error';
@@ -49,11 +50,21 @@ export class ModelManager {
         return new DataModel(this.tables);
     }
 
-    public getModel(tableName): any {
-        return this.tables[tableName];
+    public getModelCount(): number {
+        return Object.getOwnPropertyNames(this.models).length;
     }
 
-    public getTable(model): any {
+    public getModel(model: string | DbHelperModel | {new(): DbHelperModel }): any {
+        if (model instanceof String) {
+            return this.tables[model];
+        } else if (model instanceof DbHelperModel) {
+            return this.tables[this.getTable(model.__class)];
+        } else {
+            return this.tables[this.getTable(model)];
+        }
+    }
+
+    public getTable(model: {new(): DbHelperModel }): any {
         return this.models[model.name];
     }
 }

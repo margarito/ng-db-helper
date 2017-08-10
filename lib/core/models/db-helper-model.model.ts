@@ -7,7 +7,7 @@ export abstract class DbHelperModel {
     public TABLE_NAME: string;
 
     public __rowid: number = null;
-    public __class = DbHelperModel;
+    public __class: {new(): DbHelperModel};
     public __inserted = false;
     public __partialWithProjection: string[] = null;
 

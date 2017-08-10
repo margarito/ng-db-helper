@@ -26,7 +26,7 @@ class QueryDelete<T extends DbHelperModel> {
 
 
     public build(): DbQuery {
-        const table = ModelManager.getInstance().getTable(this.model['__class'] ? this.model['class'] : this.model);
+        const table = ModelManager.getInstance().getModel(this.model);
         const dbQuery = new DbQuery();
         dbQuery.page = this.page;
         dbQuery.size = this.size;

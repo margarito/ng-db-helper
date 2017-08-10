@@ -35,7 +35,7 @@ class QueryCount<T> {
 
     public build(): DbQuery {
         const dbQuery = new DbQuery();
-        dbQuery.table = ModelManager.getInstance().getTable(this.model);
+        dbQuery.table = ModelManager.getInstance().getModel(this.model).name;
         dbQuery.type = this.type;
         dbQuery.query += this.type;
         if (this.proj) {

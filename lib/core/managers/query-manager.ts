@@ -23,7 +23,10 @@ export class QueryManager {
         instance.queryConnector = config.queryConnector;
         instance.modelMigration = config.modelMigration;
         const modelManager = ModelManager.getInstance();
-        modelManager.version = config.version;
+        ModelManager.version = config.version;
+        if (config.autoIncrementVersion && ModelManager.version) {
+            ModelManager.version += '.' + ModelManager.getInstance().getModelCount();
+        }
         const subscribe = instance.queryConnector.onReady().subscribe((ready: boolean) => {
             if (ready) {
                 instance.onQueryConnectorReady();
@@ -58,6 +61,8 @@ export class QueryManager {
                     .subscribe(() => {
                         this.dequeuePendingRequest();
                     }, (err) => this.onInitializationFailure(err));
+            } else {
+                this.dequeuePendingRequest();
             }
         }, (err) => this.onInitializationFailure(err));
     }

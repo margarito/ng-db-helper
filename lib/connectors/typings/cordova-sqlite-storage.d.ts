@@ -45,7 +45,8 @@ declare namespace SQLitePlugin {
     }
 
     interface Transaction {
-        executeSql(statement: string, params?: any[], success?: TransactionStatementSuccessCallback, error?: TransactionStatementErrorCallback): void;
+        executeSql(statement: string, params?: any[], success?: TransactionStatementSuccessCallback,
+            error?: TransactionStatementErrorCallback): void;
     }
 
     interface Database {

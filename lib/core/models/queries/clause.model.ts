@@ -4,7 +4,8 @@ export class Clause {
     public static OPERATORS = {
         OR: 'OR',
         AND: 'AND'
-    }
+    };
+
     public static COMPARATORS = {
         DIFF: '!=',
         LT: '<',

@@ -27,7 +27,7 @@ class QueryUpdate<T extends DbHelperModel> {
 
 
     public build(): DbQuery {
-        const table = ModelManager.getInstance().getTable(this.model.__class);
+        const table = ModelManager.getInstance().getModel(this.model);
         const dbQuery = new DbQuery();
         dbQuery.page = this.page;
         dbQuery.size = this.size;

@@ -25,7 +25,7 @@ export class CordovaSqliteConnectorConfiguration {
         const queries = <[string]>[];
         for (const table of dataModel.tables) {
             if (doDrop) {
-                queries.push('DROP TABLE `' + table.name + '`');
+                queries.push('DROP TABLE IF EXISTS `' + table.name + '`');
             }
             queries.push(Create(table).build());
         }
