@@ -1,7 +1,7 @@
 import { QueryPart } from './queries/query-part.model';
 export class DbQuery {
     page = 0;
-    params = [];
+    params = <any[]>[];
     query = '';
     size = 1000;
     table: string;

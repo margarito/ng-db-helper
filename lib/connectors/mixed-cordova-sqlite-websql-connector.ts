@@ -16,12 +16,12 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
     private connector: QueryConnector & ModelMigration;
 
     constructor(private config: CordovaSqliteConnectorConfiguration) {
-        if (window.cordova) {
+        if ((window as {[index:string]: any}).cordova) {
             document.addEventListener('deviceready', () => {
-                if (!window['device']) {
+                if (!(window as {[index:string]: any}).device) {
                     throw(new UnsatisfiedRequirementError('Mixed connector need cordova-plugin-device to be installed'));
                 }
-                if (device.platform === 'Browser') {
+                if ((window as {[index:string]: any}).device.platform === 'Browser') {
                     this.setupWebsqlConnector();
                 } else {
                     this.setupCordovaConnector();
@@ -51,7 +51,6 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
             if (this.onReadyObserver) {
                 this.onReadyObserver.next(this.ready);
                 this.onReadyObserver.complete();
-                this.onReadyObserver = null;
             }
         });
     }

@@ -6,10 +6,10 @@ import { Observable } from 'rxjs/Rx';
 export abstract class DbHelperModel {
     public TABLE_NAME: string;
 
-    public __rowid: number = null;
+    public __rowid: number;
     public __class: {new(): DbHelperModel};
     public __inserted = false;
-    public __partialWithProjection: string[] = null;
+    public __partialWithProjection: string[];
 
     public save(): Observable<any> {
         if (this.__inserted) {

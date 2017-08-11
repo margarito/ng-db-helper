@@ -1,10 +1,8 @@
 import { DbHelperModel } from '../models/db-helper-model.model';
-import { ColumnConfig } from './../models/column-config';
-import { Clause } from './../models/clause';
-import { QueryEngine } from './../singletons/query-engine';
-import { Deferer } from './../../utils/models/deferer';
+import { ColumnConfig } from './../models/column-config.model';
+import { Clause } from './../models/queries/clause.model';
 
-export function Column<T extends DbHelperModel>(config?) {
+export function Column<T extends DbHelperModel>(config?: ColumnConfig) {
     return (target: T, key: string) => {
         const column = {
             name: key,
@@ -31,7 +29,7 @@ export function Column<T extends DbHelperModel>(config?) {
         target.constructor.prototype.columns[column.name] = column;
         target.constructor.prototype.fields[column.field] = column;
 
-        if (config.primaryKey || config.unique) {
+        if (config && (config.primaryKey || config.unique)) {
             let fnName = 'getBy';
             if (key.length > 1) {
                 fnName +=  key.substring(0, 1).toUpperCase() + key.substring(1, key.length - 1);

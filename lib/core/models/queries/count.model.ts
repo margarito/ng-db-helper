@@ -1,3 +1,4 @@
+import { DbHelperModel } from '../db-helper-model.model';
 import { QueryManager } from '../../managers/query-manager';
 import { QueryResult } from '../../interfaces/query-result.interface';
 import { Observable, Observer } from 'rxjs/Rx';
@@ -6,7 +7,7 @@ import { DbQuery } from '../db-query.model';
 import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
-class QueryCount<T> {
+export class QueryCount<T extends DbHelperModel> {
     private type = 'SELECT';
     private whereClauses: ClauseGroup;
     private proj: string[];
@@ -72,6 +73,6 @@ class QueryCount<T> {
     }
 }
 
-export function Count<T>(model: { new(): T ; }): QueryCount<T> {
+export function Count<T extends DbHelperModel>(model: { new(): T ; }): QueryCount<T> {
     return new QueryCount(model);
 }

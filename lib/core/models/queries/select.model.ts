@@ -8,7 +8,7 @@ import { DbQuery } from '../db-query.model';
 import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
-class QuerySelect<T extends DbHelperModel> {
+export class QuerySelect<T extends DbHelperModel> {
     private type = 'SELECT';
     private whereClauses: ClauseGroup;
     private proj: string[];

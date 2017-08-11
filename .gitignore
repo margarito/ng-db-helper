@@ -10,3 +10,10 @@
 !README.md
 !tsconfig.json
 !tslint.json
+!LICENCE
+!rollup.config.js
+!index.ts
+lib/**/*.app.json
+lib/**/*.spec.json
+lib/**/*.ngsummary.json
+lib/**/*.ngfactory.ts

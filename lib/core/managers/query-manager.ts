@@ -4,19 +4,20 @@ import { ModelMigration } from '../interfaces/model-migration.interface';
 import { QueryError } from '../errors/query.error';
 import { ModelManager } from './model-manager';
 import { DbQuery } from '../models/db-query.model';
+import { UnsatisfiedRequirementError } from '../errors/unsatisfied-requirement.error';
 import { QueryConnector } from '../interfaces/query-connector.interface';
 import { Observable, Observer } from 'rxjs/Rx';
 import { QueryResult } from '../interfaces/query-result.interface';
 import { PendingDbQuery } from '../models/pending-db-query.model';
 
 export class QueryManager {
-    private static instance: QueryManager;
+    private static instance = new QueryManager();
 
-    private pendingDbQueries = <[PendingDbQuery]>[];
-    private isReady: boolean;
+    private pendingDbQueries = <PendingDbQuery[]>[];
+    private isReady = false;
     private isInitializationFailed = false;
-    private queryConnector: QueryConnector;
-    private modelMigration: ModelMigration;
+    private queryConnector: QueryConnector | undefined;
+    private modelMigration: ModelMigration | undefined;
 
     public static init(config: NgDbHelperModuleConfig): QueryManager {
         const instance = QueryManager.getInstance();
@@ -38,36 +39,38 @@ export class QueryManager {
     }
 
     public static getInstance(): QueryManager {
-        if (!QueryManager.instance) {
-            QueryManager.instance = new QueryManager();
-        }
         return QueryManager.instance;
     }
 
     private constructor() {}
 
     private onQueryConnectorReady() {
-        let subcription = this.queryConnector.getDbVersion().subscribe((version: string) => {
-            if (!version) {
-                const dataModel = ModelManager.getInstance().getDataModel();
-                dataModel.version = ModelManager.version;
-                subcription = this.modelMigration.initModel(dataModel).subscribe(() => {
-                    this.dequeuePendingRequest();
-                }, (err) => this.onInitializationFailure(err));
-            } else if (version !== ModelManager.version) {
-                const dataModel = ModelManager.getInstance().getDataModel();
-                dataModel.version = ModelManager.version;
-                subcription = this.modelMigration.upgradeModel(dataModel, version)
-                    .subscribe(() => {
+        if (this.queryConnector && this.modelMigration) {
+            const modelMigration = this.modelMigration;
+            let subcription = this.queryConnector.getDbVersion().subscribe((version: string) => {
+                if (!version) {
+                    const dataModel = ModelManager.getInstance().getDataModel();
+                    dataModel.version = ModelManager.version;
+                    subcription = modelMigration.initModel(dataModel).subscribe(() => {
                         this.dequeuePendingRequest();
-                    }, (err) => this.onInitializationFailure(err));
-            } else {
-                this.dequeuePendingRequest();
-            }
-        }, (err) => this.onInitializationFailure(err));
+                    }, (err: any) => this.onInitializationFailure(err));
+                } else if (version !== ModelManager.version) {
+                    const dataModel = ModelManager.getInstance().getDataModel();
+                    dataModel.version = ModelManager.version;
+                    subcription = modelMigration.upgradeModel(dataModel, version)
+                        .subscribe(() => {
+                            this.dequeuePendingRequest();
+                        }, (err) => this.onInitializationFailure(err));
+                } else {
+                    this.dequeuePendingRequest();
+                }
+            }, (err) => this.onInitializationFailure(err));
+        } else {
+            throw(new UnsatisfiedRequirementError('ModelMigration or QueryConnector object is missing, check and fix NgDbHelperModule configuration !'))
+        }
     }
 
-    private onInitializationFailure(err) {
+    private onInitializationFailure(err: any) {
         console.error(err);
         this.isInitializationFailed = true;
         this.dequeuePendingRequest();
@@ -76,7 +79,9 @@ export class QueryManager {
     private dequeuePendingRequest() {
         while (this.pendingDbQueries.length) {
             const pendingDbQuery = this.pendingDbQueries.shift();
-            this.executeQuery(pendingDbQuery.dbQuery, pendingDbQuery.observer);
+            if (pendingDbQuery) {
+                this.executeQuery(pendingDbQuery.dbQuery, pendingDbQuery.observer);
+            }
         }
         this.isReady = true;
     }
@@ -103,13 +108,17 @@ export class QueryManager {
     private executeQuery(dbQuery: DbQuery, observer: Observer<QueryResult<any>>) {
         if (this.isInitializationFailed) {
             const error = new QueryError('query manager initialization did failed', dbQuery.query,
-                dbQuery.params ? dbQuery.params.join(', ') : null);
+                dbQuery.params ? dbQuery.params.join(', ') : '');
             observer.error(error);
         } else {
-            const subscription = this.queryConnector.query(dbQuery).subscribe((result: QueryResult<any>) => {
-                observer.next(result);
-                observer.complete();
-            }, (err) => observer.error(err));
+            if (this.queryConnector) {
+                const subscription = this.queryConnector.query(dbQuery).subscribe((result: QueryResult<any>) => {
+                    observer.next(result);
+                    observer.complete();
+                }, (err) => observer.error(err));
+            } else {
+                throw(new UnsatisfiedRequirementError('QueryConnector object is missing, check and fix NgDbHelperModule configuration !'))
+            }
         }
     }
 }

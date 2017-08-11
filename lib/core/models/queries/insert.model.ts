@@ -9,7 +9,7 @@ import { DbQuery } from '../db-query.model';
 import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
-class QueryInsert<T extends DbHelperModel> {
+export class QueryInsert<T extends DbHelperModel> {
     private static SQLITE_PRAMS_LIMIT = 999;
     private type = 'INSERT';
     private size = 1000;
@@ -20,16 +20,16 @@ class QueryInsert<T extends DbHelperModel> {
 
     public build(): DbQuery {
         let table;
+        const dbQuery = new DbQuery();
         if (Array.isArray(this.model)) {
             if (this.model.length) {
                 table = ModelManager.getInstance().getModel(this.model[0]);
             } else {
-                return null;
+                return dbQuery;
             }
         } else {
             table = ModelManager.getInstance().getModel(this.model);
         }
-        const dbQuery = new DbQuery();
         dbQuery.page = this.page;
         dbQuery.size = this.size;
         dbQuery.table = table.name;
@@ -47,7 +47,7 @@ class QueryInsert<T extends DbHelperModel> {
         for (const item of items) {
             const interrogationMarks = [];
             for (const column of table.columnList) {
-                parameters.push(item[column.field]);
+                parameters.push((item as {[index:string]: any})[column.field]);
                 interrogationMarks.push('?');
             }
             valuesStrings.push('(' + interrogationMarks.join(', ') + ')');
@@ -63,7 +63,7 @@ class QueryInsert<T extends DbHelperModel> {
             if (this.model.length) {
                 table = ModelManager.getInstance().getModel(this.model[0]);
             } else {
-                throw(new QueryError('Try to insert empty array', null, null));
+                throw(new QueryError('Try to insert empty array', '', ''));
             }
             const maxItemNumberPerRequest = Math.floor(QueryInsert.SQLITE_PRAMS_LIMIT / table.columnList.length);
             const numberOfParts = Math.floor(this.model.length / maxItemNumberPerRequest) + 1;
@@ -83,10 +83,12 @@ class QueryInsert<T extends DbHelperModel> {
 
                     const subscription = Observable.combineLatest(observables).subscribe((qrs: QueryResult<any>[]) => {
                         let rowsAffected = 0;
-                        let insertId = 0;
+                        let insertId: number | undefined;
                         for (const qr of qrs) {
                             rowsAffected += qr.rowsAffected;
-                            insertId = Math.max(insertId, qr.insertId);
+                            if (qr && qr.insertId || qr.insertId === 0) {
+                                insertId = Math.max(insertId ? insertId: 0, qr.insertId);
+                            }
                         }
                         observer.next({
                             rowsAffected: rowsAffected,

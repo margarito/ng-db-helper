@@ -13,16 +13,16 @@ export class CordovaSqliteConnectorConfiguration {
 
     public cordovaSqliteConnector: CordovaSqliteConnector;
 
-    public initDataModel(dataModel: DataModel, db: SQLitePlugin.Database): Observable<any> {
+    public initDataModel(dataModel: DataModel, db: any): Observable<any> {
         return this.createTables(dataModel, db, true);
     }
 
-    public upgradeDataModel(dataModel: DataModel, db: SQLitePlugin.Database): Observable<any> {
+    public upgradeDataModel(dataModel: DataModel, db: any): Observable<any> {
         return this.createTables(dataModel, db);
     }
 
-    private createTables(dataModel: DataModel, db: SQLitePlugin.Database, doDrop: boolean = false): Observable<any> {
-        const queries = <[string]>[];
+    private createTables(dataModel: DataModel, db: any, doDrop: boolean = false): Observable<any> {
+        const queries = <string[]>[];
         for (const table of dataModel.tables) {
             if (doDrop) {
                 queries.push('DROP TABLE IF EXISTS `' + table.name + '`');
@@ -34,7 +34,7 @@ export class CordovaSqliteConnectorConfiguration {
             db.sqlBatch(queries, () => {
                 observer.next(null);
                 observer.complete();
-            }, (err) => observer.error(err));
+            }, (err: any) => observer.error(err));
         });
     }
 

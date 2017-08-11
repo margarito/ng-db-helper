@@ -9,17 +9,17 @@ export class WebsqlConnectorConfiguration {
 
     public cordovaSqliteConnector: CordovaSqliteConnector;
 
-    public initDataModel(dataModel: DataModel, db: Database): Observable<any> {
+    public initDataModel(dataModel: DataModel, db: any): Observable<any> {
         return this.createTables(dataModel, db, true);
     }
 
-    public upgradeDataModel(dataModel: DataModel, db: Database): Observable<any> {
+    public upgradeDataModel(dataModel: DataModel, db: any): Observable<any> {
         return this.createTables(dataModel, db);
     }
 
-    private createTables(dataModel: DataModel, db: Database, doDrop: boolean = false): Observable<any> {
+    private createTables(dataModel: DataModel, db: any, doDrop: boolean = false): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
-            db.changeVersion(db.version, dataModel.version, (transaction: SQLTransaction) => {
+            db.changeVersion(db.version, dataModel.version, (transaction: any) => {
                 const observables = [];
                 for (const table of dataModel.tables) {
                     if (doDrop) {
@@ -34,20 +34,20 @@ export class WebsqlConnectorConfiguration {
                 }, () => {
                     observer.complete();
                 });
-            }, (err) => observer.error(err));
+            }, (err: any) => observer.error(err));
         });
     }
 
-    private dropTable(tableName: string, transaction: SQLTransaction): Observable<any> {
+    private dropTable(tableName: string, transaction: any): Observable<any> {
         return this.query('DROP TABLE `' + tableName + '`', transaction);
     }
 
-    private query(query: string, transaction: SQLTransaction): Observable<any> {
+    private query(query: string, transaction: any): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
-            transaction.executeSql(query, [], (result) => {
+            transaction.executeSql(query, [], (result: any) => {
                 observer.next(result);
                 observer.complete();
-            }, (tr, err) => {
+            }, (tr: any, err: any) => {
                 observer.error(err);
                 observer.complete();
             });

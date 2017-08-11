@@ -1,23 +1,19 @@
 import { DbHelperModel } from '../models/db-helper-model.model';
 import { DataModel } from '../models/data-model.model';
-import {BadColumnDeclarationError} from '../errors/bad-column-declaration.error';
-import {BadTableDeclarationError} from '../errors/bad-table-declaration.error';
+import { BadColumnDeclarationError } from '../errors/bad-column-declaration.error';
+import { BadTableDeclarationError } from '../errors/bad-table-declaration.error';
 
 export class ModelManager {
-    public static version = '';
-    private static instance;
-    private tables = {};
-    private models = {};
-    private db;
+    public static version: string = '';
+    private static instance = new ModelManager();
+    private tables: { [index:string] : any } = {};
+    private models: { [index:string] : string } = {};
 
     public static getInstance() {
-        if (!ModelManager.instance) {
-            ModelManager.instance = new ModelManager();
-        }
         return ModelManager.instance;
     }
 
-    public addModel(newModel) {
+    public addModel(newModel: { new(): DbHelperModel }) {
         this.tables[newModel.prototype.TABLE_NAME] = {
             name: newModel.prototype.TABLE_NAME,
             columns: newModel.prototype.columns,
@@ -64,7 +60,7 @@ export class ModelManager {
         }
     }
 
-    public getTable(model: {new(): DbHelperModel }): any {
+    public getTable(model: {new(): DbHelperModel }): string {
         return this.models[model.name];
     }
 }

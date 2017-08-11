@@ -8,7 +8,7 @@ import { DbQuery } from '../db-query.model';
 import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
-class QueryUpdate<T extends DbHelperModel> {
+export class QueryUpdate<T extends DbHelperModel> {
     private type = 'UPDATE';
     private whereClauses: ClauseGroup;
     private size = 1000;
@@ -43,7 +43,7 @@ class QueryUpdate<T extends DbHelperModel> {
                 if (column.primaryKey) {
                     const clause = new Clause();
                     clause.key = column.name;
-                    clause.value = this.model[column.field];
+                    clause.value = (this.model as {[index:string]:any})[column.field];
                     this.where(clause);
                 }
             }
@@ -54,13 +54,13 @@ class QueryUpdate<T extends DbHelperModel> {
         const values = [];
         for (const column of table.columnList) {
             if (this.model.__partialWithProjection) {
-                if (this.model.__partialWithProjection.indexOf(column.name) >= 0 || this.model[column.field]) {
+                if (this.model.__partialWithProjection.indexOf(column.name) >= 0 || (this.model as {[index:string]: any})[column.field]) {
                     columnsToUpdate.push(column.name);
-                    values.push(this.model[column.field]);
+                    values.push((this.model as {[index:string]: any})[column.field]);
                 }
             } else {
                 columnsToUpdate.push(column.name);
-                values.push(this.model[column.field]);
+                values.push((this.model as {[index:string]: any})[column.field]);
             }
         }
 

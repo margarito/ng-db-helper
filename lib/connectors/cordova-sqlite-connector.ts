@@ -1,9 +1,4 @@
 import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
-/// <reference path="./typings/cordova.d.ts"/>
-/// <reference path="./typings/cordova-plugin-file.d.ts"/>
-/// <reference path="./typings/cordova-sqlite-storage.d.ts"/>
-/// <reference path="./typings/cordova-plugin-device.d.ts"/>
-
 import { ModelMigration } from '../core/interfaces/model-migration.interface';
 import { QueryError } from '../core/errors/query.error';
 import { CordovaSqliteConnectorConfiguration } from './configurations/cordova-sqlite-connector-configuration';
@@ -16,17 +11,17 @@ import { QueryConnector } from '../core/interfaces/query-connector.interface';
 export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     private ready = false;
     private onReadyObserver: Observer<boolean>;
-    private targetDir: DirectoryEntry;
-    private dbValue: SQLitePlugin.Database;
-    private get db(): SQLitePlugin.Database {
+    private targetDir: any;
+    private dbValue: any;
+    private get db(): any {
         if (!this.dbValue) {
-            this.dbValue = window.sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
+            this.dbValue = (window as {[index:string]: any}).sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
         }
         return this.dbValue;
     }
 
     constructor(private config: CordovaSqliteConnectorConfiguration) {
-        if (!window.cordova) {
+        if (!(window as {[index:string]: any}).cordova) {
             throw(new UnsatisfiedRequirementError('You use cordova connector but cordova is not present !'));
         }
         document.addEventListener('deviceready', () => {
@@ -39,21 +34,20 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
             if (this.onReadyObserver) {
                 this.onReadyObserver.next(this.ready);
                 this.onReadyObserver.complete();
-                this.onReadyObserver = null;
             }
         });
     }
 
     private checkRequirements() {
         let isRequirementVerified = true;
-        if (!window.resolveLocalFileSystemURL) {
+        if (!(window as {[index:string]: any}).resolveLocalFileSystemURL) {
             const err =
               new UnsatisfiedRequirementError('On device supporting cordova sqlite, cordova-plugin-file is mandatory !');
             console.error(err);
             isRequirementVerified = false;
         }
 
-        if (!window.sqlitePlugin) {
+        if (!(window as {[index:string]: any}).sqlitePlugin) {
             const err =
               new UnsatisfiedRequirementError('On device supporting cordova sqlite, cordova-sqlite-storage is mandatory !');
             console.error(err);
@@ -77,12 +71,12 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
                     q += ' OFFSET ' + offset;
             }
             if (this.db) {
-                this.db.executeSql(q, dbQuery.params, (results: SQLitePlugin.Results) => {
+                this.db.executeSql(q, dbQuery.params, (results: any) => {
                     observer.next(results);
                     observer.complete();
-                }, (err) => observer.error(new QueryError(err.message, q, dbQuery.params ? dbQuery.params.join(', ') : null)));
+                }, (err: any) => observer.error(new QueryError(err.message, q, dbQuery.params ? dbQuery.params.join(', ') : '')));
             } else {
-                observer.error(new QueryError('no database opened', q, dbQuery.params ? dbQuery.params.join(', ') : null));
+                observer.error(new QueryError('no database opened', q, dbQuery.params ? dbQuery.params.join(', ') : ''));
             }
         });
     }
@@ -114,25 +108,25 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     getDbVersion(): Observable<string> {
         return Observable.create((observer: Observer<string>) => {
             if (this.db) {
-                this.db.executeSql('PRAGMA user_version;', [], (results: SQLitePlugin.Results) => {
+                this.db.executeSql('PRAGMA user_version;', [], (results: any) => {
                     if (results.rows.length) {
                         observer.next(results.rows.item(0));
                     } else {
-                        observer.next(null);
+                        observer.next('');
                     }
                     observer.complete();
-                }, (err) => observer.error(err));
+                }, (err: any) => observer.error(err));
             } else {
-                observer.next(null);
+                observer.next('');
                 observer.complete();
             }
         });
     }
 
     private isDbCreated(): Observable<boolean> {
-        let targetDirName = cordova.file.dataDirectory;
-        if (device.platform === 'Android') {
-            targetDirName = cordova.file.applicationStorageDirectory + 'databases/';
+        let targetDirName = (window as {[index:string]: any}).cordova.file.dataDirectory;
+        if ((window as {[index:string]: any}).device.platform === 'Android') {
+            targetDirName = (window as {[index:string]: any}).cordova.file.applicationStorageDirectory + 'databases/';
             console.log('platform is android');
             console.log('targetDirName: ' + targetDirName);
         }
@@ -141,7 +135,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
             const onTargetDirResolved = (targetDir: any) => {
                 this.targetDir = targetDir;
                 targetDir.getFile(this.config.dbName, {}, () => {
-                    this.dbValue = window.sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
+                    this.dbValue = (window as {[index:string]: any}).sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
                     observer.next(true);
                     observer.complete();
                 }, () => {
@@ -149,12 +143,12 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
                     observer.complete();
                 });
             };
-            window.resolveLocalFileSystemURL(targetDirName, onTargetDirResolved, (err) => {
-                if (device.platform === 'Android') {
-                    window.resolveLocalFileSystemURL(cordova.file.applicationStorageDirectory, (dir) => {
-                        (dir as DirectoryEntry).getDirectory('databases', {create : true},
-                        (entry) => onTargetDirResolved(entry), (error: any) => observer.error(error));
-                    }, (error) => observer.error(error));
+            (window as {[index:string]: any}).resolveLocalFileSystemURL(targetDirName, onTargetDirResolved, (err: any) => {
+                if ((window as {[index:string]: any}).device.platform === 'Android') {
+                    (window as {[index:string]: any}).resolveLocalFileSystemURL((window as {[index:string]: any}).cordova.file.applicationStorageDirectory, (dir: any) => {
+                        dir.getDirectory('databases', {create : true},
+                        (entry: any) => onTargetDirResolved(entry), (error: any) => observer.error(error));
+                    }, (error: any) => observer.error(error));
                 } else {
                     observer.error(err);
                 }
@@ -164,19 +158,19 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
 
     initModel(dataModel: DataModel): Observable<any> {
         if (this.config.doCopyDb) {
-            const sourceFileName = cordova.file.applicationDirectory + this.config.sourceDbPath + this.config.sourceDbName;
-            Observable.create((observer: Observer<any>) => {
+            const sourceFileName = (window as {[index:string]: any}).cordova.file.applicationDirectory + this.config.sourceDbPath + this.config.sourceDbName;
+            return Observable.create((observer: Observer<any>) => {
                 this.isDbCreated().subscribe((isCreated: boolean) => {
                     if (isCreated) {
                         observer.next(null);
                         observer.complete();
                     } else {
-                         window.resolveLocalFileSystemURL(sourceFileName, (sourceFile) => {
+                         (window as {[index:string]: any}).resolveLocalFileSystemURL(sourceFileName, (sourceFile: any) => {
                             sourceFile.copyTo(this.targetDir, this.config.dbName, () => {
                                 observer.next(null);
                                 observer.complete();
-                            }, (err) => observer.error(err));
-                        }, (err) => observer.error(err));
+                            }, (err: any) => observer.error(err));
+                        }, (err: any) => observer.error(err));
                     }
                 }, (err) => observer.error(err));
             });

@@ -8,7 +8,7 @@ import { DbQuery } from '../db-query.model';
 import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
-class QueryDelete<T extends DbHelperModel> {
+export class QueryDelete<T extends DbHelperModel> {
     private type = 'DELETE';
     private whereClauses: ClauseGroup;
     private size = 1000;
@@ -39,7 +39,7 @@ class QueryDelete<T extends DbHelperModel> {
                 if (column.primaryKey) {
                     const clause = new Clause();
                     clause.key = column.name;
-                    clause.value = this.model[column.field];
+                    clause.value = (this.model as {[index:string]: any})[column.field];
                     this.where(clause);
                 }
             }
@@ -56,6 +56,6 @@ class QueryDelete<T extends DbHelperModel> {
     }
 }
 
-export function Delete<T extends DbHelperModel>(model?: T | {new(): T }): QueryDelete<T> {
+export function Delete<T extends DbHelperModel>(model: T | {new(): T }): QueryDelete<T> {
     return new QueryDelete(model);
 }

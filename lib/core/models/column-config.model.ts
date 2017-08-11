@@ -3,5 +3,6 @@ export class ColumnConfig {
     public primaryKey = false;
     public autoIncrement = false;
     public unique = false;
+    public indexed = false;
     public type = 'string';
 }

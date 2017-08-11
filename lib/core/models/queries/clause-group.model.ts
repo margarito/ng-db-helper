@@ -10,14 +10,14 @@ export class ClauseGroup {
         }
     }
 
-    public add(clauses: ClauseGroup|Clause|Clause[]|Object) {
+    public add(clauses: ClauseGroup|Clause|Clause[]|{[index: string]: any}) {
         if (clauses instanceof ClauseGroup) {
             this.add(clauses.clauses);
         } else if (clauses instanceof Clause) {
             this.clauses.push(clauses);
         } else if (Array.isArray(clauses)) {
             this.clauses = this.clauses.concat(clauses);
-        } else if (clauses instanceof Object) {
+        } else {
             for (const key in clauses) {
                 if (clauses.hasOwnProperty(key)) {
                     const clause = new Clause();

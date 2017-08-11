@@ -1,6 +1,6 @@
 import { DbTable } from '../db-table.model';
 
-class QueryCreate {
+export class QueryCreate {
     constructor(private table: DbTable) {}
 
     public build(): string {
