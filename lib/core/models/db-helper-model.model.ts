@@ -9,7 +9,7 @@ export abstract class DbHelperModel {
     public __rowid: number;
     public __class: {new(): DbHelperModel};
     public __inserted = false;
-    public __partialWithProjection: string[];
+    public __partialWithProjection: string[] | undefined;
 
     public save(): Observable<any> {
         if (this.__inserted) {

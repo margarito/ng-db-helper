@@ -1,4 +1,4 @@
 export class TableConfig {
-    public name: string;
-    public version = 0;
+    public name?: string;
+    public version?: number = 0;
 }

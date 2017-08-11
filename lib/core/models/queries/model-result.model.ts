@@ -8,7 +8,7 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
         return this.result.rowsAffected;
     }
 
-    get insertId(): number {
+    get insertId(): number | undefined {
         return this.result.insertId;
     }
 
@@ -25,7 +25,7 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
                             continue;
                         }
                         if (item.hasOwnProperty(column.name)) {
-                            entity[column.field] = item[column.name];
+                            (entity as {[index:string]:any})[column.field] = item[column.name];
                         }
                     }
                     entity.__partialWithProjection = this.projection;

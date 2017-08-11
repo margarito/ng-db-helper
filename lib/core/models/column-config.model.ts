@@ -1,8 +1,8 @@
 export class ColumnConfig {
-    public name: string;
-    public primaryKey = false;
-    public autoIncrement = false;
-    public unique = false;
-    public indexed = false;
-    public type = 'string';
+    public name?: string;
+    public primaryKey?: boolean = false;
+    public autoIncrement?: boolean = false;
+    public unique?: boolean = false;
+    public indexed?: boolean = false;
+    public type?: string = 'string';
 }
