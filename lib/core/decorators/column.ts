@@ -2,6 +2,30 @@ import { DbHelperModel } from '../models/db-helper-model.model';
 import { ColumnConfig } from './../models/column-config.model';
 import { Clause } from './../models/queries/clause.model';
 
+/**
+ * Column annotation to add on class property that should use {@link Table} annotation.
+ * class using this annotation must extends {@link DbHelperModel}.
+ * 
+ * @example
+ * @Table
+ * export class Todo extends DbHelperModel {
+ * 
+ *      @Column({primaryKey: true, autoIncremented: tru, type: 'integer'})
+ *      public id: number
+ * 
+ *      @Column
+ *      public name: string;
+ * 
+ *      @Column
+ *      public dueDate: string;
+ * }
+ * 
+ * @param config, {@link ColumnConfig} is column configuration, informations are used to
+ *          build DataModel.
+ * 
+ * @author  Olivier Margarit
+ * @Since   0.1
+ */
 export function Column<T extends DbHelperModel>(config?: ColumnConfig) {
     return (target: T, key: string) => {
         const column = {

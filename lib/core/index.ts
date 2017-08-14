@@ -13,8 +13,6 @@ export { Create, QueryCreate } from './models/queries/create.model';
 export { Count } from './models/queries/count.model';
 export { Clause } from './models/queries/clause.model';
 export { ClauseGroup } from './models/queries/clause-group.model';
-export { QueryManager } from './managers/query-manager';
-export { ModelManager } from './managers/model-manager';
 export { QueryConnector } from './interfaces/query-connector.interface';
 export { ModelMigration } from './interfaces/model-migration.interface';
 export { UnsatisfiedRequirementError } from './errors/unsatisfied-requirement.error';

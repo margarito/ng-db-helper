@@ -3,21 +3,86 @@ import { DbHelperModel } from '../db-helper-model.model';
 import { retryWhen } from 'rxjs/operator/retryWhen';
 import { QueryManager } from '../../managers/query-manager';
 import { QueryResult } from '../../interfaces/query-result.interface';
-import { Observable, Observer } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { ModelManager } from '../../managers/model-manager';
 import { DbQuery } from '../db-query.model';
 import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
+import 'rxjs/add/observable/combineLatest';
+
+/**
+ * @private API
+ * @class QueryInsert is private part of the API.
+ * For design reasons this class should not be used directly and
+ * will move later. Use this class with {@link Insert} function.
+ * Prefer use of save() method instead of Insert for a single entry.
+ * Insert optimize multiple entry insertion with bulk mecanisme for example.
+ * 
+ * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * 
+ * @example
+ * // Create new model instance
+ * const todo = new Todo();
+ * // manipulates todo instance and then insert it
+ * Insert(todo).exec().subscribe((qr: QueryResult<any>) => {
+ *      // do something after insertion
+ * }, (err) => {
+ *      // manage error
+ * });
+ * 
+ * // it is simplier to use the save methode for a single entry
+ * todo.save()
+ * 
+ * // Insertion should be used for multiple model insertion
+ * const todos = <Todo[]>[];
+ * // provide and edi.subscribe((qr: QueryResult<any>) => {
+ *      // do something after insertion
+ * }, (err) => {
+ *      // manage error
+ * });t new entries
+ * Insert(todos).exec().subscribe((qr: QueryResult<any>) => {
+ *      // do something after insertion
+ * }, (err) => {
+ *      // manage error
+ * });
+ * 
+ * @author  Olivier Margarit
+ * @Since   0.1
+ */
 export class QueryInsert<T extends DbHelperModel> {
+    /**
+     * @private
+     * @static
+     * @property    SQLITE_PRAMS_LIMIT is a standard SQLite driver limit
+     *              this parameter will probably be customizable in a futrue
+     *              release
+     */
     private static SQLITE_PRAMS_LIMIT = 999;
+
+    /**
+     * @private
+     * @property type, statement type
+     */
     private type = 'INSERT';
-    private size = 1000;
-    private page = 0;
 
-    constructor(private model: T | T[]) {}
+    /**
+     * @public
+     * @constructor should not be use directly, see class header
+     * 
+     * @param model {@link DbHelperModel} extention
+     */
+    public constructor(private model: T | T[]) {}
 
 
+    /**
+     * @public
+     * @method build should be removed to be a part of the private API
+     * 
+     * @return {@link DbQuery} of the query with the string part and
+     *          clauses params.
+     */
     public build(): DbQuery {
         let table;
         const dbQuery = new DbQuery();
@@ -30,8 +95,6 @@ export class QueryInsert<T extends DbHelperModel> {
         } else {
             table = ModelManager.getInstance().getModel(this.model);
         }
-        dbQuery.page = this.page;
-        dbQuery.size = this.size;
         dbQuery.table = table.name;
         dbQuery.type = this.type;
         const columns = [];
@@ -57,6 +120,12 @@ export class QueryInsert<T extends DbHelperModel> {
         return dbQuery;
     }
 
+    /**
+     * @public
+     * @method exec to execute the query and asynchronously retreive result.
+     * 
+     * @return observable to subscribe
+     */
     public exec(): Observable<QueryResult<any>> {
         if (Array.isArray(this.model)) {
             let table;
@@ -108,6 +177,45 @@ export class QueryInsert<T extends DbHelperModel> {
     }
 }
 
+/**
+ * @public API
+ * @function Insert provide an easy mean of data insertion.
+ * Prefer use the save() method instead of Insert for a single entry, see
+ * {@link DbHelperModel} for more informations.
+ * Insert optimize multiple entry insertion with bulk mecanisme for example.
+ * 
+ * @param T exdends {@link DbHelperModel}, a model declared with table and
+ *          column annotations
+ * 
+ * @example
+ * // Create new model instance
+ * const todo = new Todo();
+ * // manipulates todo instance and then insert it
+ * Insert(todo).exec().subscribe((qr: QueryResult<any>) => {
+ *      // do something after insertion
+ * }, (err) => {
+ *      // manage error
+ * });
+ * 
+ * // it is simplier to use the save methode for a single entry
+ * todo.save()
+ * 
+ * // Insertion should be used for multiple model insertion
+ * const todos = <Todo[]>[];
+ * // provide and edi.subscribe((qr: QueryResult<any>) => {
+ *      // do something after insertion
+ * }, (err) => {
+ *      // manage error
+ * });t new entries
+ * Insert(todos).exec().subscribe((qr: QueryResult<any>) => {
+ *      // do something after insertion
+ * }, (err) => {
+ *      // manage error
+ * });
+ * 
+ * @author  Olivier Margarit
+ * @Since   0.1
+ */
 export function Insert<T extends DbHelperModel>(model: T | T[]): QueryInsert<T> {
     return new QueryInsert(model);
 }
