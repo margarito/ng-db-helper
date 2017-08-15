@@ -3,7 +3,7 @@ export default {
     dest: 'dist/bundles/ng-db-helper.umd.js',
     sourceMap: false,
     format: 'umd',
-    moduleName: 'mgto.NgDbHelper',
+    moduleName: 'NgDbHelperModule',
     globals: {
         '@angular/core': 'ng.core',
         'rxjs/Observable': 'Rx',

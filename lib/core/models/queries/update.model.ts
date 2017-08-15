@@ -1,3 +1,5 @@
+import { QueryError } from '../../errors/query.error';
+import { QueryPart } from './query-part.model';
 import { DbHelperModel } from '../db-helper-model.model';
 import { retryWhen } from 'rxjs/operator/retryWhen';
 import { QueryManager } from '../../managers/query-manager';
@@ -43,12 +45,19 @@ export class QueryUpdate<T extends DbHelperModel> {
     private whereClauses: ClauseGroup;
 
     /**
+     * @private
+     * @property valueSet, set of values where key are column name and value,
+     * the value to update.
+     */
+    private valueSet: {[index: string]: any};
+
+    /**
      * @public
      * @constructor should not be use directly, see class header
      * 
      * @param model {@link DbHelperModel} extention
      */
-    public constructor(private model: T, private partial: boolean = false) {}
+    public constructor(private model: T | { new (): T}) {}
 
     /**
      * @public
@@ -69,6 +78,81 @@ export class QueryUpdate<T extends DbHelperModel> {
 
     /**
      * @public
+     * @method where is the method to add clauses to the where statement of the query
+     * see {@link Clause} or {@link ClauseGroup}
+     * 
+     * @throws {@link QueryError} on set on single model update. set method is for updating
+     *          many entries of a specific table target from its class.
+     * 
+     * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * 
+     * @return this instance to chain query instructions
+     */
+    public set(dict: {[index: string]: any}): QueryUpdate<T> {
+        if (this.model.hasOwnProperty('__class')) {
+            throw(new QueryError('Try to set values on Update query' +
+                ' already containing a model. This is not supported', '', ''))
+        }
+        if (this.valueSet) {
+            // merge values
+            for (const key in dict) {
+                if (dict.hasOwnProperty(key)) {
+                    this.valueSet[key] = dict[key];
+                }
+            }
+        } else {
+            this.valueSet = dict;
+        }
+        return this;
+    }
+
+    /**
+     * @private
+     * @method getValuesFromModel build values part of the query from the model.
+     * 
+     * @return {@link QueryPart} the values query part of update statement
+     */
+    private getValuesFromModel(): QueryPart {
+        const table = ModelManager.getInstance().getModel(this.model);
+        const queryPart = new QueryPart();
+        const columnsToUpdate = <string[]>[];
+        for (const column of table.columnList) {
+            let value = (this.model as {[index:string]: any})[column.field];
+            value = value === undefined ? null : value;
+            if ((this.model as {[index: string]: any}).__partialWithProjection) {
+                if ((this.model as {[index: string]: any}).__partialWithProjection.indexOf(column.name) >= 0 ||
+                    (this.model as {[index:string]: any})[column.field]) {
+                    columnsToUpdate.push(column.name);
+                    queryPart.params.push(value);
+                }
+            } else {
+                columnsToUpdate.push(column.name);
+                queryPart.params.push(value);
+            }
+        }
+        queryPart.content = 'SET ' + columnsToUpdate.join(' = (?), ') + ' = (?)';
+        return queryPart;
+    }
+
+    /**
+     * @private
+     * @method getValuesFromSet build values part of the query from the set dict.
+     * 
+     * @return {@link QueryPart} the values query part of update statement
+     */
+    private getValuesFromSet(): QueryPart {
+        const queryPart = new QueryPart();
+        for (const key in this.valueSet) {
+            if (this.valueSet.hasOwnProperty(key)) {
+                queryPart.content += queryPart.content ? ', (?)': '(?)';
+                queryPart.params.push(this.valueSet[key]);
+            }
+        }
+        return queryPart;
+    }
+
+    /**
+     * @public
      * @method build should be removed to be a part of the private API
      * 
      * @return {@link DbQuery} of the query with the string part and
@@ -79,10 +163,10 @@ export class QueryUpdate<T extends DbHelperModel> {
         const dbQuery = new DbQuery();
         dbQuery.table = table.name;
         dbQuery.type = this.type;
-        if (this.model.__rowid) {
+        if ((this.model as {[index: string]: any}).hasOwnProperty('__rowid')) {
             const clause = new Clause();
             clause.key = 'rowid';
-            clause.value = this.model.__rowid;
+            clause.value = (this.model as {[index: string]: any}).__rowid;
             this.where(clause);
         } else {
             for (const column of table.columnList) {
@@ -96,22 +180,16 @@ export class QueryUpdate<T extends DbHelperModel> {
         }
         // setup values to update
         dbQuery.query += this.type + ' ' + dbQuery.table;
-        const columnsToUpdate = <string[]>[];
-        const values = [];
-        for (const column of table.columnList) {
-            if (this.model.__partialWithProjection) {
-                if (this.model.__partialWithProjection.indexOf(column.name) >= 0 || (this.model as {[index:string]: any})[column.field]) {
-                    columnsToUpdate.push(column.name);
-                    values.push((this.model as {[index:string]: any})[column.field]);
-                }
-            } else {
-                columnsToUpdate.push(column.name);
-                values.push((this.model as {[index:string]: any})[column.field]);
-            }
+        let queryPart: QueryPart;
+        if ((this.model as {[index: string]: any}).hasOwnProperty('__class')) {
+            queryPart = this.getValuesFromModel();
+        } else if (this.valueSet && Object.getOwnPropertyNames(this.valueSet).length) {
+            queryPart = this.getValuesFromSet();
+        } else {
+            throw(new QueryError('No values to update on Update query build, ' +
+                'please use set method or call Update with a single model.', '', '')); 
         }
-
-        dbQuery.query += ' SET ' + columnsToUpdate.join(' = (?), ') + ' = (?) ';
-        dbQuery.params = dbQuery.params.concat(values);
+        dbQuery.append(queryPart);
 
         if (this.whereClauses) {
             dbQuery.query += ' WHERE';
@@ -149,6 +227,6 @@ export class QueryUpdate<T extends DbHelperModel> {
  * @author  Olivier Margarit
  * @Since   0.1
  */
-export function Update<T extends DbHelperModel>(model: T, partial: boolean = false): QueryUpdate<T> {
-    return new QueryUpdate(model, partial);
+export function Update<T extends DbHelperModel>(model: T | {new(): T}): QueryUpdate<T> {
+    return new QueryUpdate(model);
 }

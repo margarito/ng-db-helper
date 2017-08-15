@@ -1,48 +1,462 @@
-# MgtoNgOrm
-library that help to buil complete modele for cordova or ionic project with database management.
+# NgDbHelperModule
 
-# Notes
-* It is based on the distributing sources files and supports `aot` build
-* It works well as dependency form regular [@angular/cli] and [Codova] project or ejected one
-* It has demo app, that could be used as documentation or sandbox. Use `ng serve -o true` to run it.
-* It exposes only `lib` directory.  
+  This module is a simple module to simplify persistence with relationnel databases.
+  As there is many platforms or devices, this module bring possibility to manage connectors.
+  It allow integrators to have a better code portability.
 
+  It can be used with cordova-sqlite-storage, websql or other relationnal database if you
+  implement your own connector.
 
-[TL;DR] See [@mgto/mgto-ng-orm-demo-app] and [live demo].
+  See example project: [Todos App](https://github.com/margarito/todos-app)
+
+  This is an example of code:
+  ```typescript
+    @Component({
+      selector: 'mgto-todos',
+      template: '',
+      styles: ''
+    })
+    class TodosPage implements OnInit {
+      public todoQueryResult: QueryResult<Todo>;
+
+      public ngOnInit() {
+        // retrieve not done todos
+        Select(Todo).where({isDone: false}).exec().subscribe((qr: QueryResult<Todo>) => {
+          this.todoQueryResult = qr;
+        }, (err) => {
+          // manage error
+        });
+      }
+
+      public checkTodo(todo: Todo) {
+        todo.isDone = !todo.isDone;
+        todo.save().subscribe(() => {
+          // isDone did change and is saved
+        }, (err) => {
+          // manage error
+          // cancel done change
+          todo.isDone = !todo.isDone;
+        });
+      }
+    }
+  ```
+
+# Getting Started
+
+## Prerequisites
+
+  Your application must be an angular project. Then choose the kind of database supported
+  by the target device of your app. This module support can be configured to support Websql
+  or cordova-sqlite-storage or both on specific conditions.
+
+  If you have other need and this need is to use a relationnal database, see the connector
+  API and you will be able to build your own connector and keep using this API design.
+
+## Installing
+
+  This module is available on official npm registry, with command line from your project,
+  use the command below:
+
+  ```shell
+    npm install ng-db-helper --save
+  ```
+
+  The module is now a part of your dependancies and is ready to be used. See Usage to learn
+  about how easy it is !
+
 # Usage
- * create new [@angular/cli] project: `ng new ng-demo-app --style scss`
- * install library: `npm install --save git://git@github.com:nsmolenskii/ng-demo-lib.git`
- * add module import declaration in `app.module.ts`:
- ```typescript
-    import { BrowserModule } from '@angular/platform-browser';
-    import { NgModule } from '@angular/core';
-    import { FormsModule } from '@angular/forms';
-    import { HttpModule } from '@angular/http';
-    import { MaterialModule } from '@angular/material';
+
+## Initialisation
+
+  Create a file where you will put your db management configuration and init the configuration:
+
+  ```typescript
+  import { NgDbHelperModuleConfig } from 'ng-db-helper';
+  import { CordovaSqliteConnector } from 'ng-db-helper';
+  import { CordovaSqliteConnectorConfiguration } from 'ng-db-helper';
+
+  // Create a function that build the module configuration
+  export function getDbHelperModuleConfiguration(): NgDbHelperModuleConfig {
+    // This configuration is for CordovaSqliteConnector
+    const connectorConfig = new CordovaSqliteConnectorConfiguration();
+
+    // you could customize configuration here but you may not need to do that
+    // See connectors part to check possibilities ans behaviour
+
+    // create the cordova-sqlite-storage connector, other connectors are
+    // Available, see connectors part to find more browser/device support
+    const connector = new CordovaSqliteConnector(connectorConfig);
+
+    // create the module configuration instance
+    const config = new NgDbHelperModuleConfig();
     
-    import { AppComponent } from './app.component';
-    import { GreeterModule } from 'ng-demo-lib';
+    // Default module connectors are model migration managers too. you
+    // can override migration behaviour from connector's configurations
+    config.modelMigration = connector;
+    config.queryConnector = connector;
+
+    // setup the version of your data model, it will enable migration script
+    // to prevent developpement issues due to import optimization, a minor
+    // version is automatically incremented. See more configuration part to
+    // learn more.
+    config.version = '1';
+    return config;
+  }
+  ```
+
+  With this configuration, you are able to persist datas from cordova-sqlite-storage devices
+  compatible. You can use another connector or develop your own connector if you are in
+  a situation where neither cordova and websql connector respond to your need.
+
+  Then your just have to include the NgDbHelperModule in your main module:
+
+  ```typescript
+    import { NgModule } from '@angular/core';
+    import { NgDbHelperModule } from 'ng-db-helper';
+    import { getDbHelperModuleConfiguration } from './config/ng-db-helper.configuration'
 
     @NgModule({
-      declarations: [
-        AppComponent
-      ],
       imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        MaterialModule.forRoot(),
-        GreeterModule
+        ...,
+        NgDbHelperModule.forRoot(getDbHelperModuleConfiguration()),
+        ...
       ],
-      providers: [],
-      bootstrap: [AppComponent]
+      declarations: [...],
+      exports: [...],
+      providers: [...]
     })
- ```
- * use `demo-greeter` in `app.component.html`: ```<demo-greeter name="Peter Pan"></demo-greeter>```
- * run project: `ng serve -o true`
- * profit
+    class MyAwesomeAppModule {}
+  ```
 
-[@angular/cli]: https://github.com/angular/angular-cli
-[@ns/ng-demo-app]: https://github.com/nsmolenskii/ng-demo-app
-[live demo]: https://nsmolenskii.github.io/ng-demo-app/
-[angular/angular-cli#1692]: https://github.com/angular/angular-cli/issues/1692
+  Your now are ready to declare all your models.
+
+## Declare model
+
+  Model management is based on annotation, the application is designed to prevent declaration
+  redundancy. Every data model declaration should be done in the main model class file.
+
+  This an example of what model declaration could be:
+
+  ```typescript
+    import { DbHelperModel } from 'ng-db-helper';
+    import { Table } from 'ng-db-helper';
+    import { Column } from 'ng-db-helper';
+
+    @Table()
+    export class Todo extends DbHelperModel {
+      @Column({primaryKey: true, autoIncremental: true})
+      public id: number;
+
+      @Column()
+      public label: string;
+
+      @Column({type: 'boolean'})
+      public isDone: boolean;
+    }
+  ```
+  This is as simple as this example, annotations will be enougth to create your data model in database
+  and being queriable in your application.
+
+  Rules are simple to get the expected result:
+    - extends DbHelperModel,
+    - use @Table annotation,
+    - use @Column annotation,
+    - never declare properties named with double underscore ('__')
+
+  In details, what does each ng-db-helper tools ?
+
+### extends DbHelperModel
+
+  Model has to extends DbHelperModel to be usable with annotations, implements default model method
+  and being used with query helpers.
+
+  ```typescript
+    // assume that Todo is a model extending DbHelperModel
+    // this what could look like todo editor
+    @NgComponent({
+      ...
+    })
+    class TodoComponent implements OnInit {
+      // the todo id injected with an html attribute
+      // this is just a pretext to show a query
+      @Input()
+      public todoId?: number;
+
+      // the todo item edited from the view
+      public todo: Todo;
+
+      public ngOnInit() {
+        if (this.id) {
+          // Select the todo item, it is probably to create a TodoService with a getById
+          // method and this is what you could put in there
+          Select(Todo).where({id: this.id}).exec().subscribe((qr: QueryResult<Todo>) => {
+            if (qr.rows.length) {
+              this.todo = qr.rows.item(0);
+            } else {
+              // item has not be found by id...
+            }
+          }, (err) => {
+            // manage query error
+          })
+        } else {
+          // no id is set, it is probably a creation instance of the component
+          this.todo = new Todo();
+        }
+      }
+
+      // method called on save button clicked
+      public onSaveButtonPressed() {
+        // call save method
+        this.todo.save().subscribe((qr: QueryResult<any>) => {
+          // do things after todo is saved
+        }, (err) => {
+          // manage error
+        });
+      }
+
+      // method called on delete button clicked
+      public onDeleteButtonPressed() {
+        // call delete method
+        this.todo.delete().subscribe((qr: QueryResult<any>) => {
+          // do things after todo is saved
+        }, (err) => {
+          // manage error
+        });
+      }
+
+    }
+    
+  ```
+
+### use @Table annotation
+
+  Table annotation subscribe your model in the main data model. Then it could be
+  a part of the model migration to be represented on database and persisted.
+
+  you can customize the name of the table and its version. Default name is the
+  class name and default version is 1.
+
+  ```typescript
+    // Table name will be Todo and version will be 1
+    @Table()
+    class Todo extends DbHelperModel {
+      // declare properties and columns
+    }
+  ```
+
+  ```typescript
+    @Table({
+      name: 'Todos' // prefer the table name plural
+    })
+    class Todo extends DbHelperModule {
+      // declare properties and columns
+    }
+  ```
+
+### use @Column annotation
+
+  @Column is annotation for model fields to configure database column where the value
+  will be stored. See database standard to clearly understand available column
+  configurations. Current available properties are:
+
+| config name   |  type   | default value | description                               |
+|---------------|:-------:|:-------------:|-------------------------------------------|
+| name          | string  | field name    | the column name                           |
+| type          | string  | `'string'`    | type of the column, see sqlite types      |
+| primaryKey    | boolean | `false`       | flag to set column primary key            |
+| autoIncrement | boolean | `false`       | flag to set column value auto incremented |
+| unique        | boolean | `false`       | flag to set column value unique           |
+| indexed       | boolean | `false`       | flag to set column value indexed          |
+
+  And in action:
+
+```typescript
+    import { DbHelperModel } from 'ng-db-helper';
+    import { Table } from 'ng-db-helper';
+    import { Column } from 'ng-db-helper';
+
+    @Table()
+    export class Todo extends DbHelperModel {
+      @Column({
+        primaryKey: true,
+        autoIncremental: true // no need to set type integer, auto incremental suggest it
+      })
+      public id: number;
+
+      @Column() // column name will be name, type string...
+      public label: string;
+
+      @Column({
+        type: 'boolean' // set type boolean
+      })
+      public isDone: boolean;
+    }
+  ```
+
+  ___
+    /!\ TypeScript is a typed language but not JavaScript. Type cannot be read from field
+    annotation. You have to declare compatible type between field and database column, if not queries will fail.
+  ___
+
+## Model lifecycle
+
+  Model has a simple lifecycled linked to database management and supported by simple methods:
+
+  ```typescript
+    // Create model
+    const todo = new Todo();
+    todo.save().subscribe(...);
+
+    // Retrieve one model
+    Select(Todo).where({id: this.id}).setSize(1).exec()
+      .subscribe((qr: QueryResult<Todo>) => {
+        if (qr.rows.length) {
+          this.todo = qr.rows.item(0);
+        }
+      }, (err) => this.manageError(err));
+
+    // Retrieve many model
+    Select(Todo).exec().subscribe((qr: QueryResult<Todo>) => {
+      for (let i = 0; i < qr.rows.length; i++) {
+        this.todos.push(qr.rows.item(i));
+      }
+    }, (err) => this.manageError(err));
+
+    // Update model, simply save it ! Save do his magic to insert or update entry
+    this.todo.save().subscribe(...);
+
+    // Delete model
+    this.todo.delete().subscribe(...);
+  ```
+
+## Queries
+
+### Select
+
+  Select provide multiple methods returning itself to chain operations et being more semantic.
+
+  example:
+  ```typescript
+    Select(Todo)
+      .where({isDone: false})     // set where clauses
+      .groupBy('dueDate')         // set group by clause
+      .orderBy('createdAt DESC')  // order items on one or many column
+      .setSize(100)         // set size, default is 1000, this allow to paginate results
+      .setPage(0)           // set page, default is 0, this allow to target specific page
+      .projection(['id', 'isDone', 'label', 'dueDate', 'createdAt'])
+        // customize projection, this may be use to optimize query on big object
+        // but should not be used if not perf problem is detected
+  ```
+
+### Insert
+
+  Insert allow single model insertion:
+
+  ```typescript
+    Insert(todo).exec().subscribe(...);
+  ```
+
+  But prefer use save method on model `todo.save()`.
+
+  Insert is a better solution to insert many model, the helper will optimize insertions:
+
+  ```typescript
+    Insert(todos).exec().subscribe(...);
+  ```
+
+### Update
+
+  Update is an helper to update a single model:
+
+  ```typescript
+    Update(todo).exec().subscribe(...);
+  ```
+
+  but you should prefer use `todo.save()`;
+
+  Otherwise it could be used to update multiple entries in one query:
+
+  ```typescript
+    // set done on all passed todos
+    const dueDatePassedClause = new Clause();
+    dueDatePassedClause.key = 'dueDate';
+    dueDatePassedClause.value = (new Date()).getTime();
+    dueDatePassedClause.comparator = Clause.COMPARATORS.LTE
+    Update(Todo).set({isDone: true}).where(dueDatePassedClause).exec().subscribe(...);
+
+    // alternativelly you could do undone task in one week
+    Update(Todo)
+      .set({dueDate: onWeekLaterDate.getTime()})
+      .where(dueDatePassedClause).where({isDone: false})
+      .exec().subscribe(...);
+  ```
+
+### Delete
+
+  Delete is an helper to delete a single model:
+
+  ```typescript
+    Update(todo).exec().subscribe(...);
+  ```
+
+  but you should prefer use `todo.delete()`;
+
+  Otherwise it could be used to delete multiple entries in one query:
+
+  ```typescript
+    // delete done todos
+    Delete(Todo).where({isDone: true}).exec().subscribe(...);
+
+    // delete all todos
+    Delete(Todo).exec().subscribe(...);
+  ```
+
+### RawQuery
+
+  RawQuery allow integrators to start unmanaged queries but it is strongly deprecated
+  to use it only this API. This could totally suppress the interest of using this module.
+
+  ```typescript
+    // Select des todo dont l'état done est défini dans la table config
+    // Les requête imbriqué n'étant pas encore géré, on peut imaginer une requête
+    // de ce type
+    RawQuery('SELECT * FROM Todo WHERE isDone =' +
+      '(SELECT value FROM Config WHERE name = (?))',
+      ['defaultDoneState'], // params of the query
+      50, // page size of the query
+      0);
+  ```
+
+  It's planed to manage complex query soon, be carefull about updates to benefit 
+  optimizations and code lisibility.
+
+## Connector
+
+## ModelMigration
+
+# Todos
+
+  - Queries
+    - Add batch queries feature
+    - Manage join tables
+    - Add sub queries management to clauses
+    - Add sub clause group
+    - Batch queries
+  - Models
+    - Foreign models
+    - Foreign keys
+    - Manage more types like Date
+    - constraint management
+  - Connectors
+    - Batch queries
+    - Default connector configuration
+  - Design
+    - Pass some possible values for field to enum
+
+# Authors
+
+  - Olivier Margarit
+
+# License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.

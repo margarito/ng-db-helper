@@ -1,53 +1,54 @@
 {
-    "name": "@mgto/ng-db-helper",
-    "version": "0.1.0",
-    "license": "MIT",
-    "description": "Simple db helper for typescript like an orm with plugable connectors.",
-    "author": {
-        "name": "Olivier Margarit"
-    },
-    "keywords": [
-        "angular",
-        "angular 2",
-        "orm",
-        "database",
-        "cordova",
-        "websql",
-        "sqlite",
-        "rdb",
-        "model"
-    ],
-    "main": "dist/bundles/ng-db-helper.umd.js",
-    "module": "dist/index.js",
-    "typings": "lib/index.ts",
-    "scripts": {
-        "cleanup": "rimraf dist/bundles dist/src dist/index.d.ts dist/index.metadata.json dist/index.js dist/index.js.map dist/LICENSE dist/README.md",
-        "bundling": "rollup -c",
-        "minify": "uglifyjs dist/bundles/ng-db-helper.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ng-db-helper.umd.min.js",
-        "copy": "copyfiles LICENSE README.md dist",
-        "build": "npm run cleanup && ngc && npm run bundling && npm run minify && npm run copy"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/margarito/ng-db-helper.git"
-    },
-    "homepage": "https://github.com/margarito/ng-db-helper",
-    "bugs": {
-        "url": "https://github.com/margarito/ng-db-helper/issues"
-    },
-    "dependencies": {
-        "@angular/core": "^4.0.0",
-        "core-js": "^2.4.1",
-        "rxjs": "^5.1.0",
-        "zone.js": "^0.8.4"
-    },
-    "devDependencies": {
-        "@angular/compiler": "^4.0.1",
-        "@angular/compiler-cli": "^4.0.1",
-        "copyfiles": "^1.2.0",
-        "rimraf": "^2.6.1",
-        "rollup": "~0.41.6",
-        "typescript": "^2.2.2",
-        "uglify-js": "^2.8.20"
-    }
+  "name": "ng-db-helper",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Simple db helper for typescript like an orm with plugable connectors.",
+  "author": {
+    "name": "Olivier Margarit"
+  },
+  "keywords": [
+    "angular",
+    "angular 2",
+    "orm",
+    "database",
+    "cordova",
+    "websql",
+    "sqlite",
+    "rdb",
+    "model"
+  ],
+  "main": "dist/bundles/ng-db-helper.umd.js",
+  "module": "dist/index.js",
+  "typings": "lib/index.ts",
+  "scripts": {
+    "cleanup": "rimraf dist/bundles dist/src dist/index.d.ts dist/index.metadata.json dist/index.js dist/index.js.map dist/LICENSE dist/README.md",
+    "bundling": "rollup -c",
+    "minify": "uglifyjs dist/bundles/ng-db-helper.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ng-db-helper.umd.min.js",
+    "copy": "copyfiles LICENSE README.md dist",
+    "build": "npm run cleanup && ngc && npm run bundling && npm run minify && npm run copy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/margarito/ng-db-helper.git"
+  },
+  "homepage": "https://github.com/margarito/ng-db-helper",
+  "bugs": {
+    "url": "https://github.com/margarito/ng-db-helper/issues"
+  },
+  "dependencies": {
+    "@angular/core": "^4.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^4.0.1",
+    "@angular/compiler-cli": "^4.0.1",
+    "copyfiles": "^1.2.0",
+    "rimraf": "^2.6.1",
+    "rollup": "~0.41.6",
+    "typedoc": "^0.8.0",
+    "typescript": "^2.2.2",
+    "uglify-js": "^2.8.20"
+  }
 }

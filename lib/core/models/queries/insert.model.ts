@@ -110,7 +110,8 @@ export class QueryInsert<T extends DbHelperModel> {
         for (const item of items) {
             const interrogationMarks = [];
             for (const column of table.columnList) {
-                parameters.push((item as {[index:string]: any})[column.field]);
+                const value = (item as {[index:string]: any})[column.field];
+                parameters.push(value === undefined ? null : value);
                 interrogationMarks.push('?');
             }
             valuesStrings.push('(' + interrogationMarks.join(', ') + ')');
@@ -127,7 +128,9 @@ export class QueryInsert<T extends DbHelperModel> {
      * @return observable to subscribe
      */
     public exec(): Observable<QueryResult<any>> {
+        let observable: Observable<QueryResult<any>> | null = null;
         if (Array.isArray(this.model)) {
+            // check if array is to big for insertion
             let table;
             if (this.model.length) {
                 table = ModelManager.getInstance().getModel(this.model[0]);
@@ -137,7 +140,8 @@ export class QueryInsert<T extends DbHelperModel> {
             const maxItemNumberPerRequest = Math.floor(QueryInsert.SQLITE_PRAMS_LIMIT / table.columnList.length);
             const numberOfParts = Math.floor(this.model.length / maxItemNumberPerRequest) + 1;
             if (numberOfParts > 1) {
-                return Observable.create((observer: Observer<QueryResult<any>>) => {
+                // Array is to big, subsequent insert queries will be created and executed
+                observable = Observable.create((observer: Observer<QueryResult<any>>) => {
                     const observables = [];
                     for (let i = 0; i < numberOfParts; i += 1) {
                         const start = i * maxItemNumberPerRequest;
@@ -173,7 +177,22 @@ export class QueryInsert<T extends DbHelperModel> {
                 });
             }
         }
-        return QueryManager.getInstance().query(this.build());
+        if (!observable) {
+            // this is not a too big array, so the query can simply be executed
+            observable = Observable.create((observer: Observer<QueryResult<any>>) => {
+                QueryManager.getInstance().query(this.build()).subscribe((qr: QueryResult<any>) => {
+                    if (Array.isArray(this.model)) {
+                        for (const model of this.model) {
+                            model.__inserted = true;
+                        }
+                    } else {
+                        this.model.__inserted = true;
+                    }
+                    observer.next(qr);
+                }, (err) => observer.error(err), () => observer.complete());
+            });
+        }
+        return observable as Observable<QueryResult<any>>;
     }
 }
 

@@ -10,7 +10,7 @@
 !README.md
 !tsconfig.json
 !tslint.json
-!LICENCE
+!LICENSE
 !rollup.config.js
 !index.ts
 lib/**/*.app.json
