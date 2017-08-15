@@ -11,10 +11,15 @@ import 'rxjs/add/observable/combineLatest';
  * This class provides config key to add copy informations.
  * 
  * @example
+ * 
+ * ```typescript
  * const config = new WebsqlConnectorConfiguration();
- * config.dbName = app.sqlite // configure db name on device
- * const connector = WebsqlConnector(config); // add config to connector
+ * // configure db name on device
+ * config.dbName = app.sqlite;
+ * // add config to connector
+ * const connector = WebsqlConnector(config);
  * // add your connector to module configuration
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

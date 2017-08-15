@@ -159,8 +159,8 @@
 
   Rules are simple to get the expected result:
     - extends DbHelperModel,
-    - use @Table annotation,
-    - use @Column annotation,
+    - use `@Table` annotation,
+    - use `@Column` annotation,
     - never declare properties named with double underscore ('__')
 
   In details, what does each ng-db-helper tools ?
@@ -228,7 +228,7 @@
     
   ```
 
-### use @Table annotation
+### use `@Table` annotation
 
   Table annotation subscribe your model in the main data model. Then it could be
   a part of the model migration to be represented on database and persisted.
@@ -253,11 +253,9 @@
     }
   ```
 
-### use @Column annotation
+### use `@Column` annotation
 
-  @Column is annotation for model fields to configure database column where the value
-  will be stored. See database standard to clearly understand available column
-  configurations. Current available properties are:
+  `@Column` is annotation for model fields to configure database column where the value will be stored. See database standard to clearly understand available column configurations. Current available properties are:
 
 | config name   |  type   | default value | description                               |
 |---------------|:-------:|:-------------:|-------------------------------------------|
@@ -331,6 +329,11 @@
 
 ## Queries
 
+All statement builder have the same design pattern. All building method return the statement itself
+to chain conditions and being easily readable.
+
+All statement are excuted with the `exec()` method and return a standard `Observable`.
+
 ### Select
 
   Select provide multiple methods returning itself to chain operations et being more semantic.
@@ -346,6 +349,20 @@
       .projection(['id', 'isDone', 'label', 'dueDate', 'createdAt'])
         // customize projection, this may be use to optimize query on big object
         // but should not be used if not perf problem is detected
+      .subscribe(...);
+  ```
+
+  `Select(model: {new(): T})` is a templated function, so that the subscribed success method will directly give
+  you instances of the model
+
+  ```typescript
+    Select(Todo).subscribe((qr: QueryResult<Todo>) => {
+      if (qr.rows.length) {
+        const todo = qr.rows.item(0); // todo item is an instance of Todo without any effort
+
+        // do things with your newly instanciated Todo instance !!
+      }
+    });
   ```
 
 ### Insert
@@ -430,28 +447,192 @@
   It's planed to manage complex query soon, be carefull about updates to benefit 
   optimizations and code lisibility.
 
-## Connector
+## Mastering Clauses
+
+  ### Standard Clauses manipulation
+
+  ### Semantic use of clauses
+
+    Feature will be added on future release
+
+  ### Clause imbrication
+
+    Feature will be added on future release 
+
+  ### Query imbrication in clause
+
+    Feature will be added on future release
+
+## Connectors
+
+  ### cordova-sqlite-storage
+
+`cordova-sqlite-storage` is the most use plugin by mobile developper using cordova. This connector
+could be the most use with this module. This how to set it up:
+
+```typescript
+  import { NgDbHelperModuleConfig } from 'ng-db-helper';
+  import { CordovaSqliteConnector } from 'ng-db-helper';
+  import { CordovaSqliteConnectorConfiguration } from 'ng-db-helper';
+
+  // Create a function that build the module configuration
+  export function getDbHelperModuleConfiguration(): NgDbHelperModuleConfig {
+    // This configuration is for CordovaSqliteConnector
+    const connectorConfig = new CordovaSqliteConnectorConfiguration();
+
+    // Set up the configuration on the connector
+    const connector = new CordovaSqliteConnector(connectorConfig);
+
+    // create the module configuration instance
+    const config = new NgDbHelperModuleConfig();
+    
+    // Default module connectors are model migration managers too. you
+    // can override migration behaviour from connector's configurations
+    config.modelMigration = connector;
+    config.queryConnector = connector;
+
+    config.version = '1';
+    return config;
+  }
+```
+
+As default configuration database will be created in the standard directory and at each version
+change, new tables are created. This is options given to you by 
+CordovaSqliteConnectorConfiguration by customizing its properties:
+
+  - `dbName` : filename for database on target device, default value is `'database.db'`,
+  - `doCopyDb` : flag to create database by copy, other configurations provides source informations, default value is false,
+  - `sourceDbName` : the db name to copy from the project files, default value is `'www/assets/'`,
+  - `sourceDbPath` : path to the db relative to the root of the project, default is `'database.db'`,
+  - `location` : see `cordova-sqlite-storage` location parameter on database open method, default is `'location'`,
+  - `initDatamodel` : function called on model initialization, if you add your custom logic, part of previous configuration will not be needed, method signature: `(dataModel: DataModel, db: SQLiteDatabase) => Observable<any>`
+  - `upgradeDataModel` : this function is the function to replace to manage model migration, see the method signature: `(dataModel: DataModel, db: SQLiteDatabase, oldVarsion: number) => Observable<any>`. New data model share the new version number and old version is passed too. DataModel object is generated from annotation and the version putted from the configuration, all is here to write migration script.
+
+  ### Websql connector
+
+`Websql` is the standard sql storage for browser, see W3C specification. This connector is the only usable for browser. Be carefull on targer browser, some old browser do not support this API. In this case, the connecto will raise an error.
+
+```typescript
+  import { NgDbHelperModuleConfig } from 'ng-db-helper';
+  import { WebsqlConnector } from 'ng-db-helper';
+  import { WebsqlConnectorConfiguration } from 'ng-db-helper';
+
+  // Create a function that build the module configuration
+  export function getDbHelperModuleConfiguration(): NgDbHelperModuleConfig {
+    // This configuration is for CordovaSqliteConnector
+    const connectorConfig = new WebsqlConnectorConfiguration();
+
+    // Set up the configuration on the connector
+    const connector = new WebsqlConnector(connectorConfig);
+
+    // create the module configuration instance
+    const config = new NgDbHelperModuleConfig();
+    
+    // Default module connectors are model migration managers too. you
+    // can override migration behaviour from connector's configurations
+    config.modelMigration = connector;
+    config.queryConnector = connector;
+
+    config.version = '1';
+    return config;
+  }
+```
+
+As default configuration database will be created in the standard directory and at each version
+change, new tables are created. This is options given to you by 
+CordovaSqliteConnectorConfiguration by customizing its properties:
+
+  - `dbName` : filename for database,
+  - `initDatamodel` : function called on model initialization, method signature: `(dataModel: DataModel, db: SQLiteDatabase) => Observable<any>`
+  - `upgradeDataModel` : this function is the function to replace to manage model migration, see the method signature: `(dataModel: DataModel, db: SQLiteDatabase, oldVarsion: number) => Observable<any>`. New data model share the new version number and old version is passed too. DataModel object is generated from annotation and the version putted from the configuration, all is here to write migration script.
+
+  ### Mixed cordova-websql connector
+
+This connector is the most adaptive connector. It switch on one of the previous connector considering support and is cordova first. 
+As WebsqlConnectorConfiguration is inclusive compared to CordovaSqliteConnectorConfiguration, it is the second configuration that is used to configure the connector :
+
+```typescript
+  import { NgDbHelperModuleConfig } from 'ng-db-helper';
+  import { MixedCordovaSqliteWebsqlConnector } from 'ng-db-helper';
+  import { CordovaSqliteConnectorConfiguration } from 'ng-db-helper';
+
+  // Create a function that build the module configuration
+  export function getDbHelperModuleConfiguration(): NgDbHelperModuleConfig {
+    // This configuration is for CordovaSqliteConnector
+    const connectorConfig = new CordovaSqliteConnectorConfiguration();
+
+    // Set up the configuration on the connector
+    const connector = new MixedCordovaSqliteWebsqlConnector(connectorConfig);
+
+    // create the module configuration instance
+    const config = new NgDbHelperModuleConfig();
+    
+    // Default module connectors are model migration managers too. you
+    // can override migration behaviour from connector's configurations
+    config.modelMigration = connector;
+    config.queryConnector = connector;
+
+    config.version = '1';
+    return config;
+  }
+```
+
+As default configuration database will be created in the standard directory and at each version
+change, new tables are created. This is options given to you by 
+CordovaSqliteConnectorConfiguration by customizing its properties:
+
+  - `dbName` : filename for database on target device, default value is `'database.db'`,
+  - `doCopyDb` : flag to create database by copy, other configurations provides source informations, default value is false,
+  - `sourceDbName` : the db name to copy from the project files, default value is `'www/assets/'`,
+  - `sourceDbPath` : path to the db relative to the root of the project, default is `'database.db'`,
+  - `location` : see `cordova-sqlite-storage` location parameter on database open method, default is `'location'`,
+  - `initDatamodel` : function called on model initialization, if you add your custom logic, part of previous configuration will not be needed, method signature: `(dataModel: DataModel, db: SQLiteDatabase) => Observable<any>`
+  - `upgradeDataModel` : this function is the function to replace to manage model migration, see the method signature: `(dataModel: DataModel, db: SQLiteDatabase, oldVarsion: number) => Observable<any>`. New data model share the new version number and old version is passed too. DataModel object is generated from annotation and the version putted from the configuration, all is here to write migration script.
+
+  ### Customize your own connector
+
+if you need to have your own connector, an interface is provided to build it. See QueryConnector documentation.
 
 ## ModelMigration
 
+  ### Understand migration workflow
+
+  ### Existing migration
+
+  ### Customize your migrations
+
 # Todos
 
-  - Queries
-    - Add batch queries feature
-    - Manage join tables
-    - Add sub queries management to clauses
-    - Add sub clause group
-    - Batch queries
-  - Models
-    - Foreign models
-    - Foreign keys
-    - Manage more types like Date
-    - constraint management
-  - Connectors
-    - Batch queries
-    - Default connector configuration
-  - Design
-    - Pass some possible values for field to enum
+  Contact me to suggest missing things on this todo list!
+
+  - [-] Queries
+    - [x] select
+    - [x] insert
+    - [x] update
+    - [x] delete
+    - [-] Add batch queries feature
+    - [-] Manage join tables
+    - [-] Add sub queries management to clauses
+    - [-] Add sub clause group
+    - [-] Allow semantic clause complexity
+    - [-] Batch queries
+  - [-] Models
+    - [x] Table annotation
+    - [x] Column annotation
+    - [-] Foreign models
+    - [-] Foreign keys
+    - [-] Manage more types like Date
+    - [-] constraint management
+  - [-] Connectors
+    - [x] standard interface
+    - [x] plugable connector on init config
+    - [x] cordova-sqlite-storage connector
+    - [x] Websql connector
+    - [x] Hybrid connector detecting cordova-sqlite-storage or Websql connector support and activate it
+    - [-] Batch queries
+    - [-] Default connector configuration
+  - [-] Design
+    - [-] Pass some possible values for field to enum
 
 # Authors
 

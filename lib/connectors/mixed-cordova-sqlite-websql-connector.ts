@@ -26,14 +26,19 @@ import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirem
  *               else Websql 
  * 
  * @example
+ * ```typescript
  * const connectorConfig = new CordovaSqliteConnectorConfiguration();
- * connectorConfig.dbName = app.sqlite // configure db name on device
- * const connector = MixedCordovaSqliteWebsqlConnector(connectorConfig); // add config to connector
- * const config = new NgDbHelperModuleConfiguration(); // create module config
+ * // configure db name on device
+ * connectorConfig.dbName = app.sqlite;
+ * // add config to connector
+ * const connector = MixedCordovaSqliteWebsqlConnector(connectorConfig);
+ * // create module config
+ * const config = new NgDbHelperModuleConfiguration(); 
  * config.queryConnector = connector;
  * config.modelMigration = connector;
- * config.version = '1'
+ * config.version = '1';
  * // add config to module with forRoot method
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

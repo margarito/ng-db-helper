@@ -8,6 +8,7 @@ import { Clause } from './clause.model';
  * and Delete statement.
  * 
  * @example
+ * ```typescript
  * // Create a group of clauses
  * const group = new ClauseGroup();
  * 
@@ -30,6 +31,7 @@ import { Clause } from './clause.model';
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

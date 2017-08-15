@@ -24,14 +24,19 @@ import { QueryResult } from '../core/interfaces/query-result.interface';
  * Requirements: Websql support by browser
  * 
  * @example
+ * ```typescript
  * const connectorConfig = new WebsqlConnectorConfiguration();
- * connectorConfig.dbName = app.sqlite // configure db name on device
- * const connector = WebsqlConnector(connectorConfig); // add config to connector
- * const config = new NgDbHelperModuleConfiguration(); // create module config
+ * // configure db name on device
+ * connectorConfig.dbName = app.sqlite;
+ * // add config to connector
+ * const connector = WebsqlConnector(connectorConfig);
+ * // create module config
+ * const config = new NgDbHelperModuleConfiguration();
  * config.queryConnector = connector;
  * config.modelMigration = connector;
- * config.version = '1'
+ * config.version = '1';
  * // add config to module with forRoot method
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

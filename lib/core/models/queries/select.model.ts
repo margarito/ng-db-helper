@@ -18,12 +18,14 @@ import { Clause } from './clause.model';
  * @param T exdends DbHelperModel, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // select todos
  * Select(Todo).where({isDone: false}}).exec().subscribe((qr: QueryResult<Todo>) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1
@@ -222,12 +224,14 @@ export class QuerySelect<T extends DbHelperModel> {
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // select todos
  * Select(Todo).where({isDone: false}}).exec().subscribe((qr: QueryResult<Todo>) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

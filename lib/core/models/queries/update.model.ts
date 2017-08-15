@@ -20,12 +20,14 @@ import { Clause } from './clause.model';
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // update todo object
  * Update(todo).exec().subscribe((qr: QueryResult<any>) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1
@@ -210,19 +212,21 @@ export class QueryUpdate<T extends DbHelperModel> {
 }
 
 /**
- * @private API
+ * @public API
  * @function Update is an helper to update models.
  * For a single model prefer use {@link DbHelperModel.save}
  * 
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // update todo object
  * Update(todo).exec().subscribe((qr: QueryResult<any>) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

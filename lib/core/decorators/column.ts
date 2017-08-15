@@ -7,6 +7,7 @@ import { Clause } from './../models/queries/clause.model';
  * class using this annotation must extends {@link DbHelperModel}.
  * 
  * @example
+ * ```typescript
  * @Table
  * export class Todo extends DbHelperModel {
  * 
@@ -16,9 +17,10 @@ import { Clause } from './../models/queries/clause.model';
  *      @Column
  *      public name: string;
  * 
- *      @Column
- *      public dueDate: string;
+ *      @Column({type: 'long'})
+ *      public dueDate: number;
  * }
+ * ```
  * 
  * @param config, {@link ColumnConfig} is column configuration, informations are used to
  *          build DataModel.

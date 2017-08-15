@@ -9,13 +9,22 @@ import { DataModel } from '../../core/models/data-model.model';
  * This class provides config key to add copy informations.
  * 
  * @example
+ * 
+ * ```typescript
  * const config = new CordovaSqliteConnectorConfiguration();
- * config.dbName = app.sqlite // configure db name on device
- * config.sourceDbName = db.sqlite // configure the database to copy from
- * config.sourceDbPath = 'www/assets/db/' // configure the path to the database
- * config.doCopyDb = true // turn on db init by copy
- * const connector = CordovaSqliteConnector(config); // add config to connector
+ * // configure db name on device
+ * config.dbName = app.sqlite;
+ * // configure the database to copy from
+ * config.sourceDbName = db.sqlite;
+ * // configure the path to the database
+ * config.sourceDbPath = 'www/assets/db/';
+ * // turn on db init by copy
+ * config.doCopyDb = true;
+ * // add config to connector
+ * const connector = CordovaSqliteConnector(config);
  * // add your connector to module configuration
+ * 
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

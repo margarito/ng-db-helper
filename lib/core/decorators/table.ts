@@ -7,6 +7,7 @@ import { ModelManager } from './../managers/model-manager';
  * This annotation declares class in datamodel
  * 
  * @example
+ * ```typescript
  * @Table
  * export class Todo extends DbHelperModel {
  * 
@@ -16,9 +17,10 @@ import { ModelManager } from './../managers/model-manager';
  *      @Column
  *      public name: string;
  * 
- *      @Column
- *      public dueDate: string;
+ *      @Column({type: 'long'})
+ *      public dueDate: number;
  * }
+ * ```
  * 
  * @param config, {@link TableConfig} is table configuration, informations are used to
  *          build DataModel.

@@ -23,6 +23,7 @@ import 'rxjs/add/observable/combineLatest';
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // Create new model instance
  * const todo = new Todo();
  * // manipulates todo instance and then insert it
@@ -47,6 +48,7 @@ import 'rxjs/add/observable/combineLatest';
  * }, (err) => {
  *      // manage error
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1
@@ -207,6 +209,7 @@ export class QueryInsert<T extends DbHelperModel> {
  *          column annotations
  * 
  * @example
+ * ```typescript
  * // Create new model instance
  * const todo = new Todo();
  * // manipulates todo instance and then insert it
@@ -231,6 +234,7 @@ export class QueryInsert<T extends DbHelperModel> {
  * }, (err) => {
  *      // manage error
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

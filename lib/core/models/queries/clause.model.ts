@@ -5,6 +5,7 @@ import { QueryPart } from './query-part.model';
  * @class Clause is a single clause for where statement.
  * 
  * @example
+ * ```typescript
  * // Create a group of clauses
  * const group = new ClauseGroup();
  * 
@@ -27,6 +28,7 @@ import { QueryPart } from './query-part.model';
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

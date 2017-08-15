@@ -11,14 +11,19 @@ import { QueryManager } from './core/managers/query-manager';
  * to use.
  * 
  * @example
+ * 
+ * ```typescript
  *  function getConfig(): NgDbHelperModuleConfiguration {
  *      const connectorConfig = new CordovaSqliteConnectorConfiguration();
- *      connectorConfig.dbName = app.sqlite // configure db name on device
- *      const connector = MixedCordovaSqliteWebsqlConnector(connectorConfig); // add config to connector
- *      const config = new NgDbHelperModuleConfiguration(); // create module config
+ *      // configure db name on device
+ *      connectorConfig.dbName = app.sqlite;
+ *      // add config to connector
+ *      const connector = MixedCordovaSqliteWebsqlConnector(connectorConfig);
+ *      // create module config 
+ *      const config = new NgDbHelperModuleConfiguration();
  *      config.queryConnector = connector;
  *      config.modelMigration = connector;
- *      config.version = '1'
+ *      config.version = '1';
  *  }
  * 
  *  @NgModule({
@@ -31,6 +36,7 @@ import { QueryManager } from './core/managers/query-manager';
  *  export class AwesomeModule {
  * 
  *  }
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

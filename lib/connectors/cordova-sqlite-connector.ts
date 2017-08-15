@@ -23,14 +23,19 @@ import { QueryConnector } from '../core/interfaces/query-connector.interface';
  * Requirements: cordova, cordova-plugin-file, cordova-sqlite-storage 
  * 
  * @example
+ * ```typescript
  * const connectorConfig = new CordovaSqliteConnectorConfiguration();
- * connectorConfig.dbName = app.sqlite // configure db name on device
- * const connector = CordovaSqliteConnector(connectorConfig); // add config to connector
- * const config = new NgDbHelperModuleConfiguration(); // create module config
+ * // configure db name on device
+ * connectorConfig.dbName = app.sqlite;
+ * // add config to connector
+ * const connector = CordovaSqliteConnector(connectorConfig);
+ * // create module config
+ * const config = new NgDbHelperModuleConfiguration();
  * config.queryConnector = connector;
  * config.modelMigration = connector;
- * config.version = '1'
+ * config.version = '1';
  * // add config to module with forRoot method
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

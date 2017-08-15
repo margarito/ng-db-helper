@@ -17,12 +17,14 @@ import { Clause } from './clause.model';
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // count todos
  * Count(Todo).where({isDone: false}}).exec().subscribe((qr: QueryResult<number>) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1
@@ -165,12 +167,14 @@ export class QueryCount<T extends DbHelperModel> {
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
  * 
  * @example
+ * ```typescript
  * // count todos
  * Count(Todo).where({isDone: false}}).exec().subscribe((QueryResult<number>) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
+ * ```
  * 
  * @author  Olivier Margarit
  * @Since   0.1

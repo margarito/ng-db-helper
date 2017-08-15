@@ -19,6 +19,7 @@ import { Clause } from './clause.model';
  *          and column annotations
  * 
  * @example
+ * ```typesrcript
  * // Delete a specific model using Delete
  * // assume that "todo" is declared before and is a model extending
  * // DbHelperModel and using Table + Column annotation
@@ -33,6 +34,7 @@ import { Clause } from './clause.model';
  * }, (err) => {
  *      // manage th error...
  * });
+ * ```
  * 
  * 
  * @author  Olivier Margarit
@@ -128,6 +130,7 @@ export class QueryDelete<T extends DbHelperModel> {
  *          and column annotations
  * 
  * @example
+ * ```typescript
  * // Delete a specific model using Delete
  * // assume that "todo" is declared before and is a model extending
  * // DbHelperModel and using Table + Column annotation
@@ -142,6 +145,7 @@ export class QueryDelete<T extends DbHelperModel> {
  * }, (err) => {
  *      // manage th error...
  * });
+ * ```
  * 
  * 
  * @author  Olivier Margarit
