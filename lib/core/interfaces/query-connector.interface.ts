@@ -8,17 +8,17 @@ import { DbQuery } from '../models/db-query.model';
  * This interface allow to switch between rdb solution like cordova-sqlite-storage
  * or Websql.
  * The purpose is to be able to switch platform without modifying any line of the application code.
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
 export interface QueryConnector {
     /**
      * @method query connector method to fire query
-     * 
+     *
      * @param dbQuery   DbQuery object containing query and query params.
      *                  see {@link DbQuery}
-     * 
+     *
      * @return          Obsevable   passing {@link QueryResult<any>} on query success
      *                              passing {@link QueryError} on query error
      */
@@ -27,7 +27,7 @@ export interface QueryConnector {
     /**
      * @method isReady to check if module is ready, if not, caller should
      * subscribe to {@link QueryConnector.onReady}
-     * 
+     *
      * @return should be true if connector can query else false
      */
     isReady(): boolean;
@@ -35,8 +35,8 @@ export interface QueryConnector {
     /**
      * @method onReady should be subscribed if connector is not ready
      * if connector is ready, if QueryConnector isReady or not this should be
-     * a permanent state. The engine never resubscribe in his instance lifecycle. 
-     * 
+     * a permanent state. The engine never resubscribe in his instance lifecycle.
+     *
      * @return Observable   passing true if connector is ready
      *                      passing false if connector will never be ready
      */
@@ -45,7 +45,7 @@ export interface QueryConnector {
     /**
      * @method getDbVersion called to check db version, should be called only if connector
      * is ready. The rdb may need a query so the call is async.
-     * 
+     *
      * @return Observable   passing string version after version is checked
      */
     getDbVersion(): Observable<string>;

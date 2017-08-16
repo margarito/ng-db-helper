@@ -1,6 +1,6 @@
 /**
  * @class TableConfig a config model for {@link Table} annotation
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -14,5 +14,5 @@ export class TableConfig {
     /**
      * @property version, the table model version, information to help migration
      */
-    public version?: number = 0;
+    public version? = 0;
 }

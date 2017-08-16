@@ -3,7 +3,7 @@ import { QueryPart } from './queries/query-part.model';
 /**
  * @class DbQuery is a model to share query informations specifically to
  * the query connector.
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -44,9 +44,9 @@ export class DbQuery {
      * @public
      * @method append is a part of private API.
      * this method is used to build query by appending part of it
-     * 
-     * @param queryPart the {@link QueryPart} 
-     * 
+     *
+     * @param queryPart the {@link QueryPart}
+     *
      * @return the db query instance to chain part appending
      */
     public append(queryPart: QueryPart): DbQuery {

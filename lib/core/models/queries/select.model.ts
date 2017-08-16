@@ -14,9 +14,9 @@ import { Clause } from './clause.model';
  * @class QuerySelect is private part of the APi.
  * For design reasons this class should not be used directly and
  * will move later. Use this class with {@link Select} function.
- * 
+ *
  * @param T exdends DbHelperModel, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // select todos
@@ -26,7 +26,7 @@ import { Clause } from './clause.model';
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -78,7 +78,7 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @constructor should not be use directly, see class header
-     * 
+     *
      * @param model {@link DbHelperModel} extention
      */
     public constructor(private model: { new(): T ; }) {}
@@ -87,9 +87,9 @@ export class QuerySelect<T extends DbHelperModel> {
      * @public
      * @method projection customize the select column of the QueryResult
      *         for performance optimization if needed.
-     * 
+     *
      * @param proj the projection
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public projection(proj: string[]): QuerySelect<T> {
@@ -101,9 +101,9 @@ export class QuerySelect<T extends DbHelperModel> {
      * @public
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
-     * 
+     *
      * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public where(clauses: Clause|Clause[]|ClauseGroup|Object): QuerySelect<T> {
@@ -117,9 +117,9 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @method groupBy add group by instructions to the query
-     * 
+     *
      * @param group string whith the column to group by
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public groupBy(group: string): QuerySelect<T> {
@@ -130,9 +130,9 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @method orderBy add order by instructions to the query
-     * 
+     *
      * @param order string whith the column to order by
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public orderBy(order: string): QuerySelect<T> {
@@ -143,9 +143,9 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @method setPage set the page result for pagination
-     * 
+     *
      * @param page page number of the result
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public setPage(page: number): QuerySelect<T> {
@@ -156,9 +156,9 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @method setSize set the size of the page result for pagination
-     * 
+     *
      * @param size page size number of the result
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public setSize(size: number): QuerySelect<T> {
@@ -170,7 +170,7 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @method build should be removed to be a part of the private API
-     * 
+     *
      * @return {@link DbQuery} of the query with the string part and
      *          clauses params.
      */
@@ -203,7 +203,7 @@ export class QuerySelect<T extends DbHelperModel> {
     /**
      * @public
      * @method exec to execute the query and asynchronously retreive result.
-     * 
+     *
      * @return observable to subscribe
      */
     public exec(): Observable<QueryResult<T>> {
@@ -220,9 +220,9 @@ export class QuerySelect<T extends DbHelperModel> {
  * @public API
  * @function Select an helper to select models inherited from {@link DbHelperModel}
  * from the database
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // select todos
@@ -232,7 +232,7 @@ export class QuerySelect<T extends DbHelperModel> {
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

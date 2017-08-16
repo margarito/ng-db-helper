@@ -13,9 +13,9 @@ import { Clause } from './clause.model';
  * @class QueryCount is private part of the APi.
  * For design reasons this class should not be used directly and
  * will move later. Use this class with {@link Count} function.
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // count todos
@@ -25,7 +25,7 @@ import { Clause } from './clause.model';
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -59,7 +59,7 @@ export class QueryCount<T extends DbHelperModel> {
     /**
      * @public
      * @constructor should not be use directly, see class header
-     * 
+     *
      * @param model {@link DbHelperModel} extention
      */
     public constructor(private model: { new(): T ; }) {}
@@ -67,10 +67,10 @@ export class QueryCount<T extends DbHelperModel> {
     /**
      * @public
      * @method projection set the projection to the query
-     * 
+     *
      * @param proj string list of column name that shoul be in the
      * result item of th query
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public projection(proj: string[]): QueryCount<T> {
@@ -82,9 +82,9 @@ export class QueryCount<T extends DbHelperModel> {
      * @public
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
-     * 
+     *
      * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public where(clauses: Clause|Clause[]|ClauseGroup|Object): QueryCount<T> {
@@ -98,9 +98,9 @@ export class QueryCount<T extends DbHelperModel> {
     /**
      * @public
      * @method groupBy add group by instructions to the query
-     * 
+     *
      * @param group string whith the column to group by
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public groupBy(group: string): QueryCount<T> {
@@ -111,7 +111,7 @@ export class QueryCount<T extends DbHelperModel> {
     /**
      * @public
      * @method build should be removed to be a part of the private API
-     * 
+     *
      * @return {@link DbQuery} of the query with the string part and
      *          clauses params.
      */
@@ -139,7 +139,7 @@ export class QueryCount<T extends DbHelperModel> {
     /**
      * @public
      * @method exec to execute the query and asynchronously retreive result.
-     * 
+     *
      * @return observable to subscribe
      */
     public exec(): Observable<number> {
@@ -163,9 +163,9 @@ export class QueryCount<T extends DbHelperModel> {
 /**
  * @public API
  * @function Count is an helper to count element from database
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // count todos
@@ -175,7 +175,7 @@ export class QueryCount<T extends DbHelperModel> {
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

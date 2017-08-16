@@ -2,7 +2,7 @@
  * @private API
  * @class QueryPart is private part of the API.
  * It is an intermidiate query object for builded query parts
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -23,9 +23,9 @@ export class QueryPart {
      * @public
      * @method append   append other query part to itself and return itself
      *                  to chain appending
-     * 
+     *
      * @param queryPart another query part
-     * 
+     *
      * @return the query part itself
      */
     public append(queryPart: QueryPart): QueryPart {

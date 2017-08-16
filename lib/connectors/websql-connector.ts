@@ -11,18 +11,18 @@ import { QueryResult } from '../core/interfaces/query-result.interface';
 
 /**
  * @class WebsqlConnector is a default connector
- * for rdb module see {@link NgDbHelperModuleConfiguration}
+ * for rdb module see {@link NgDbHelperModuleConfig}
  * This class provides config key to add copy informations.
- * 
+ *
  * This default connector allow query to database provided with Websql
  * use {@link WebsqlConnectorConfiguration} to override default migrations logics.
  * See W3C specification and check browser support
- * 
+ *
  * To understand QueryConnectors or ModelMigrations see respectively {@link QueryConnectors},
  * {@link ModelMigrations} and configuration default script configuration
- * 
+ *
  * Requirements: Websql support by browser
- * 
+ *
  * @example
  * ```typescript
  * const connectorConfig = new WebsqlConnectorConfiguration();
@@ -31,20 +31,20 @@ import { QueryResult } from '../core/interfaces/query-result.interface';
  * // add config to connector
  * const connector = WebsqlConnector(connectorConfig);
  * // create module config
- * const config = new NgDbHelperModuleConfiguration();
+ * const config = new NgDbHelperModuleConfig();
  * config.queryConnector = connector;
  * config.modelMigration = connector;
  * config.version = '1';
  * // add config to module with forRoot method
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
 export class WebsqlConnector implements QueryConnector, ModelMigration {
     /**
      * @private
-     * @property ready, flag updated with connector state to indicate that connector can query 
+     * @property ready, flag updated with connector state to indicate that connector can query
      */
     private ready = true;
 
@@ -60,7 +60,7 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      */
     private get db(): any {
         if (!this.dbValue) {
-            this.dbValue = (window as {[index:string]: any}).openDatabase(this.config.dbName, '', this.config.dbName, 10000000);
+            this.dbValue = (window as {[index: string]: any}).openDatabase(this.config.dbName, '', this.config.dbName, 10000000);
         }
         return this.dbValue;
     };
@@ -69,12 +69,12 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      * @constructor
      * @throws UnsatisfiedRequirementError, thrown if Websql is not supported
      * connector start logic after 'deviceready' signal firing.
-     * 
+     *
      * @param config    configuration of the connector, see {@link CordovaSqliteConnectorConfiguration}
      *                  and connector documentation header.
      */
     public constructor(private config: WebsqlConnectorConfiguration) {
-        this.ready = !!(window as {[index:string]: any}).openDatabase;
+        this.ready = !!(window as {[index: string]: any}).openDatabase;
         if (!this.ready) {
             throw(new UnsatisfiedRequirementError('Your browser does not support websql !'))
         }
@@ -83,10 +83,10 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
     /**
      * @public
      * @method query connector method to fire query
-     * 
+     *
      * @param dbQuery   DbQuery object containing query and query params.
      *                  see {@link DbQuery}
-     * 
+     *
      * @return          Obsevable   passing {@link QueryResult<any>} on query success
      *                              passing {@link QueryError} on query error
      */
@@ -105,7 +105,9 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
                     transaction.executeSql(q, dbQuery.params, (tr: any, result: any) => {
                         observer.next(result);
                         observer.complete();
-                    }, (tr: any, err: any) => observer.error(new QueryError(err.message, q, dbQuery.params ? dbQuery.params.join(', ') : '')));
+                    }, (tr: any, err: any) => {
+                        observer.error(new QueryError(err.message, q, dbQuery.params ? dbQuery.params.join(', ') : ''));
+                    });
                 }, (err: any) => observer.error(new QueryError(String(err.message), q, dbQuery.params ? dbQuery.params.join(', ') : '')));
             } else {
                 observer.error(new QueryError('no database opened', q, dbQuery.params ? dbQuery.params.join(', ') : ''));
@@ -117,7 +119,7 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      * @public
      * @method isReady to check if module is ready, if not, caller should
      * subscribe to {@link CordovaSqliteConnector.onReady}
-     * 
+     *
      * @return should be true if connector can query else false
      */
     isReady(): boolean {
@@ -127,7 +129,7 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
     /**
      * @public
      * @method onReady no async check is done, capability is checked in constructor.
-     * 
+     *
      * @return Observable   passing true if connector is ready
      *                      passing false if connector will never be ready
      */
@@ -142,7 +144,7 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      * @public
      * @method getDbVersion called to check db version, should be called only if connector
      * is ready.
-     * 
+     *
      * @return Observable   passing string version after version is checked
      */
     getDbVersion(): Observable<string> {
@@ -160,9 +162,9 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      * @public
      * @method initModel is implemented method from ModelMigration, see {@link ModelMigration} to understand usage.
      * {@link WebsqlConnectorConfiguration.initDataModel} is called
-     * 
+     *
      * @param dataModel {@link DataModel} generated with model annotations
-     * 
+     *
      * @return Observable resolved on initModel finish
      */
     initModel(dataModel: DataModel): Observable<any> {
@@ -173,10 +175,10 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      * @public
      * @method upgradeModel is implemented method from ModelMigration, see {@link ModelMigration} to understand usage.
      * directly call {@link WebsqlConnectorConfiguration.upgradeDataModel}
-     * 
+     *
      * @param dataModel     {@link DataModel} generated with model annotations
      * @param oldVersion    old model version
-     * 
+     *
      * @return Observable resolved on upgradeModel finish
      */
     upgradeModel(dataModel: DataModel, oldVersion: string): Observable<any> {

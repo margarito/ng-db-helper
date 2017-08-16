@@ -1,8 +1,8 @@
 # NgDbHelperModule
 
-  This module is a simple module to simplify persistence with relationnel databases.
+  This module is a simple module to simplify persistence with relationnal databases.
   As there is many platforms or devices, this module bring possibility to manage connectors.
-  It allow integrators to have a better code portability.
+  It allows integrators to have a better code portability.
 
   It can be used with cordova-sqlite-storage, websql or other relationnal database if you
   implement your own connector.
@@ -68,7 +68,8 @@
 
 ## Initialisation
 
-  Create a file where you will put your db management configuration and init the configuration:
+  Create a file where you will put your db management configuration factory
+  and init the configuration when it's time to provide it:
 
   ```typescript
   import { NgDbHelperModuleConfig } from 'ng-db-helper';
@@ -118,7 +119,7 @@
     @NgModule({
       imports: [
         ...,
-        NgDbHelperModule.forRoot(getDbHelperModuleConfiguration()),
+        NgDbHelperModule.forRoot(getDbHelperModuleConfiguration),
         ...
       ],
       declarations: [...],
@@ -623,6 +624,7 @@ if you need to have your own connector, an interface is provided to build it. Se
     - [-] Foreign keys
     - [-] Manage more types like Date
     - [-] constraint management
+    - [-] Create a base service with usefull generic functions
   - [-] Connectors
     - [x] standard interface
     - [x] plugable connector on init config

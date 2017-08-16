@@ -8,12 +8,12 @@ import { DbQuery } from '../db-query.model';
  * @public
  * @function RawQuery allow integrators to make RawQuery, any query not permitted
  *           by the current api will be able here
- *  
+ *
  * @param query     the query string
  * @param params    the query paraeters
  * @param size      optional result size
  * @param page      optional result page
- * 
+ *
  * @return query object to execute
  */
 export function RawQuery(query: string, params: any[], size?: number, page?: number) {
@@ -24,8 +24,8 @@ export function RawQuery(query: string, params: any[], size?: number, page?: num
     dbQuery.size = size || 1000;
     dbQuery.page = page || 0;
     const trimedQuery = query.trim();
-    let firstWord = trimedQuery.substr(0, trimedQuery.indexOf(" "));
-    firstWord = firstWord ? firstWord.toUpperCase(): '';
+    let firstWord = trimedQuery.substr(0, trimedQuery.indexOf(' '));
+    firstWord = firstWord ? firstWord.toUpperCase() : '';
     if (firstWord && types.indexOf(firstWord[0])) {
         dbQuery.type = firstWord;
     } else {
@@ -36,10 +36,10 @@ export function RawQuery(query: string, params: any[], size?: number, page?: num
         /**
          * @public
          * @method exec to execute the query and asynchronously retreive result.
-         * 
+         *
          * @return observable to subscribe
          */
-        exec: () : Observable<QueryResult<any>> => {
+        exec: (): Observable<QueryResult<any>> => {
             return QueryManager.getInstance().query(dbQuery);
         }
     }

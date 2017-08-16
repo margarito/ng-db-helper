@@ -1,6 +1,6 @@
 /**
  * @class BadTableDeclarationError is thrown when a table declaration is detected
- * 
+ *
  * @see Error
  * @author  Olivier Margarit
  * @Since   0.1
@@ -12,7 +12,7 @@ export class BadTableDeclarationError implements Error {
     /**
      * @public
      * @constructor
-     * @param message message explaining in details error 
+     * @param message message explaining in details error
      */
     public constructor(public message: string) {
         Object.setPrototypeOf(this, new.target.prototype);

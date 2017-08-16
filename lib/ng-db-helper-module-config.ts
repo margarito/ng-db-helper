@@ -5,7 +5,7 @@ import { ModelMigration } from './core/interfaces/model-migration.interface';
  * @class NgDbHelperModuleConfig is a config model for the module.
  * Future release version may have default values to make easier the module
  * integration.
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

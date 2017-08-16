@@ -9,9 +9,9 @@ import 'rxjs/add/observable/combineLatest';
  * @class WebsqlConnectorConfiguration is a default configuration
  * for connector {@link WebsqlConnector}
  * This class provides config key to add copy informations.
- * 
+ *
  * @example
- * 
+ *
  * ```typescript
  * const config = new WebsqlConnectorConfiguration();
  * // configure db name on device
@@ -20,7 +20,7 @@ import 'rxjs/add/observable/combineLatest';
  * const connector = WebsqlConnector(config);
  * // add your connector to module configuration
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -35,7 +35,7 @@ export class WebsqlConnectorConfiguration {
      * @public
      * @method initDataModel is called if database need to be initialized.
      * You can override this method if you need to add your logic
-     * 
+     *
      * @param dataModel model generated be model annotations
      * @param db        SQLiteDatabase object, see cordova-sqlite-storage
      */
@@ -49,7 +49,7 @@ export class WebsqlConnectorConfiguration {
      * Default script create new table but does not alter existing table.
      * You can override this method to add your own logic like alteration
      * and let script create new table by calling super.
-     * 
+     *
      * @param dataModel model generated be model annotations
      * @param db        Database object, see websql documentation
      */
@@ -60,7 +60,7 @@ export class WebsqlConnectorConfiguration {
     /**
      * @private
      * @method createTables create table linked to datamodel (not table alteration)
-     * 
+     *
      * @param dataModel model generated be model annotations
      * @param db        Database object, see websql documentation
      * @param doDrop    drop table to allow recreation of database
@@ -89,7 +89,7 @@ export class WebsqlConnectorConfiguration {
     /**
      * @private
      * @method dropTable drop table if exists
-     * 
+     *
      * @param tableName     name of the table to drop
      * @param transaction SQLTransaction object, see websql documentation
      */
@@ -100,7 +100,7 @@ export class WebsqlConnectorConfiguration {
     /**
      * @private
      * @method query fire sql query
-     * 
+     *
      * @param query         sql query
      * @param transaction   SQLTransaction object, see websql documentation
      */

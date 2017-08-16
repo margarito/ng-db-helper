@@ -1,6 +1,6 @@
 /**
  * @class ColumnConfig, specific configurator for {@link Column} annotation
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -15,29 +15,29 @@ export class ColumnConfig {
      * @property primaryKey, define the column as primary key of the table,
      *           the default value is false
      */
-    public primaryKey?: boolean = false;
+    public primaryKey? = false;
 
     /**
      * @property autoIncrement, define if the column value is auto incremented
      *           default value is false
      */
-    public autoIncrement?: boolean = false;
+    public autoIncrement? = false;
 
     /**
      * @property unique, define if column value should be unique. Default value
      *           is false
      */
-    public unique?: boolean = false;
+    public unique? = false;
 
     /**
      * @property indexed, define if column value should be indexed. Default value
      *           is false
      */
-    public indexed?: boolean = false;
+    public indexed? = false;
 
     /**
      * @property type, define type of the column, type must be compatible with
      *           the field type plus the sqlite manged type
      */
-    public type?: string = 'string';
+    public type? = 'string';
 }

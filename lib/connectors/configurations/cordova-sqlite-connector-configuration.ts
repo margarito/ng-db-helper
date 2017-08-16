@@ -7,9 +7,9 @@ import { DataModel } from '../../core/models/data-model.model';
  * @class CordovaSqliteConnectorConfiguration is a default configuration
  * for connector {@link CordovaSqliteConnector}
  * This class provides config key to add copy informations.
- * 
+ *
  * @example
- * 
+ *
  * ```typescript
  * const config = new CordovaSqliteConnectorConfiguration();
  * // configure db name on device
@@ -23,9 +23,9 @@ import { DataModel } from '../../core/models/data-model.model';
  * // add config to connector
  * const connector = CordovaSqliteConnector(config);
  * // add your connector to module configuration
- * 
+ *
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -65,7 +65,7 @@ export class CordovaSqliteConnectorConfiguration {
      * @public
      * @method initDataModel is called if database need to be initialized.
      * You can override this method if you need to add your logic
-     * 
+     *
      * @param dataModel model generated be model annotations
      * @param db        SQLiteDatabase object, see cordova-sqlite-storage
      */
@@ -79,7 +79,7 @@ export class CordovaSqliteConnectorConfiguration {
      * Default script create new table but does not alter existing table.
      * You can override this method to add your own logic like alteration
      * and let script create new table by calling super.
-     * 
+     *
      * @param dataModel model generated be model annotations
      * @param db        SQLiteDatabase object, see cordova-sqlite-storage
      */
@@ -90,7 +90,7 @@ export class CordovaSqliteConnectorConfiguration {
     /**
      * @private
      * @method createTables create table linked to datamodel (not table alteration)
-     * 
+     *
      * @param dataModel model generated be model annotations
      * @param db        SQLiteDatabase object, see cordova-sqlite-storage
      * @param doDrop    drop table to allow recreation of database

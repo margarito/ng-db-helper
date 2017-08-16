@@ -3,25 +3,25 @@ import { QueryPart } from './query-part.model';
 /**
  * @public API
  * @class Clause is a single clause for where statement.
- * 
+ *
  * @example
  * ```typescript
  * // Create a group of clauses
  * const group = new ClauseGroup();
- * 
+ *
  * // create clause to get Todo item where isDone === false
  * const doneClause = new Clause();
  * doneClause.key = 'isDone';
  * doneClause.value = false;
  * group.add(doneClause);
- * 
+ *
  * // create clause to get Todo item where dueDate <= now
  * const dueDateClause = new Clause();
  * dueDateClause.key = 'dueDate';
  * dueDateClause.value = (new Date()).getTime();
  * dueDateClause.comparator = Clause.COMPARATORS.LTE;
  * group.add(dueDateClause);
- * 
+ *
  * // start select clause
  * Select(Todo).where(group).exec().subscribe((QueryResult<Todo>) => {
  *      // do something with the result...
@@ -29,7 +29,7 @@ import { QueryPart } from './query-part.model';
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -95,7 +95,7 @@ export class Clause {
     /**
      * @public
      * @method build should be removed to be a part of the private API
-     * 
+     *
      * @return {@link QueryPart} of the query with the string part and
      *          clauses params.
      */

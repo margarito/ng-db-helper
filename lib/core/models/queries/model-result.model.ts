@@ -6,10 +6,10 @@ import { QueryResult } from '../../interfaces/query-result.interface';
  * @private API
  * @class ModelResult is private part of the API.
  * A specific wrapper to convert QueryResult to typed QueryResult on demand
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and
  *          column annotations
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -52,9 +52,9 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
              * @public
              * @method item get typed item from ResultQuery and keep it in cache
              *              to avoid doing the job two times
-             * 
+             *
              * @param i the index of the item
-             * 
+             *
              * @return the typed item
              */
             item: (i: number): T => {
@@ -67,7 +67,7 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
                             continue;
                         }
                         if (item.hasOwnProperty(column.name)) {
-                            (entity as {[index:string]:any})[column.field] = item[column.name];
+                            (entity as {[index: string]: any})[column.field] = item[column.name];
                         }
                     }
                     entity.__partialWithProjection = this.projection;
@@ -83,7 +83,7 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
     /**
      * @public
      * @constructor this is a private API and should not be available for integrators
-     * 
+     *
      * @param result        {@link QueryResult<any>} the real QueryResult converted to return typed models
      * @param model         {@link DbHelperModel} the target model to convert
      * @param projection    the optional projection

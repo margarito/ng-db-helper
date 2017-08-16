@@ -19,9 +19,9 @@ import 'rxjs/add/observable/combineLatest';
  * will move later. Use this class with {@link Insert} function.
  * Prefer use of save() method instead of Insert for a single entry.
  * Insert optimize multiple entry insertion with bulk mecanisme for example.
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // Create new model instance
@@ -32,10 +32,10 @@ import 'rxjs/add/observable/combineLatest';
  * }, (err) => {
  *      // manage error
  * });
- * 
+ *
  * // it is simplier to use the save methode for a single entry
  * todo.save()
- * 
+ *
  * // Insertion should be used for multiple model insertion
  * const todos = <Todo[]>[];
  * // provide and edi.subscribe((qr: QueryResult<any>) => {
@@ -49,7 +49,7 @@ import 'rxjs/add/observable/combineLatest';
  *      // manage error
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -72,7 +72,7 @@ export class QueryInsert<T extends DbHelperModel> {
     /**
      * @public
      * @constructor should not be use directly, see class header
-     * 
+     *
      * @param model {@link DbHelperModel} extention
      */
     public constructor(private model: T | T[]) {}
@@ -81,7 +81,7 @@ export class QueryInsert<T extends DbHelperModel> {
     /**
      * @public
      * @method build should be removed to be a part of the private API
-     * 
+     *
      * @return {@link DbQuery} of the query with the string part and
      *          clauses params.
      */
@@ -112,7 +112,7 @@ export class QueryInsert<T extends DbHelperModel> {
         for (const item of items) {
             const interrogationMarks = [];
             for (const column of table.columnList) {
-                const value = (item as {[index:string]: any})[column.field];
+                const value = (item as {[index: string]: any})[column.field];
                 parameters.push(value === undefined ? null : value);
                 interrogationMarks.push('?');
             }
@@ -126,7 +126,7 @@ export class QueryInsert<T extends DbHelperModel> {
     /**
      * @public
      * @method exec to execute the query and asynchronously retreive result.
-     * 
+     *
      * @return observable to subscribe
      */
     public exec(): Observable<QueryResult<any>> {
@@ -162,7 +162,7 @@ export class QueryInsert<T extends DbHelperModel> {
                         for (const qr of qrs) {
                             rowsAffected += qr.rowsAffected;
                             if (qr && qr.insertId || qr.insertId === 0) {
-                                insertId = Math.max(insertId ? insertId: 0, qr.insertId);
+                                insertId = Math.max(insertId ? insertId : 0, qr.insertId);
                             }
                         }
                         observer.next({
@@ -204,10 +204,10 @@ export class QueryInsert<T extends DbHelperModel> {
  * Prefer use the save() method instead of Insert for a single entry, see
  * {@link DbHelperModel} for more informations.
  * Insert optimize multiple entry insertion with bulk mecanisme for example.
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and
  *          column annotations
- * 
+ *
  * @example
  * ```typescript
  * // Create new model instance
@@ -218,10 +218,10 @@ export class QueryInsert<T extends DbHelperModel> {
  * }, (err) => {
  *      // manage error
  * });
- * 
+ *
  * // it is simplier to use the save methode for a single entry
  * todo.save()
- * 
+ *
  * // Insertion should be used for multiple model insertion
  * const todos = <Todo[]>[];
  * // provide and edi.subscribe((qr: QueryResult<any>) => {
@@ -235,7 +235,7 @@ export class QueryInsert<T extends DbHelperModel> {
  *      // manage error
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

@@ -16,9 +16,9 @@ import { Clause } from './clause.model';
  * @class QueryUpdate is private part of the APi.
  * For design reasons this class should not be used directly and
  * will move later. Use this class with {@link Update} function.
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // update todo object
@@ -28,7 +28,7 @@ import { Clause } from './clause.model';
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -56,7 +56,7 @@ export class QueryUpdate<T extends DbHelperModel> {
     /**
      * @public
      * @constructor should not be use directly, see class header
-     * 
+     *
      * @param model {@link DbHelperModel} extention
      */
     public constructor(private model: T | { new (): T}) {}
@@ -65,9 +65,9 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @public
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
-     * 
+     *
      * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public where(clauses: Clause|Clause[]|ClauseGroup|Object): QueryUpdate<T> {
@@ -82,12 +82,12 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @public
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
-     * 
+     *
      * @throws {@link QueryError} on set on single model update. set method is for updating
      *          many entries of a specific table target from its class.
-     * 
+     *
      * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public set(dict: {[index: string]: any}): QueryUpdate<T> {
@@ -111,7 +111,7 @@ export class QueryUpdate<T extends DbHelperModel> {
     /**
      * @private
      * @method getValuesFromModel build values part of the query from the model.
-     * 
+     *
      * @return {@link QueryPart} the values query part of update statement
      */
     private getValuesFromModel(): QueryPart {
@@ -119,11 +119,11 @@ export class QueryUpdate<T extends DbHelperModel> {
         const queryPart = new QueryPart();
         const columnsToUpdate = <string[]>[];
         for (const column of table.columnList) {
-            let value = (this.model as {[index:string]: any})[column.field];
+            let value = (this.model as {[index: string]: any})[column.field];
             value = value === undefined ? null : value;
             if ((this.model as {[index: string]: any}).__partialWithProjection) {
                 if ((this.model as {[index: string]: any}).__partialWithProjection.indexOf(column.name) >= 0 ||
-                    (this.model as {[index:string]: any})[column.field]) {
+                    (this.model as {[index: string]: any})[column.field]) {
                     columnsToUpdate.push(column.name);
                     queryPart.params.push(value);
                 }
@@ -139,14 +139,14 @@ export class QueryUpdate<T extends DbHelperModel> {
     /**
      * @private
      * @method getValuesFromSet build values part of the query from the set dict.
-     * 
+     *
      * @return {@link QueryPart} the values query part of update statement
      */
     private getValuesFromSet(): QueryPart {
         const queryPart = new QueryPart();
         for (const key in this.valueSet) {
             if (this.valueSet.hasOwnProperty(key)) {
-                queryPart.content += queryPart.content ? ', (?)': '(?)';
+                queryPart.content += queryPart.content ? ', (?)' : '(?)';
                 queryPart.params.push(this.valueSet[key]);
             }
         }
@@ -156,7 +156,7 @@ export class QueryUpdate<T extends DbHelperModel> {
     /**
      * @public
      * @method build should be removed to be a part of the private API
-     * 
+     *
      * @return {@link DbQuery} of the query with the string part and
      *          clauses params.
      */
@@ -175,7 +175,7 @@ export class QueryUpdate<T extends DbHelperModel> {
                 if (column.primaryKey) {
                     const clause = new Clause();
                     clause.key = column.name;
-                    clause.value = (this.model as {[index:string]:any})[column.field];
+                    clause.value = (this.model as {[index: string]: any})[column.field];
                     this.where(clause);
                 }
             }
@@ -189,7 +189,7 @@ export class QueryUpdate<T extends DbHelperModel> {
             queryPart = this.getValuesFromSet();
         } else {
             throw(new QueryError('No values to update on Update query build, ' +
-                'please use set method or call Update with a single model.', '', '')); 
+                'please use set method or call Update with a single model.', '', ''));
         }
         dbQuery.append(queryPart);
 
@@ -203,7 +203,7 @@ export class QueryUpdate<T extends DbHelperModel> {
     /**
      * @public
      * @method exec to execute the query and asynchronously retreive result.
-     * 
+     *
      * @return observable to subscribe
      */
     public exec(): Observable<QueryResult<any>> {
@@ -215,9 +215,9 @@ export class QueryUpdate<T extends DbHelperModel> {
  * @public API
  * @function Update is an helper to update models.
  * For a single model prefer use {@link DbHelperModel.save}
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // update todo object
@@ -227,7 +227,7 @@ export class QueryUpdate<T extends DbHelperModel> {
  *      // do something with the error...
  * });
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

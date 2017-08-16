@@ -17,7 +17,7 @@ import { PendingDbQuery } from '../models/pending-db-query.model';
  * This manager has not to be exposed, it is used to handle queries
  * with the connector. It stack it during connector is not ready and
  * release it when connector ca query
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -69,7 +69,7 @@ export class QueryManager {
      * @method init is a part of the private API, config is submitted to
      * pass connector, model migration and other config. see {@link NgDbHelperModuleConfig}
      * for more informations
-     * 
+     *
      * @param config the module configuration with connector instance and model migration
      */
     public static init(config: NgDbHelperModuleConfig): QueryManager {
@@ -95,7 +95,7 @@ export class QueryManager {
      * @static
      * @public
      * @method getInstance to get the unique QueryManager instance
-     * 
+     *
      * @return QueryManager instance
      */
     public static getInstance(): QueryManager {
@@ -135,7 +135,8 @@ export class QueryManager {
                 }
             }, (err) => this.onInitializationFailure(err));
         } else {
-            throw(new UnsatisfiedRequirementError('ModelMigration or QueryConnector object is missing, check and fix NgDbHelperModule configuration !'))
+            throw(new UnsatisfiedRequirementError(
+                'ModelMigration or QueryConnector object is missing, check and fix NgDbHelperModule configuration !'));
         }
     }
 
@@ -143,8 +144,8 @@ export class QueryManager {
      * @private
      * @method onInitializationFailure is called on initilization failure to cancel
      * all started queries and nexts
-     * 
-     * @param err the error return by the initialization failure 
+     *
+     * @param err the error return by the initialization failure
      */
     private onInitializationFailure(err: any) {
         console.error(err);
@@ -171,9 +172,9 @@ export class QueryManager {
      * @method query private API to start queries, it check if queries can be executed
      * If initialization failed, error is sent back. If connector is not ready, query will
      * be stack until connector ready signal
-     * 
+     *
      * @param dbQuery   query information with params, see {@link DbQuery}
-     * 
+     *
      * @return Observable   in case of success, {@link QueryResult<any>} is passed
      *                      in case of failure, {@link QueryError} is passed
      */
@@ -190,10 +191,10 @@ export class QueryManager {
     /**
      * @private
      * @method executeQuery should be called only when connector is ready
-     * 
+     *
      * @param dbQuery   query information with params, see {@link DbQuery}
      * @param observer  observer to manage query callback
-     * 
+     *
      * @return Observable   in case of success, {@link QueryResult<any>} is passed
      *                      in case of failure, {@link QueryError} is passed
      */

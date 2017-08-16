@@ -5,26 +5,26 @@ import { Clause } from './../models/queries/clause.model';
 /**
  * Column annotation to add on class property that should use {@link Table} annotation.
  * class using this annotation must extends {@link DbHelperModel}.
- * 
+ *
  * @example
  * ```typescript
  * @Table
  * export class Todo extends DbHelperModel {
- * 
+ *
  *      @Column({primaryKey: true, autoIncremented: tru, type: 'integer'})
  *      public id: number
- * 
+ *
  *      @Column
  *      public name: string;
- * 
+ *
  *      @Column({type: 'long'})
  *      public dueDate: number;
  * }
  * ```
- * 
+ *
  * @param config, {@link ColumnConfig} is column configuration, informations are used to
  *          build DataModel.
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

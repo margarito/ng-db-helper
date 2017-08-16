@@ -14,10 +14,10 @@ import { Clause } from './clause.model';
  * @class QueryDelete is private part of the API.
  * For design reasons this class should not be used directly and
  * will move later. Use this class through {@link Delete} function.
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table
  *          and column annotations
- * 
+ *
  * @example
  * ```typesrcript
  * // Delete a specific model using Delete
@@ -35,8 +35,7 @@ import { Clause } from './clause.model';
  *      // manage th error...
  * });
  * ```
- * 
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
@@ -57,7 +56,7 @@ export class QueryDelete<T extends DbHelperModel> {
     /**
      * @public
      * @constructor should not be use directly, see class header
-     * 
+     *
      * @param model DbHelperModel extention
      */
     public constructor(private model: T | {new(): T }) {}
@@ -66,9 +65,9 @@ export class QueryDelete<T extends DbHelperModel> {
      * @public
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
-     * 
+     *
      * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
-     * 
+     *
      * @return this instance to chain query instructions
      */
     public where(clauses: Clause|Clause[]|ClauseGroup|Object): QueryDelete<T> {
@@ -82,7 +81,7 @@ export class QueryDelete<T extends DbHelperModel> {
     /**
      * @public
      * @method build should be removed to be a part of the private API
-     * 
+     *
      * @return {@link DbQuery} of the query with the string part and
      *          clauses params.
      */
@@ -98,7 +97,7 @@ export class QueryDelete<T extends DbHelperModel> {
                 if (column.primaryKey) {
                     const clause = new Clause();
                     clause.key = column.name;
-                    clause.value = (this.model as {[index:string]: any})[column.field];
+                    clause.value = (this.model as {[index: string]: any})[column.field];
                     this.where(clause);
                 }
             }
@@ -113,7 +112,7 @@ export class QueryDelete<T extends DbHelperModel> {
     /**
      * @public
      * @method exec to execute the query and asynchronously retreive result.
-     * 
+     *
      * @return observable to subscribe
      */
     public exec(): Observable<QueryResult<any>> {
@@ -125,10 +124,10 @@ export class QueryDelete<T extends DbHelperModel> {
  * @public API
  * @function Delete allow to simply remove model instance or entries
  * matching with specific clauses.
- * 
+ *
  * @param T exdends {@link DbHelperModel}, a model declared with table
  *          and column annotations
- * 
+ *
  * @example
  * ```typescript
  * // Delete a specific model using Delete
@@ -146,8 +145,7 @@ export class QueryDelete<T extends DbHelperModel> {
  *      // manage th error...
  * });
  * ```
- * 
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */

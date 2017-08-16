@@ -11,17 +11,17 @@ import { QueryConnector } from '../core/interfaces/query-connector.interface';
 
 /**
  * @class CordovaSqliteConnector is a default connector
- * for rdb module see {@link NgDbHelperModuleConfiguration}
+ * for rdb module see {@link NgDbHelperModuleConfig}
  * This class provides config key to add copy informations.
- * 
+ *
  * This default connector allow query to database provided with cordova-sqlite-storage
  * use {@link CordovaSqliteConnectorConfiguration} to override default migrations logics.
- * 
+ *
  * To understand QueryConnectors or ModelMigrations see respectively {@link QueryConnectors},
  * {@link ModelMigrations} and configuration default script configuration
- * 
- * Requirements: cordova, cordova-plugin-file, cordova-sqlite-storage 
- * 
+ *
+ * Requirements: cordova, cordova-plugin-file, cordova-sqlite-storage
+ *
  * @example
  * ```typescript
  * const connectorConfig = new CordovaSqliteConnectorConfiguration();
@@ -30,20 +30,20 @@ import { QueryConnector } from '../core/interfaces/query-connector.interface';
  * // add config to connector
  * const connector = CordovaSqliteConnector(connectorConfig);
  * // create module config
- * const config = new NgDbHelperModuleConfiguration();
+ * const config = new NgDbHelperModuleConfig();
  * config.queryConnector = connector;
  * config.modelMigration = connector;
  * config.version = '1';
  * // add config to module with forRoot method
  * ```
- * 
+ *
  * @author  Olivier Margarit
  * @Since   0.1
  */
 export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     /**
      * @private
-     * @property ready, flag updated with connector state to indicate that connector can query 
+     * @property ready, flag updated with connector state to indicate that connector can query
      */
     private ready = false;
 
@@ -71,7 +71,8 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      */
     private get db(): any {
         if (!this.dbValue) {
-            this.dbValue = (window as {[index:string]: any}).sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
+            this.dbValue = (window as {[index: string]: any})
+                .sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
         }
         return this.dbValue;
     }
@@ -80,12 +81,12 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @constructor
      * @throws UnsatisfiedRequirementError, thrown if cordova is missing
      * connector start logic after 'deviceready' signal firing.
-     * 
+     *
      * @param config    configuration of the connector, see {@link CordovaSqliteConnectorConfiguration}
      *                  and connector documentation header.
      */
     public constructor(private config: CordovaSqliteConnectorConfiguration) {
-        if (!(window as {[index:string]: any}).cordova) {
+        if (!(window as {[index: string]: any}).cordova) {
             throw(new UnsatisfiedRequirementError('You use cordova connector but cordova is not present !'));
         }
         document.addEventListener('deviceready', () => {
@@ -111,14 +112,14 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      */
     private checkRequirements() {
         let isRequirementVerified = true;
-        if (!(window as {[index:string]: any}).resolveLocalFileSystemURL) {
+        if (!(window as {[index: string]: any}).resolveLocalFileSystemURL) {
             const err =
               new UnsatisfiedRequirementError('CordovaSqliteConnector needs cordova-plugin-file !');
             console.error(err);
             isRequirementVerified = false;
         }
 
-        if (!(window as {[index:string]: any}).sqlitePlugin) {
+        if (!(window as {[index: string]: any}).sqlitePlugin) {
             const err =
               new UnsatisfiedRequirementError('CordovaSqliteConnector needs cordova-sqlite-storage !');
             console.error(err);
@@ -131,10 +132,10 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     /**
      * @public
      * @method query connector method to fire query
-     * 
+     *
      * @param dbQuery   DbQuery object containing query and query params.
      *                  see {@link DbQuery}
-     * 
+     *
      * @return          Obsevable   passing {@link QueryResult<any>} on query success
      *                              passing {@link QueryError} on query error
      */
@@ -163,7 +164,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @public
      * @method isReady to check if module is ready, if not, caller should
      * subscribe to {@link CordovaSqliteConnector.onReady}
-     * 
+     *
      * @return should be true if connector can query else false
      */
     public isReady(): boolean {
@@ -175,7 +176,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @method onReady should be subscribed if connector is not ready
      * if connector is ready, observable is immediatly called, else all check will
      * be done after 'deviceready' signal
-     * 
+     *
      * @return Observable   passing true if connector is ready
      *                      passing false if connector will never be ready
      */
@@ -194,7 +195,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @public
      * @method getDbVersion called to check db version, should be called only if connector
      * is ready.
-     * 
+     *
      * @return Observable   passing string version after version is checked
      */
     public getDbVersion(): Observable<string> {
@@ -218,14 +219,14 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     /**
      * @private
      * @method isDbCreated is private method to check if db is created before copy
-     * 
+     *
      * @return Observable   passing true if db file is present
      *                      passing false if db file is missing
      */
     private isDbCreated(): Observable<boolean> {
-        let targetDirName = (window as {[index:string]: any}).cordova.file.dataDirectory;
-        if ((window as {[index:string]: any}).device.platform === 'Android') {
-            targetDirName = (window as {[index:string]: any}).cordova.file.applicationStorageDirectory + 'databases/';
+        let targetDirName = (window as {[index: string]: any}).cordova.file.dataDirectory;
+        if ((window as {[index: string]: any}).device.platform === 'Android') {
+            targetDirName = (window as {[index: string]: any}).cordova.file.applicationStorageDirectory + 'databases/';
             console.log('platform is android');
             console.log('targetDirName: ' + targetDirName);
         }
@@ -234,7 +235,8 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
             const onTargetDirResolved = (targetDir: any) => {
                 this.targetDir = targetDir;
                 targetDir.getFile(this.config.dbName, {}, () => {
-                    this.dbValue = (window as {[index:string]: any}).sqlitePlugin.openDatabase({name: this.config.dbName, location: this.config.location});
+                    this.dbValue = (window as {[index: string]: any}).sqlitePlugin
+                        .openDatabase({name: this.config.dbName, location: this.config.location});
                     observer.next(true);
                     observer.complete();
                 }, () => {
@@ -242,12 +244,14 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
                     observer.complete();
                 });
             };
-            (window as {[index:string]: any}).resolveLocalFileSystemURL(targetDirName, onTargetDirResolved, (err: any) => {
-                if ((window as {[index:string]: any}).device.platform === 'Android') {
-                    (window as {[index:string]: any}).resolveLocalFileSystemURL((window as {[index:string]: any}).cordova.file.applicationStorageDirectory, (dir: any) => {
-                        dir.getDirectory('databases', {create : true},
-                        (entry: any) => onTargetDirResolved(entry), (error: any) => observer.error(error));
-                    }, (error: any) => observer.error(error));
+            (window as {[index: string]: any}).resolveLocalFileSystemURL(targetDirName, onTargetDirResolved, (err: any) => {
+                if ((window as {[index: string]: any}).device.platform === 'Android') {
+                    (window as {[index: string]: any})
+                        .resolveLocalFileSystemURL((window as {[index: string]: any}).cordova.file.applicationStorageDirectory,
+                            (dir: any) => {
+                                dir.getDirectory('databases', {create : true},
+                                    (entry: any) => onTargetDirResolved(entry), (error: any) => observer.error(error));
+                            }, (error: any) => observer.error(error));
                 } else {
                     observer.error(err);
                 }
@@ -261,21 +265,22 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * {@link CordovaSqliteConnectorConfiguration.doCopyDb} is checked:
      *      - if true datamodel is initialized by copy or using config
      *      - if false {@link CordovaSqliteConnectorConfiguration.initDataModel} is called
-     * 
+     *
      * @param dataModel {@link DataModel} generated with model annotations
-     * 
+     *
      * @return Observable resolved on initModel finish
      */
     public initModel(dataModel: DataModel): Observable<any> {
         if (this.config.doCopyDb) {
-            const sourceFileName = (window as {[index:string]: any}).cordova.file.applicationDirectory + this.config.sourceDbPath + this.config.sourceDbName;
+            const sourceFileName = (window as {[index: string]: any}).cordova.file.applicationDirectory +
+                this.config.sourceDbPath + this.config.sourceDbName;
             return Observable.create((observer: Observer<any>) => {
                 this.isDbCreated().subscribe((isCreated: boolean) => {
                     if (isCreated) {
                         observer.next(null);
                         observer.complete();
                     } else {
-                         (window as {[index:string]: any}).resolveLocalFileSystemURL(sourceFileName, (sourceFile: any) => {
+                         (window as {[index: string]: any}).resolveLocalFileSystemURL(sourceFileName, (sourceFile: any) => {
                             sourceFile.copyTo(this.targetDir, this.config.dbName, () => {
                                 observer.next(null);
                                 observer.complete();
@@ -293,10 +298,10 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @public
      * @method upgradeModel is implemented method from ModelMigration, see {@link ModelMigration} to understand usage.
      * directly call {@link CordovaSqliteConnectorConfiguration.upgradeDataModel}
-     * 
+     *
      * @param dataModel     {@link DataModel} generated with model annotations
      * @param oldVersion    old model version
-     * 
+     *
      * @return Observable resolved on upgradeModel finish
      */
     public upgradeModel(dataModel: DataModel, oldVersion: string): Observable<any> {
