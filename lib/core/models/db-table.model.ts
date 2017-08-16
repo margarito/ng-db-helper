@@ -1,5 +1,4 @@
 import { DbColumn } from './db-column.model';
-import { TableConfig } from './table-config.model';
 
 /**
  * @class DbTable extends {@link TableConfig} is a table model
@@ -8,12 +7,17 @@ import { TableConfig } from './table-config.model';
  * @author  Olivier Margarit
  * @Since   0.1
  */
-export class DbTable extends TableConfig {
+export class DbTable {
     /**
      * @property name cannot be an option information and is the table
      * name in database
      */
     public name: string;
+
+    /**
+     * @property version, the table model version, information to help migration
+     */
+    public version?: number = 0;
 
     /**
      * @property columnList is an array of DbColumn listing each column

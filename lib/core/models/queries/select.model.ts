@@ -208,7 +208,7 @@ export class QuerySelect<T extends DbHelperModel> {
      */
     public exec(): Observable<QueryResult<T>> {
         return Observable.create((observer: Observer<QueryResult<T>>) => {
-            const subscription = QueryManager.getInstance().query(this.build()).subscribe((qr: QueryResult<any>) => {
+            QueryManager.getInstance().query(this.build()).subscribe((qr: QueryResult<any>) => {
                 observer.next(new ModelResult(qr, this.model, this.proj));
                 observer.complete();
             }, (err) => observer.error(err));

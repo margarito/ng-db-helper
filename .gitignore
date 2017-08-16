@@ -5,6 +5,7 @@
 !.editorconfig
 !.gitignore
 !.angular-cli.json
+!generate-dist-package.json.js
 !karma.conf.js
 !package.json
 !protractor.conf.js

@@ -156,7 +156,7 @@ export class QueryInsert<T extends DbHelperModel> {
                         observables.push(insert.exec());
                     }
 
-                    const subscription = Observable.combineLatest(observables).subscribe((qrs: QueryResult<any>[]) => {
+                    Observable.combineLatest(observables).subscribe((qrs: QueryResult<any>[]) => {
                         let rowsAffected = 0;
                         let insertId: number | undefined;
                         for (const qr of qrs) {

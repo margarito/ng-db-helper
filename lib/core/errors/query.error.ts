@@ -5,7 +5,10 @@
  * @author  Olivier Margarit
  * @Since   0.1
  */
-export class QueryError extends Error {
+export class QueryError implements Error {
+    public name: string;
+    public extra: any;
+    public stack: any;
     /**
      * @public
      * @constructor
@@ -14,7 +17,9 @@ export class QueryError extends Error {
      * @param params    query params of the failed query
      */
     public constructor(public message: string, private query: string, private params: string) {
-        super();
+        Object.setPrototypeOf(this, new.target.prototype);
+        Error.captureStackTrace(this, this.constructor);
+        this.message = message;
         this.name = 'query error';
     }
 }

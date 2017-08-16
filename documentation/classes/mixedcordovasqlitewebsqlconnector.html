@@ -1,0 +1,676 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>MixedCordovaSqliteWebsqlConnector | ng-db-helper</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">ng-db-helper</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="mixedcordovasqlitewebsqlconnector.html">MixedCordovaSqliteWebsqlConnector</a>
+				</li>
+			</ul>
+			<h1>Class MixedCordovaSqliteWebsqlConnector</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt>class</dt>
+						<dd><p>MixedCordovaSqliteWebsqlConnector is a default connector
+								for rdb module see {@link NgDbHelperModuleConfiguration}
+							This class provides config key to add copy informations.</p>
+							<p>This default connector allow query to database provided with cordova-sqlite-storage or Websql
+							use <a href="cordovasqliteconnectorconfiguration.html">CordovaSqliteConnectorConfiguration</a> to override default migrations logics.</p>
+							<p>To understand QueryConnectors or ModelMigrations see respectively {@link QueryConnectors},
+							{@link ModelMigrations} and configuration default script configuration</p>
+							<p>Requirements: if crodova is supported, cordova, cordova-plugin-device, cordova-plugin-file, cordova-sqlite-storage
+							else Websql</p>
+						</dd>
+						<dt>example</dt>
+						<dd><pre><code class="lang-typescript"><span class="hljs-keyword">const</span> connectorConfig = <span class="hljs-keyword">new</span> CordovaSqliteConnectorConfiguration();
+<span class="hljs-comment">// configure db name on device</span>
+connectorConfig.dbName = app.sqlite;
+<span class="hljs-comment">// add config to connector</span>
+<span class="hljs-keyword">const</span> connector = MixedCordovaSqliteWebsqlConnector(connectorConfig);
+<span class="hljs-comment">// create module config</span>
+<span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfiguration();
+config.queryConnector = connector;
+config.modelMigration = connector;
+config.version = <span class="hljs-string">'1'</span>;
+<span class="hljs-comment">// add config to module with forRoot method</span>
+</code></pre>
+						</dd>
+						<dt>author</dt>
+						<dd><p>Olivier Margarit</p>
+						</dd>
+						<dt>since</dt>
+						<dd><p>0.1</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">MixedCordovaSqliteWebsqlConnector</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/queryconnector.html" class="tsd-signature-type">QueryConnector</a></li>
+					<li><a href="../interfaces/modelmigration.html" class="tsd-signature-type">ModelMigration</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#connector" class="tsd-kind-icon">connector</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#onreadyobserver" class="tsd-kind-icon">on<wbr>Ready<wbr>Observer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#ready" class="tsd-kind-icon">ready</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#getdbversion" class="tsd-kind-icon">get<wbr>DbVersion</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#initmodel" class="tsd-kind-icon">init<wbr>Model</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#isready" class="tsd-kind-icon">is<wbr>Ready</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#observeconnectorready" class="tsd-kind-icon">observe<wbr>Connector<wbr>Ready</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#onready" class="tsd-kind-icon">on<wbr>Ready</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#setupcordovaconnector" class="tsd-kind-icon">setup<wbr>Cordova<wbr>Connector</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#setupwebsqlconnector" class="tsd-kind-icon">setup<wbr>Websql<wbr>Connector</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="mixedcordovasqlitewebsqlconnector.html#upgrademodel" class="tsd-kind-icon">upgrade<wbr>Model</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Mixed<wbr>Cordova<wbr>Sqlite<wbr>Websql<wbr>Connector<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="cordovasqliteconnectorconfiguration.html" class="tsd-signature-type">CordovaSqliteConnectorConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="mixedcordovasqlitewebsqlconnector.html" class="tsd-signature-type">MixedCordovaSqliteWebsqlConnector</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L63">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:63</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>constructor</dt>
+									<dd></dd>
+									<dt>throws</dt>
+									<dd><p>UnsatisfiedRequirementError, thrown if cordova-plugin-device is missing and needed
+											connector start logic after &#39;deviceready&#39; signal firing if cordova is present else directly start,
+										assuming that in this case platform should support Websql.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <a href="cordovasqliteconnectorconfiguration.html" class="tsd-signature-type">CordovaSqliteConnectorConfiguration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>configuration of the connector, see <a href="cordovasqliteconnectorconfiguration.html">CordovaSqliteConnectorConfiguration</a>
+											and connector documentation header.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="mixedcordovasqlitewebsqlconnector.html" class="tsd-signature-type">MixedCordovaSqliteWebsqlConnector</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="config" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="cordovasqliteconnectorconfiguration.html" class="tsd-signature-type">CordovaSqliteConnectorConfiguration</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L74">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:74</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>configuration of the connector, see <a href="cordovasqliteconnectorconfiguration.html">CordovaSqliteConnectorConfiguration</a>
+							and connector documentation header.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="connector" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> connector</h3>
+					<div class="tsd-signature tsd-kind-icon">connector<span class="tsd-signature-symbol">:</span> <a href="../interfaces/queryconnector.html" class="tsd-signature-type">QueryConnector</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/modelmigration.html" class="tsd-signature-type">ModelMigration</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L63">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:63</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>connector, real connector choose with logic based on platform</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="onreadyobserver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Ready<wbr>Observer</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Ready<wbr>Observer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L57">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:57</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>onReadyObserver, observer of registered listener on connector ready update</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="ready" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> ready</h3>
+					<div class="tsd-signature tsd-kind-icon">ready<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L51">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:51</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>ready, flag updated with connector state to indicate that connector can query</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getdbversion" class="tsd-anchor"></a>
+					<h3>get<wbr>DbVersion</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>DbVersion<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#getdbversion">getDbVersion</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L177">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:177</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>getDbVersion called to check db version, should be called only if connector
+										is ready.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Observable   passing string version after version is checked</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="initmodel" class="tsd-anchor"></a>
+					<h3>init<wbr>Model</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Model<span class="tsd-signature-symbol">(</span>dataModel<span class="tsd-signature-symbol">: </span><a href="datamodel.html" class="tsd-signature-type">DataModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/modelmigration.html">ModelMigration</a>.<a href="../interfaces/modelmigration.html#initmodel">initModel</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L190">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:190</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>initModel is implemented method from ModelMigration, see <a href="../interfaces/modelmigration.html">ModelMigration</a> to understand usage.
+										method directly delegated to real connector</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataModel: <a href="datamodel.html" class="tsd-signature-type">DataModel</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>generated with model annotations</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Observable resolved on initModel finish</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="isready" class="tsd-anchor"></a>
+					<h3>is<wbr>Ready</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Ready<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#isready">isReady</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L146">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:146</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>isReady to check if module is ready, if not, caller should
+										subscribe to <a href="mixedcordovasqlitewebsqlconnector.html#onready">MixedCordovaSqliteWebsqlConnector.onReady</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>should be true if connector can query else false</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="observeconnectorready" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> observe<wbr>Connector<wbr>Ready</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">observe<wbr>Connector<wbr>Ready<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L115">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:115</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>observeConnectorReady called on connector setted up</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="onready" class="tsd-anchor"></a>
+					<h3>on<wbr>Ready</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Ready<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#onready">onReady</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L159">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:159</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>onReady should be subscribed if connector is not ready
+											if connector is ready, observable is immediatly called, else all check will
+										be done after &#39;deviceready&#39; signal</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Observable   passing true if connector is ready
+							passing false if connector will never be ready</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="query" class="tsd-anchor"></a>
+					<h3>query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>dbQuery<span class="tsd-signature-symbol">: </span><a href="dbquery.html" class="tsd-signature-type">DbQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#query">query</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L135">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:135</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>query connector method to fire query, query is delegate to real connector</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dbQuery: <a href="dbquery.html" class="tsd-signature-type">DbQuery</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>DbQuery object containing query and query params.
+										see <a href="dbquery.html">DbQuery</a></p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Obsevable   passing {@link QueryResult<any>} on query success
+							passing <a href="queryerror.html">QueryError</a> on query error</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="setupcordovaconnector" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> setup<wbr>Cordova<wbr>Connector</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">setup<wbr>Cordova<wbr>Connector<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L106">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:106</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>setupCordovaConnector</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="setupwebsqlconnector" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> setup<wbr>Websql<wbr>Connector</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">setup<wbr>Websql<wbr>Connector<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L95">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:95</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>setupWebsqlConnector</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="upgrademodel" class="tsd-anchor"></a>
+					<h3>upgrade<wbr>Model</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">upgrade<wbr>Model<span class="tsd-signature-symbol">(</span>dataModel<span class="tsd-signature-symbol">: </span><a href="datamodel.html" class="tsd-signature-type">DataModel</a>, oldVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/modelmigration.html">ModelMigration</a>.<a href="../interfaces/modelmigration.html#upgrademodel">upgradeModel</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/mixed-cordova-sqlite-websql-connector.ts#L204">lib/connectors/mixed-cordova-sqlite-websql-connector.ts:204</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>upgradeModel is implemented method from ModelMigration, see <a href="../interfaces/modelmigration.html">ModelMigration</a> to understand usage.
+										method directly delegated to real connector</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataModel: <a href="datamodel.html" class="tsd-signature-type">DataModel</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>generated with model annotations</p>
+									</div>
+								</li>
+								<li>
+									<h5>oldVersion: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>old model version</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Observable resolved on upgradeModel finish</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-is-external">
+						<a href="mixedcordovasqlitewebsqlconnector.html" class="tsd-kind-icon">Mixed<wbr>Cordova<wbr>Sqlite<wbr>Websql<wbr>Connector</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#config" class="tsd-kind-icon">config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#connector" class="tsd-kind-icon">connector</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#onreadyobserver" class="tsd-kind-icon">on<wbr>Ready<wbr>Observer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#ready" class="tsd-kind-icon">ready</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#getdbversion" class="tsd-kind-icon">get<wbr>DbVersion</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#initmodel" class="tsd-kind-icon">init<wbr>Model</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#isready" class="tsd-kind-icon">is<wbr>Ready</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#observeconnectorready" class="tsd-kind-icon">observe<wbr>Connector<wbr>Ready</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#onready" class="tsd-kind-icon">on<wbr>Ready</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#query" class="tsd-kind-icon">query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#setupcordovaconnector" class="tsd-kind-icon">setup<wbr>Cordova<wbr>Connector</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#setupwebsqlconnector" class="tsd-kind-icon">setup<wbr>Websql<wbr>Connector</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="mixedcordovasqlitewebsqlconnector.html#upgrademodel" class="tsd-kind-icon">upgrade<wbr>Model</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

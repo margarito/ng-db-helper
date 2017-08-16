@@ -76,13 +76,12 @@ export class QueryManager {
         const instance = QueryManager.getInstance();
         instance.queryConnector = config.queryConnector;
         instance.modelMigration = config.modelMigration;
-        const modelManager = ModelManager.getInstance();
         ModelManager.version = config.version;
         if (config.autoIncrementVersion && ModelManager.version) {
             // compute auto upgrade version
             ModelManager.version += '.' + ModelManager.getInstance().getModelCount();
         }
-        const subscribe = instance.queryConnector.onReady().subscribe((ready: boolean) => {
+        instance.queryConnector.onReady().subscribe((ready: boolean) => {
             if (ready) {
                 instance.onQueryConnectorReady();
             } else {
@@ -205,7 +204,7 @@ export class QueryManager {
             observer.error(error);
         } else {
             if (this.queryConnector) {
-                const subscription = this.queryConnector.query(dbQuery).subscribe((result: QueryResult<any>) => {
+                this.queryConnector.query(dbQuery).subscribe((result: QueryResult<any>) => {
                     observer.next(result);
                     observer.complete();
                 }, (err) => observer.error(err));

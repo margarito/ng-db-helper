@@ -72,6 +72,6 @@ export class NgDbHelperModule {
      * @param config {@link NgDbHelperModuleConfig} to configure the module
      */
     public constructor(config: NgDbHelperModuleConfig) {
-        const instance = QueryManager.init(config);
+        QueryManager.init(config);
     }
 }
