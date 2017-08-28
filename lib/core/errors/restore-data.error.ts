@@ -5,7 +5,7 @@
  * @author  Olivier Margarit
  * @since   0.1
  */
-export class QueryError implements Error {
+export class RestoreDataError implements Error {
     public name: string;
     public extra: any;
     public stack: any;
@@ -16,14 +16,14 @@ export class QueryError implements Error {
      * @param query     query text that did failed execution
      * @param params    query params of the failed query
      */
-    public constructor(public message: string, private query: string, private params: string) {
+    public constructor(public message: string) {
         Object.setPrototypeOf(this, new.target.prototype);
         Error.captureStackTrace(this, this.constructor);
         this.message = message;
-        this.name = 'query error';
+        this.name = 'Restore data error';
     }
 
     public toString(): string {
-        return name + '\n' + this.message + (this.query ? '\nquery: ' + this.query : '') + (this.params ? '\nparams: ' + this.params : '');
+        return name + '\n' + this.message;
     }
 }

@@ -1,3 +1,10 @@
+import { IClause } from '../interfaces/i-clause.interface';
+import { ColumnClauseValue } from './column-clause-value.model';
+import { ClauseGroup } from './clause-group.model';
+import { QuerySelect } from './select.model';
+import { ClauseComparators } from '../constants/clause-comparators.constant';
+import { ClauseOperators } from '../constants/clause-operators.constant';
+import { QueryError } from '../../errors/query.error';
 import { QueryPart } from './query-part.model';
 
 /**
@@ -31,47 +38,71 @@ import { QueryPart } from './query-part.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
-export class Clause {
-    /**
-     * @public
-     * @static
-     * @enum OPERATORS, not an enum yet but would be converted soon
-     */
-    public static OPERATORS = {
-        OR: 'OR',
-        AND: 'AND'
-    };
-
-    /**
-     * @public
-     * @static
-     * @enum COMPARATORS, not an enum yet but would be converted soon
-     */
-    public static COMPARATORS = {
-        DIFF: '!=',
-        LT: '<',
-        LTE: '<=',
-        GT: '>',
-        GTE: '>=',
-        LIKE: 'LIKE',
-        IN: 'IN',
-        EQ: '='
-    };
+export class Clause implements IClause {
 
     /**
      * @public
      * @property operator is used as join clause condition
      */
-    public operator = Clause.OPERATORS.AND;
+    public operator = ClauseOperators.AND;
+
+    private keyValue = '';
+
+    /**
+     * @public
+     * @method key is table column name corresponding to the field
+     * to compare with
+     */
+    public set key(value: string) {
+        const parts = value.split(/__| /);
+        const clauseError = new QueryError('key clause is invalid', '', '')
+        if (!parts.length || parts.length > 4) {
+            throw clauseError;
+        }
+        if (parts.length === 1) {
+            this.keyValue = parts[0];
+        } else {
+            let currentPartIndex = 0;
+            if (ClauseOperators.isKeyOf(parts[0])) {
+                this.operator = ClauseOperators.valueOf(parts[0]);
+                currentPartIndex++;
+            }
+            if (parts[currentPartIndex].toUpperCase() === 'NOT') {
+                this.not = true;
+                currentPartIndex++;
+            }
+
+            if (currentPartIndex >= parts.length) {
+                return;
+            }
+
+            this.keyValue = ClauseComparators.isKeyOf(parts[currentPartIndex]) ?
+                ClauseComparators.valueOf(parts[currentPartIndex]) : parts[currentPartIndex];
+            currentPartIndex++;
+
+            if (currentPartIndex === parts.length) {
+                return;
+            }
+
+            if (currentPartIndex === parts.length - 1 && ClauseComparators.isKeyOf(parts[currentPartIndex])) {
+                this.comparator = ClauseComparators.valueOf(parts[currentPartIndex]);
+            } else {
+                throw new QueryError('Clause key "' + value + '" is malformed', '', '');
+            }
+
+        }
+    }
 
     /**
      * @public
      * @property key is table column name corresponding to the field
      * to compare with
      */
-    public key: string;
+    public get key(): string {
+        return this.keyValue;
+    }
 
     /**
      * @public
@@ -90,7 +121,16 @@ export class Clause {
      * @property comparator is a comparator that define the type of
      * relation with the value to compare with and the result.
      */
-    public comparator = Clause.COMPARATORS.EQ;
+    public comparator = ClauseComparators.EQ;
+
+    public constructor(key?: string, value?: any) {
+        if (key) {
+            this.key = key;
+        }
+        if (value) {
+            this.value = value;
+        }
+    }
 
     /**
      * @public
@@ -100,23 +140,42 @@ export class Clause {
      *          clauses params.
      */
     public build(): QueryPart {
+        if (!this.key && !(this.value instanceof ClauseGroup || (typeof this.value === 'object' && !(this.value instanceof Date)))) {
+            throw new QueryError('one clause has no key for column name.', '', '');
+        }
         const queryPart = new QueryPart();
         if (this.not) {
-            queryPart.content += 'NOT ';
+            queryPart.appendContent('NOT');
         }
-        queryPart.content += this.key + ' ';
-        if ((this.value === null || this.value === undefined)  && this.comparator === Clause.COMPARATORS.EQ) {
-            queryPart.content += 'IS';
+        queryPart.appendContent(this.key);
+        if ((this.value === null || this.value === undefined)  && this.comparator === ClauseComparators.EQ) {
+            queryPart.appendContent('IS');
+        } else if (
+            this.value instanceof ClauseGroup || (
+                typeof this.value === 'object' &&
+                !(this.value instanceof Date) &&
+                !(Array.isArray(this.value))
+            )
+        ) {
+            // no comparator in this case.
         } else {
-            queryPart.content += this.comparator;
+            queryPart.appendContent(this.comparator);
         }
-        queryPart.content += ' ';
         if (Array.isArray(this.value)) {
-            queryPart.content += '(' + Array(this.value.length).fill('(?)').join(', ') + ')';
+            queryPart.appendContent('(' + Array(this.value.length).fill('(?)').join(', ') + ')');
             queryPart.params = this.value;
+        } else if (this.value instanceof QuerySelect) {
+            queryPart.appendSub(this.value.build());
+        } else if (this.value instanceof ClauseGroup) {
+            queryPart.appendSub(this.value.build());
+        } else if (typeof this.value === 'object' && this.value !== null && !(this.value instanceof Date)) {
+            const group = new ClauseGroup(this.value);
+            queryPart.appendSub(group.build());
+        } else if (this.value instanceof ColumnClauseValue) {
+            queryPart.appendContent(this.value.fqn());
         } else {
-            queryPart.content += '(?)';
-            queryPart.params.push(this.value);
+            queryPart.appendContent('(?)');
+            queryPart.params.push(this.value === undefined ? null : this.value);
         }
         return queryPart;
     }

@@ -1,7 +1,10 @@
+import { QueryError } from '../../core/errors/query.error';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Create } from '../../core/models/queries/create.model';
-import { DataModel } from '../../core/models/data-model.model';
+import { DataModel } from '../../core/models/structure/data-model.model';
+
+import 'rxjs/add/observable/concat';
 
 /**
  * @class CordovaSqliteConnectorConfiguration is a default configuration
@@ -27,7 +30,7 @@ import { DataModel } from '../../core/models/data-model.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class CordovaSqliteConnectorConfiguration {
     /**
@@ -98,17 +101,40 @@ export class CordovaSqliteConnectorConfiguration {
     private createTables(dataModel: DataModel, db: any, doDrop: boolean = false): Observable<any> {
         const queries = <string[]>[];
         for (const table of dataModel.tables) {
-            if (doDrop) {
-                queries.push('DROP TABLE IF EXISTS `' + table.name + '`');
-            }
             queries.push(Create(table).build());
         }
         queries.push('PRAGMA user_version=' + dataModel.version);
+        const createObservable = Observable.create((observer: Observer<any>) => {
+            db.sqlBatch(queries, () => {
+                observer.next(null);
+                observer.complete();
+            }, (err: any) => observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), '', '')));
+        });
+        if (doDrop) {
+            return Observable.concat(this.dropTables(dataModel, db), createObservable);
+        } else {
+            return createObservable;
+        }
+    }
+
+    /**
+     * @private
+     * @method createTables create table linked to datamodel (not table alteration)
+     *
+     * @param dataModel model generated be model annotations
+     * @param db        SQLiteDatabase object, see cordova-sqlite-storage
+     * @param doDrop    drop table to allow recreation of database
+     */
+    private dropTables(dataModel: DataModel, db: any): Observable<any> {
+        const queries = <string[]>[];
+        for (const table of dataModel.tables) {
+                queries.push('DROP TABLE IF EXISTS `' + table.name + '`');
+        }
         return Observable.create((observer: Observer<any>) => {
             db.sqlBatch(queries, () => {
                 observer.next(null);
                 observer.complete();
-            }, (err: any) => observer.error(err));
+            }, (err: any) => observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), '', '')));
         });
     }
 

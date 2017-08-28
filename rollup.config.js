@@ -8,6 +8,20 @@ export default {
         '@angular/core': 'ng.core',
         'rxjs/Observable': 'Rx',
         'rxjs/Observer': 'Rx',
-        'rxjs/add/operator/combineLatest': 'Rx.Observable.prototype'
-    }
+        'rxjs/Subject': 'Rx',
+        'rxjs/add/operator/combineLatest': 'Rx.Observable.prototype',
+        'rxjs/add/operator/map': 'Rx.Observable.prototype',
+        'rxjs/add/operator/share': 'Rx.Observable.prototype',
+        'rxjs/add/observable/concat': 'Rx.Observable.prototype'
+    },
+    external: [
+        '@angular/core',
+        'rxjs/Observable',
+        'rxjs/Observer',
+        'rxjs/Subject',
+        'rxjs/add/observable/combineLatest',
+        'rxjs/add/operator/map',
+        'rxjs/add/operator/share',
+        'rxjs/add/observable/concat'
+    ]
 }

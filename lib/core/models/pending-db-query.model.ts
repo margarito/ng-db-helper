@@ -1,5 +1,5 @@
 import { Query } from '@angular/core';
-import { Observer } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
 import { DbQuery } from './db-query.model';
 import { QueryResult } from '../interfaces/query-result.interface';
 
@@ -9,7 +9,7 @@ import { QueryResult } from '../interfaces/query-result.interface';
  * during connector activation
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class PendingDbQuery {
 

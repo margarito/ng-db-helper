@@ -30,7 +30,7 @@ import { Clause } from './clause.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class QueryUpdate<T extends DbHelperModel> {
     /**
@@ -70,7 +70,7 @@ export class QueryUpdate<T extends DbHelperModel> {
      *
      * @return this instance to chain query instructions
      */
-    public where(clauses: Clause|Clause[]|ClauseGroup|Object): QueryUpdate<T> {
+    public where(clauses: Clause|Clause[]|ClauseGroup|{[index: string]: any}): QueryUpdate<T> {
         if (!this.whereClauses) {
             this.whereClauses = new ClauseGroup();
         }
@@ -91,7 +91,7 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @return this instance to chain query instructions
      */
     public set(dict: {[index: string]: any}): QueryUpdate<T> {
-        if (this.model.hasOwnProperty('__class')) {
+        if ((this.model as {[index: string]: any}).$$isDbHelperModel) {
             throw(new QueryError('Try to set values on Update query' +
                 ' already containing a model. This is not supported', '', ''))
         }
@@ -119,17 +119,25 @@ export class QueryUpdate<T extends DbHelperModel> {
         const queryPart = new QueryPart();
         const columnsToUpdate = <string[]>[];
         for (const column of table.columnList) {
-            let value = (this.model as {[index: string]: any})[column.field];
+            let value = (this.model as DbHelperModel).getFieldValue(column.field);
             value = value === undefined ? null : value;
-            if ((this.model as {[index: string]: any}).__partialWithProjection) {
-                if ((this.model as {[index: string]: any}).__partialWithProjection.indexOf(column.name) >= 0 ||
+            if ((this.model as {[index: string]: any}).$$partialWithProjection) {
+                if ((this.model as {[index: string]: any}).$$partialWithProjection.indexOf(column.name) >= 0 ||
                     (this.model as {[index: string]: any})[column.field]) {
                     columnsToUpdate.push(column.name);
-                    queryPart.params.push(value);
+                    if (value && (value as {[index: string]: any}).$$isDbHelperModel) {
+                        queryPart.params.push((value as {[index: string]: any})[column.field]);
+                    } else {
+                        queryPart.params.push(value === undefined ? null : value);
+                    }
                 }
             } else {
                 columnsToUpdate.push(column.name);
-                queryPart.params.push(value);
+                if (value && (value as {[index: string]: any}).$$isDbHelperModel) {
+                    queryPart.params.push((value as {[index: string]: any})[column.field]);
+                } else {
+                    queryPart.params.push(value === undefined ? null : value);
+                }
             }
         }
         queryPart.content = 'SET ' + columnsToUpdate.join(' = (?), ') + ' = (?)';
@@ -165,10 +173,11 @@ export class QueryUpdate<T extends DbHelperModel> {
         const dbQuery = new DbQuery();
         dbQuery.table = table.name;
         dbQuery.type = this.type;
-        if ((this.model as {[index: string]: any}).hasOwnProperty('__rowid')) {
+        const rowid = (this.model as {[index: string]: any})['$$rowid'];
+        if ((this.model as {[index: string]: any}).$$isDbHelperModel && (rowid || rowid === 0)) {
             const clause = new Clause();
             clause.key = 'rowid';
-            clause.value = (this.model as {[index: string]: any}).__rowid;
+            clause.value = rowid;
             this.where(clause);
         } else {
             for (const column of table.columnList) {
@@ -183,7 +192,7 @@ export class QueryUpdate<T extends DbHelperModel> {
         // setup values to update
         dbQuery.query += this.type + ' ' + dbQuery.table;
         let queryPart: QueryPart;
-        if ((this.model as {[index: string]: any}).hasOwnProperty('__class')) {
+        if ((this.model as {[index: string]: any}).$$isDbHelperModel) {
             queryPart = this.getValuesFromModel();
         } else if (this.valueSet && Object.getOwnPropertyNames(this.valueSet).length) {
             queryPart = this.getValuesFromSet();
@@ -229,7 +238,7 @@ export class QueryUpdate<T extends DbHelperModel> {
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export function Update<T extends DbHelperModel>(model: T | {new(): T}): QueryUpdate<T> {
     return new QueryUpdate(model);

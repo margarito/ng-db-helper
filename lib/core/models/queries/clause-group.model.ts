@@ -1,5 +1,7 @@
+import { ClauseOperators } from '../constants/clause-operators.constant';
 import { QueryPart } from './query-part.model';
 import { Clause } from './clause.model';
+import { IClause } from '../interfaces/i-clause.interface';
 
 /**
  * @public API
@@ -34,10 +36,10 @@ import { Clause } from './clause.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class ClauseGroup {
-    private clauses = <Clause[]>[];
+    private clauses = <IClause[]>[];
 
     /**
      * @public
@@ -70,7 +72,7 @@ export class ClauseGroup {
      *
      * @param clauses ClauseGroup, Clause, Clause list of dictionnary of clauses
      */
-    public add(clauses: ClauseGroup|Clause|Clause[]|{[index: string]: any}) {
+    public add(clauses: ClauseGroup|Clause|Clause[]|IClause[]|{[index: string]: any}) {
         if (clauses instanceof ClauseGroup) {
             this.add(clauses.clauses);
         } else if (clauses instanceof Clause) {
@@ -101,7 +103,7 @@ export class ClauseGroup {
         const queryPart = new QueryPart;
         for (const clause of this.clauses) {
             if (queryPart.content) {
-                queryPart.content += (clause.operator === Clause.OPERATORS.AND) ? Clause.OPERATORS.AND : Clause.OPERATORS.OR;
+                queryPart.appendContent((clause.operator === ClauseOperators.AND) ? ClauseOperators.AND : ClauseOperators.OR);
             }
             queryPart.append(clause.build());
         }

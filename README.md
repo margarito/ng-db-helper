@@ -1,5 +1,7 @@
 # NgDbHelperModule
 
+  See [complete documentation](http://htmlpreview.github.io/?https://github.com/margarito/ng-db-helper/blob/master/documentation/index.html)
+
   This module is a simple module to simplify persistence with relationnal databases.
   As there is many platforms or devices, this module bring possibility to manage connectors.
   It allows integrators to have a better code portability.

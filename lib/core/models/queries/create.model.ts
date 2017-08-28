@@ -1,4 +1,4 @@
-import { DbTable } from '../db-table.model';
+import { DbTable } from '../structure/db-table.model';
 
 /**
  * @private
@@ -15,7 +15,7 @@ import { DbTable } from '../db-table.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class QueryCreate {
     /**
@@ -37,7 +37,7 @@ export class QueryCreate {
     public build(): string {
         const columns = [];
         for (const column of this.table.columnList) {
-            let value = column.name + ' ' + (column.autoIncrement ? ' INTEGER' : column.type);
+            let value = column.name + ' ' + (column.autoIncrement ? 'INTEGER' : column.type);
             value += (column.primaryKey ? ' PRIMARY KEY' : '');
             value += (column.autoIncrement ? ' AUTOINCREMENT' : '');
             columns.push(value);
@@ -62,7 +62,7 @@ export class QueryCreate {
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export function Create(table: DbTable): QueryCreate {
     return new QueryCreate(table);

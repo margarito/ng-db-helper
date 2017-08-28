@@ -1,3 +1,5 @@
+import { toArray } from 'rxjs/operator/toArray';
+import { Subject } from 'rxjs/Subject';
 import { NgDbHelperModuleConfig } from '../../ng-db-helper-module-config';
 import { Query } from '@angular/core';
 import { ModelMigration } from '../interfaces/model-migration.interface';
@@ -11,6 +13,8 @@ import { Observer } from 'rxjs/Observer';
 import { QueryResult } from '../interfaces/query-result.interface';
 import { PendingDbQuery } from '../models/pending-db-query.model';
 
+import 'rxjs/add/operator/share';
+
 /**
  * @private API
  * @class QueryManager, this class is a singleton manging query
@@ -19,7 +23,7 @@ import { PendingDbQuery } from '../models/pending-db-query.model';
  * release it when connector ca query
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class QueryManager {
     /**
@@ -35,6 +39,8 @@ export class QueryManager {
      * connector is ready
      */
     private pendingDbQueries = <PendingDbQuery[]>[];
+
+    private pendingBatchDbQueries = <PendingDbQuery[]>[];
 
     /**
      * @private
@@ -62,6 +68,10 @@ export class QueryManager {
      * @property modelMigration that handle migration on version change
      */
     private modelMigration: ModelMigration | undefined;
+
+    private batchLock: any;
+
+    private batchSubject: Subject<any> | undefined;
 
     /**
      * @static
@@ -116,20 +126,40 @@ export class QueryManager {
     private onQueryConnectorReady() {
         if (this.queryConnector && this.modelMigration) {
             const modelMigration = this.modelMigration;
-            let subcription = this.queryConnector.getDbVersion().subscribe((version: string) => {
+            this.queryConnector.getDbVersion().subscribe((version: string) => {
+                console.log('old version: ' + version);
+                const dataModel = ModelManager.getInstance().getDataModel();
+                dataModel.version = ModelManager.version;
+                console.log('new version: ' + dataModel.version);
+                let isFailed: any = false;
                 if (!version) {
-                    const dataModel = ModelManager.getInstance().getDataModel();
-                    dataModel.version = ModelManager.version;
-                    subcription = modelMigration.initModel(dataModel).subscribe(() => {
-                        this.dequeuePendingRequest();
-                    }, (err: any) => this.onInitializationFailure(err));
-                } else if (version !== ModelManager.version) {
-                    const dataModel = ModelManager.getInstance().getDataModel();
-                    dataModel.version = ModelManager.version;
-                    subcription = modelMigration.upgradeModel(dataModel, version)
-                        .subscribe(() => {
+                    console.log('call init data model migration');
+                    modelMigration.initModel(dataModel).subscribe(() => {
+                        console.log('init data model migration successed');
+                    }, (err: any) => {
+                        isFailed = err;
+                        console.log('init data model migration failed');
+                    }, () => {
+                        if (isFailed) {
+                            this.onInitializationFailure(isFailed);
+                        } else {
                             this.dequeuePendingRequest();
-                        }, (err) => this.onInitializationFailure(err));
+                        }
+                    });
+                } else if (version !== ModelManager.version) {
+                    console.log('call upgrade data model migration');
+                    modelMigration.upgradeModel(dataModel, version).subscribe(() => {
+                        console.log('upgrade data model migration successed');
+                    }, (err: any) => {
+                        isFailed = err;
+                       console.log('upgrade data model migration failed');
+                    }, () => {
+                        if (isFailed) {
+                            this.onInitializationFailure(isFailed);
+                        } else {
+                            this.dequeuePendingRequest();
+                        }
+                    });
                 } else {
                     this.dequeuePendingRequest();
                 }
@@ -167,6 +197,12 @@ export class QueryManager {
         this.isReady = true;
     }
 
+    public startBatch(locker: any) {
+        if (!this.batchLock) {
+            this.batchLock = locker;
+        }
+    }
+
     /**
      * @public
      * @method query private API to start queries, it check if queries can be executed
@@ -179,13 +215,60 @@ export class QueryManager {
      *                      in case of failure, {@link QueryError} is passed
      */
     public query(dbQuery: DbQuery): Observable<QueryResult<any>> {
-        return Observable.create((observer: Observer<QueryResult<any>>) => {
-            if (this.isReady) {
-                this.executeQuery(dbQuery, observer);
-            } else {
-                this.pendingDbQueries.push(new PendingDbQuery(dbQuery, observer));
+        const subject = new Subject<QueryResult<any>>();
+        if (this.batchLock) {
+            this.pendingBatchDbQueries.push({
+                dbQuery: dbQuery,
+                observer: subject
+            });
+        } else if (this.isReady) {
+            this.executeQuery(dbQuery, subject);
+        } else {
+            this.pendingDbQueries.push(new PendingDbQuery(dbQuery, subject));
+        }
+        return subject;
+    }
+
+    public execBatch(locker: any): Observable<QueryResult<any>> {
+        const queries = <DbQuery[]>[];
+        const observers = <Observer<QueryResult<any>>[]>[];
+        if (!this.batchSubject) {
+            this.batchSubject = new Subject<QueryResult<any>>();
+        }
+        if (this.batchLock === locker) {
+            this.batchLock = null;
+        } else {
+            return this.batchSubject;
+        }
+
+        while (this.pendingBatchDbQueries.length) {
+            const pendingQuery = this.pendingBatchDbQueries.shift()!;
+            queries.push(pendingQuery.dbQuery);
+            observers.push(pendingQuery.observer);
+        }
+        const obs = this.queryConnector!.queryBatch(queries);
+        obs.map((res: any) => {
+            for (const observer of observers) {
+                observer.next({
+                    insertId: undefined,
+                    rowsAffected: 0,
+                    rows: {
+                        length: 0,
+                        item: function (index: number): any {
+                            return null;
+                        },
+                        toArray: function (): any[] {
+                            return <any[]>[];
+                        }
+                    }
+                });
+                observer.complete();
             }
+            return res;
         });
+        obs.share().subscribe(this.batchSubject);
+        this.batchSubject = undefined;
+        return obs;
     }
 
     /**
@@ -205,10 +288,7 @@ export class QueryManager {
             observer.error(error);
         } else {
             if (this.queryConnector) {
-                this.queryConnector.query(dbQuery).subscribe((result: QueryResult<any>) => {
-                    observer.next(result);
-                    observer.complete();
-                }, (err) => observer.error(err));
+                this.queryConnector.query(dbQuery).subscribe(observer);
             } else {
                 throw(new UnsatisfiedRequirementError('QueryConnector object is missing, check and fix NgDbHelperModule configuration !'))
             }

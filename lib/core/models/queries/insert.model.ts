@@ -1,3 +1,4 @@
+import { toArray } from 'rxjs/operator/toArray';
 import { QueryError } from '../../errors/query.error';
 import { DbHelperModel } from '../db-helper-model.model';
 import { retryWhen } from 'rxjs/operator/retryWhen';
@@ -11,6 +12,7 @@ import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
 
 /**
  * @private API
@@ -51,7 +53,7 @@ import 'rxjs/add/observable/combineLatest';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class QueryInsert<T extends DbHelperModel> {
     /**
@@ -112,8 +114,15 @@ export class QueryInsert<T extends DbHelperModel> {
         for (const item of items) {
             const interrogationMarks = [];
             for (const column of table.columnList) {
-                const value = (item as {[index: string]: any})[column.field];
-                parameters.push(value === undefined ? null : value);
+                const value = item.getFieldValue(column.field);
+                if (value === undefined) {
+                    parameters.push(null);
+                    item.setFieldValue(column.field, null);
+                } else if (column.foreignKey && value && (value as {[index: string]: any}).$$isDbHelperModel) {
+                    parameters.push((value as {[index: string]: any})[column.field]);
+                } else {
+                    parameters.push(value);
+                }
                 interrogationMarks.push('?');
             }
             valuesStrings.push('(' + interrogationMarks.join(', ') + ')');
@@ -143,55 +152,55 @@ export class QueryInsert<T extends DbHelperModel> {
             const numberOfParts = Math.floor(this.model.length / maxItemNumberPerRequest) + 1;
             if (numberOfParts > 1) {
                 // Array is to big, subsequent insert queries will be created and executed
-                observable = Observable.create((observer: Observer<QueryResult<any>>) => {
-                    const observables = [];
-                    for (let i = 0; i < numberOfParts; i += 1) {
-                        const start = i * maxItemNumberPerRequest;
-                        const nextIndex = start + maxItemNumberPerRequest;
-                        const end = nextIndex < (this.model as Array<T>).length ? nextIndex : (this.model as Array<T>).length;
-                        if (start >= end) {
-                            break;
-                        }
-                        const insert = Insert((this.model as Array<T>).slice(start, end));
-                        observables.push(insert.exec());
+                const observables = [];
+                for (let i = 0; i < numberOfParts; i += 1) {
+                    const start = i * maxItemNumberPerRequest;
+                    const nextIndex = start + maxItemNumberPerRequest;
+                    const end = nextIndex < (this.model as Array<T>).length ? nextIndex : (this.model as Array<T>).length;
+                    if (start >= end) {
+                        break;
                     }
+                    const insert = Insert((this.model as Array<T>).slice(start, end));
+                    observables.push(insert.exec());
+                }
 
-                    Observable.combineLatest(observables).subscribe((qrs: QueryResult<any>[]) => {
-                        let rowsAffected = 0;
-                        let insertId: number | undefined;
-                        for (const qr of qrs) {
-                            rowsAffected += qr.rowsAffected;
-                            if (qr && qr.insertId || qr.insertId === 0) {
-                                insertId = Math.max(insertId ? insertId : 0, qr.insertId);
+                observable = Observable.combineLatest(observables).map((qrs: QueryResult<any>[]) => {
+                    let rowsAffected = 0;
+                    let insertId: number | undefined;
+                    for (const qr of qrs) {
+                        rowsAffected += qr.rowsAffected;
+                        if (qr && qr.insertId || qr.insertId === 0) {
+                            insertId = Math.max(insertId ? insertId : 0, qr.insertId);
+                        }
+                    }
+                    return {
+                        rowsAffected: rowsAffected,
+                        insertId: insertId,
+                        rows: {
+                            length: 0,
+                            item: function (i: number) {
+                                return null;
+                            },
+                            toArray: function (): any[] {
+                                return <any[]>[];
                             }
                         }
-                        observer.next({
-                            rowsAffected: rowsAffected,
-                            insertId: insertId,
-                            rows: {
-                                length: 0,
-                                item: function (i: number) {
-                                    return null;
-                                }
-                            }
-                        });
-                    }, (err) => observer.error(err));
+                    };
                 });
             }
         }
         if (!observable) {
             // this is not a too big array, so the query can simply be executed
-            observable = Observable.create((observer: Observer<QueryResult<any>>) => {
-                QueryManager.getInstance().query(this.build()).subscribe((qr: QueryResult<any>) => {
-                    if (Array.isArray(this.model)) {
-                        for (const model of this.model) {
-                            model.__inserted = true;
-                        }
-                    } else {
-                        this.model.__inserted = true;
+            observable = QueryManager.getInstance().query(this.build());
+            observable.map((qr: QueryResult<any>) => {
+                if (Array.isArray(this.model)) {
+                    for (const model of this.model) {
+                        model.$$inserted = true;
                     }
-                    observer.next(qr);
-                }, (err) => observer.error(err), () => observer.complete());
+                } else {
+                    this.model.$$inserted = true;
+                }
+                return qr;
             });
         }
         return observable as Observable<QueryResult<any>>;
@@ -237,7 +246,7 @@ export class QueryInsert<T extends DbHelperModel> {
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export function Insert<T extends DbHelperModel>(model: T | T[]): QueryInsert<T> {
     return new QueryInsert(model);

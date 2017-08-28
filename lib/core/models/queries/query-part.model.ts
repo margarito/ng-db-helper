@@ -1,10 +1,11 @@
+import { DbQuery } from '../db-query.model';
 /**
  * @private API
  * @class QueryPart is private part of the API.
  * It is an intermidiate query object for builded query parts
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class QueryPart {
     /**
@@ -29,8 +30,27 @@ export class QueryPart {
      * @return the query part itself
      */
     public append(queryPart: QueryPart): QueryPart {
-        this.content = this.content.trim() + ' ' + queryPart.content.trim();
+        this.appendContent(queryPart.content);
         this.params = this.params.concat(queryPart.params);
+        return this;
+    }
+
+    public appendSub(queryPart: QueryPart | DbQuery): QueryPart {
+        if (queryPart instanceof QueryPart) {
+            this.content += ' (';
+            this.append(queryPart);
+            this.content += ')';
+        } else {
+            this.content += ' (';
+            this.content += queryPart.query.trim();
+            this.content += ')';
+            this.params = this.params.concat(queryPart.params);
+        }
+        return this;
+    }
+
+    public appendContent(content: string): QueryPart {
+        this.content = this.content + ' ' + content.trim();
         return this;
     }
 }

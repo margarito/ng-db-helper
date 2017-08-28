@@ -1,5 +1,10 @@
+import { IQueryHelper } from '../interfaces/i-query-helper.interface';
+import { IJoin } from '../interfaces/i-join.interface';
+import { QueryJoin } from './join.model';
+import { DbColumn } from '../structure/db-column.model';
 import { DbHelperModel } from '../db-helper-model.model';
 import { ModelResult } from './model-result.model';
+import { DbTable } from '../structure/db-table.model';
 import { QueryManager } from '../../managers/query-manager';
 import { QueryResult } from '../../interfaces/query-result.interface';
 import { Observable } from 'rxjs/Observable';
@@ -28,15 +33,20 @@ import { Clause } from './clause.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
-export class QuerySelect<T extends DbHelperModel> {
+export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
     /**
      * @private
      * @property whereClauses is {@link ClauseGroup} instance containing
      * where clauses
      */
     private type = 'SELECT';
+
+    /**
+     * @property joins
+     */
+    private joins = <IJoin[]>[];
 
     /**
      * @private
@@ -75,6 +85,8 @@ export class QuerySelect<T extends DbHelperModel> {
      */
     private page = 0;
 
+    public alias = '';
+
     /**
      * @public
      * @constructor should not be use directly, see class header
@@ -82,6 +94,12 @@ export class QuerySelect<T extends DbHelperModel> {
      * @param model {@link DbHelperModel} extention
      */
     public constructor(private model: { new(): T ; }) {}
+
+    public copy(): QuerySelect<T> {
+        const q = Select(this.model).where(this.whereClauses).join(this.joins).groupBy(this.grpBy).orderBy(this.ordrBy);
+        if (this.proj) {q.projection(this.proj)}
+        return q;
+    }
 
     /**
      * @public
@@ -97,6 +115,25 @@ export class QuerySelect<T extends DbHelperModel> {
         return this;
     }
 
+    public join(joinQuery: IJoin | IJoin[]): QuerySelect<T> {
+        let joins;
+        if (!Array.isArray(joinQuery)) {
+            joins = [joinQuery];
+        } else {
+            joins = joinQuery;
+        }
+        for (const jq of joins) {
+            if (!jq) {
+                continue;
+            }
+            if (!jq.alias) {
+                jq.alias = 'join_' + this.joins.length;
+            }
+            this.joins.push(jq);
+        }
+        return this;
+    }
+
     /**
      * @public
      * @method where is the method to add clauses to the where statement of the query
@@ -106,7 +143,7 @@ export class QuerySelect<T extends DbHelperModel> {
      *
      * @return this instance to chain query instructions
      */
-    public where(clauses: Clause|Clause[]|ClauseGroup|Object): QuerySelect<T> {
+    public where(clauses: Clause|Clause[]|ClauseGroup|{[index: string]: any}): QuerySelect<T> {
         if (!this.whereClauses) {
             this.whereClauses = new ClauseGroup();
         }
@@ -166,6 +203,74 @@ export class QuerySelect<T extends DbHelperModel> {
         return this;
     }
 
+    public getProjectedTable(): DbTable {
+        const srcTable = ModelManager.getInstance().getModel(this.model);
+        const table = new DbTable();
+        table.name = srcTable.name;
+        table.modelName = srcTable.modelName;
+        if (this.proj) {
+            const projection = this.proj.slice();
+            for (const column of srcTable.columnList) {
+                const index = projection.indexOf(column.name);
+                if (index >= 0) {
+                    table.columns[column.name] = column;
+                    table.fields[column.field] = column;
+                    table.columnList.push(column);
+                    projection.slice(index, 1);
+                }
+            }
+            for (const name of projection) {
+                const dbColumn = new DbColumn(name);
+                dbColumn.field = name;
+                table.columns[dbColumn.name] = dbColumn;
+                table.columnList.push(dbColumn);
+                table.fields[dbColumn.field] = dbColumn;
+            }
+        } else {
+            for (const column of srcTable.columnList) {
+                table.columnList.push(column);
+                table.columns[column.name] = column;
+                table.fields[column.field] = column;
+            }
+            if (table.columns.hasOwnProperty('rowid')) {
+                const rowidColumn = new DbColumn('rowid');
+                rowidColumn.indexed = true;
+                rowidColumn.autoIncrement = true;
+                rowidColumn.field = '$$rowid';
+                rowidColumn.type = 'integer';
+                table.columns[rowidColumn.name] = rowidColumn;
+                table.columnList.push(rowidColumn);
+                table.fields[rowidColumn.field] = rowidColumn;
+            }
+        }
+        if (this.joins) {
+            for (const joinQuery of this.joins) {
+                const joinTable = joinQuery.getProjectedTable();
+                for (const column of joinTable.columnList) {
+                    const joinColumn = column.fromAlias(joinQuery.alias)
+                    table.columnList.push(joinColumn);
+                    table.columns[joinColumn.name] = joinColumn;
+                    table.fields[joinColumn.field] = joinColumn;
+                }
+            }
+        }
+        return table;
+    }
+
+    private getJoinProjection(): string {
+        let joinProjection = '';
+        if (this.joins) {
+            const columns = <string[]>[];
+            for (const joinQuery of this.joins) {
+                const joinTable = joinQuery.getProjectedTable();
+                for (const column of joinTable.columnList) {
+                    columns.push(joinQuery.alias + '.' + column.name);
+                }
+            }
+            joinProjection = columns.join(', ');
+        }
+        return joinProjection;
+    }
 
     /**
      * @public
@@ -186,7 +291,13 @@ export class QuerySelect<T extends DbHelperModel> {
         } else {
             dbQuery.query += ' rowid, *';
         }
+        if (this.joins && this.joins.length && !this.proj) {
+            dbQuery.query += ', ' + this.getJoinProjection();
+        }
         dbQuery.query += ' FROM ' + dbQuery.table;
+        for (const joinQuery of this.joins) {
+            dbQuery.append(joinQuery.build());
+        }
         if (this.whereClauses) {
             dbQuery.query += ' WHERE';
             dbQuery.append(this.whereClauses.build());
@@ -207,12 +318,13 @@ export class QuerySelect<T extends DbHelperModel> {
      * @return observable to subscribe
      */
     public exec(): Observable<QueryResult<T>> {
-        return Observable.create((observer: Observer<QueryResult<T>>) => {
-            QueryManager.getInstance().query(this.build()).subscribe((qr: QueryResult<any>) => {
-                observer.next(new ModelResult(qr, this.model, this.proj));
-                observer.complete();
-            }, (err) => observer.error(err));
+        return QueryManager.getInstance().query(this.build()).map((qr: QueryResult<any>) => {
+            return new ModelResult(qr, this.model, this.proj);
         });
+    }
+
+    public execRaw(): Observable<QueryResult<any>> {
+        return QueryManager.getInstance().query(this.build());
     }
 }
 
@@ -234,7 +346,7 @@ export class QuerySelect<T extends DbHelperModel> {
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export function Select<T extends DbHelperModel>(model: { new(): T }): QuerySelect<T> {
     return new QuerySelect(model);

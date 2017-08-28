@@ -1,4 +1,5 @@
-import { TableConfig } from '../models/table-config.model';
+import { DbTable } from '../models/structure/db-table.model';
+import { TableConfig } from './configurator/table.configurator';
 import { DbHelperModel } from '../models/db-helper-model.model';
 import { ModelManager } from './../managers/model-manager';
 
@@ -26,15 +27,17 @@ import { ModelManager } from './../managers/model-manager';
  *          build DataModel.
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export function Table<T extends DbHelperModel>(config?: TableConfig) {
     return (target: {new(): T}) => {
         target.prototype.TABLE_NAME = config ? config.name : target.name;
-        target.prototype.__class = target;
-        if (!target.prototype.columns) {target.prototype.columns = {}; };
-        if (!target.prototype.columnList) {target.prototype.columnList = []; };
-        if (!target.prototype.fields) {target.prototype.fields = []; };
-        ModelManager.getInstance().addModel(target);
+        if (!target.prototype.$$dbTable) {
+            target.prototype.$$dbTable = new DbTable();
+        }
+        target.prototype.$$dbTable.name = target.prototype.TABLE_NAME;
+        target.prototype.$$dbTable.modelName = target.name;
+        target.prototype.$$dbTable.configure(config);
+        ModelManager.getInstance().addModel(target.prototype.$$dbTable);
     };
 }

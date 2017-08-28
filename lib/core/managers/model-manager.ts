@@ -1,5 +1,6 @@
+import { DbTable } from '../models/structure/db-table.model';
 import { DbHelperModel } from '../models/db-helper-model.model';
-import { DataModel } from '../models/data-model.model';
+import { DataModel } from '../models/structure/data-model.model';
 import { BadColumnDeclarationError } from '../errors/bad-column-declaration.error';
 import { BadTableDeclarationError } from '../errors/bad-table-declaration.error';
 
@@ -10,7 +11,7 @@ import { BadTableDeclarationError } from '../errors/bad-table-declaration.error'
  * every time it is necessary
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class ModelManager {
     /**
@@ -32,7 +33,7 @@ export class ModelManager {
      * @private
      * @property tables, hashmap of table names to their datamodel
      */
-    private tables: { [index: string]: any } = {};
+    private tables: { [index: string]: DbTable } = {};
 
     /**
      * @private
@@ -58,15 +59,9 @@ export class ModelManager {
      *
      * @param newModel model extending DbHelperModel
      */
-    public addModel(newModel: { new(): DbHelperModel }) {
-        this.tables[newModel.prototype.TABLE_NAME] = {
-            name: newModel.prototype.TABLE_NAME,
-            columns: newModel.prototype.columns,
-            columnList: newModel.prototype.columnList,
-            fields: newModel.prototype.fields,
-            model: newModel
-        };
-        this.models[newModel.name] = newModel.prototype.TABLE_NAME;
+    public addModel(dbTable: DbTable) {
+        this.tables[dbTable.name] = dbTable;
+        this.models[dbTable.modelName] = dbTable.name;
     }
 
     /**
@@ -124,11 +119,11 @@ export class ModelManager {
      *
      * @param model model extending DbHelperModel
      */
-    public getModel(model: string | DbHelperModel | {new(): DbHelperModel }): any {
+    public getModel(model: string | DbHelperModel | {new(): DbHelperModel }): DbTable {
         if (model instanceof String) {
             return this.tables[model];
         } else if (model instanceof DbHelperModel) {
-            return this.tables[this.getTable(model.__class)];
+            return this.tables[this.getTable(model.constructor as {new(): DbHelperModel})];
         } else {
             return this.tables[this.getTable(model)];
         }

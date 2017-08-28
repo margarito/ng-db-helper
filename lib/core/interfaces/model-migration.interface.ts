@@ -1,4 +1,4 @@
-import { DataModel } from '../models/data-model.model';
+import { DataModel } from '../models/structure/data-model.model';
 import { Observable } from 'rxjs/Observable';
 
 /**
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
  * ModelMigration instance has to be added to {@link NgDbHelperConfiguration}
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export interface ModelMigration {
     /**

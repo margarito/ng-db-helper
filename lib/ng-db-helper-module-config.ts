@@ -7,7 +7,7 @@ import { ModelMigration } from './core/interfaces/model-migration.interface';
  * integration.
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class NgDbHelperModuleConfig {
     /**

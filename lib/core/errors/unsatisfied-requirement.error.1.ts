@@ -1,11 +1,11 @@
 /**
- * @class BadTableDeclarationError is thrown when a table declaration is detected
+ * @class UnsatisfiedRequirementError is thrown when a requirement is unsatisfied
  *
  * @see Error
  * @author  Olivier Margarit
  * @since   0.1
  */
-export class BadTableDeclarationError implements Error {
+export class NotImplementedError implements Error {
     public name: string;
     public extra: any;
     public stack: any;
@@ -18,7 +18,7 @@ export class BadTableDeclarationError implements Error {
         Object.setPrototypeOf(this, new.target.prototype);
         Error.captureStackTrace(this, this.constructor);
         this.message = message;
-        this.name = 'bad table declaration error';
+        this.name = 'Not Implemented Error';
     }
 
     public toString(): string {

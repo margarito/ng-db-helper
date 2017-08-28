@@ -1,3 +1,4 @@
+import { QueryResultWrapper } from './query-result-wrapper';
 import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
 import { ModelMigration } from '../core/interfaces/model-migration.interface';
 import { QueryError } from '../core/errors/query.error';
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { QueryResult } from '../core/interfaces/query-result.interface';
 import { DbQuery } from '../core/models/db-query.model';
-import { DataModel } from '../core/models/data-model.model';
+import { DataModel } from '../core/models/structure/data-model.model';
 import { QueryConnector } from '../core/interfaces/query-connector.interface';
 
 /**
@@ -38,7 +39,7 @@ import { QueryConnector } from '../core/interfaces/query-connector.interface';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     /**
@@ -151,11 +152,28 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
             }
             if (this.db) {
                 this.db.executeSql(q, dbQuery.params, (results: any) => {
-                    observer.next(results);
+                    observer.next(new QueryResultWrapper(results));
                     observer.complete();
                 }, (err: any) => observer.error(new QueryError(err.message, q, dbQuery.params ? dbQuery.params.join(', ') : '')));
             } else {
                 observer.error(new QueryError('no database opened', q, dbQuery.params ? dbQuery.params.join(', ') : ''));
+            }
+        });
+    }
+
+    public queryBatch(dbQuries: DbQuery[]): Observable<QueryResult<any>> {
+        const queries = <[string, any[]][]>[];
+        for (const dbQuery of dbQuries) {
+            queries.push([dbQuery.query, dbQuery.params]);
+        }
+        return Observable.create((observer: Observer<QueryResult<any>>) => {
+            if (this.db) {
+                this.db.sqlBatch(queries, (results: any) => {
+                    observer.next(new QueryResultWrapper(results));
+                    observer.complete();
+                }, (err: any) => observer.error(new QueryError(err.message, '', '')));
+            } else {
+                observer.error(new QueryError('no database opened', '', ''));
             }
         });
     }

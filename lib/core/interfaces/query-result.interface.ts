@@ -1,3 +1,4 @@
+import { toArray } from 'rxjs/operator/toArray';
 /**
  * @interface QueryResult is an interface to standardize query result
  * In many case this could be any, but this allow to return typed object
@@ -6,7 +7,7 @@
  * @param T the result type of the query.
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export interface QueryResult<T> {
     /**
@@ -32,5 +33,7 @@ export interface QueryResult<T> {
          * @return T, the model returned by query
          */
         item(i: number): T;
+
+        toArray(): T[];
     };
 }

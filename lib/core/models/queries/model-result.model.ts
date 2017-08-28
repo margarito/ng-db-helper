@@ -11,7 +11,7 @@ import { QueryResult } from '../../interfaces/query-result.interface';
  *          column annotations
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
     /**
@@ -70,12 +70,21 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
                             (entity as {[index: string]: any})[column.field] = item[column.name];
                         }
                     }
-                    entity.__partialWithProjection = this.projection;
-                    entity.__rowid = item.hasOwnProperty('rowid') ? item.rowid : null;
-                    entity.__inserted = true;
+                    entity.$$partialWithProjection = this.projection;
+                    entity.$$rowid = item.hasOwnProperty('rowid') ? item.rowid : null;
+                    entity.$$inserted = true;
                     this.cache[i] = entity;
                 }
                 return this.cache[i];
+            },
+
+            toArray: (): T[] => {
+                for (let i = 0; i < this.cache.length; i++) {
+                    if (!this.cache[i]) {
+                        this.rows.item(i);
+                    }
+                }
+                return this.cache;
             }
         };
     };

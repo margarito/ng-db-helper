@@ -3,7 +3,7 @@
  *
  * @see Error
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class BadColumnDeclarationError implements Error {
     public name: string;
@@ -19,5 +19,9 @@ export class BadColumnDeclarationError implements Error {
         Error.captureStackTrace(this, this.constructor);
         this.message = message;
         this.name = 'bad column declaration error';
+    }
+
+    public toString(): string {
+        return name + '\n' + this.message;
     }
 }

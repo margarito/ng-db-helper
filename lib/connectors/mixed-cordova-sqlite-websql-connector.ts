@@ -8,7 +8,7 @@ import { QueryResult } from '../core/interfaces/query-result.interface';
 import { DbQuery } from '../core/models/db-query.model';
 import { ModelMigration } from '../core/interfaces/model-migration.interface';
 import { QueryConnector } from '../core/interfaces/query-connector.interface';
-import { DataModel } from '../core/models/data-model.model';
+import { DataModel } from '../core/models/structure/data-model.model';
 import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
 
 /**
@@ -41,7 +41,7 @@ import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirem
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelMigration {
     /**
@@ -134,6 +134,10 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
      */
     public query(dbQuery: DbQuery): Observable<QueryResult<any>> {
         return this.connector.query(dbQuery);
+    }
+
+    public queryBatch(dbQueries: DbQuery[]): Observable<QueryResult<any>> {
+        return this.connector.queryBatch(dbQueries);
     }
 
     /**

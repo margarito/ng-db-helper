@@ -10,7 +10,7 @@ import { DbQuery } from '../models/db-query.model';
  * The purpose is to be able to switch platform without modifying any line of the application code.
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export interface QueryConnector {
     /**
@@ -23,6 +23,8 @@ export interface QueryConnector {
      *                              passing {@link QueryError} on query error
      */
     query(dbQuery: DbQuery): Observable<QueryResult<any>>;
+
+    queryBatch(dbQueries: DbQuery[]): Observable<QueryResult<any>>;
 
     /**
      * @method isReady to check if module is ready, if not, caller should

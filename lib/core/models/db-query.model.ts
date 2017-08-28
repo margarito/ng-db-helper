@@ -5,7 +5,7 @@ import { QueryPart } from './queries/query-part.model';
  * the query connector.
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class DbQuery {
     /**

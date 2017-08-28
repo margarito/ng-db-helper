@@ -1,10 +1,12 @@
+import { toArray } from 'rxjs/operator/toArray';
+import { QueryResultWrapper } from './query-result-wrapper';
 import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
 import { QueryError } from '../core/errors/query.error';
 import { DbQuery } from '../core/models/db-query.model';
 import { WebsqlConnectorConfiguration } from './configurations/websql-connector-configuration';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { DataModel } from '../core/models/data-model.model';
+import { DataModel } from '../core/models/structure/data-model.model';
 import { QueryConnector } from '../core/interfaces/query-connector.interface';
 import { ModelMigration } from '../core/interfaces/model-migration.interface';
 import { QueryResult } from '../core/interfaces/query-result.interface';
@@ -39,7 +41,7 @@ import { QueryResult } from '../core/interfaces/query-result.interface';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class WebsqlConnector implements QueryConnector, ModelMigration {
     /**
@@ -101,16 +103,50 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
                     q += ' OFFSET ' + offset;
             }
             if (this.db) {
+                let qr: QueryResultWrapper;
                 this.db.transaction((transaction: any) => {
                     transaction.executeSql(q, dbQuery.params, (tr: any, result: any) => {
-                        observer.next(result);
-                        observer.complete();
+                        qr = new QueryResultWrapper(result);
                     }, (tr: any, err: any) => {
                         observer.error(new QueryError(err.message, q, dbQuery.params ? dbQuery.params.join(', ') : ''));
                     });
-                }, (err: any) => observer.error(new QueryError(String(err.message), q, dbQuery.params ? dbQuery.params.join(', ') : '')));
+                }, (err: any) => observer.error(new QueryError(String(err.message), q, dbQuery.params ? dbQuery.params.join(', ') : '')),
+                    (res: any) => {
+                        observer.next(qr);
+                        observer.complete();
+                    });
             } else {
                 observer.error(new QueryError('no database opened', q, dbQuery.params ? dbQuery.params.join(', ') : ''));
+            }
+        });
+    }
+
+    public queryBatch(dbQuries: DbQuery[]): Observable<QueryResult<any>> {
+        return Observable.create((observer: Observer<QueryResult<any>>) => {
+            if (this.db) {
+                this.db.transaction((transaction: any) => {
+                    for (const dbQuery of dbQuries) {
+                        transaction.executeSql(dbQuery.query, dbQuery.params);
+                    }
+                }, (err: any) => observer.error(new QueryError(String(err.message), '', '')),
+                () => {
+                    observer.next({
+                        insertId: undefined,
+                        rowsAffected: 0,
+                        rows: {
+                            length: 0,
+                            item: function (index: number) {
+                                return null;
+                            },
+                            toArray: function (): any[] {
+                                return <any[]>[];
+                            }
+                        }
+                    });
+                    observer.complete();
+                });
+            } else {
+                observer.error(new QueryError('no database opened', '', ''));
             }
         });
     }
@@ -182,6 +218,6 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
      * @return Observable resolved on upgradeModel finish
      */
     upgradeModel(dataModel: DataModel, oldVersion: string): Observable<any> {
-        return this.config.initDataModel(dataModel, this.db);
+        return this.config.upgradeDataModel(dataModel, this.db);
     }
 }

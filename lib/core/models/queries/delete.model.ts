@@ -37,7 +37,7 @@ import { Clause } from './clause.model';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class QueryDelete<T extends DbHelperModel> {
     /**
@@ -92,7 +92,7 @@ export class QueryDelete<T extends DbHelperModel> {
         dbQuery.type = this.type;
         dbQuery.query += this.type;
         dbQuery.query += ' FROM ' + table.name;
-        if (this.model.hasOwnProperty('__class')) {
+        if ((this.model as {[index: string]: any}).$$isDbHelperModel) {
             for (const column of table.columnList) {
                 if (column.primaryKey) {
                     const clause = new Clause();
@@ -147,7 +147,7 @@ export class QueryDelete<T extends DbHelperModel> {
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export function Delete<T extends DbHelperModel>(model: T | {new(): T }): QueryDelete<T> {
     return new QueryDelete(model);

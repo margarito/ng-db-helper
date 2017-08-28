@@ -2,7 +2,7 @@
  * @class TableConfig a config model for {@link Table} annotation
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class TableConfig {
     /**

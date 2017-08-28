@@ -4,7 +4,7 @@ import { DbTable } from './db-table.model';
  * @class DataModel, data model passed to the model migration
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class DataModel {
     /**

@@ -39,7 +39,7 @@ import { QueryManager } from './core/managers/query-manager';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 @NgModule({
     imports: [],

@@ -1,9 +1,11 @@
+import { QueryError } from '../../core/errors/query.error';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Create } from '../../core/models/queries/create.model';
-import { DataModel } from '../../core/models/data-model.model';
+import { DataModel } from '../../core/models/structure/data-model.model';
 
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/concat';
 
 /**
  * @class WebsqlConnectorConfiguration is a default configuration
@@ -22,7 +24,7 @@ import 'rxjs/add/observable/combineLatest';
  * ```
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class WebsqlConnectorConfiguration {
     /**
@@ -66,23 +68,50 @@ export class WebsqlConnectorConfiguration {
      * @param doDrop    drop table to allow recreation of database
      */
     private createTables(dataModel: DataModel, db: any, doDrop: boolean = false): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
+        let dbQuery: string;
+
+        const createObservable = Observable.create((observer: Observer<any>) => {
+            console.log(dataModel);
             db.changeVersion(db.version, dataModel.version, (transaction: any) => {
                 const observables = [];
                 for (const table of dataModel.tables) {
-                    if (doDrop) {
-                        observables.push(this.dropTable(table.name, transaction));
-                    }
-                    observables.push(this.query(Create(table).build(), transaction));
+                    dbQuery = Create(table).build();
+                    observables.push(this.query(dbQuery, transaction));
+                    console.log(dbQuery);
                 }
-                Observable.combineLatest(observables).subscribe(() => {
-                    observer.next(null);
-                }, (err) => {
-                    observer.error(err);
-                }, () => {
-                    observer.complete();
+                Observable.combineLatest(observables).subscribe(() => {}, (err: any) => {
+                    observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), '', ''));
                 });
-            }, (err: any) => observer.error(err));
+            }, (err: any) => {
+                observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), '', ''))
+            }, () => {
+                observer.next(null);
+                observer.complete();
+            });
+        });
+        if (doDrop) {
+            return Observable.concat(this.dropTables(dataModel, db), createObservable);
+        } else {
+            return createObservable;
+        }
+    }
+
+    private dropTables(dataModel: DataModel, db: any): Observable<any> {
+        return Observable.create((observer: Observer<any>) => {
+            db.transaction((transaction: any) => {
+                const observables = [];
+                for (const table of dataModel.tables) {
+                    observables.push(this.dropTable(table.name, transaction));
+                }
+                Observable.combineLatest(observables).subscribe(() => {}, (err: any) => {
+                    observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), '', ''));
+                });
+            }, (err: any) => {
+                observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), '', ''))
+            }, () => {
+                observer.next(null);
+                observer.complete();
+            });
         });
     }
 
@@ -94,7 +123,7 @@ export class WebsqlConnectorConfiguration {
      * @param transaction SQLTransaction object, see websql documentation
      */
     private dropTable(tableName: string, transaction: any): Observable<any> {
-        return this.query('DROP TABLE `' + tableName + '`', transaction);
+        return this.query('DROP TABLE IF EXISTS `' + tableName + '`', transaction);
     }
 
     /**
@@ -110,7 +139,7 @@ export class WebsqlConnectorConfiguration {
                 observer.next(result);
                 observer.complete();
             }, (tr: any, err: any) => {
-                observer.error(err);
+                observer.error(new QueryError(err instanceof String ? err as string : JSON.stringify(err), query, ''));
                 observer.complete();
             });
         });

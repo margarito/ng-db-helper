@@ -1,5 +1,7 @@
+import { DbTable } from '../models/structure/db-table.model';
+import { DbColumn } from '../models/structure/db-column.model';
 import { DbHelperModel } from '../models/db-helper-model.model';
-import { ColumnConfig } from './../models/column-config.model';
+import { ColumnConfig } from './configurator/column.configurator';
 import { Clause } from './../models/queries/clause.model';
 
 /**
@@ -26,42 +28,34 @@ import { Clause } from './../models/queries/clause.model';
  *          build DataModel.
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
-export function Column<T extends DbHelperModel>(config?: ColumnConfig) {
+export function Column<T extends DbHelperModel>(config?: ColumnConfig): any {
     return (target: T, key: string) => {
-        const column = {
-            name: key,
-            field: key,
-            type: 'string',
-            primaryKey: false,
-            autoIncrement: false,
-            unique: false,
-            indexed: false
-        };
+        const column = new DbColumn(key);
+
         if (config) {
-            column.name = config.name || key;
-            column.type = config.type || column.type;
-            column.primaryKey = config.primaryKey || column.primaryKey;
-            column.unique = config.unique || column.unique;
-            column.indexed = config.indexed || column.indexed;
-            column.autoIncrement = config.autoIncrement || column.autoIncrement;
+            column.configure(config);
         }
 
-        if (!target.constructor.prototype.columns) {target.constructor.prototype.columns = {}; };
-        if (!target.constructor.prototype.columnList) {target.constructor.prototype.columnList = []; };
-        if (!target.constructor.prototype.fields) {target.constructor.prototype.fields = {}; };
-        target.constructor.prototype.columnList.push(column);
-        target.constructor.prototype.columns[column.name] = column;
-        target.constructor.prototype.fields[column.field] = column;
-
-        if (config && (config.primaryKey || config.unique)) {
-            let fnName = 'getBy';
-            if (key.length > 1) {
-                fnName +=  key.substring(0, 1).toUpperCase() + key.substring(1, key.length - 1);
-            } else {
-                fnName += key.toUpperCase();
-            }
+        if (!target.constructor.prototype.$$dbTable) {
+            target.constructor.prototype.$$dbTable = new DbTable();
         }
+
+        target.constructor.prototype.$$dbTable.columnList.push(column);
+        target.constructor.prototype.$$dbTable.columns[column.name] = column;
+        target.constructor.prototype.$$dbTable.fields[column.field] = column;
+
+        Object.defineProperty(target, key, {
+            get: function () {
+                return this.$$shawdow[column.name].val;
+            },
+            set: function (val: any) {
+                this.$$shawdow[column.name].val = val;
+                this.$$isModified = true;
+            },
+            enumerable: true,
+            configurable: false
+        });
     };
 }

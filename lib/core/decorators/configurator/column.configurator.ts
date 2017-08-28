@@ -2,7 +2,7 @@
  * @class ColumnConfig, specific configurator for {@link Column} annotation
  *
  * @author  Olivier Margarit
- * @Since   0.1
+ * @since   0.1
  */
 export class ColumnConfig {
     /**
