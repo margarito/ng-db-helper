@@ -119,7 +119,7 @@ export class QueryUpdate<T extends DbHelperModel> {
         const queryPart = new QueryPart();
         const columnsToUpdate = <string[]>[];
         for (const column of table.columnList) {
-            let value = (this.model as DbHelperModel).getFieldValue(column.field);
+            let value = (this.model as DbHelperModel).getColumnValue(column.name);
             value = value === undefined ? null : value;
             if ((this.model as {[index: string]: any}).$$partialWithProjection) {
                 if ((this.model as {[index: string]: any}).$$partialWithProjection.indexOf(column.name) >= 0 ||

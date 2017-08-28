@@ -1,3 +1,4 @@
+import { Column } from '../../..';
 import { ShadowValue } from './shadow-value.model';
 import { Subject } from 'rxjs/Subject';
 import { IClause } from './interfaces/i-clause.interface';
@@ -56,13 +57,25 @@ export abstract class DbHelperModel {
      */
     public $$partialWithProjection: string[] | undefined;
 
-    public $$shadow = <{[index: string]: ShadowValue}>{};
+    public $$shadow = <{[index: string]: ShadowValue}> {};
 
     public $$dbTable: DbTable | undefined;
 
     public $$isModified = true;
 
     public readonly $$isDbHelperModel = true;
+
+    public constructor() {
+        const table = ModelManager.getInstance().getModel(this.constructor as {new(): DbHelperModel});
+        for (const column of table.columnList) {
+            const shadow = new ShadowValue();
+            shadow.column = column;
+            if (column.defaultValue !== undefined) {
+                this.setFieldValue(column.field, column.defaultValue);
+            }
+            this.$$shadow[column.name] = shadow;
+        }
+    }
 
     /**
      * @public
@@ -136,20 +149,20 @@ export abstract class DbHelperModel {
 
     public toClauseGroup(): ClauseGroup {
         const group = new ClauseGroup();
-        const table = ModelManager.getInstance().getModel(this.constructor as {new(): DbHelperModel});
-        for (const column of table.columnList) {
-            const val = this.getFieldValue(column.field);
-            if (column.autoIncrement && !val && val !== 0) {
-                continue;
+        for (const key in this.$$shadow) {
+            if (this.$$shadow.hasOwnProperty(key)) {
+                const shadow = this.$$shadow[key];
+                if (shadow.column.autoIncrement && !shadow.val && shadow.val !== 0) {
+                    continue;
+                }
+                const clause = new Clause();
+                clause.key = key;
+                clause.value = shadow.val === undefined ? null : shadow.val;
+                if (!shadow.val && shadow.foreign) {
+                    shadow.val = shadow.foreign.getColumnValue(shadow.column.foreignKey!);
+                }
+                group.add(clause);
             }
-            const clause = new Clause();
-            clause.key = column.name;
-            if (val && column.foreignKey) {
-                clause.value = (val as {[index: string]: any})[column.foreignField!];
-            } else {
-                clause.value = val === undefined ? null : val;
-            }
-            group.add(clause);
         }
         if (this.hasValidRowid()) {
             group.add({rowid: this.$$rowid});
@@ -160,12 +173,17 @@ export abstract class DbHelperModel {
     public getPrimaryClause(): IClause {
         const clause = new CompositeClause();
         clause.comparator = ClauseComparators.IN;
-        const table = ModelManager.getInstance().getModel(this.constructor as {new(): DbHelperModel});
         const values = <any[]>[];
-        for (const column of table.columnList) {
-            if (column.primaryKey && !this.getFieldValue(column.field)) {
-                clause.addKey(column.name);
-                values.push(this.getFieldValue(column.field));
+        for (const key in this.$$shadow) {
+            if (this.$$shadow.hasOwnProperty(key)) {
+                const shadow = this.$$shadow[key];
+                if (shadow.foreign) {
+                    shadow.val = shadow.foreign.getColumnValue(shadow.column.foreignKey!);
+                }
+                if (shadow.column.primaryKey && (!shadow.column.autoIncrement || (shadow.val !== undefined && shadow.val !== null))) {
+                    clause.addKey(shadow.column.name);
+                    values.push(shadow.val === undefined ? null : shadow.val);
+                }
             }
         }
         clause.addValue(values);
@@ -173,11 +191,15 @@ export abstract class DbHelperModel {
     }
 
     public hasValidPrimaryKey(): boolean {
-        const table = ModelManager.getInstance().getModel(this.constructor as {new(): DbHelperModel});
-        for (const column of table.columnList) {
-            if (column.primaryKey) {
-                const fieldValue = this.getFieldValue(column.field);
-                if (fieldValue === undefined || (column.autoIncrement && fieldValue === null)) {
+        for (const key in this.$$shadow) {
+            if (this.$$shadow.hasOwnProperty(key)) {
+                const shadow = this.$$shadow[key];
+                if (shadow.column.foreignKey) {
+                    if (shadow.foreign) {
+                        shadow.val = shadow.foreign.getColumnValue(shadow.column.foreignKey);
+                    }
+                }
+                if (shadow.val === undefined || (shadow.column.autoIncrement && shadow.val === null)) {
                     return false;
                 }
             }
@@ -186,27 +208,33 @@ export abstract class DbHelperModel {
     }
 
     public getColumnValue(columnName: string): any {
-        const table = ModelManager.getInstance().getModel(this.constructor as {new(): DbHelperModel});
-        const column = table.columns[columnName];
-        if (!column) {
+        if (!this.$$shadow.hasOwnProperty(columnName)) {
             throw new BadColumnDeclarationError('Value for column "' + columnName +
-                '" can\'t be retrieve because this column is missing on model "' + table.name + '"');
+                '" can\'t be retrieve because this column is missing on model "' + this.$$dbTable!.name + '"');
         }
-        let value: any;
-        value = (this as {[index: string]: any})[column.field];
-        if (column.foreignKey) {
-            if (!value) {
-                const foreignValue = value[column.foreignField!];
-                if (foreignValue === undefined || foreignValue === null) {
-                    throw new QueryError('Model "' + value.constructor.name + '" cannot be affected to Model "' +
-                        this.constructor.name + '" because the first one has a null primary key.', '', '');
-                }
-                value = foreignValue;
-            } else {
-                value = null;
+        const shadow = this.$$shadow[columnName];
+        if (shadow.column.foreignKey) {
+            if (shadow.foreign) {
+                shadow.val = shadow.foreign.getColumnValue(shadow.column.foreignKey);
             }
         }
+        let value;
+        value = shadow.val;
         return value;
+    }
+
+    public setColumnValue(columnName: string, value: any): any {
+        if (!this.$$shadow.hasOwnProperty(columnName)) {
+            throw new BadColumnDeclarationError('Value for column "' + columnName +
+                '" can\'t be retrieve because this column is missing on model "' + this.$$dbTable!.name + '"');
+        }
+        const shadow = this.$$shadow[columnName];
+        const oldVal = shadow.val;
+        shadow.val = value;
+        if (oldVal !== value && oldVal !== undefined) {
+            this.$$isModified = true;
+        }
+
     }
 
     public getFieldValue(fieldName: string): any {

@@ -1,3 +1,4 @@
+import { CompositeClause } from './composite-clause.model';
 import { ClauseOperators } from '../constants/clause-operators.constant';
 import { QueryPart } from './query-part.model';
 import { Clause } from './clause.model';
@@ -75,7 +76,7 @@ export class ClauseGroup {
     public add(clauses: ClauseGroup|Clause|Clause[]|IClause[]|{[index: string]: any}) {
         if (clauses instanceof ClauseGroup) {
             this.add(clauses.clauses);
-        } else if (clauses instanceof Clause) {
+        } else if (clauses instanceof Clause || clauses instanceof CompositeClause) {
             this.clauses.push(clauses);
         } else if (Array.isArray(clauses)) {
             this.clauses = this.clauses.concat(clauses);

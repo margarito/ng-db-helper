@@ -1,3 +1,4 @@
+export { ForeignModel } from './decorators/foreign-model';
 export { PrimaryKey } from './decorators/primary-key';
 export { DbRelationModel } from './models/structure/db-relation.model';
 export { ClauseOperators } from './models/constants/clause-operators.constant';
@@ -5,7 +6,6 @@ export { ClauseComparators } from './models/constants/clause-comparators.constan
 export { RelationType } from './models/constants/relation-type.constant';
 export { IQueryHelper } from './models/interfaces/i-query-helper.interface';
 export { RawQuery } from './models/queries/raw-query';
-export { ForeignModel } from './decorators/foreign-model';
 export { ColumnClauseValue } from './models/queries/column-clause-value.model';
 export { IJoin } from './models/interfaces/i-join.interface';
 export { Join, QueryJoin } from './models/queries/join.model';

@@ -1,3 +1,4 @@
+import { ShadowValue } from '../models/shadow-value.model';
 import { ModelManager } from '../managers/model-manager';
 import { Clause } from '../models/queries/clause.model';
 import { QueryResult } from '../interfaces/query-result.interface';
@@ -10,7 +11,7 @@ import { DbColumn } from '../models/structure/db-column.model';
 import { DbHelperModel } from '../models/db-helper-model.model';
 import { ColumnConfig } from './configurator/column.configurator';
 
-export function ForeignModel<T extends DbHelperModel>(model: {new(): DbHelperModel}, config?: ColumnConfig, relationKey?: string) {
+export function ForeignModel<T extends DbHelperModel>(model: {new(): DbHelperModel}, config?: ColumnConfig, relationKey?: string): any {
     return (target: T, key: string) => {
 
         const column = new DbColumn();
@@ -51,14 +52,28 @@ export function ForeignModel<T extends DbHelperModel>(model: {new(): DbHelperMod
         table.columns[column.name] = column;
         table.fields[column.field] = column;
 
-        Object.defineProperty(target, key, {
+        const descriptor = Object.getOwnPropertyDescriptor(target, key);
+        if (descriptor && descriptor.value !== undefined) {
+            column.defaultValue = descriptor.value;
+        }
+
+        Object.defineProperty(target.constructor.prototype, key, {
             get: function () {
-                return this.$$shawdow[column.name].foreign;
+                return this.$$shadow[column.name].foreign;
             },
             set: function (foreign: DbHelperModel) {
-                this.$$shawdow[column.name].val = foreign.getFieldValue(column.foreignField!);
-                this.$$shawdow[column.name].foreign = foreign;
-                this.$$isModified = true;
+                const oldVal = this.$$shadow[column.name].val;
+                if (!foreign) {
+                    this.$$shadow[column.name].val = null;
+                    this.$$shadow[column.name].foreign = null;
+                } else {
+                    this.$$shadow[column.name].val = foreign.getFieldValue(column.foreignField!);
+                    this.$$shadow[column.name].foreign = foreign;
+                }
+                if (this.$$shadow[column.name].val !== oldVal) {
+                    this.$$isModified = true;
+                    this.$$shadow[column.name].prevVal = oldVal;
+                }
             },
             enumerable: true,
             configurable: false

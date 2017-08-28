@@ -114,12 +114,10 @@ export class QueryInsert<T extends DbHelperModel> {
         for (const item of items) {
             const interrogationMarks = [];
             for (const column of table.columnList) {
-                const value = item.getFieldValue(column.field);
+                const value = item.getColumnValue(column.name);
                 if (value === undefined) {
                     parameters.push(null);
                     item.setFieldValue(column.field, null);
-                } else if (column.foreignKey && value && (value as {[index: string]: any}).$$isDbHelperModel) {
-                    parameters.push((value as {[index: string]: any})[column.field]);
                 } else {
                     parameters.push(value);
                 }
@@ -196,9 +194,11 @@ export class QueryInsert<T extends DbHelperModel> {
                 if (Array.isArray(this.model)) {
                     for (const model of this.model) {
                         model.$$inserted = true;
+                        model.$$isModified = false;
                     }
                 } else {
                     this.model.$$inserted = true;
+                    this.model.$$isModified = false;
                 }
                 return qr;
             });

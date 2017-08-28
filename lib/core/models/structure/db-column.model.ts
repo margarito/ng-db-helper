@@ -54,6 +54,8 @@ export class DbColumn {
 
     public foreignField: string|null = null;
 
+    public defaultValue: any = undefined;
+
 
     public constructor(name?: string) {
         if (name) {

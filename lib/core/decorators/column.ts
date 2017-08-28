@@ -1,3 +1,4 @@
+import { ShadowValue } from '../models/shadow-value.model';
 import { DbTable } from '../models/structure/db-table.model';
 import { DbColumn } from '../models/structure/db-column.model';
 import { DbHelperModel } from '../models/db-helper-model.model';
@@ -46,13 +47,22 @@ export function Column<T extends DbHelperModel>(config?: ColumnConfig): any {
         target.constructor.prototype.$$dbTable.columns[column.name] = column;
         target.constructor.prototype.$$dbTable.fields[column.field] = column;
 
-        Object.defineProperty(target, key, {
+        const descriptor = Object.getOwnPropertyDescriptor(target, key);
+        if (descriptor && descriptor.value !== undefined) {
+            column.defaultValue = descriptor.value;
+        }
+
+        Object.defineProperty(target.constructor.prototype, key, {
             get: function () {
-                return this.$$shawdow[column.name].val;
+                return this.$$shadow[column.name].val;
             },
             set: function (val: any) {
-                this.$$shawdow[column.name].val = val;
-                this.$$isModified = true;
+                const oldVal = this.$$shadow[column.name].val;
+                this.$$shadow[column.name].val = val;
+                if (this.$$shadow[column.name].val !== oldVal) {
+                    this.$$isModified = true;
+                    this.$$shadow[column.name].prevVal = oldVal;
+                }
             },
             enumerable: true,
             configurable: false

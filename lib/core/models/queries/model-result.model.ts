@@ -61,18 +61,21 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
                 if (!this.cache[i]) {
                     const entity = new this.model();
                     const item = this.result.rows.item(i);
-                    const table = ModelManager.getInstance().getModel(this.model);
-                    for (const column of table.columnList) {
-                        if (this.projection && this.projection.indexOf(column.name) < 0) {
-                            continue;
-                        }
-                        if (item.hasOwnProperty(column.name)) {
-                            (entity as {[index: string]: any})[column.field] = item[column.name];
+                    for (const key in entity.$$shadow) {
+                        if (entity.$$shadow.hasOwnProperty(key)) {
+                            const shadow = entity.$$shadow[key];
+                            if (this.projection && this.projection.indexOf(key) < 0) {
+                                continue;
+                            }
+                            if (item.hasOwnProperty(key)) {
+                                shadow.val = item[key];
+                            }
                         }
                     }
                     entity.$$partialWithProjection = this.projection;
                     entity.$$rowid = item.hasOwnProperty('rowid') ? item.rowid : null;
                     entity.$$inserted = true;
+                    entity.$$isModified = false;
                     this.cache[i] = entity;
                 }
                 return this.cache[i];
