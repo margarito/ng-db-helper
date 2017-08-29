@@ -1,3 +1,4 @@
+import { CompositeClause } from './composite-clause.model';
 import { DbHelperModel } from '../db-helper-model.model';
 import { retryWhen } from 'rxjs/operator/retryWhen';
 import { QueryManager } from '../../managers/query-manager';
@@ -10,12 +11,13 @@ import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
 /**
- * @private API
- * @class QueryDelete is private part of the API.
- * For design reasons this class should not be used directly and
- * will move later. Use this class through {@link Delete} function.
+ * @public
+ * @class QueryDelete
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table
+ * @description
+ * For design reasons this class should not be used directly. Use this class through {@link Delete} function.
+ *
+ * @param T @extends DbHelperModel a model declared with table
  *          and column annotations
  *
  * @example
@@ -42,13 +44,13 @@ import { Clause } from './clause.model';
 export class QueryDelete<T extends DbHelperModel> {
     /**
      * @private
-     * @property type the type of statement, should not be modified
+     * @constant {string} type the type of statement, should not be modified
      */
-    private type = 'DELETE';
+    private readonly type = 'DELETE';
 
     /**
      * @private
-     * @property whereClauses is {@link ClauseGroup} instance containing
+     * @property {ClauseGroup} whereClauses is {@link ClauseGroup} instance containing
      * where clauses
      */
     private whereClauses: ClauseGroup;
@@ -57,7 +59,7 @@ export class QueryDelete<T extends DbHelperModel> {
      * @public
      * @constructor should not be use directly, see class header
      *
-     * @param model DbHelperModel extention
+     * @param {T | {new(): T }} model DbHelperModel extention
      */
     public constructor(private model: T | {new(): T }) {}
 
@@ -66,11 +68,11 @@ export class QueryDelete<T extends DbHelperModel> {
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
      *
-     * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * @param {Clause|Clause[]|ClauseGroup|CompositeClause|{[index: string]: any}} clauses list of clauses
      *
-     * @return this instance to chain query instructions
+     * @return {QueryDelete<T>} this instance to chain query instructions
      */
-    public where(clauses: Clause|Clause[]|ClauseGroup|Object): QueryDelete<T> {
+    public where(clauses: Clause|Clause[]|ClauseGroup|CompositeClause|{[index: string]: any}): QueryDelete<T> {
         if (!this.whereClauses) {
             this.whereClauses = new ClauseGroup();
         }
@@ -82,7 +84,7 @@ export class QueryDelete<T extends DbHelperModel> {
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link DbQuery} of the query with the string part and
+     * @return {DbQuery} of the query with the string part and
      *          clauses params.
      */
     public build(): DbQuery {
@@ -113,7 +115,7 @@ export class QueryDelete<T extends DbHelperModel> {
      * @public
      * @method exec to execute the query and asynchronously retreive result.
      *
-     * @return observable to subscribe
+     * @return {Observable<QueryResult<any>>} observable to subscribe and retrieve results
      */
     public exec(): Observable<QueryResult<any>> {
         return QueryManager.getInstance().query(this.build());
@@ -122,10 +124,13 @@ export class QueryDelete<T extends DbHelperModel> {
 
 /**
  * @public API
- * @function Delete allow to simply remove model instance or entries
+ * @function Delete
+ *
+ * @description
+ * this function allow to simply remove model instance or entries
  * matching with specific clauses.
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table
+ * @param T @extends DbHelperModel a model declared with table
  *          and column annotations
  *
  * @example
@@ -145,6 +150,8 @@ export class QueryDelete<T extends DbHelperModel> {
  *      // manage th error...
  * });
  * ```
+ *
+ * @return {QueryDelete<T>} QueryDelete instance
  *
  * @author  Olivier Margarit
  * @since   0.1

@@ -8,12 +8,13 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/concat';
 
 /**
- * @class WebsqlConnectorConfiguration is a default configuration
- * for connector {@link WebsqlConnector}
- * This class provides config key to add copy informations.
+ * @class WebsqlConnectorConfiguration
+ *
+ * @description
+ * This class is a default configuration for connector {@link WebsqlConnector}
+ * It provides config key to add copy informations.
  *
  * @example
- *
  * ```typescript
  * const config = new WebsqlConnectorConfiguration();
  * // configure db name on device
@@ -29,7 +30,7 @@ import 'rxjs/add/observable/concat';
 export class WebsqlConnectorConfiguration {
     /**
      * @public
-     * @property dbName file name of the database on the device
+     * @property {string} dbName file name of the database on the device
      */
     public dbName = 'database.db';
 
@@ -38,8 +39,10 @@ export class WebsqlConnectorConfiguration {
      * @method initDataModel is called if database need to be initialized.
      * You can override this method if you need to add your logic
      *
-     * @param dataModel model generated be model annotations
-     * @param db        SQLiteDatabase object, see cordova-sqlite-storage
+     * @param {DataModel} dataModel     model generated be model annotations
+     * @param {Database} db             @see WebSQL
+     *
+     * @return {Observable<any>}        observable to subscribe during async operation
      */
     public initDataModel(dataModel: DataModel, db: any): Observable<any> {
         return this.createTables(dataModel, db, true);
@@ -52,8 +55,10 @@ export class WebsqlConnectorConfiguration {
      * You can override this method to add your own logic like alteration
      * and let script create new table by calling super.
      *
-     * @param dataModel model generated be model annotations
-     * @param db        Database object, see websql documentation
+     * @param {DataModel} dataModel     model generated be model annotations
+     * @param {Database} db             @see WebSQL
+     *
+     * @return {Observable<any>}        observable to subscribe during async operation
      */
     public upgradeDataModel(dataModel: DataModel, db: any): Observable<any> {
         return this.createTables(dataModel, db);
@@ -63,9 +68,11 @@ export class WebsqlConnectorConfiguration {
      * @private
      * @method createTables create table linked to datamodel (not table alteration)
      *
-     * @param dataModel model generated be model annotations
-     * @param db        Database object, see websql documentation
-     * @param doDrop    drop table to allow recreation of database
+     * @param {DataModel} dataModel     model generated be model annotations
+     * @param {Database} db             @see WebSQL
+     * @param {boolean} doDrop          drop table to allow recreation of database
+     *
+     * @return {Observable<any>}        observable to subscribe during async operation
      */
     private createTables(dataModel: DataModel, db: any, doDrop: boolean = false): Observable<any> {
         let dbQuery: string;
@@ -96,6 +103,14 @@ export class WebsqlConnectorConfiguration {
         }
     }
 
+    /**
+     * @private
+     * @method dropTables a simmple method to drop all table in the data model
+     * @param {DataModel} dataModel     model generated be model annotations
+     * @param {Database} db             @see WebSQL
+     *
+     * @return {Observable<any>}        observable to subscribe during async operation
+     */
     private dropTables(dataModel: DataModel, db: any): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
             db.transaction((transaction: any) => {
@@ -119,8 +134,10 @@ export class WebsqlConnectorConfiguration {
      * @private
      * @method dropTable drop table if exists
      *
-     * @param tableName     name of the table to drop
-     * @param transaction SQLTransaction object, see websql documentation
+     * @param {string} tableName            name of the table to drop
+     * @param {SQLTransaction} transaction  @see WebSQL
+     *
+     * @return {Observable<any>}        observable to subscribe during async operation
      */
     private dropTable(tableName: string, transaction: any): Observable<any> {
         return this.query('DROP TABLE IF EXISTS `' + tableName + '`', transaction);

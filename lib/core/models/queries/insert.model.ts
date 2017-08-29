@@ -15,14 +15,15 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/map';
 
 /**
- * @private API
- * @class QueryInsert is private part of the API.
- * For design reasons this class should not be used directly and
- * will move later. Use this class with {@link Insert} function.
+ * @public
+ * @class QueryInsert
+ *
+ * @description
+ * For design reasons this class should not be used directly. Use this class with {@link Insert} function.
  * Prefer use of save() method instead of Insert for a single entry.
  * Insert optimize multiple entry insertion with bulk mecanisme for example.
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
@@ -59,23 +60,23 @@ export class QueryInsert<T extends DbHelperModel> {
     /**
      * @private
      * @static
-     * @property    SQLITE_PRAMS_LIMIT is a standard SQLite driver limit
+     * @constant {number} SQLITE_PRAMS_LIMIT is a standard SQLite driver limit
      *              this parameter will probably be customizable in a futrue
      *              release
      */
-    private static SQLITE_PRAMS_LIMIT = 999;
+    private static readonly SQLITE_PRAMS_LIMIT = 999;
 
     /**
      * @private
-     * @property type, statement type
+     * @constant {string} type statement type
      */
-    private type = 'INSERT';
+    private readonly type = 'INSERT';
 
     /**
      * @public
      * @constructor should not be use directly, see class header
      *
-     * @param model {@link DbHelperModel} extention
+     * @param {T | Array<T>} model  DbHelper model or list of models
      */
     public constructor(private model: T | T[]) {}
 
@@ -84,7 +85,7 @@ export class QueryInsert<T extends DbHelperModel> {
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link DbQuery} of the query with the string part and
+     * @return {DbQuery} of the query with the string part and
      *          clauses params.
      */
     public build(): DbQuery {
@@ -134,7 +135,7 @@ export class QueryInsert<T extends DbHelperModel> {
      * @public
      * @method exec to execute the query and asynchronously retreive result.
      *
-     * @return observable to subscribe
+     * @return {Observable<QueryResult<any>>} observable to subscribe and manage results
      */
     public exec(): Observable<QueryResult<any>> {
         let observable: Observable<QueryResult<any>> | null = null;
@@ -208,13 +209,16 @@ export class QueryInsert<T extends DbHelperModel> {
 }
 
 /**
- * @public API
- * @function Insert provide an easy mean of data insertion.
+ * @public
+ * @function Insert
+ *
+ * @description
+ * This function provides an easy mean of data insertion.
  * Prefer use the save() method instead of Insert for a single entry, see
  * {@link DbHelperModel} for more informations.
  * Insert optimize multiple entry insertion with bulk mecanisme for example.
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and
+ * @param T @extends DbHelperModel a model declared with table and
  *          column annotations
  *
  * @example
@@ -244,6 +248,8 @@ export class QueryInsert<T extends DbHelperModel> {
  *      // manage error
  * });
  * ```
+ *
+ * @return {QueryInsert<T>} QueryInsert instance
  *
  * @author  Olivier Margarit
  * @since   0.1

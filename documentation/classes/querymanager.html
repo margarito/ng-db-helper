@@ -105,9 +105,12 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#batchlock" class="tsd-kind-icon">batch<wbr>Lock</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#batchsubject" class="tsd-kind-icon">batch<wbr>Subject</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#isinitializationfailed" class="tsd-kind-icon">is<wbr>Initialization<wbr>Failed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#isready" class="tsd-kind-icon">is<wbr>Ready</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#modelmigration" class="tsd-kind-icon">model<wbr>Migration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#pendingbatchdbqueries" class="tsd-kind-icon">pending<wbr>Batch<wbr>DbQueries</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#pendingdbqueries" class="tsd-kind-icon">pending<wbr>DbQueries</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#queryconnector" class="tsd-kind-icon">query<wbr>Connector</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external"><a href="querymanager.html#instance" class="tsd-kind-icon">instance</a></li>
@@ -117,10 +120,12 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#dequeuependingrequest" class="tsd-kind-icon">dequeue<wbr>Pending<wbr>Request</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querymanager.html#execbatch" class="tsd-kind-icon">exec<wbr>Batch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#executequery" class="tsd-kind-icon">execute<wbr>Query</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#oninitializationfailure" class="tsd-kind-icon">on<wbr>Initialization<wbr>Failure</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querymanager.html#onqueryconnectorready" class="tsd-kind-icon">on<wbr>Query<wbr>Connector<wbr>Ready</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querymanager.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querymanager.html#startbatch" class="tsd-kind-icon">start<wbr>Batch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-external"><a href="querymanager.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-external"><a href="querymanager.html#init" class="tsd-kind-icon">init</a></li>
 							</ul>
@@ -140,7 +145,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L104">lib/core/managers/query-manager.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L113">lib/core/managers/query-manager.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -158,12 +163,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="batchlock" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> batch<wbr>Lock</h3>
+					<div class="tsd-signature tsd-kind-icon">batch<wbr>Lock<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L72">lib/core/managers/query-manager.ts:72</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="batchsubject" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> batch<wbr>Subject</h3>
+					<div class="tsd-signature tsd-kind-icon">batch<wbr>Subject<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L74">lib/core/managers/query-manager.ts:74</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="isinitializationfailed" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> is<wbr>Initialization<wbr>Failed</h3>
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Initialization<wbr>Failed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L51">lib/core/managers/query-manager.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L57">lib/core/managers/query-manager.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -181,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Ready<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L44">lib/core/managers/query-manager.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L50">lib/core/managers/query-manager.ts:50</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -199,7 +224,7 @@
 					<div class="tsd-signature tsd-kind-icon">model<wbr>Migration<span class="tsd-signature-symbol">:</span> <a href="../interfaces/modelmigration.html" class="tsd-signature-type">ModelMigration</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L64">lib/core/managers/query-manager.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L70">lib/core/managers/query-manager.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -211,12 +236,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="pendingbatchdbqueries" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> pending<wbr>Batch<wbr>DbQueries</h3>
+					<div class="tsd-signature tsd-kind-icon">pending<wbr>Batch<wbr>DbQueries<span class="tsd-signature-symbol">:</span> <a href="pendingdbquery.html" class="tsd-signature-type">PendingDbQuery</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&lt;PendingDbQuery[]&gt;[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L43">lib/core/managers/query-manager.ts:43</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="pendingdbqueries" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> pending<wbr>DbQueries</h3>
 					<div class="tsd-signature tsd-kind-icon">pending<wbr>DbQueries<span class="tsd-signature-symbol">:</span> <a href="pendingdbquery.html" class="tsd-signature-type">PendingDbQuery</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&lt;PendingDbQuery[]&gt;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L37">lib/core/managers/query-manager.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L41">lib/core/managers/query-manager.ts:41</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -234,7 +269,7 @@
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Connector<span class="tsd-signature-symbol">:</span> <a href="../interfaces/queryconnector.html" class="tsd-signature-type">QueryConnector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L58">lib/core/managers/query-manager.ts:58</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L64">lib/core/managers/query-manager.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -252,7 +287,7 @@
 					<div class="tsd-signature tsd-kind-icon">instance<span class="tsd-signature-symbol">:</span> <a href="querymanager.html" class="tsd-signature-type">QueryManager</a><span class="tsd-signature-symbol"> =&nbsp;new QueryManager()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L30">lib/core/managers/query-manager.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L34">lib/core/managers/query-manager.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -278,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L160">lib/core/managers/query-manager.ts:160</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L190">lib/core/managers/query-manager.ts:190</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -292,6 +327,29 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="execbatch" class="tsd-anchor"></a>
+					<h3>exec<wbr>Batch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">exec<wbr>Batch<span class="tsd-signature-symbol">(</span>locker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L232">lib/core/managers/query-manager.ts:232</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>locker: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="executequery" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> execute<wbr>Query</h3>
@@ -302,7 +360,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L201">lib/core/managers/query-manager.ts:201</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L284">lib/core/managers/query-manager.ts:284</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -343,7 +401,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L150">lib/core/managers/query-manager.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L180">lib/core/managers/query-manager.ts:180</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -377,7 +435,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L117">lib/core/managers/query-manager.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L126">lib/core/managers/query-manager.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -402,7 +460,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L181">lib/core/managers/query-manager.ts:181</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L217">lib/core/managers/query-manager.ts:217</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -429,6 +487,29 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="startbatch" class="tsd-anchor"></a>
+					<h3>start<wbr>Batch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Batch<span class="tsd-signature-symbol">(</span>locker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L200">lib/core/managers/query-manager.ts:200</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>locker: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-external">
 					<a name="getinstance" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Instance</h3>
@@ -439,7 +520,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L102">lib/core/managers/query-manager.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L111">lib/core/managers/query-manager.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -466,7 +547,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/managers/query-manager.ts#L75">lib/core/managers/query-manager.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/query-manager.ts#L85">lib/core/managers/query-manager.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -514,6 +595,12 @@
 								<a href="querymanager.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="querymanager.html#batchlock" class="tsd-kind-icon">batch<wbr>Lock</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="querymanager.html#batchsubject" class="tsd-kind-icon">batch<wbr>Subject</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="querymanager.html#isinitializationfailed" class="tsd-kind-icon">is<wbr>Initialization<wbr>Failed</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
@@ -521,6 +608,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="querymanager.html#modelmigration" class="tsd-kind-icon">model<wbr>Migration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="querymanager.html#pendingbatchdbqueries" class="tsd-kind-icon">pending<wbr>Batch<wbr>DbQueries</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="querymanager.html#pendingdbqueries" class="tsd-kind-icon">pending<wbr>DbQueries</a>
@@ -534,6 +624,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="querymanager.html#dequeuependingrequest" class="tsd-kind-icon">dequeue<wbr>Pending<wbr>Request</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="querymanager.html#execbatch" class="tsd-kind-icon">exec<wbr>Batch</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="querymanager.html#executequery" class="tsd-kind-icon">execute<wbr>Query</a>
 							</li>
@@ -545,6 +638,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="querymanager.html#query" class="tsd-kind-icon">query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="querymanager.html#startbatch" class="tsd-kind-icon">start<wbr>Batch</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-external">
 								<a href="querymanager.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a>

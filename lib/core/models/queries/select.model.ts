@@ -1,3 +1,4 @@
+import { CompositeClause } from './composite-clause.model';
 import { IQueryHelper } from '../interfaces/i-query-helper.interface';
 import { IJoin } from '../interfaces/i-join.interface';
 import { QueryJoin } from './join.model';
@@ -15,12 +16,13 @@ import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
 /**
- * @private API
- * @class QuerySelect is private part of the APi.
- * For design reasons this class should not be used directly and
- * will move later. Use this class with {@link Select} function.
+ * @public
+ * @class QuerySelect
  *
- * @param T exdends DbHelperModel, a model declared with table and column annotations
+ * @description
+ * For design reasons this class should not be used directly. Use this class with {@link Select} function.
+ *
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
@@ -38,38 +40,37 @@ import { Clause } from './clause.model';
 export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
     /**
      * @private
-     * @property whereClauses is {@link ClauseGroup} instance containing
-     * where clauses
+     * @constant {string} type query type
      */
-    private type = 'SELECT';
+    private readonly type = 'SELECT';
 
     /**
-     * @property joins
+     * @private
+     * @property {Array<IJoin>} joins list of join for the query
      */
     private joins = <IJoin[]>[];
 
     /**
      * @private
-     * @property whereClauses is {@link ClauseGroup} instance containing
-     * where clauses
+     * @property {ClauseGroup} whereClauses clause group instance containing where clauses
      */
     private whereClauses: ClauseGroup;
 
     /**
      * @private
-     * @property proj is the query projection
+     * @property {Array<string>} proj is the query projection
      */
     private proj: string[];
 
     /**
      * @private
-     * @property grpBy is the group by condition of the query
+     * @property {string} grpBy is the group by condition of the query
      */
     private grpBy: string;
 
     /**
      * @private
-     * @property ordrBy order by condition for the query
+     * @property {string} ordrBy order by condition for the query
      */
     private ordrBy: string;
 
@@ -81,20 +82,32 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
 
     /**
      * @private
-     * @property page, the paginated number of the query select
+     * @property {number} page the paginated number of the query select
      */
     private page = 0;
 
+    /**
+     * @private
+     * @property {string} alias the query alias to prevent column collision
+     */
     public alias = '';
 
     /**
      * @public
      * @constructor should not be use directly, see class header
      *
-     * @param model {@link DbHelperModel} extention
+     * @param {{new(): T}} model extention
      */
-    public constructor(private model: { new(): T ; }) {}
+    public constructor(private model: {new(): T}) {}
 
+    /**
+     * @public
+     * @method copy method to copy QuerySelect
+     *
+     * @return {QuerySelect<T>} the query select copy
+     *
+     * @since 0.2
+     */
     public copy(): QuerySelect<T> {
         const q = Select(this.model).where(this.whereClauses).join(this.joins).groupBy(this.grpBy).orderBy(this.ordrBy);
         if (this.proj) {q.projection(this.proj)}
@@ -106,15 +119,23 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @method projection customize the select column of the QueryResult
      *         for performance optimization if needed.
      *
-     * @param proj the projection
+     * @param {Array<string>} proj the projection
      *
-     * @return this instance to chain query instructions
+     * @return {QuerySelect<T>} this instance to chain query instructions
      */
     public projection(proj: string[]): QuerySelect<T> {
         this.proj = proj;
         return this;
     }
 
+    /**
+     * @public
+     * @method join add query join to query select
+     *
+     * @param {IJoin|Array<IJoin>} joinQuery join query or list of join queries
+     *
+     * @return {QuerySelect<T>} the instance itself to chain operation
+     */
     public join(joinQuery: IJoin | IJoin[]): QuerySelect<T> {
         let joins;
         if (!Array.isArray(joinQuery)) {
@@ -137,13 +158,13 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
     /**
      * @public
      * @method where is the method to add clauses to the where statement of the query
-     * see {@link Clause} or {@link ClauseGroup}
+     * see {@link Clause} or {@link ClauseGroup} or {@link CompositeClause}
      *
-     * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * @param {Clause|Clause[]|CompositeClause|ClauseGroup|{[index: string]: any}} clauses  where clauses
      *
-     * @return this instance to chain query instructions
+     * @return {QuerySelect<T>} this instance to chain query instructions
      */
-    public where(clauses: Clause|Clause[]|ClauseGroup|{[index: string]: any}): QuerySelect<T> {
+    public where(clauses: Clause|Clause[]|CompositeClause|ClauseGroup|{[index: string]: any}): QuerySelect<T> {
         if (!this.whereClauses) {
             this.whereClauses = new ClauseGroup();
         }
@@ -155,9 +176,9 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @public
      * @method groupBy add group by instructions to the query
      *
-     * @param group string whith the column to group by
+     * @param {string} group string whith the column to group by
      *
-     * @return this instance to chain query instructions
+     * @return {QuerySelect<T>} this instance to chain query instructions
      */
     public groupBy(group: string): QuerySelect<T> {
         this.grpBy = group;
@@ -168,9 +189,9 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @public
      * @method orderBy add order by instructions to the query
      *
-     * @param order string whith the column to order by
+     * @param {string} order string whith the column to order by
      *
-     * @return this instance to chain query instructions
+     * @return {QuerySelect<T>} this instance to chain query instructions
      */
     public orderBy(order: string): QuerySelect<T> {
         this.ordrBy = order;
@@ -181,9 +202,9 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @public
      * @method setPage set the page result for pagination
      *
-     * @param page page number of the result
+     * @param {number} page page number of the result
      *
-     * @return this instance to chain query instructions
+     * @return {QuerySelect<T>} this instance to chain query instructions
      */
     public setPage(page: number): QuerySelect<T> {
         this.page = page;
@@ -194,15 +215,21 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @public
      * @method setSize set the size of the page result for pagination
      *
-     * @param size page size number of the result
+     * @param {number} size page size number of the result
      *
-     * @return this instance to chain query instructions
+     * @return {QuerySelect<T>} this instance to chain query instructions
      */
     public setSize(size: number): QuerySelect<T> {
         this.size = size;
         return this;
     }
 
+    /**
+     * @public
+     * @method getProjectedTable get virtual table representing the result table expected
+     *
+     * @return {DbTable} the virtual table
+     */
     public getProjectedTable(): DbTable {
         const srcTable = ModelManager.getInstance().getModel(this.model);
         const table = new DbTable();
@@ -257,6 +284,12 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
         return table;
     }
 
+    /**
+     * @private
+     * @method getJoinProjection get the projection of join query
+     *
+     * @return {string} the projection
+     */
     private getJoinProjection(): string {
         let joinProjection = '';
         if (this.joins) {
@@ -276,7 +309,7 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link DbQuery} of the query with the string part and
+     * @return {DbQuery} of the query with the string part and
      *          clauses params.
      */
     public build(): DbQuery {
@@ -315,7 +348,7 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
      * @public
      * @method exec to execute the query and asynchronously retreive result.
      *
-     * @return observable to subscribe
+     * @return {Observable<QueryResult<T>>} observable to subscribe and retrieve typed result
      */
     public exec(): Observable<QueryResult<T>> {
         return QueryManager.getInstance().query(this.build()).map((qr: QueryResult<any>) => {
@@ -323,17 +356,29 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
         });
     }
 
+    /**
+     * @public
+     * @method exec to execute the query and asynchronously retreive result.
+     *
+     * @return {Observable<QueryResult<any>>} observable to subscribe and retrieve result
+     *
+     * @since 0.2
+     */
     public execRaw(): Observable<QueryResult<any>> {
         return QueryManager.getInstance().query(this.build());
     }
 }
 
 /**
- * @public API
- * @function Select an helper to select models inherited from {@link DbHelperModel}
+ * @public
+ *
+ * @function Select
+ *
+ * @description
+ * This function is an helper to select models inherited from {@link DbHelperModel}
  * from the database
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
@@ -344,6 +389,8 @@ export class QuerySelect<T extends DbHelperModel> implements IQueryHelper {
  *      // do something with the error...
  * });
  * ```
+ *
+ * @return {QuerySelect<T>} the new query select instance.
  *
  * @author  Olivier Margarit
  * @since   0.1

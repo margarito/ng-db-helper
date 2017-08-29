@@ -1,6 +1,11 @@
 import { ColumnConfig } from '../../decorators/configurator/column.configurator';
+
 /**
- * @class DbColumn extends {@link ColumnConfig} is a column model
+ * @public
+ * @class DbColumn
+ *
+ * @description
+ * This class is a column model
  * to help model migration to do his soup
  *
  * @author  Olivier Margarit
@@ -8,55 +13,84 @@ import { ColumnConfig } from '../../decorators/configurator/column.configurator'
  */
 export class DbColumn {
     /**
-     * @property name, the optional column name, if not set, the column take
+     * @public
+     * @property {string} name, the optional column name, if not set, the column take
      *           the field name as column name
      */
     public name: string
 
     /**
-     * @property field
+     * @public
+     * @property {string} field field name form the declared model
      */
     public field: string;
 
     /**
-     * @property primaryKey, define the column as primary key of the table,
+     * @public
+     * @property {boolean} primaryKey define the column as primary key of the table,
      *           the default value is false
      */
     public primaryKey = false;
 
     /**
-     * @property autoIncrement, define if the column value is auto incremented
+     * @public
+     * @property {boolean} autoIncrement define if the column value is auto incremented
      *           default value is false
      */
     public autoIncrement = false;
 
     /**
-     * @property unique, define if column value should be unique. Default value
+     * @public
+     * @property {boolean} unique define if column value should be unique. Default value
      *           is false
      */
     public unique = false;
 
     /**
-     * @property indexed, define if column value should be indexed. Default value
+     * @public
+     * @property {boolean} indexed define if column value should be indexed. Default value
      *           is false
      */
     public indexed = false;
 
     /**
-     * @property type, define type of the column, type must be compatible with
+     * @public
+     * @property {string} type define type of the column, type must be compatible with
      *           the field type plus the sqlite manged type
      */
     public type = 'string';
 
+    /**
+     * @public
+     * @property {string} foreignTable foreign table name
+     */
     public foreignTable: string|null = null;
 
+    /**
+     * @public
+     * @property {string} foreignKey foreign key linked to current key
+     */
     public foreignKey: string|null = null;
 
+    /**
+     * @public
+     * @property {string} foreignField field name of the foreign model
+     */
     public foreignField: string|null = null;
 
+    /**
+     * @public
+     * @property {any} defaultValue the default value of the column
+     */
     public defaultValue: any = undefined;
 
 
+    /**
+     * @public
+     * @constructor Create column instance
+     *
+     * @param {string} name column name
+     */
     public constructor(name?: string) {
         if (name) {
             this.name = name;
@@ -64,6 +98,14 @@ export class DbColumn {
         }
     }
 
+    /**
+     * @public
+     * @method configure configure the column from configurator model
+     *
+     * @param {ColumnConfig} config the configurator object
+     *
+     * @since 0.2
+     */
     public configure(config: ColumnConfig) {
         if (config.name) {this.name = config.name}
         if (config.type) {this.type = config.type}
@@ -73,6 +115,16 @@ export class DbColumn {
         if (config.autoIncrement !== undefined) {this.autoIncrement = config.autoIncrement}
     }
 
+    /**
+     * @public
+     * @method fromAlias get aliased column
+     *
+     * @param {string} alias the alias label
+     *
+     * @return {DbColumn} the aliased column
+     *
+     * @since 0.2
+     */
     public fromAlias(alias: string): DbColumn {
         const aliasColumn = new DbColumn(alias + '.' + this.name);
         aliasColumn.field = alias + '.' + this.field
@@ -82,6 +134,5 @@ export class DbColumn {
         aliasColumn.indexed = this.indexed;
         aliasColumn.autoIncrement = this.autoIncrement;
         return aliasColumn;
-
     }
 }

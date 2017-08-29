@@ -4,7 +4,10 @@ import { Observable } from 'rxjs/Observable';
 
 /**
  * @public
- * @function QueryBatch is an helper to fire many queries. It is usefull to popullate datas
+ * @function QueryBatch
+ *
+ * @description
+ * This function is an helper to fire many queries. It is usefull to popullate datas
  *
  * @param batchFn function that contains queries
  *
@@ -20,6 +23,8 @@ import { Observable } from 'rxjs/Observable';
  *      // manage batch error
  *  });
  * ```
+ *
+ * @return {Observable<QueryResult<any>>} Observable to subscribe and chain with success or failure functions
  *
  * @author Olivier Margarit
  * @since 0.2

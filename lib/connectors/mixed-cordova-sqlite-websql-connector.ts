@@ -12,8 +12,10 @@ import { DataModel } from '../core/models/structure/data-model.model';
 import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
 
 /**
- * @class MixedCordovaSqliteWebsqlConnector is a default connector
- * for rdb module see {@link NgDbHelperModuleConfig}
+ * @class MixedCordovaSqliteWebsqlConnector
+ *
+ * @description
+ * is a default connector for rdb module see {@link NgDbHelperModuleConfig}
  * This class provides config key to add copy informations.
  *
  * This default connector allow query to database provided with cordova-sqlite-storage or Websql
@@ -46,30 +48,30 @@ import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirem
 export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelMigration {
     /**
      * @private
-     * @property ready, flag updated with connector state to indicate that connector can query
+     * @property {boolean} ready flag updated with connector state to indicate that connector can query
      */
     private ready = false;
 
     /**
      * @private
-     * @property onReadyObserver, observer of registered listener on connector ready update
+     * @property {Observer<boolean>} onReadyObserver observer of registered listener on connector ready update
      */
     private onReadyObserver: Observer<boolean>;
 
     /**
      * @private
-     * @property connector, real connector choose with logic based on platform
+     * @property {QueryConnector & ModelMigration} connector real connector choose with logic based on platform
      */
     private connector: QueryConnector & ModelMigration;
 
     /**
+     * @public
      * @constructor
-     * @throws UnsatisfiedRequirementError, thrown if cordova-plugin-device is missing and needed
+     * @throws {UnsatisfiedRequirementError}, thrown if cordova-plugin-device is missing and needed
      * connector start logic after 'deviceready' signal firing if cordova is present else directly start,
      * assuming that in this case platform should support Websql.
      *
-     * @param config    configuration of the connector, see {@link CordovaSqliteConnectorConfiguration}
-     *                  and connector documentation header.
+     * @param {CordovaSqliteConnectorConfiguration} config    configuration of the connector
      */
     public constructor(private config: CordovaSqliteConnectorConfiguration) {
         if ((window as {[index: string]: any}).cordova) {
@@ -124,18 +126,27 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
 
     /**
      * @public
-     * @method query connector method to fire query, query is delegate to real connector
+     * @method query connector method to fire query
      *
-     * @param dbQuery   DbQuery object containing query and query params.
-     *                  see {@link DbQuery}
+     * @param {DbQuery} dbQuery   DbQuery object containing query and query params.
+     *                            see {@link DbQuery}
      *
-     * @return          Obsevable   passing {@link QueryResult<any>} on query success
-     *                              passing {@link QueryError} on query error
+     * @return {Observable<QueryResult<any>>}   passing {@link QueryResult<any>} on query success
+     *                                          passing {@link QueryError} on query error
      */
     public query(dbQuery: DbQuery): Observable<QueryResult<any>> {
         return this.connector.query(dbQuery);
     }
 
+    /**
+     * @public
+     * @method queryBatch make multiple queries in an unique transaction
+     *
+     * @param {DbQuery} dbQueries multiple queries to run in the same transaction
+     *
+     * @return {Observable<QueryResult<any>>}   passing {@link QueryResult<any>} on query success
+     *                                          passing {@link QueryError} on query error
+     */
     public queryBatch(dbQueries: DbQuery[]): Observable<QueryResult<any>> {
         return this.connector.queryBatch(dbQueries);
     }
@@ -145,7 +156,7 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
      * @method isReady to check if module is ready, if not, caller should
      * subscribe to {@link MixedCordovaSqliteWebsqlConnector.onReady}
      *
-     * @return should be true if connector can query else false
+     * @return {boolean} should be true if connector can query else false
      */
     public isReady(): boolean {
         return this.ready;
@@ -157,8 +168,8 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
      * if connector is ready, observable is immediatly called, else all check will
      * be done after 'deviceready' signal
      *
-     * @return Observable   passing true if connector is ready
-     *                      passing false if connector will never be ready
+     * @return {Observable<boolean>}    passing true if connector is ready
+     *                                  passing false if connector will never be ready
      */
     public onReady(): Observable<boolean> {
         return Observable.create((observer: Observer<boolean>) => {
@@ -176,7 +187,7 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
      * @method getDbVersion called to check db version, should be called only if connector
      * is ready.
      *
-     * @return Observable   passing string version after version is checked
+     * @return {Observable<string>}   passing string version after version is checked
      */
     public getDbVersion(): Observable<string> {
         return this.connector.getDbVersion();
@@ -187,9 +198,9 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
      * @method initModel is implemented method from ModelMigration, see {@link ModelMigration} to understand usage.
      * method directly delegated to real connector
      *
-     * @param dataModel {@link DataModel} generated with model annotations
+     * @param {DataModel} dataModel data model generated with model annotations
      *
-     * @return Observable resolved on initModel finish
+     * @return {Observable<any>} resolved on initModel finish
      */
     public initModel(dataModel: DataModel): Observable<any> {
         return this.connector.initModel(dataModel);
@@ -200,10 +211,10 @@ export class MixedCordovaSqliteWebsqlConnector implements QueryConnector, ModelM
      * @method upgradeModel is implemented method from ModelMigration, see {@link ModelMigration} to understand usage.
      * method directly delegated to real connector
      *
-     * @param dataModel     {@link DataModel} generated with model annotations
-     * @param oldVersion    old model version
+     * @param {DataModel} dataModel     data model generated with model annotations
+     * @param {string} oldVersion    old model version
      *
-     * @return Observable resolved on upgradeModel finish
+     * @return {Observable<any>} resolved on upgradeModel finish
      */
     public upgradeModel(dataModel: DataModel, oldVersion: string): Observable<any> {
         return this.connector.upgradeModel(dataModel, oldVersion);

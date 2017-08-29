@@ -71,7 +71,7 @@
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
 						<dd><p>WebsqlConnector is a default connector
-								for rdb module see {@link NgDbHelperModuleConfiguration}
+								for rdb module see <a href="ngdbhelpermoduleconfig.html">NgDbHelperModuleConfig</a>
 							This class provides config key to add copy informations.</p>
 							<p>This default connector allow query to database provided with Websql
 								use <a href="websqlconnectorconfiguration.html">WebsqlConnectorConfiguration</a> to override default migrations logics.
@@ -87,7 +87,7 @@ connectorConfig.dbName = app.sqlite;
 <span class="hljs-comment">// add config to connector</span>
 <span class="hljs-keyword">const</span> connector = WebsqlConnector(connectorConfig);
 <span class="hljs-comment">// create module config</span>
-<span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfiguration();
+<span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfig();
 config.queryConnector = connector;
 config.modelMigration = connector;
 config.version = <span class="hljs-string">'1'</span>;
@@ -150,6 +150,7 @@ config.version = <span class="hljs-string">'1'</span>;
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="websqlconnector.html#isready" class="tsd-kind-icon">is<wbr>Ready</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="websqlconnector.html#onready" class="tsd-kind-icon">on<wbr>Ready</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="websqlconnector.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="websqlconnector.html#querybatch" class="tsd-kind-icon">query<wbr>Batch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="websqlconnector.html#upgrademodel" class="tsd-kind-icon">upgrade<wbr>Model</a></li>
 							</ul>
 						</section>
@@ -168,7 +169,7 @@ config.version = <span class="hljs-string">'1'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L66">lib/connectors/websql-connector.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L68">lib/connectors/websql-connector.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -206,7 +207,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="websqlconnectorconfiguration.html" class="tsd-signature-type">WebsqlConnectorConfiguration</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L76">lib/connectors/websql-connector.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L78">lib/connectors/websql-connector.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,7 +223,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">db<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L55">lib/connectors/websql-connector.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L57">lib/connectors/websql-connector.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -239,7 +240,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">ready<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L49">lib/connectors/websql-connector.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L51">lib/connectors/websql-connector.ts:51</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -263,7 +264,7 @@ config.version = <span class="hljs-string">'1'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L61">lib/connectors/websql-connector.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L63">lib/connectors/websql-connector.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -291,7 +292,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#getdbversion">getDbVersion</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L148">lib/connectors/websql-connector.ts:148</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L186">lib/connectors/websql-connector.ts:186</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -318,7 +319,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/modelmigration.html">ModelMigration</a>.<a href="../interfaces/modelmigration.html#initmodel">initModel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L168">lib/connectors/websql-connector.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L206">lib/connectors/websql-connector.ts:206</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -354,7 +355,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#isready">isReady</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L123">lib/connectors/websql-connector.ts:123</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L161">lib/connectors/websql-connector.ts:161</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -381,7 +382,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#onready">onReady</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L134">lib/connectors/websql-connector.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L172">lib/connectors/websql-connector.ts:172</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -408,7 +409,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#query">query</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L93">lib/connectors/websql-connector.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L95">lib/connectors/websql-connector.ts:95</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -435,6 +436,30 @@ config.version = <span class="hljs-string">'1'</span>;
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="querybatch" class="tsd-anchor"></a>
+					<h3>query<wbr>Batch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Batch<span class="tsd-signature-symbol">(</span>dbQuries<span class="tsd-signature-symbol">: </span><a href="dbquery.html" class="tsd-signature-type">DbQuery</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#querybatch">queryBatch</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L124">lib/connectors/websql-connector.ts:124</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dbQuries: <a href="dbquery.html" class="tsd-signature-type">DbQuery</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="upgrademodel" class="tsd-anchor"></a>
 					<h3>upgrade<wbr>Model</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
@@ -445,7 +470,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/modelmigration.html">ModelMigration</a>.<a href="../interfaces/modelmigration.html#upgrademodel">upgradeModel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/websql-connector.ts#L182">lib/connectors/websql-connector.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/websql-connector.ts#L220">lib/connectors/websql-connector.ts:220</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -522,6 +547,9 @@ config.version = <span class="hljs-string">'1'</span>;
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="websqlconnector.html#query" class="tsd-kind-icon">query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="websqlconnector.html#querybatch" class="tsd-kind-icon">query<wbr>Batch</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="websqlconnector.html#upgrademodel" class="tsd-kind-icon">upgrade<wbr>Model</a>

@@ -126,11 +126,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querycount.html#grpby" class="tsd-kind-icon">grp<wbr>By</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querycount.html#model" class="tsd-kind-icon">model</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querycount.html#proj" class="tsd-kind-icon">proj</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querycount.html#type" class="tsd-kind-icon">type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querycount.html#whereclauses" class="tsd-kind-icon">where<wbr>Clauses</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="querycount.html#queryselect" class="tsd-kind-icon">query<wbr>Select</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
@@ -138,9 +134,6 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querycount.html#build" class="tsd-kind-icon">build</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querycount.html#exec" class="tsd-kind-icon">exec</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querycount.html#groupby" class="tsd-kind-icon">group<wbr>By</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querycount.html#projection" class="tsd-kind-icon">projection</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="querycount.html#where" class="tsd-kind-icon">where</a></li>
 							</ul>
 						</section>
 					</div>
@@ -152,48 +145,19 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Count<span class="tsd-signature-symbol">(</span>model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querycount.html" class="tsd-signature-type">QueryCount</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Count<span class="tsd-signature-symbol">(</span>querySelect<span class="tsd-signature-symbol">: </span><a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querycount.html" class="tsd-signature-type">QueryCount</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L56">lib/core/models/queries/count.model.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L34">lib/core/models/queries/count.model.ts:34</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>constructor</dt>
-									<dd><p>should not be use directly, see class header</p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>model: <span class="tsd-signature-type">object</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>extention</p>
-										</div>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
-											<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-type-literal tsd-is-external tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon">new __type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<aside class="tsd-sources">
-														<ul>
-															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L65">lib/core/models/queries/count.model.ts:65</a></li>
-														</ul>
-													</aside>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
-												</li>
-										</ul>        </li>
-									</ul>
+									<h5>querySelect: <a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="querycount.html" class="tsd-signature-type">QueryCount</a></h4>
@@ -204,108 +168,14 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="grpby" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> grp<wbr>By</h3>
-					<div class="tsd-signature tsd-kind-icon">grp<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="queryselect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> query<wbr>Select</h3>
+					<div class="tsd-signature tsd-kind-icon">query<wbr>Select<span class="tsd-signature-symbol">:</span> <a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L56">lib/core/models/queries/count.model.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L36">lib/core/models/queries/count.model.ts:36</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>grpBy is the group by condition of the query</p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="model" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> model</h3>
-					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L65">lib/core/models/queries/count.model.ts:65</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>extention</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
-								<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-type-literal tsd-is-external tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon">new __type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<aside class="tsd-sources">
-											<ul>
-												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L65">lib/core/models/queries/count.model.ts:65</a></li>
-											</ul>
-										</aside>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
-									</li>
-							</ul>        </li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="proj" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> proj</h3>
-					<div class="tsd-signature tsd-kind-icon">proj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L50">lib/core/models/queries/count.model.ts:50</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>proj is the query projection</p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;SELECT&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L37">lib/core/models/queries/count.model.ts:37</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>type the type of statement, should not be modified</p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="whereclauses" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> where<wbr>Clauses</h3>
-					<div class="tsd-signature tsd-kind-icon">where<wbr>Clauses<span class="tsd-signature-symbol">:</span> <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L44">lib/core/models/queries/count.model.ts:44</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>whereClauses is <a href="clausegroup.html">ClauseGroup</a> instance containing
-								where clauses</p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
@@ -320,7 +190,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L118">lib/core/models/queries/count.model.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L45">lib/core/models/queries/count.model.ts:45</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -346,7 +216,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L145">lib/core/models/queries/count.model.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L55">lib/core/models/queries/count.model.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -358,110 +228,6 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>observable to subscribe</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="groupby" class="tsd-anchor"></a>
-					<h3>group<wbr>By</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">group<wbr>By<span class="tsd-signature-symbol">(</span>group<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querycount.html" class="tsd-signature-type">QueryCount</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L106">lib/core/models/queries/count.model.ts:106</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>method</dt>
-									<dd><p>groupBy add group by instructions to the query</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>group: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>string whith the column to group by</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="querycount.html" class="tsd-signature-type">QueryCount</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>this instance to chain query instructions</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="projection" class="tsd-anchor"></a>
-					<h3>projection</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">projection<span class="tsd-signature-symbol">(</span>proj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querycount.html" class="tsd-signature-type">QueryCount</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L76">lib/core/models/queries/count.model.ts:76</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>method</dt>
-									<dd><p>projection set the projection to the query</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>proj: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>string list of column name that shoul be in the
-										result item of th query</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="querycount.html" class="tsd-signature-type">QueryCount</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>this instance to chain query instructions</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="where" class="tsd-anchor"></a>
-					<h3>where</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querycount.html" class="tsd-signature-type">QueryCount</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/count.model.ts#L90">lib/core/models/queries/count.model.ts:90</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>method</dt>
-									<dd><p>where is the method to add clauses to the where statement of the query
-										see <a href="clause.html">Clause</a> or <a href="clausegroup.html">ClauseGroup</a></p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>ClauseGroup, Clause, Clause list of dictionnary of clauses</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="querycount.html" class="tsd-signature-type">QueryCount</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>this instance to chain query instructions</p>
 						</li>
 					</ul>
 				</section>
@@ -486,34 +252,13 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 								<a href="querycount.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-								<a href="querycount.html#grpby" class="tsd-kind-icon">grp<wbr>By</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-								<a href="querycount.html#model" class="tsd-kind-icon">model</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-								<a href="querycount.html#proj" class="tsd-kind-icon">proj</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-								<a href="querycount.html#type" class="tsd-kind-icon">type</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-								<a href="querycount.html#whereclauses" class="tsd-kind-icon">where<wbr>Clauses</a>
+								<a href="querycount.html#queryselect" class="tsd-kind-icon">query<wbr>Select</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="querycount.html#build" class="tsd-kind-icon">build</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="querycount.html#exec" class="tsd-kind-icon">exec</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="querycount.html#groupby" class="tsd-kind-icon">group<wbr>By</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="querycount.html#projection" class="tsd-kind-icon">projection</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="querycount.html#where" class="tsd-kind-icon">where</a>
 							</li>
 						</ul>
 					</li>

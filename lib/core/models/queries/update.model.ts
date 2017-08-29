@@ -1,3 +1,4 @@
+import { CompositeClause } from './composite-clause.model';
 import { QueryError } from '../../errors/query.error';
 import { QueryPart } from './query-part.model';
 import { DbHelperModel } from '../db-helper-model.model';
@@ -12,12 +13,13 @@ import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
 /**
- * @private API
- * @class QueryUpdate is private part of the APi.
- * For design reasons this class should not be used directly and
- * will move later. Use this class with {@link Update} function.
+ * @public
+ * @class QueryUpdate
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * @description
+ * For design reasons this class should not be used directly. Use this class with {@link Update} function.
+ *
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
@@ -35,20 +37,20 @@ import { Clause } from './clause.model';
 export class QueryUpdate<T extends DbHelperModel> {
     /**
      * @private
-     * @property type the type of statement, should not be modified
+     * @constant {string} type the type of statement, should not be modified
      */
-    private type = 'UPDATE';
+    private readonly type = 'UPDATE';
 
     /**
      * @private
-     * @property whereClauses is {@link ClauseGroup} instance containing
+     * @property {ClauseGroup} whereClauses clause group instance containing
      * where clauses
      */
     private whereClauses: ClauseGroup;
 
     /**
      * @private
-     * @property valueSet, set of values where key are column name and value,
+     * @property {{[index: string]: any}} valueSet set of values where key are column name and value,
      * the value to update.
      */
     private valueSet: {[index: string]: any};
@@ -57,20 +59,20 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @public
      * @constructor should not be use directly, see class header
      *
-     * @param model {@link DbHelperModel} extention
+     * @param {T | {new (): T}} model model instance or model
      */
-    public constructor(private model: T | { new (): T}) {}
+    public constructor(private model: T | {new (): T}) {}
 
     /**
      * @public
      * @method where is the method to add clauses to the where statement of the query
      * see {@link Clause} or {@link ClauseGroup}
      *
-     * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * @param {Clause|Clause[]|CompositeClause|ClauseGroup|{[index: string]: any}} clauses  where clauses
      *
-     * @return this instance to chain query instructions
+     * @return {QueryUpdate<T>} this instance to chain query instructions
      */
-    public where(clauses: Clause|Clause[]|ClauseGroup|{[index: string]: any}): QueryUpdate<T> {
+    public where(clauses: Clause|Clause[]|CompositeClause|ClauseGroup|{[index: string]: any}): QueryUpdate<T> {
         if (!this.whereClauses) {
             this.whereClauses = new ClauseGroup();
         }
@@ -86,9 +88,9 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @throws {@link QueryError} on set on single model update. set method is for updating
      *          many entries of a specific table target from its class.
      *
-     * @param clauses  ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * @param {{[index: string]: any}} dict map of column and values to update.
      *
-     * @return this instance to chain query instructions
+     * @return {QueryUpdate<T>} this instance to chain query instructions
      */
     public set(dict: {[index: string]: any}): QueryUpdate<T> {
         if ((this.model as {[index: string]: any}).$$isDbHelperModel) {
@@ -112,7 +114,7 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @private
      * @method getValuesFromModel build values part of the query from the model.
      *
-     * @return {@link QueryPart} the values query part of update statement
+     * @return {QueryPart} the values query part of update statement
      */
     private getValuesFromModel(): QueryPart {
         const table = ModelManager.getInstance().getModel(this.model);
@@ -148,7 +150,7 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @private
      * @method getValuesFromSet build values part of the query from the set dict.
      *
-     * @return {@link QueryPart} the values query part of update statement
+     * @return {QueryPart} the values query part of update statement
      */
     private getValuesFromSet(): QueryPart {
         const queryPart = new QueryPart();
@@ -165,7 +167,7 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link DbQuery} of the query with the string part and
+     * @return {DbQuery} of the query with the string part and
      *          clauses params.
      */
     public build(): DbQuery {
@@ -213,7 +215,7 @@ export class QueryUpdate<T extends DbHelperModel> {
      * @public
      * @method exec to execute the query and asynchronously retreive result.
      *
-     * @return observable to subscribe
+     * @return {Observable<QueryResult<any>>} observable to subscribe
      */
     public exec(): Observable<QueryResult<any>> {
         return QueryManager.getInstance().query(this.build());
@@ -221,11 +223,14 @@ export class QueryUpdate<T extends DbHelperModel> {
 }
 
 /**
- * @public API
- * @function Update is an helper to update models.
+ * @public
+ * @function Update
+ *
+ * @description
+ * This function is an helper to update models.
  * For a single model prefer use {@link DbHelperModel.save}
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
@@ -236,6 +241,8 @@ export class QueryUpdate<T extends DbHelperModel> {
  *      // do something with the error...
  * });
  * ```
+ *
+ * @return {QueryUpdate} query update instance
  *
  * @author  Olivier Margarit
  * @since   0.1

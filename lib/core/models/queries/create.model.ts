@@ -1,9 +1,12 @@
 import { DbTable } from '../structure/db-table.model';
 
 /**
- * @private
- * @class QueryCreate is designed to be used behind {@link Create} function
- * this class is an helper to easily create a table from the datamodel
+ * @public
+ * @class QueryCreate
+ *
+ * @description
+ * this class is designed to be used behind {@link Create} function
+ * this class is an helper to easily create a table from the data model generated with the annotations
  *
  * @example
  * ```typescript
@@ -22,7 +25,7 @@ export class QueryCreate {
      * @public
      * @constructor should not be called directly for API design purpose
      *
-     * @param table {@link DbTable} object with a single model infomations
+     * @param {DbTable} table object with a single model infomations
      *              generated with table and column annotations
      */
     public constructor(private table: DbTable) {}
@@ -31,7 +34,7 @@ export class QueryCreate {
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link DbQuery} of the query with the string part and
+     * @return {DbQuery} of the query with the string part and
      *          clauses params.
      */
     public build(): string {
@@ -48,9 +51,12 @@ export class QueryCreate {
 }
 
 /**
- * @public API
- * @function Create is an helper to create table
- * This function is designed to help connectors to manage the datamodel
+ * @public
+ * @function Create
+ *
+ * @description
+ * this function is an helper to create table
+ * This function is designed to help connectors to manage data model creation
  *
  * @example
  * ```typescript
@@ -60,6 +66,8 @@ export class QueryCreate {
  *      // do something with the error
  * });
  * ```
+ *
+ * @return {QueryCreate} instance
  *
  * @author  Olivier Margarit
  * @since   0.1

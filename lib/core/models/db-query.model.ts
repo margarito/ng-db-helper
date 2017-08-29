@@ -1,7 +1,11 @@
 import { QueryPart } from './queries/query-part.model';
 
 /**
- * @class DbQuery is a model to share query informations specifically to
+ * @public
+ * @class DbQuery
+ *
+ * @description
+ * This class is a model to share query informations specifically to
  * the query connector.
  *
  * @author  Olivier Margarit
@@ -9,34 +13,40 @@ import { QueryPart } from './queries/query-part.model';
  */
 export class DbQuery {
     /**
-     * @property page, the page number to retrieve for select queries
+     * @public
+     * @property {number} page the page number to retrieve for select queries
      */
     page = 0;
 
     /**
-     * @property params, list of params of the query, see the sqlite
+     * @public
+     * @property {Array<any>} params list of params of the query, see the sqlite
      * documenetations to learn about query parameters
      */
     params = <any[]>[];
 
     /**
-     * @property query, the query string
+     * @public
+     * @property {string} query the query string
      */
     query = '';
 
     /**
-     * @property size, the number of result to retrieve per page
+     * @public
+     * @property {number} size the number of result to retrieve per page
      * on select statement
      */
     size = 1000;
 
     /**
-     * @property table, the table name of the main query target
+     * @public
+     * @property {string} table the table name of the main query target
      */
     table: string;
 
     /**
-     * @property type, the type of query, ie SELECT, INSERT, UPDATE, DELETE
+     * @public
+     * @property {string} type the type of query, ie SELECT, INSERT, UPDATE, DELETE
      */
     type: string;
 
@@ -45,9 +55,9 @@ export class DbQuery {
      * @method append is a part of private API.
      * this method is used to build query by appending part of it
      *
-     * @param queryPart the {@link QueryPart}
+     * @param {QueryPart} queryPart query part to append
      *
-     * @return the db query instance to chain part appending
+     * @return {DbQuery} the db query instance to chain part appending
      */
     public append(queryPart: QueryPart): DbQuery {
         this.query = this.query.trim() + ' ' + queryPart.content.trim();

@@ -4,9 +4,12 @@ import { QueryResult } from './query-result.interface';
 import { DbQuery } from '../models/db-query.model';
 
 /**
- * @interface QueryConnector is an interface allowing to customize connector
- * This interface allow to switch between rdb solution like cordova-sqlite-storage
- * or Websql.
+ * @public
+ * @interface QueryConnector
+ *
+ * @description
+ * This interface allow to customize connector
+ * It switch between rdb solution like cordova-sqlite-storage or Websql.
  * The purpose is to be able to switch platform without modifying any line of the application code.
  *
  * @author  Olivier Margarit
@@ -16,21 +19,30 @@ export interface QueryConnector {
     /**
      * @method query connector method to fire query
      *
-     * @param dbQuery   DbQuery object containing query and query params.
-     *                  see {@link DbQuery}
+     * @param {DbQuery} dbQuery     DbQuery object containing query and query params.
+     *                              @see {DbQuery}
      *
-     * @return          Obsevable   passing {@link QueryResult<any>} on query success
+     * @return {Obsevable<any>}     passing {@link QueryResult<any>} on query success
      *                              passing {@link QueryError} on query error
      */
     query(dbQuery: DbQuery): Observable<QueryResult<any>>;
 
+    /**
+     * @public
+     * @method queryBatch connector method to fire many queries in a single transaction
+     *
+     * @param {DbQuery} dbQueries   DbQuery object containing query and query params.
+     *
+     * @return {Obsevable<QueryResult<any>>}    passing {@link QueryResult<any>} on query success
+     *                                          passing {@link QueryError} on query error
+     */
     queryBatch(dbQueries: DbQuery[]): Observable<QueryResult<any>>;
 
     /**
      * @method isReady to check if module is ready, if not, caller should
      * subscribe to {@link QueryConnector.onReady}
      *
-     * @return should be true if connector can query else false
+     * @return {boolean} should be true if connector can query else false
      */
     isReady(): boolean;
 
@@ -39,8 +51,8 @@ export interface QueryConnector {
      * if connector is ready, if QueryConnector isReady or not this should be
      * a permanent state. The engine never resubscribe in his instance lifecycle.
      *
-     * @return Observable   passing true if connector is ready
-     *                      passing false if connector will never be ready
+     * @return {Observable<boolean>}    passing true if connector is ready
+     *                                  passing false if connector will never be ready
      */
     onReady(): Observable<boolean>;
 
@@ -48,7 +60,7 @@ export interface QueryConnector {
      * @method getDbVersion called to check db version, should be called only if connector
      * is ready. The rdb may need a query so the call is async.
      *
-     * @return Observable   passing string version after version is checked
+     * @return {Observable<string>}     passing string version after version is checked
      */
     getDbVersion(): Observable<string>;
 }

@@ -6,18 +6,22 @@ import { ColumnConfig } from './configurator/column.configurator';
 import { Clause } from './../models/queries/clause.model';
 
 /**
- * Column annotation to add on class property that should use {@link Table} annotation.
+ * @public
+ * @function Column
+ *
+ * @description
+ * annotation factory to add on class property that should use {@link Table} annotation.
  * class using this annotation must extends {@link DbHelperModel}.
  *
  * @example
  * ```typescript
- * @Table
+ * @Table()
  * export class Todo extends DbHelperModel {
  *
- *      @Column({primaryKey: true, autoIncremented: tru, type: 'integer'})
+ *      @PrimaryKey({autoIncremented: true})
  *      public id: number
  *
- *      @Column
+ *      @Column()
  *      public name: string;
  *
  *      @Column({type: 'long'})
@@ -25,13 +29,24 @@ import { Clause } from './../models/queries/clause.model';
  * }
  * ```
  *
- * @param config, {@link ColumnConfig} is column configuration, informations are used to
+ * @template T @extends DbHelperModel the target model
+ *
+ * @param {ColumConfig} config is column configuration, informations are used to
  *          build DataModel.
+ *
+ * @return {Function} the annotation
  *
  * @author  Olivier Margarit
  * @since   0.1
  */
 export function Column<T extends DbHelperModel>(config?: ColumnConfig): any {
+
+    /**
+     * @function
+     *
+     * @description
+     * the annotation returned with the specific configuration.
+     */
     return (target: T, key: string) => {
         const column = new DbColumn(key);
 
@@ -52,6 +67,10 @@ export function Column<T extends DbHelperModel>(config?: ColumnConfig): any {
             column.defaultValue = descriptor.value;
         }
 
+        /**
+         * @define
+         * redefine property to set and get value from the shadow model
+         */
         Object.defineProperty(target.constructor.prototype, key, {
             get: function () {
                 return this.$$shadow[column.name].val;

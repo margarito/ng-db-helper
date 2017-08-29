@@ -5,8 +5,11 @@ import { Clause } from './clause.model';
 import { IClause } from '../interfaces/i-clause.interface';
 
 /**
- * @public API
- * @class ClauseGroup is a group of clause computed at the same
+ * @public
+ * @class ClauseGroup
+ *
+ * @description
+ * is a group of clause computed at the same
  * level. Clause group are used for where statement of Select, Update
  * and Delete statement.
  *
@@ -37,18 +40,23 @@ import { IClause } from '../interfaces/i-clause.interface';
  * ```
  *
  * @author  Olivier Margarit
+ *
  * @since   0.1
  */
 export class ClauseGroup {
+    /**
+     * @private
+     * @property {Array<IClause>} clauses array of clause to append in the same group
+     */
     private clauses = <IClause[]>[];
 
     /**
      * @public
      * @constructor could take same parameters as add
      *
-     * @param clauses ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * @param {ClauseGroup|Clause|Clause[]|CompositeClause|{[index: string]: any}} clauses clauses to add to the group
      */
-    public constructor(clauses?: ClauseGroup|Clause|Clause[]|{[index: string]: any}) {
+    public constructor(clauses?: ClauseGroup|Clause|Clause[]|CompositeClause|{[index: string]: any}) {
         if (clauses) {
             this.add(clauses);
         }
@@ -71,9 +79,9 @@ export class ClauseGroup {
      * clause.value = false;
      * group.add(clause);
      *
-     * @param clauses ClauseGroup, Clause, Clause list of dictionnary of clauses
+     * @param {ClauseGroup|Clause|Clause[]|IClause[]|CompositeClause|{[index: string]: any}} clauses clauses to add to the clause group
      */
-    public add(clauses: ClauseGroup|Clause|Clause[]|IClause[]|{[index: string]: any}) {
+    public add(clauses: ClauseGroup|Clause|Clause[]|IClause[]|CompositeClause|{[index: string]: any}) {
         if (clauses instanceof ClauseGroup) {
             this.add(clauses.clauses);
         } else if (clauses instanceof Clause || clauses instanceof CompositeClause) {
@@ -97,7 +105,7 @@ export class ClauseGroup {
      * @method build is apart of private API, should move later...
      * it build the clause  group to the string part of the query
      *
-     * @return {@link QueryPart} of the query with the string part and
+     * @return {QueryPart} of the query with the string part and
      *          clauses params.
      */
     public build(): QueryPart {

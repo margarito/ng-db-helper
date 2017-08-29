@@ -6,18 +6,21 @@ import { DbQuery } from '../db-query.model';
 
 /**
  * @public
- * @function RawQuery allow integrators to make RawQuery, any query not permitted
- *           by the current api will be able here
+ * @function RawQuery
  *
- * @param query     the query string
- * @param params    the query paraeters
- * @param size      optional result size
- * @param page      optional result page
+ * @description
+ * this function allow integrators to make RawQuery, any query not permitted
+ * by the current api will be able here
  *
- * @return query object to execute
+ * @param {string} query        the query string
+ * @param {Array<any>} params   the query paraeters
+ * @param {number} size         optional result size
+ * @param {number} page         optional result page
+ *
+ * @return {Object} query object to execute with 'exec()' method
  */
-export function RawQuery(query: string, params: any[], size?: number, page?: number) {
-    const types = ['SELECT', 'UPDATE', 'INSERT', 'DELETE'];
+export function RawQuery(query: string, params: any[], size?: number, page?: number): Object {
+    const types = ['PRAGMA', 'ALTER', 'DROP', 'CREATE', 'SELECT', 'UPDATE', 'INSERT', 'DELETE'];
     const dbQuery = new DbQuery();
     dbQuery.query = query;
     dbQuery.params = params;

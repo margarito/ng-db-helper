@@ -3,11 +3,14 @@ import { ModelManager } from '../../managers/model-manager';
 import { QueryResult } from '../../interfaces/query-result.interface';
 
 /**
- * @private API
- * @class ModelResult is private part of the API.
+ * @private
+ * @class ModelResult
+ *
+ * @description
+ * This class is private part of the API.
  * A specific wrapper to convert QueryResult to typed QueryResult on demand
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and
+ * @param T @extends {@link DbHelperModel}, a model declared with table and
  *          column annotations
  *
  * @author  Olivier Margarit
@@ -16,13 +19,13 @@ import { QueryResult } from '../../interfaces/query-result.interface';
 export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
     /**
      * @private
-     * @property cache, array of converted model. Only keep getted model as cache
+     * @property {Array<T>} cache array of converted model. Only keep getted model as cache
      */
     private cache: T[];
 
     /**
      * @public
-     * @property rowsAffected serve real ResultQuery rowsAffected;
+     * @property {number} rowsAffected serve real ResultQuery rowsAffected;
      */
     public get rowsAffected(): number {
         return this.result.rowsAffected;
@@ -30,7 +33,7 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
 
     /**
      * @public
-     * @property insertId serve real ResultQuery insertId;
+     * @property {number} insertId serve real ResultQuery insertId;
      */
     public get insertId(): number | undefined {
         return this.result.insertId;
@@ -38,13 +41,13 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
 
     /**
      * @public
-     * @property rows serve customized type ResultQuery rows;
+     * @property {Object} rows serve customized type ResultQuery rows;
      */
     public get rows() {
         return {
             /**
              * @public
-             * @property rows.length serve real ResultQuery rows.length;
+             * @property {number} length serve real ResultQuery rows.length;
              */
             length: this.result.rows.length,
 
@@ -53,9 +56,9 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
              * @method item get typed item from ResultQuery and keep it in cache
              *              to avoid doing the job two times
              *
-             * @param i the index of the item
+             * @param {number} i the index of the item
              *
-             * @return the typed item
+             * @return {T} the typed item
              */
             item: (i: number): T => {
                 if (!this.cache[i]) {
@@ -81,6 +84,12 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
                 return this.cache[i];
             },
 
+            /**
+             * @public
+             * @method toArray convert rows to an array of instanciated models
+             *
+             * @return {Array<T>} the array of models
+             */
             toArray: (): T[] => {
                 for (let i = 0; i < this.cache.length; i++) {
                     if (!this.cache[i]) {
@@ -96,11 +105,11 @@ export class ModelResult<T extends DbHelperModel> implements QueryResult<T> {
      * @public
      * @constructor this is a private API and should not be available for integrators
      *
-     * @param result        {@link QueryResult<any>} the real QueryResult converted to return typed models
-     * @param model         {@link DbHelperModel} the target model to convert
-     * @param projection    the optional projection
+     * @param {QueryResult<any>} result     the real QueryResult converted to return typed models
+     * @param {{new(): T}} model         the target model to convert
+     * @param {Array<string>} projection    the optional projection
      */
-    public constructor(private result: QueryResult<any>, private model: {new(): T }, private projection?: string[]) {
+    public constructor(private result: QueryResult<any>, private model: {new(): T}, private projection?: string[]) {
         this.cache = new Array(result.rows.length).fill(null);
     }
 

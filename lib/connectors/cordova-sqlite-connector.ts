@@ -11,8 +11,10 @@ import { DataModel } from '../core/models/structure/data-model.model';
 import { QueryConnector } from '../core/interfaces/query-connector.interface';
 
 /**
- * @class CordovaSqliteConnector is a default connector
- * for rdb module see {@link NgDbHelperModuleConfig}
+ * @class CordovaSqliteConnector
+ *
+ * @description
+ * This class is a default connector for rdb module see {@link NgDbHelperModuleConfig}
  * This class provides config key to add copy informations.
  *
  * This default connector allow query to database provided with cordova-sqlite-storage
@@ -44,31 +46,31 @@ import { QueryConnector } from '../core/interfaces/query-connector.interface';
 export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
     /**
      * @private
-     * @property ready, flag updated with connector state to indicate that connector can query
+     * @property {boolean} ready flag updated with connector state to indicate that connector can query
      */
     private ready = false;
 
     /**
      * @private
-     * @property onReadyObserver, observer of registered listener on connector ready update
+     * @property {Observer<boolean>} onReadyObserver observer of registered listener on connector ready update
      */
     private onReadyObserver: Observer<boolean>;
 
     /**
      * @private
-     * @property targetDir, target dir where database should be copied
+     * @property {any} targetDir target dir where database should be copied
      */
     private targetDir: any;
 
     /**
      * @private
-     * @property dbValue, SQLiteDatabase provided by cordova-sqlite-storage
+     * @property {SQLiteDatabas} dbValue @see cordova-sqlite-storage
      */
     private dbValue: any;
 
     /**
      * @private
-     * @property db, getter that open database on demand
+     * @property {SQLiteDatabase} db getter that open database on demand
      */
     private get db(): any {
         if (!this.dbValue) {
@@ -80,11 +82,12 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
 
     /**
      * @constructor
-     * @throws UnsatisfiedRequirementError, thrown if cordova is missing
+     * @throws {UnsatisfiedRequirementError} thrown if cordova is missing
      * connector start logic after 'deviceready' signal firing.
      *
-     * @param config    configuration of the connector, see {@link CordovaSqliteConnectorConfiguration}
-     *                  and connector documentation header.
+     * @param {CordovaSqliteConnectorConfiguration} config    configuration of the connector,
+     *                                      see {@link CordovaSqliteConnectorConfiguration}
+     *                                      and connector documentation header.
      */
     public constructor(private config: CordovaSqliteConnectorConfiguration) {
         if (!(window as {[index: string]: any}).cordova) {
@@ -108,8 +111,9 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
 
     /**
      * @private
-     * @method checkRequirements
-     * @throws UnsatisfiedRequirementError, log error if cordova-plugin-file or cordova-sqlite-storage is missing
+     * @method checkRequirements check if all platform requirement are satisfied
+     *
+     * @throws {UnsatisfiedRequirementError} log error if cordova-plugin-file or cordova-sqlite-storage is missing
      */
     private checkRequirements() {
         let isRequirementVerified = true;
@@ -134,11 +138,11 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @public
      * @method query connector method to fire query
      *
-     * @param dbQuery   DbQuery object containing query and query params.
-     *                  see {@link DbQuery}
+     * @param {DbQuery} dbQuery   DbQuery object containing query and query params.
+     *                            see {@link DbQuery}
      *
-     * @return          Obsevable   passing {@link QueryResult<any>} on query success
-     *                              passing {@link QueryError} on query error
+     * @return {Observable<QueryResult<any>>}   passing {@link QueryResult<any>} on query success
+     *                                          passing {@link QueryError} on query error
      */
     public query(dbQuery: DbQuery): Observable<QueryResult<any>> {
         return Observable.create((observer: Observer<QueryResult<any>>) => {
@@ -161,9 +165,18 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
         });
     }
 
-    public queryBatch(dbQuries: DbQuery[]): Observable<QueryResult<any>> {
+    /**
+     * @public
+     * @method queryBatch make multiple queries in an unique transaction
+     *
+     * @param {DbQuery} dbQueries multiple queries to run in the same transaction
+     *
+     * @return {Observable<QueryResult<any>>}   passing {@link QueryResult<any>} on query success
+     *                                          passing {@link QueryError} on query error
+     */
+    public queryBatch(dbQueries: DbQuery[]): Observable<QueryResult<any>> {
         const queries = <[string, any[]][]>[];
-        for (const dbQuery of dbQuries) {
+        for (const dbQuery of dbQueries) {
             queries.push([dbQuery.query, dbQuery.params]);
         }
         return Observable.create((observer: Observer<QueryResult<any>>) => {
@@ -183,7 +196,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @method isReady to check if module is ready, if not, caller should
      * subscribe to {@link CordovaSqliteConnector.onReady}
      *
-     * @return should be true if connector can query else false
+     * @return {boolean} should be true if connector can query else false
      */
     public isReady(): boolean {
         return this.ready;
@@ -195,8 +208,8 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * if connector is ready, observable is immediatly called, else all check will
      * be done after 'deviceready' signal
      *
-     * @return Observable   passing true if connector is ready
-     *                      passing false if connector will never be ready
+     * @return {Observable<boolean>}    passing true if connector is ready
+     *                                  passing false if connector will never be ready
      */
     public onReady(): Observable<boolean> {
         return Observable.create((observer: Observer<boolean>) => {
@@ -214,7 +227,7 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @method getDbVersion called to check db version, should be called only if connector
      * is ready.
      *
-     * @return Observable   passing string version after version is checked
+     * @return {Observable<string>} passing string version after version is checked
      */
     public getDbVersion(): Observable<string> {
         return Observable.create((observer: Observer<string>) => {
@@ -238,8 +251,8 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @private
      * @method isDbCreated is private method to check if db is created before copy
      *
-     * @return Observable   passing true if db file is present
-     *                      passing false if db file is missing
+     * @return {Observable<boolean>}    passing true if db file is present
+     *                                  passing false if db file is missing
      */
     private isDbCreated(): Observable<boolean> {
         let targetDirName = (window as {[index: string]: any}).cordova.file.dataDirectory;
@@ -284,9 +297,9 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      *      - if true datamodel is initialized by copy or using config
      *      - if false {@link CordovaSqliteConnectorConfiguration.initDataModel} is called
      *
-     * @param dataModel {@link DataModel} generated with model annotations
+     * @param {DataModel} dataModel data model generated with model annotations
      *
-     * @return Observable resolved on initModel finish
+     * @return {Observable<any>} resolved on initModel finish
      */
     public initModel(dataModel: DataModel): Observable<any> {
         if (this.config.doCopyDb) {
@@ -317,10 +330,10 @@ export class CordovaSqliteConnector implements QueryConnector, ModelMigration {
      * @method upgradeModel is implemented method from ModelMigration, see {@link ModelMigration} to understand usage.
      * directly call {@link CordovaSqliteConnectorConfiguration.upgradeDataModel}
      *
-     * @param dataModel     {@link DataModel} generated with model annotations
-     * @param oldVersion    old model version
+     * @param {DataModel} dataModel data model generated with model annotations
+     * @param {string} oldVersion   old model version
      *
-     * @return Observable resolved on upgradeModel finish
+     * @return {Observable<any>} resolved on upgradeModel finish
      */
     public upgradeModel(dataModel: DataModel, oldVersion: string): Observable<any> {
         return this.config.upgradeDataModel(dataModel, this.db);

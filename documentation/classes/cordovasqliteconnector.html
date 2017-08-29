@@ -71,7 +71,7 @@
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
 						<dd><p>CordovaSqliteConnector is a default connector
-								for rdb module see {@link NgDbHelperModuleConfiguration}
+								for rdb module see <a href="ngdbhelpermoduleconfig.html">NgDbHelperModuleConfig</a>
 							This class provides config key to add copy informations.</p>
 							<p>This default connector allow query to database provided with cordova-sqlite-storage
 							use <a href="cordovasqliteconnectorconfiguration.html">CordovaSqliteConnectorConfiguration</a> to override default migrations logics.</p>
@@ -86,7 +86,7 @@ connectorConfig.dbName = app.sqlite;
 <span class="hljs-comment">// add config to connector</span>
 <span class="hljs-keyword">const</span> connector = CordovaSqliteConnector(connectorConfig);
 <span class="hljs-comment">// create module config</span>
-<span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfiguration();
+<span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfig();
 config.queryConnector = connector;
 config.modelMigration = connector;
 config.version = <span class="hljs-string">'1'</span>;
@@ -153,6 +153,7 @@ config.version = <span class="hljs-string">'1'</span>;
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="cordovasqliteconnector.html#isready" class="tsd-kind-icon">is<wbr>Ready</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="cordovasqliteconnector.html#onready" class="tsd-kind-icon">on<wbr>Ready</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="cordovasqliteconnector.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="cordovasqliteconnector.html#querybatch" class="tsd-kind-icon">query<wbr>Batch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="cordovasqliteconnector.html#upgrademodel" class="tsd-kind-icon">upgrade<wbr>Model</a></li>
 							</ul>
 						</section>
@@ -171,7 +172,7 @@ config.version = <span class="hljs-string">'1'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L77">lib/connectors/cordova-sqlite-connector.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L79">lib/connectors/cordova-sqlite-connector.ts:79</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -209,7 +210,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="cordovasqliteconnectorconfiguration.html" class="tsd-signature-type">CordovaSqliteConnectorConfiguration</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L87">lib/connectors/cordova-sqlite-connector.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L89">lib/connectors/cordova-sqlite-connector.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -225,7 +226,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">db<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L66">lib/connectors/cordova-sqlite-connector.ts:66</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L67">lib/connectors/cordova-sqlite-connector.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -242,7 +243,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Ready<wbr>Observer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L54">lib/connectors/cordova-sqlite-connector.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L55">lib/connectors/cordova-sqlite-connector.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -259,7 +260,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">ready<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L48">lib/connectors/cordova-sqlite-connector.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L49">lib/connectors/cordova-sqlite-connector.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -276,7 +277,7 @@ config.version = <span class="hljs-string">'1'</span>;
 					<div class="tsd-signature tsd-kind-icon">target<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L60">lib/connectors/cordova-sqlite-connector.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L61">lib/connectors/cordova-sqlite-connector.ts:61</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -300,7 +301,7 @@ config.version = <span class="hljs-string">'1'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L72">lib/connectors/cordova-sqlite-connector.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L73">lib/connectors/cordova-sqlite-connector.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -327,7 +328,7 @@ config.version = <span class="hljs-string">'1'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L112">lib/connectors/cordova-sqlite-connector.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L114">lib/connectors/cordova-sqlite-connector.ts:114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -355,7 +356,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#getdbversion">getDbVersion</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L200">lib/connectors/cordova-sqlite-connector.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L219">lib/connectors/cordova-sqlite-connector.ts:219</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -382,7 +383,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/modelmigration.html">ModelMigration</a>.<a href="../interfaces/modelmigration.html#initmodel">initModel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L269">lib/connectors/cordova-sqlite-connector.ts:269</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L291">lib/connectors/cordova-sqlite-connector.ts:291</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -419,7 +420,7 @@ config.version = <span class="hljs-string">'1'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L225">lib/connectors/cordova-sqlite-connector.ts:225</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L244">lib/connectors/cordova-sqlite-connector.ts:244</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -446,7 +447,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#isready">isReady</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L169">lib/connectors/cordova-sqlite-connector.ts:169</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L188">lib/connectors/cordova-sqlite-connector.ts:188</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -473,7 +474,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#onready">onReady</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L182">lib/connectors/cordova-sqlite-connector.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L201">lib/connectors/cordova-sqlite-connector.ts:201</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -502,7 +503,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#query">query</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L141">lib/connectors/cordova-sqlite-connector.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L143">lib/connectors/cordova-sqlite-connector.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,6 +530,30 @@ config.version = <span class="hljs-string">'1'</span>;
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="querybatch" class="tsd-anchor"></a>
+					<h3>query<wbr>Batch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Batch<span class="tsd-signature-symbol">(</span>dbQuries<span class="tsd-signature-symbol">: </span><a href="dbquery.html" class="tsd-signature-type">DbQuery</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/queryconnector.html">QueryConnector</a>.<a href="../interfaces/queryconnector.html#querybatch">queryBatch</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L164">lib/connectors/cordova-sqlite-connector.ts:164</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dbQuries: <a href="dbquery.html" class="tsd-signature-type">DbQuery</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="upgrademodel" class="tsd-anchor"></a>
 					<h3>upgrade<wbr>Model</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
@@ -539,7 +564,7 @@ config.version = <span class="hljs-string">'1'</span>;
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/modelmigration.html">ModelMigration</a>.<a href="../interfaces/modelmigration.html#upgrademodel">upgradeModel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/connectors/cordova-sqlite-connector.ts#L302">lib/connectors/cordova-sqlite-connector.ts:302</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/connectors/cordova-sqlite-connector.ts#L325">lib/connectors/cordova-sqlite-connector.ts:325</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -628,6 +653,9 @@ config.version = <span class="hljs-string">'1'</span>;
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="cordovasqliteconnector.html#query" class="tsd-kind-icon">query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="cordovasqliteconnector.html#querybatch" class="tsd-kind-icon">query<wbr>Batch</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="cordovasqliteconnector.html#upgrademodel" class="tsd-kind-icon">upgrade<wbr>Model</a>

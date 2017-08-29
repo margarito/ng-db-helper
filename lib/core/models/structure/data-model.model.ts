@@ -1,7 +1,10 @@
 import { DbTable } from './db-table.model';
 
 /**
- * @class DataModel, data model passed to the model migration
+ * @class DataModel
+ *
+ * @description
+ * data model passed to the model migration
  *
  * @author  Olivier Margarit
  * @since   0.1
@@ -9,13 +12,13 @@ import { DbTable } from './db-table.model';
 export class DataModel {
     /**
      * @public
-     * @property tables, data model table list
+     * @property {Array<DbTable>} tables, data model table list
      */
     public tables = <DbTable[]>[];
 
     /**
      * @public
-     * @property version, data model varsion
+     * @property {string} version, data model varsion
      */
     public version = '';
 
@@ -24,7 +27,7 @@ export class DataModel {
      * @constructor is a part of private API, DataModel is generated
      * by the NgDbHelperModule for the model migration
      *
-     * @param tables tables of the data model
+     * @param {{[index: string]: any}} tables tables of the data model
      */
     public constructor(tables: {[index: string]: any}) {
         for (const key in tables) {

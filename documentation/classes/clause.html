@@ -114,18 +114,36 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/iclause.html" class="tsd-signature-type">IClause</a></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="clause.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="clause.html#comparator" class="tsd-kind-icon">comparator</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="clause.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="clause.html#keyvalue" class="tsd-kind-icon">key<wbr>Value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="clause.html#not" class="tsd-kind-icon">not</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="clause.html#operator" class="tsd-kind-icon">operator</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="clause.html#value" class="tsd-kind-icon">value</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="clause.html#key" class="tsd-kind-icon">key</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
@@ -134,14 +152,36 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="clause.html#build" class="tsd-kind-icon">build</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-external">
-							<h3>Object literals</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-static tsd-is-external"><a href="clause.html#comparators" class="tsd-kind-icon">COMPARATORS</a></li>
-								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-static tsd-is-external"><a href="clause.html#operators" class="tsd-kind-icon">OPERATORS</a></li>
-							</ul>
-						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Clause<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L124">lib/core/models/queries/clause.model.ts:124</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> key: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="clause.html" class="tsd-signature-type">Clause</a></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
@@ -149,10 +189,10 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="comparator" class="tsd-anchor"></a>
 					<h3>comparator</h3>
-					<div class="tsd-signature tsd-kind-icon">comparator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;Clause.COMPARATORS.EQ</span></div>
+					<div class="tsd-signature tsd-kind-icon">comparator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;ClauseComparators.EQ</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L93">lib/core/models/queries/clause.model.ts:93</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L124">lib/core/models/queries/clause.model.ts:124</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -164,23 +204,15 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 						</dl>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="keyvalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> key<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">key<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L74">lib/core/models/queries/clause.model.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L51">lib/core/models/queries/clause.model.ts:51</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>key is table column name corresponding to the field
-								to compare with</p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="not" class="tsd-anchor"></a>
@@ -188,7 +220,7 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">not<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L86">lib/core/models/queries/clause.model.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L117">lib/core/models/queries/clause.model.ts:117</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,10 +234,11 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="operator" class="tsd-anchor"></a>
 					<h3>operator</h3>
-					<div class="tsd-signature tsd-kind-icon">operator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;Clause.OPERATORS.AND</span></div>
+					<div class="tsd-signature tsd-kind-icon">operator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;ClauseOperators.AND</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/iclause.html">IClause</a>.<a href="../interfaces/iclause.html#operator">operator</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L67">lib/core/models/queries/clause.model.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L49">lib/core/models/queries/clause.model.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,7 +255,7 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L80">lib/core/models/queries/clause.model.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L111">lib/core/models/queries/clause.model.ts:111</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -232,6 +265,57 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 							</dd>
 						</dl>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> key<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> key<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L103">lib/core/models/queries/clause.model.ts:103</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>property</dt>
+									<dd><p>key is table column name corresponding to the field
+										to compare with</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L58">lib/core/models/queries/clause.model.ts:58</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>key is table column name corresponding to the field
+										to compare with</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
@@ -245,8 +329,9 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/iclause.html">IClause</a>.<a href="../interfaces/iclause.html#build">build</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L102">lib/core/models/queries/clause.model.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L142">lib/core/models/queries/clause.model.ts:142</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,147 +346,6 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 							clauses params.</p>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Object literals</h2>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-static tsd-is-external">
-					<a name="comparators" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> COMPARATORS</h3>
-					<div class="tsd-signature tsd-kind-icon">COMPARATORS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L52">lib/core/models/queries/clause.model.ts:52</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>static</dt>
-							<dd></dd>
-							<dt>enum</dt>
-							<dd><p>COMPARATORS, not an enum yet but would be converted soon</p>
-							</dd>
-						</dl>
-					</div>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.diff" class="tsd-anchor"></a>
-						<h3>DIFF</h3>
-						<div class="tsd-signature tsd-kind-icon">DIFF<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;!&#x3D;&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L53">lib/core/models/queries/clause.model.ts:53</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.eq" class="tsd-anchor"></a>
-						<h3>EQ</h3>
-						<div class="tsd-signature tsd-kind-icon">EQ<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&#x3D;&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L60">lib/core/models/queries/clause.model.ts:60</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.gt" class="tsd-anchor"></a>
-						<h3>GT</h3>
-						<div class="tsd-signature tsd-kind-icon">GT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&gt;&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L56">lib/core/models/queries/clause.model.ts:56</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.gte" class="tsd-anchor"></a>
-						<h3>GTE</h3>
-						<div class="tsd-signature tsd-kind-icon">GTE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&gt;&#x3D;&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L57">lib/core/models/queries/clause.model.ts:57</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.in" class="tsd-anchor"></a>
-						<h3>IN</h3>
-						<div class="tsd-signature tsd-kind-icon">IN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;IN&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L59">lib/core/models/queries/clause.model.ts:59</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.like" class="tsd-anchor"></a>
-						<h3>LIKE</h3>
-						<div class="tsd-signature tsd-kind-icon">LIKE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;LIKE&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L58">lib/core/models/queries/clause.model.ts:58</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.lt" class="tsd-anchor"></a>
-						<h3>LT</h3>
-						<div class="tsd-signature tsd-kind-icon">LT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&lt;&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L54">lib/core/models/queries/clause.model.ts:54</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="comparators.lte" class="tsd-anchor"></a>
-						<h3>LTE</h3>
-						<div class="tsd-signature tsd-kind-icon">LTE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&lt;&#x3D;&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L55">lib/core/models/queries/clause.model.ts:55</a></li>
-							</ul>
-						</aside>
-					</section>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-static tsd-is-external">
-					<a name="operators" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> OPERATORS</h3>
-					<div class="tsd-signature tsd-kind-icon">OPERATORS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L42">lib/core/models/queries/clause.model.ts:42</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>static</dt>
-							<dd></dd>
-							<dt>enum</dt>
-							<dd><p>OPERATORS, not an enum yet but would be converted soon</p>
-							</dd>
-						</dl>
-					</div>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="operators.and" class="tsd-anchor"></a>
-						<h3>AND</h3>
-						<div class="tsd-signature tsd-kind-icon">AND<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;AND&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L44">lib/core/models/queries/clause.model.ts:44</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-						<a name="operators.or" class="tsd-anchor"></a>
-						<h3>OR</h3>
-						<div class="tsd-signature tsd-kind-icon">OR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;OR&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/f0f5173/lib/core/models/queries/clause.model.ts#L43">lib/core/models/queries/clause.model.ts:43</a></li>
-							</ul>
-						</aside>
-					</section>
 				</section>
 			</section>
 		</div>
@@ -420,11 +364,14 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<li class="current tsd-kind-class tsd-is-external">
 						<a href="clause.html" class="tsd-kind-icon">Clause</a>
 						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="clause.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
 								<a href="clause.html#comparator" class="tsd-kind-icon">comparator</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="clause.html#key" class="tsd-kind-icon">key</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="clause.html#keyvalue" class="tsd-kind-icon">key<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
 								<a href="clause.html#not" class="tsd-kind-icon">not</a>
@@ -435,14 +382,11 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
 								<a href="clause.html#value" class="tsd-kind-icon">value</a>
 							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="clause.html#key" class="tsd-kind-icon">key</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="clause.html#build" class="tsd-kind-icon">build</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-static tsd-is-external">
-								<a href="clause.html#comparators" class="tsd-kind-icon">COMPARATORS</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-static tsd-is-external">
-								<a href="clause.html#operators" class="tsd-kind-icon">OPERATORS</a>
 							</li>
 						</ul>
 					</li>

@@ -8,8 +8,12 @@ import { QueryError } from '../../errors/query.error';
 import { QueryPart } from './query-part.model';
 
 /**
- * @public API
- * @class Clause is a single clause for where statement.
+ * @public
+ *
+ * @class Clause
+ *
+ * @description
+ * This entity is a single clause for where statement.
  *
  * @example
  * ```typescript
@@ -44,7 +48,9 @@ export class Clause implements IClause {
 
     /**
      * @public
-     * @property operator is used as join clause condition
+     * @property {string} operator is used as join clause condition
+     *
+     * @default ClauseOperators.AND
      */
     public operator = ClauseOperators.AND;
 
@@ -53,7 +59,43 @@ export class Clause implements IClause {
     /**
      * @public
      * @method key is table column name corresponding to the field
-     * to compare with
+     * to compare with. Since 0.2, key support complex values. You can use an appended key with
+     * [optional]operator + [optional]not + column name + [optional]comparator with space separator
+     * or double underscore (__).
+     * Be carefull, get key will not return the value set for key. The get method only retrieve the column
+     * informations.
+     *
+     * @example:
+     * ```typescript
+     *  // function to quickly get current timestamp
+     *  function now(): number {
+     *      return (new Date()).getTime()
+     *  }
+     *
+     *  // Select all done or passed todo
+     *  Select(Todo).where({isDone: true, or__dueDate__lt: now()}).subcribe((qr: QueryResult<Todo>) => {
+     *      const ids = <number[]>[];
+     *      for (let i = 0; i < qr.rows.length; i++) {
+     *          // check if todo really need to be deleted ...
+     *          ids.push(qr.rows.item(i).id);
+     *      }
+     *
+     *      Delete(Todo).where(id__in:ids).exec().subscribe(() => {
+     *          // todos are delete
+     *      }, (err) => {
+     *          console.error(err);
+     *      })
+     *  }, (err) => {
+     *      console.error(err);
+     *  });
+     *
+     *  // delete directly without check
+     *  Delete(Todo).where({isDone: true, or__dueDate__lt: now()}).subcribe(() => {
+     *      // delete done
+     *  }, (err) => {
+     *      console.error(err);
+     *  });
+     * ```
      */
     public set key(value: string) {
         const parts = value.split(/__| /);
@@ -106,23 +148,33 @@ export class Clause implements IClause {
 
     /**
      * @public
-     * @property value is the column value to compare with
+     * @property {any} value is the column value to compare with
      */
     public value: any;
 
     /**
      * @public
-     * @property not is an additionnal operator to invert condition
+     * @property {boolean} not is an additionnal operator to invert condition
      */
     public not = false;
 
     /**
      * @public
-     * @property comparator is a comparator that define the type of
+     * @property {string} comparator is a comparator that define the type of
      * relation with the value to compare with and the result.
+     *
+     * @default ClauseComparators.EQ
      */
     public comparator = ClauseComparators.EQ;
 
+    /**
+     * @public
+     * @constructor create a new instance of Clause
+     * @param {string} key the clause key
+     * @param {any} value the clause value
+     *
+     * @since 0.2
+     */
     public constructor(key?: string, value?: any) {
         if (key) {
             this.key = key;
@@ -136,7 +188,7 @@ export class Clause implements IClause {
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link QueryPart} of the query with the string part and
+     * @return {QueryPart} of the query with the string part and
      *          clauses params.
      */
     public build(): QueryPart {

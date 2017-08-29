@@ -11,7 +11,50 @@ import { DbColumn } from '../models/structure/db-column.model';
 import { DbHelperModel } from '../models/db-helper-model.model';
 import { ColumnConfig } from './configurator/column.configurator';
 
+/**
+ * @public
+ * @function ForeignModel
+ *
+ * @description
+ * Annotation factory to declare foreign model.
+ *
+ * @example
+ * ```typescript
+ *  @Table()
+ *  export class Todo extends DbHelperModel {
+ *
+ *      @PrimaryKey({autoIncremented: true})
+ *      public id: number
+ *
+ *      @Column()
+ *      public name: string;
+ *
+ *      @Column({type: 'long'})
+ *      public dueDate: number;
+ *
+ *      @ForeignModel(Category, {name: 'categoryFk'})
+ *      public category: Category
+ *  }
+ * ```
+ *
+ *  @template T @extends DbHelperModel the target model
+ *
+ * @param {{new(): DbHelperModel}} model    the target model
+ * @param {ColumnConfig?} config            optional configuration
+ * @param {string?} relationKey             optional relation key
+ *
+ * @return {Function} the annotation
+ *
+ * @author  Olivier Margarit
+ * @since   0.1
+ */
 export function ForeignModel<T extends DbHelperModel>(model: {new(): DbHelperModel}, config?: ColumnConfig, relationKey?: string): any {
+    /**
+     * @function
+     *
+     * @description
+     * the annotation
+     */
     return (target: T, key: string) => {
 
         const column = new DbColumn();

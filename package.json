@@ -1,6 +1,6 @@
 {
     "name": "ng-db-helper",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "license": "MIT",
     "description": "Simple db helper for typescript like an orm with plugable connectors.",
     "author": {

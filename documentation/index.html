@@ -65,9 +65,10 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="ngdbhelpermodule">NgDbHelperModule</h1>
-				<p>  This module is a simple module to simplify persistence with relationnel databases.
+				<p>  See <a href="http://htmlpreview.github.io/?https://github.com/margarito/ng-db-helper/blob/master/documentation/index.html">complete documentation</a></p>
+				<p>  This module is a simple module to simplify persistence with relationnal databases.
 					As there is many platforms or devices, this module bring possibility to manage connectors.
-				It allow integrators to have a better code portability.</p>
+				It allows integrators to have a better code portability.</p>
 				<p>  It can be used with cordova-sqlite-storage, websql or other relationnal database if you
 				implement your own connector.</p>
 				<p>  See example project: <a href="https://github.com/margarito/todos-app">Todos App</a></p>
@@ -117,7 +118,8 @@
 				about how easy it is !</p>
 				<h1 id="usage">Usage</h1>
 				<h2 id="initialisation">Initialisation</h2>
-				<p>  Create a file where you will put your db management configuration and init the configuration:</p>
+				<p>  Create a file where you will put your db management configuration factory
+				and init the configuration when it&#39;s time to provide it:</p>
 				<pre><code class="lang-typescript">  <span class="hljs-keyword">import</span> { NgDbHelperModuleConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
   <span class="hljs-keyword">import</span> { CordovaSqliteConnector } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
   <span class="hljs-keyword">import</span> { CordovaSqliteConnectorConfiguration } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
@@ -161,7 +163,7 @@
     <span class="hljs-meta">@NgModule</span>({
       imports: [
         ...,
-        NgDbHelperModule.forRoot(getDbHelperModuleConfiguration()),
+        NgDbHelperModule.forRoot(getDbHelperModuleConfiguration),
         ...
       ],
       declarations: [...],
@@ -612,6 +614,7 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 							<li>[-] Foreign keys</li>
 							<li>[-] Manage more types like Date</li>
 							<li>[-] constraint management</li>
+							<li>[-] Create a base service with usefull generic functions</li>
 						</ul>
 					</li>
 					<li>[-] Connectors<ul>
@@ -657,10 +660,22 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 						<a href="classes/clause.html" class="tsd-kind-icon">Clause</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/clausecomparators.html" class="tsd-kind-icon">Clause<wbr>Comparators</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/clausegroup.html" class="tsd-kind-icon">Clause<wbr>Group</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/clauseoperators.html" class="tsd-kind-icon">Clause<wbr>Operators</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/columnclausevalue.html" class="tsd-kind-icon">Column<wbr>Clause<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/columnconfig.html" class="tsd-kind-icon">Column<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/compositeclause.html" class="tsd-kind-icon">Composite<wbr>Clause</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/cordovasqliteconnector.html" class="tsd-kind-icon">Cordova<wbr>Sqlite<wbr>Connector</a>
@@ -681,7 +696,13 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 						<a href="classes/dbquery.html" class="tsd-kind-icon">Db<wbr>Query</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/dbrelationmodel.html" class="tsd-kind-icon">Db<wbr>Relation<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/dbtable.html" class="tsd-kind-icon">Db<wbr>Table</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/jointype.html" class="tsd-kind-icon">Join<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/mixedcordovasqlitewebsqlconnector.html" class="tsd-kind-icon">Mixed<wbr>Cordova<wbr>Sqlite<wbr>Websql<wbr>Connector</a>
@@ -697,6 +718,9 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/ngdbhelpermoduleconfig.html" class="tsd-kind-icon">Ng<wbr>DbHelper<wbr>Module<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/notimplementederror.html" class="tsd-kind-icon">Not<wbr>Implemented<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/pendingdbquery.html" class="tsd-kind-icon">Pending<wbr>DbQuery</a>
@@ -716,17 +740,32 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
 						<a href="classes/queryinsert.html" class="tsd-kind-icon">Query<wbr>Insert</a>
 					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
+						<a href="classes/queryjoin.html" class="tsd-kind-icon">Query<wbr>Join</a>
+					</li>
 					<li class=" tsd-kind-class tsd-is-private tsd-is-external">
 						<a href="classes/querymanager.html" class="tsd-kind-icon">Query<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-private tsd-is-external">
 						<a href="classes/querypart.html" class="tsd-kind-icon">Query<wbr>Part</a>
 					</li>
+					<li class=" tsd-kind-class tsd-is-private tsd-is-external">
+						<a href="classes/queryresultwrapper.html" class="tsd-kind-icon">Query<wbr>Result<wbr>Wrapper</a>
+					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
 						<a href="classes/queryselect.html" class="tsd-kind-icon">Query<wbr>Select</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
 						<a href="classes/queryupdate.html" class="tsd-kind-icon">Query<wbr>Update</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/relationtype.html" class="tsd-kind-icon">Relation<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/restoredataerror.html" class="tsd-kind-icon">Restore<wbr>Data<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/shadowvalue.html" class="tsd-kind-icon">Shadow<wbr>Value</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/tableconfig.html" class="tsd-kind-icon">Table<wbr>Config</a>
@@ -739,6 +778,15 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/websqlconnectorconfiguration.html" class="tsd-kind-icon">Websql<wbr>Connector<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/iclause.html" class="tsd-kind-icon">IClause</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/ijoin.html" class="tsd-kind-icon">IJoin</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/iqueryhelper.html" class="tsd-kind-icon">IQuery<wbr>Helper</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/modelmigration.html" class="tsd-kind-icon">Model<wbr>Migration</a>
@@ -762,7 +810,19 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 						<a href="globals.html#delete" class="tsd-kind-icon">Delete</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
+						<a href="globals.html#foreignmodel" class="tsd-kind-icon">Foreign<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
 						<a href="globals.html#insert" class="tsd-kind-icon">Insert</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
+						<a href="globals.html#join" class="tsd-kind-icon">Join</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#primarykey" class="tsd-kind-icon">Primary<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#rawquery" class="tsd-kind-icon">Raw<wbr>Query</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
 						<a href="globals.html#select" class="tsd-kind-icon">Select</a>

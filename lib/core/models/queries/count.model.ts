@@ -11,17 +11,19 @@ import { ClauseGroup } from './clause-group.model';
 import { Clause } from './clause.model';
 
 /**
- * @private API
- * @class QueryCount is private part of the APi.
- * For design reasons this class should not be used directly and
- * will move later. Use this class with {@link Count} function.
+ * @public
+ * @class QueryCount
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * @description
+ * For design reasons this class should not be used directly.
+ * Prefer use {@link Count} function.
+ *
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
  * // count todos
- * Count(Todo).where({isDone: false}}).exec().subscribe((qr: QueryResult<number>) => {
+ * Count(Select(Todo).where({isDone: false}})).exec().subscribe((cout: number) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
@@ -29,17 +31,22 @@ import { Clause } from './clause.model';
  * ```
  *
  * @author  Olivier Margarit
- * @since   0.1
+ * @since   0.2
  */
 export class QueryCount<T extends DbHelperModel> {
 
+    /**
+     * @public
+     * @constructor create instance of QueryCount
+     * @param querySelect the query to count the result
+     */
     public constructor(private querySelect: QuerySelect<T>) {}
 
     /**
      * @public
      * @method build should be removed to be a part of the private API
      *
-     * @return {@link DbQuery} of the query with the string part and
+     * @return {DbQuery} of the query with the string part and
      *          clauses params.
      */
     public build(): DbQuery {
@@ -50,7 +57,7 @@ export class QueryCount<T extends DbHelperModel> {
      * @public
      * @method exec to execute the query and asynchronously retreive result.
      *
-     * @return observable to subscribe
+     * @return {Observable<number>} observable to subscribe and returning a count number as result
      */
     public exec(): Observable<number> {
         const dbQuery = this.build();
@@ -66,23 +73,28 @@ export class QueryCount<T extends DbHelperModel> {
 }
 
 /**
- * @public API
- * @function Count is an helper to count element from database
+ * @public
+ * @function Count
  *
- * @param T exdends {@link DbHelperModel}, a model declared with table and column annotations
+ * @description
+ * function helper to count element that a query could return
+ *
+ * @param T @extends DbHelperModel a model declared with table and column annotations
  *
  * @example
  * ```typescript
  * // count todos
- * Count(Todo).where({isDone: false}}).exec().subscribe((QueryResult<number>) => {
+ * Count(Select(Todo).where({isDone: false}})).exec().subscribe(count: number) => {
  *      // do something with the result...
  * }, (err) => {
  *      // do something with the error...
  * });
  * ```
  *
+ * @return {QueryCount<T>} instance
+ *
  * @author  Olivier Margarit
- * @since   0.1
+ * @since   0.2
  */
 export function Count<T extends DbHelperModel>(select: QuerySelect<T>): QueryCount<T> {
     return new QueryCount(select);

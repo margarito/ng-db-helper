@@ -4,18 +4,19 @@ import { DbHelperModel } from '../models/db-helper-model.model';
 import { ModelManager } from './../managers/model-manager';
 
 /**
- * Table annotation to add on class extending {@link DbHelperModel}.
+ * @function Table
+ * Table annotation factory to add on class extending {@link DbHelperModel}.
  * This annotation declares class in datamodel
  *
  * @example
  * ```typescript
- * @Table
+ * @Table()
  * export class Todo extends DbHelperModel {
  *
- *      @Column({primaryKey: true, autoIncremented: tru, type: 'integer'})
+ *      @PrimaryKey({autoIncremented: true})
  *      public id: number
  *
- *      @Column
+ *      @Column()
  *      public name: string;
  *
  *      @Column({type: 'long'})
@@ -23,8 +24,12 @@ import { ModelManager } from './../managers/model-manager';
  * }
  * ```
  *
- * @param config, {@link TableConfig} is table configuration, informations are used to
+ * @template T @extends DbHelperModel the target model
+ *
+ * @param {TableConfig} config, table configurator, informations are used to
  *          build DataModel.
+ *
+ * @return {Function} the annotation
  *
  * @author  Olivier Margarit
  * @since   0.1

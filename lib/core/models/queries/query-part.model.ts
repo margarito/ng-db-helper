@@ -1,22 +1,26 @@
 import { DbQuery } from '../db-query.model';
 /**
- * @private API
- * @class QueryPart is private part of the API.
+ * @private
+ * @class QueryPart
+ *
+ * @description
+ * This class is private part of the API.
  * It is an intermidiate query object for builded query parts
  *
  * @author  Olivier Margarit
+ *
  * @since   0.1
  */
 export class QueryPart {
     /**
      * @public
-     * @property content, this string part of the query
+     * @property {string} content string part of the query
      */
     public content = '';
 
     /**
      * @public
-     * @property params, the parametrs of this part of query
+     * @property {Array<any>} params the parameters of this part of query
      */
     public params = <any[]>[];
 
@@ -25,9 +29,9 @@ export class QueryPart {
      * @method append   append other query part to itself and return itself
      *                  to chain appending
      *
-     * @param queryPart another query part
+     * @param {QueryPart} queryPart another query part to append
      *
-     * @return the query part itself
+     * @return {QueryPart} the query part itself
      */
     public append(queryPart: QueryPart): QueryPart {
         this.appendContent(queryPart.content);
@@ -35,6 +39,16 @@ export class QueryPart {
         return this;
     }
 
+    /**
+     * @public
+     * @method appendSub append sub query part
+     *
+     * @param {QueryPart} queryPart the query part to append
+     *
+     * @return {QueryPart} the query part instance to chain operation
+     *
+     * @since 0.2
+     */
     public appendSub(queryPart: QueryPart | DbQuery): QueryPart {
         if (queryPart instanceof QueryPart) {
             this.content += ' (';
@@ -49,6 +63,16 @@ export class QueryPart {
         return this;
     }
 
+    /**
+     * @public
+     * @method appendContent append query content to the query part
+     *
+     * @param {string} content the string part to append
+     *
+     * @return {QueryPart} the query part instance to chain operation
+     *
+     * @since 0.2
+     */
     public appendContent(content: string): QueryPart {
         this.content = this.content + ' ' + content.trim();
         return this;

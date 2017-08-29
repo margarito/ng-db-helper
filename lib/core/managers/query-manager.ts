@@ -16,8 +16,11 @@ import { PendingDbQuery } from '../models/pending-db-query.model';
 import 'rxjs/add/operator/share';
 
 /**
- * @private API
- * @class QueryManager, this class is a singleton manging query
+ * @private
+ * @class QueryManager
+ *
+ * @description
+ * This class is a singleton manging query
  * This manager has not to be exposed, it is used to handle queries
  * with the connector. It stack it during connector is not ready and
  * release it when connector ca query
@@ -29,48 +32,62 @@ export class QueryManager {
     /**
      * @static
      * @private
-     * @property instance, private reference to the model manager instance
+     * @property {QueryManager} instance private reference to the model manager instance
      */
     private static instance = new QueryManager();
 
     /**
      * @private
-     * @property pendingDbQueries stack of queries to fire when the
+     * @property {Array<PendingDbQuery>} pendingDbQueries stack of queries to fire when the
      * connector is ready
      */
     private pendingDbQueries = <PendingDbQuery[]>[];
 
+    /**
+     * @private
+     * @property {Array<PendingDbQuery>} pendingBatchDbQueries stack of queries to fire in a single transaction
+     */
     private pendingBatchDbQueries = <PendingDbQuery[]>[];
 
     /**
      * @private
-     * @property isReady flag that should pas to true only when
+     * @property {boolean} isReady flag that should pas to true only when
      * query can be sent
      */
     private isReady = false;
 
     /**
      * @private
-     * @property isInitializationFailed flag to reject all queries
+     * @property {boolean} isInitializationFailed flag to reject all queries
      * in case of connector activation failure
      */
     private isInitializationFailed = false;
 
     /**
      * @private
-     * @property queryConnector query connector that handle queries
+     * @property {QueryConnector | undefined} queryConnector query connector that handle queries
      * to real db
      */
     private queryConnector: QueryConnector | undefined;
 
     /**
      * @private
-     * @property modelMigration that handle migration on version change
+     * @property {ModelMigration | undefined} modelMigration that handle migration on version change
      */
     private modelMigration: ModelMigration | undefined;
 
+    /**
+     * @private
+     * @property {any} batchLock batch locker that can fire transaction. This locker prevent batch to collide.
+     * @since 0.2
+     */
     private batchLock: any;
 
+    /**
+     * @private
+     * @property {Subject<any> | undefined} batchSubject an Observable where multiple batch transaction owner an subscribe
+     * @since 0.2
+     */
     private batchSubject: Subject<any> | undefined;
 
     /**
@@ -80,7 +97,9 @@ export class QueryManager {
      * pass connector, model migration and other config. see {@link NgDbHelperModuleConfig}
      * for more informations
      *
-     * @param config the module configuration with connector instance and model migration
+     * @param {NgDbHelperModuleConfig} config the module configuration with connector instance and model migration
+     *
+     * @return {QueryManager} the initialized instance
      */
     public static init(config: NgDbHelperModuleConfig): QueryManager {
         const instance = QueryManager.getInstance();
@@ -106,7 +125,7 @@ export class QueryManager {
      * @public
      * @method getInstance to get the unique QueryManager instance
      *
-     * @return QueryManager instance
+     * @return {QueryManager} the instance
      */
     public static getInstance(): QueryManager {
         return QueryManager.instance;
@@ -175,7 +194,7 @@ export class QueryManager {
      * @method onInitializationFailure is called on initilization failure to cancel
      * all started queries and nexts
      *
-     * @param err the error return by the initialization failure
+     * @param {Error} err the error return by the initialization failure
      */
     private onInitializationFailure(err: any) {
         console.error(err);
@@ -197,6 +216,11 @@ export class QueryManager {
         this.isReady = true;
     }
 
+    /**
+     * @public
+     * @method startBatch start transaction for multiple queries
+     * @param {any} locker the locker that can fire the transaction if none is set
+     */
     public startBatch(locker: any) {
         if (!this.batchLock) {
             this.batchLock = locker;
@@ -209,10 +233,10 @@ export class QueryManager {
      * If initialization failed, error is sent back. If connector is not ready, query will
      * be stack until connector ready signal
      *
-     * @param dbQuery   query information with params, see {@link DbQuery}
+     * @param {DbQuery} dbQuery   query information with params
      *
-     * @return Observable   in case of success, {@link QueryResult<any>} is passed
-     *                      in case of failure, {@link QueryError} is passed
+     * @return {Observable<QueryResult<any>>}   in case of success, {@link QueryResult<any>} is passed
+     *                                          in case of failure, {@link QueryError} is passed
      */
     public query(dbQuery: DbQuery): Observable<QueryResult<any>> {
         const subject = new Subject<QueryResult<any>>();
@@ -229,6 +253,17 @@ export class QueryManager {
         return subject;
     }
 
+    /**
+     * @public
+     * @method queryBatch should only be called from {@link QueryBatch} function.
+     *
+     * @param locker the locker passed to startBatch that allow queries releasing
+     *
+     * @return {Observable<QueryResult<any>>}   in case of success, {@link QueryResult<any>} is passed
+     *                                          in case of failure, {@link QueryError} is passed
+     *
+     * @since 0.2
+     */
     public execBatch(locker: any): Observable<QueryResult<any>> {
         const queries = <DbQuery[]>[];
         const observers = <Observer<QueryResult<any>>[]>[];
@@ -275,11 +310,11 @@ export class QueryManager {
      * @private
      * @method executeQuery should be called only when connector is ready
      *
-     * @param dbQuery   query information with params, see {@link DbQuery}
-     * @param observer  observer to manage query callback
+     * @param {DbQuery} dbQuery   query information with params
+     * @param {Observer} observer  observer to manage query callback
      *
-     * @return Observable   in case of success, {@link QueryResult<any>} is passed
-     *                      in case of failure, {@link QueryError} is passed
+     * @return {Observable<QueryResult<any>>}   in case of success, {@link QueryResult<any>} is passed
+     *                                          in case of failure, {@link QueryError} is passed
      */
     private executeQuery(dbQuery: DbQuery, observer: Observer<QueryResult<any>>) {
         if (this.isInitializationFailed) {

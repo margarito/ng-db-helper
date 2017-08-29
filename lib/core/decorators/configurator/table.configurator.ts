@@ -1,18 +1,21 @@
 /**
- * @class TableConfig a config model for {@link Table} annotation
+ * @class TableConfig
+ *
+ * @description
+ * a table configurator for model, @see {Table} annotation
  *
  * @author  Olivier Margarit
  * @since   0.1
  */
 export class TableConfig {
     /**
-     * @property name, optional configuration. If not provided, the default
+     * @property {string} name, optional configuration. If not provided, the default
      * value is th class name
      */
     public name?: string;
 
     /**
-     * @property version, the table model version, information to help migration
+     * @property {number} version, the table model version, information to help migration
      */
     public version? = 0;
 }
