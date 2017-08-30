@@ -1,5 +1,28 @@
 # NgDbHelperModule
 
+## Prerequisites
+
+Your application must be an angular project. Then choose the kind of database supported
+by the target device of your app. This module support can be configured to support Websql
+or cordova-sqlite-storage or both on specific conditions.
+
+If you have other need and this need is to use a relationnal database, see the connector
+API and you will be able to build your own connector and keep using this API design.
+
+## Installing
+
+This module is available on official npm registry, with command line from your project,
+use the command below:
+
+```shell
+
+npm install ng-db-helper --save
+
+```
+
+The module is now a part of your dependancies and is ready to be used. See Usage to learn
+about how easy it is !
+
 ## Usage index
 
 - [Initialization](./chapters/initialization.md)
