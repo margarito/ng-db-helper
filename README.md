@@ -2,10 +2,6 @@
 
 > This module is an ORM with plugable connector to share model and logic on multiple environnement.
 
-See [Usage documentation](https://github.com/margarito/ng-db-helper/blob/master/index.md)
-
-See [complete api documentation](http://htmlpreview.github.io/?https://raw.githubusercontent.com/margarito/ng-db-helper/master/documentation/index.html)
-
 This module simplify persistence with relationnal databases.
 As there is many platforms or devices, this module bring possibility to manage connectors.
 It allows integrators to have a better code portability.
@@ -13,11 +9,15 @@ It allows integrators to have a better code portability.
 It can be used with cordova-sqlite-storage, websql or other relationnal database if you
 implement your own connector.
 
-See example project: [Todos App](https://github.com/margarito/todos-app)
+## See [Usage documentation](https://github.com/margarito/ng-db-helper/blob/master/tuto/index.md)
 
-See examples of code below,
+## See [complete api documentation](http://htmlpreview.github.io/?https://raw.githubusercontent.com/margarito/ng-db-helper/master/documentation/index.html)
 
-Déclaration:
+## See example project: [Todos App](https://github.com/margarito/todos-app)
+
+## See examples of code below
+
+Declaration:
 
 ```typescript
 
