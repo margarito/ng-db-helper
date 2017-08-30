@@ -65,578 +65,12 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="ngdbhelpermodule">NgDbHelperModule</h1>
-				<p>  See <a href="http://htmlpreview.github.io/?https://github.com/margarito/ng-db-helper/blob/master/documentation/index.html">complete documentation</a></p>
-				<p>  This module is a simple module to simplify persistence with relationnal databases.
-					As there is many platforms or devices, this module bring possibility to manage connectors.
-				It allows integrators to have a better code portability.</p>
-				<p>  It can be used with cordova-sqlite-storage, websql or other relationnal database if you
-				implement your own connector.</p>
-				<p>  See example project: <a href="https://github.com/margarito/todos-app">Todos App</a></p>
-				<p>  This is an example of code:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-meta">@Component</span>({
-      selector: <span class="hljs-string">'mgto-todos'</span>,
-      template: <span class="hljs-string">''</span>,
-      styles: <span class="hljs-string">''</span>
-    })
-    <span class="hljs-keyword">class</span> TodosPage <span class="hljs-keyword">implements</span> OnInit {
-      <span class="hljs-keyword">public</span> todoQueryResult: QueryResult&lt;Todo&gt;;
-
-      <span class="hljs-keyword">public</span> ngOnInit() {
-        <span class="hljs-comment">// retrieve not done todos</span>
-        Select(Todo).where({isDone: <span class="hljs-literal">false</span>}).exec().subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;Todo&gt;</span>) =&gt;</span> {
-          <span class="hljs-keyword">this</span>.todoQueryResult = qr;
-        }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-          <span class="hljs-comment">// manage error</span>
-        });
-      }
-
-      <span class="hljs-keyword">public</span> checkTodo(todo: Todo) {
-        todo.isDone = !todo.isDone;
-        todo.save().subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-          <span class="hljs-comment">// isDone did change and is saved</span>
-        }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-          <span class="hljs-comment">// manage error</span>
-          <span class="hljs-comment">// cancel done change</span>
-          todo.isDone = !todo.isDone;
-        });
-      }
-    }
-</code></pre>
-				<h1 id="getting-started">Getting Started</h1>
-				<h2 id="prerequisites">Prerequisites</h2>
-				<p>  Your application must be an angular project. Then choose the kind of database supported
-					by the target device of your app. This module support can be configured to support Websql
-				or cordova-sqlite-storage or both on specific conditions.</p>
-				<p>  If you have other need and this need is to use a relationnal database, see the connector
-				API and you will be able to build your own connector and keep using this API design.</p>
-				<h2 id="installing">Installing</h2>
-				<p>  This module is available on official npm registry, with command line from your project,
-				use the command below:</p>
-				<pre><code class="lang-shell">    npm install ng-db-helper --save
-</code></pre>
-				<p>  The module is now a part of your dependancies and is ready to be used. See Usage to learn
-				about how easy it is !</p>
-				<h1 id="usage">Usage</h1>
-				<h2 id="initialisation">Initialisation</h2>
-				<p>  Create a file where you will put your db management configuration factory
-				and init the configuration when it&#39;s time to provide it:</p>
-				<pre><code class="lang-typescript">  <span class="hljs-keyword">import</span> { NgDbHelperModuleConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { CordovaSqliteConnector } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { CordovaSqliteConnectorConfiguration } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-
-  <span class="hljs-comment">// Create a function that build the module configuration</span>
-  <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDbHelperModuleConfiguration</span>(<span class="hljs-params"></span>): <span class="hljs-title">NgDbHelperModuleConfig</span> </span>{
-    <span class="hljs-comment">// This configuration is for CordovaSqliteConnector</span>
-    <span class="hljs-keyword">const</span> connectorConfig = <span class="hljs-keyword">new</span> CordovaSqliteConnectorConfiguration();
-
-    <span class="hljs-comment">// you could customize configuration here but you may not need to do that</span>
-    <span class="hljs-comment">// See connectors part to check possibilities ans behaviour</span>
-
-    <span class="hljs-comment">// create the cordova-sqlite-storage connector, other connectors are</span>
-    <span class="hljs-comment">// Available, see connectors part to find more browser/device support</span>
-    <span class="hljs-keyword">const</span> connector = <span class="hljs-keyword">new</span> CordovaSqliteConnector(connectorConfig);
-
-    <span class="hljs-comment">// create the module configuration instance</span>
-    <span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfig();
-
-    <span class="hljs-comment">// Default module connectors are model migration managers too. you</span>
-    <span class="hljs-comment">// can override migration behaviour from connector's configurations</span>
-    config.modelMigration = connector;
-    config.queryConnector = connector;
-
-    <span class="hljs-comment">// setup the version of your data model, it will enable migration script</span>
-    <span class="hljs-comment">// to prevent developpement issues due to import optimization, a minor</span>
-    <span class="hljs-comment">// version is automatically incremented. See more configuration part to</span>
-    <span class="hljs-comment">// learn more.</span>
-    config.version = <span class="hljs-string">'1'</span>;
-    <span class="hljs-keyword">return</span> config;
-  }
-</code></pre>
-				<p>  With this configuration, you are able to persist datas from cordova-sqlite-storage devices
-					compatible. You can use another connector or develop your own connector if you are in
-				a situation where neither cordova and websql connector respond to your need.</p>
-				<p>  Then your just have to include the NgDbHelperModule in your main module:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-    <span class="hljs-keyword">import</span> { NgDbHelperModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-    <span class="hljs-keyword">import</span> { getDbHelperModuleConfiguration } <span class="hljs-keyword">from</span> <span class="hljs-string">'./config/ng-db-helper.configuration'</span>
-
-    <span class="hljs-meta">@NgModule</span>({
-      imports: [
-        ...,
-        NgDbHelperModule.forRoot(getDbHelperModuleConfiguration),
-        ...
-      ],
-      declarations: [...],
-      exports: [...],
-      providers: [...]
-    })
-    <span class="hljs-keyword">class</span> MyAwesomeAppModule {}
-</code></pre>
-				<p>  Your now are ready to declare all your models.</p>
-				<h2 id="declare-model">Declare model</h2>
-				<p>  Model management is based on annotation, the application is designed to prevent declaration
-				redundancy. Every data model declaration should be done in the main model class file.</p>
-				<p>  This an example of what model declaration could be:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-keyword">import</span> { DbHelperModel } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-    <span class="hljs-keyword">import</span> { Table } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-    <span class="hljs-keyword">import</span> { Column } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-
-    <span class="hljs-meta">@Table</span>()
-    <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Todo <span class="hljs-keyword">extends</span> DbHelperModel {
-      <span class="hljs-meta">@Column</span>({primaryKey: <span class="hljs-literal">true</span>, autoIncremental: <span class="hljs-literal">true</span>})
-      <span class="hljs-keyword">public</span> id: <span class="hljs-built_in">number</span>;
-
-      <span class="hljs-meta">@Column</span>()
-      <span class="hljs-keyword">public</span> label: <span class="hljs-built_in">string</span>;
-
-      <span class="hljs-meta">@Column</span>({<span class="hljs-keyword">type</span>: <span class="hljs-string">'boolean'</span>})
-      <span class="hljs-keyword">public</span> isDone: <span class="hljs-built_in">boolean</span>;
-    }
-</code></pre>
-				<p>  This is as simple as this example, annotations will be enougth to create your data model in database
-				and being queriable in your application.</p>
-				<p>  Rules are simple to get the expected result:</p>
-				<pre><code>-<span class="ruby"> extends DbHelperModel,
-</span>-<span class="ruby"> use <span class="hljs-string">`@Table`</span> annotation,
-</span>-<span class="ruby"> use <span class="hljs-string">`@Column`</span> annotation,
-</span>-<span class="ruby"> never declare properties named with double underscore (<span class="hljs-string">'__'</span>)</span>
-</code></pre><p>  In details, what does each ng-db-helper tools ?</p>
-				<h3 id="extends-dbhelpermodel">extends DbHelperModel</h3>
-				<p>  Model has to extends DbHelperModel to be usable with annotations, implements default model method
-				and being used with query helpers.</p>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// assume that Todo is a model extending DbHelperModel</span>
-    <span class="hljs-comment">// this what could look like todo editor</span>
-    <span class="hljs-meta">@NgComponent</span>({
-      ...
-    })
-    <span class="hljs-keyword">class</span> TodoComponent <span class="hljs-keyword">implements</span> OnInit {
-      <span class="hljs-comment">// the todo id injected with an html attribute</span>
-      <span class="hljs-comment">// this is just a pretext to show a query</span>
-      <span class="hljs-meta">@Input</span>()
-      <span class="hljs-keyword">public</span> todoId?: <span class="hljs-built_in">number</span>;
-
-      <span class="hljs-comment">// the todo item edited from the view</span>
-      <span class="hljs-keyword">public</span> todo: Todo;
-
-      <span class="hljs-keyword">public</span> ngOnInit() {
-        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.id) {
-          <span class="hljs-comment">// Select the todo item, it is probably to create a TodoService with a getById</span>
-          <span class="hljs-comment">// method and this is what you could put in there</span>
-          Select(Todo).where({id: <span class="hljs-keyword">this</span>.id}).exec().subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;Todo&gt;</span>) =&gt;</span> {
-            <span class="hljs-keyword">if</span> (qr.rows.length) {
-              <span class="hljs-keyword">this</span>.todo = qr.rows.item(<span class="hljs-number">0</span>);
-            } <span class="hljs-keyword">else</span> {
-              <span class="hljs-comment">// item has not be found by id...</span>
-            }
-          }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-            <span class="hljs-comment">// manage query error</span>
-          })
-        } <span class="hljs-keyword">else</span> {
-          <span class="hljs-comment">// no id is set, it is probably a creation instance of the component</span>
-          <span class="hljs-keyword">this</span>.todo = <span class="hljs-keyword">new</span> Todo();
-        }
-      }
-
-      <span class="hljs-comment">// method called on save button clicked</span>
-      <span class="hljs-keyword">public</span> onSaveButtonPressed() {
-        <span class="hljs-comment">// call save method</span>
-        <span class="hljs-keyword">this</span>.todo.save().subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;<span class="hljs-built_in">any</span>&gt;</span>) =&gt;</span> {
-          <span class="hljs-comment">// do things after todo is saved</span>
-        }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-          <span class="hljs-comment">// manage error</span>
-        });
-      }
-
-      <span class="hljs-comment">// method called on delete button clicked</span>
-      <span class="hljs-keyword">public</span> onDeleteButtonPressed() {
-        <span class="hljs-comment">// call delete method</span>
-        <span class="hljs-keyword">this</span>.todo.delete().subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;<span class="hljs-built_in">any</span>&gt;</span>) =&gt;</span> {
-          <span class="hljs-comment">// do things after todo is saved</span>
-        }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-          <span class="hljs-comment">// manage error</span>
-        });
-      }
-
-    }
-</code></pre>
-				<h3 id="use-table-annotation">use <code>@Table</code> annotation</h3>
-				<p>  Table annotation subscribe your model in the main data model. Then it could be
-				a part of the model migration to be represented on database and persisted.</p>
-				<p>  you can customize the name of the table and its version. Default name is the
-				class name and default version is 1.</p>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// Table name will be Todo and version will be 1</span>
-    <span class="hljs-meta">@Table</span>()
-    <span class="hljs-keyword">class</span> Todo <span class="hljs-keyword">extends</span> DbHelperModel {
-      <span class="hljs-comment">// declare properties and columns</span>
-    }
-</code></pre>
-				<pre><code class="lang-typescript">    <span class="hljs-meta">@Table</span>({
-      name: <span class="hljs-string">'Todos'</span> <span class="hljs-comment">// prefer the table name plural</span>
-    })
-    <span class="hljs-keyword">class</span> Todo <span class="hljs-keyword">extends</span> DbHelperModule {
-      <span class="hljs-comment">// declare properties and columns</span>
-    }
-</code></pre>
-				<h3 id="use-column-annotation">use <code>@Column</code> annotation</h3>
-				<p>  <code>@Column</code> is annotation for model fields to configure database column where the value will be stored. See database standard to clearly understand available column configurations. Current available properties are:</p>
-				<table>
-					<thead>
-						<tr>
-							<th>config name</th>
-							<th style="text-align:center">type</th>
-							<th style="text-align:center">default value</th>
-							<th>description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>name</td>
-							<td style="text-align:center">string</td>
-							<td style="text-align:center">field name</td>
-							<td>the column name</td>
-						</tr>
-						<tr>
-							<td>type</td>
-							<td style="text-align:center">string</td>
-							<td style="text-align:center"><code>&#39;string&#39;</code></td>
-							<td>type of the column, see sqlite types</td>
-						</tr>
-						<tr>
-							<td>primaryKey</td>
-							<td style="text-align:center">boolean</td>
-							<td style="text-align:center"><code>false</code></td>
-							<td>flag to set column primary key</td>
-						</tr>
-						<tr>
-							<td>autoIncrement</td>
-							<td style="text-align:center">boolean</td>
-							<td style="text-align:center"><code>false</code></td>
-							<td>flag to set column value auto incremented</td>
-						</tr>
-						<tr>
-							<td>unique</td>
-							<td style="text-align:center">boolean</td>
-							<td style="text-align:center"><code>false</code></td>
-							<td>flag to set column value unique</td>
-						</tr>
-						<tr>
-							<td>indexed</td>
-							<td style="text-align:center">boolean</td>
-							<td style="text-align:center"><code>false</code></td>
-							<td>flag to set column value indexed</td>
-						</tr>
-					</tbody>
-				</table>
-				<p>  And in action:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-keyword">import</span> { DbHelperModel } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-    <span class="hljs-keyword">import</span> { Table } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-    <span class="hljs-keyword">import</span> { Column } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-
-    <span class="hljs-meta">@Table</span>()
-    <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Todo <span class="hljs-keyword">extends</span> DbHelperModel {
-      <span class="hljs-meta">@Column</span>({
-        primaryKey: <span class="hljs-literal">true</span>,
-        autoIncremental: <span class="hljs-literal">true</span> <span class="hljs-comment">// no need to set type integer, auto incremental suggest it</span>
-      })
-      <span class="hljs-keyword">public</span> id: <span class="hljs-built_in">number</span>;
-
-      <span class="hljs-meta">@Column</span>() <span class="hljs-comment">// column name will be name, type string...</span>
-      <span class="hljs-keyword">public</span> label: <span class="hljs-built_in">string</span>;
-
-      <span class="hljs-meta">@Column</span>({
-        <span class="hljs-keyword">type</span>: <span class="hljs-string">'boolean'</span> <span class="hljs-comment">// set type boolean</span>
-      })
-      <span class="hljs-keyword">public</span> isDone: <span class="hljs-built_in">boolean</span>;
-    }
-</code></pre>
-				<hr>
-				<pre><code>/!\ TypeScript is a typed language but <span class="hljs-keyword">not</span> JavaScript.<span class="hljs-built_in"> Type </span>cannot be read <span class="hljs-keyword">from</span> field
-annotation. You have <span class="hljs-keyword">to</span> declare compatible<span class="hljs-built_in"> type </span>between field <span class="hljs-keyword">and</span> database column, <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> queries will fail.
-</code></pre><hr>
-				<h2 id="model-lifecycle">Model lifecycle</h2>
-				<p>  Model has a simple lifecycled linked to database management and supported by simple methods:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// Create model</span>
-    <span class="hljs-keyword">const</span> todo = <span class="hljs-keyword">new</span> Todo();
-    todo.save().subscribe(...);
-
-    <span class="hljs-comment">// Retrieve one model</span>
-    Select(Todo).where({id: <span class="hljs-keyword">this</span>.id}).setSize(<span class="hljs-number">1</span>).exec()
-      .subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;Todo&gt;</span>) =&gt;</span> {
-        <span class="hljs-keyword">if</span> (qr.rows.length) {
-          <span class="hljs-keyword">this</span>.todo = qr.rows.item(<span class="hljs-number">0</span>);
-        }
-      }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> <span class="hljs-keyword">this</span>.manageError(err));
-
-    <span class="hljs-comment">// Retrieve many model</span>
-    Select(Todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;Todo&gt;</span>) =&gt;</span> {
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; qr.rows.length; i++) {
-        <span class="hljs-keyword">this</span>.todos.push(qr.rows.item(i));
-      }
-    }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> <span class="hljs-keyword">this</span>.manageError(err));
-
-    <span class="hljs-comment">// Update model, simply save it ! Save do his magic to insert or update entry</span>
-    <span class="hljs-keyword">this</span>.todo.save().subscribe(...);
-
-    <span class="hljs-comment">// Delete model</span>
-    <span class="hljs-keyword">this</span>.todo.delete().subscribe(...);
-</code></pre>
-				<h2 id="queries">Queries</h2>
-				<p>All statement builder have the same design pattern. All building method return the statement itself
-				to chain conditions and being easily readable.</p>
-				<p>All statement are excuted with the <code>exec()</code> method and return a standard <code>Observable</code>.</p>
-				<h3 id="select">Select</h3>
-				<p>  Select provide multiple methods returning itself to chain operations et being more semantic.</p>
-				<p>  example:</p>
-				<pre><code class="lang-typescript">    Select(Todo)
-      .where({isDone: <span class="hljs-literal">false</span>})     <span class="hljs-comment">// set where clauses</span>
-      .groupBy(<span class="hljs-string">'dueDate'</span>)         <span class="hljs-comment">// set group by clause</span>
-      .orderBy(<span class="hljs-string">'createdAt DESC'</span>)  <span class="hljs-comment">// order items on one or many column</span>
-      .setSize(<span class="hljs-number">100</span>)         <span class="hljs-comment">// set size, default is 1000, this allow to paginate results</span>
-      .setPage(<span class="hljs-number">0</span>)           <span class="hljs-comment">// set page, default is 0, this allow to target specific page</span>
-      .projection([<span class="hljs-string">'id'</span>, <span class="hljs-string">'isDone'</span>, <span class="hljs-string">'label'</span>, <span class="hljs-string">'dueDate'</span>, <span class="hljs-string">'createdAt'</span>])
-        <span class="hljs-comment">// customize projection, this may be use to optimize query on big object</span>
-        <span class="hljs-comment">// but should not be used if not perf problem is detected</span>
-      .subscribe(...);
-</code></pre>
-				<p>  <code>Select(model: {new(): T})</code> is a templated function, so that the subscribed success method will directly give
-				you instances of the model</p>
-				<pre><code class="lang-typescript">    Select(Todo).subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;Todo&gt;</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (qr.rows.length) {
-        <span class="hljs-keyword">const</span> todo = qr.rows.item(<span class="hljs-number">0</span>); <span class="hljs-comment">// todo item is an instance of Todo without any effort</span>
-
-        <span class="hljs-comment">// do things with your newly instanciated Todo instance !!</span>
-      }
-    });
-</code></pre>
-				<h3 id="insert">Insert</h3>
-				<p>  Insert allow single model insertion:</p>
-				<pre><code class="lang-typescript">    Insert(todo).exec().subscribe(...);
-</code></pre>
-				<p>  But prefer use save method on model <code>todo.save()</code>.</p>
-				<p>  Insert is a better solution to insert many model, the helper will optimize insertions:</p>
-				<pre><code class="lang-typescript">    Insert(todos).exec().subscribe(...);
-</code></pre>
-				<h3 id="update">Update</h3>
-				<p>  Update is an helper to update a single model:</p>
-				<pre><code class="lang-typescript">    Update(todo).exec().subscribe(...);
-</code></pre>
-				<p>  but you should prefer use <code>todo.save()</code>;</p>
-				<p>  Otherwise it could be used to update multiple entries in one query:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// set done on all passed todos</span>
-    <span class="hljs-keyword">const</span> dueDatePassedClause = <span class="hljs-keyword">new</span> Clause();
-    dueDatePassedClause.key = <span class="hljs-string">'dueDate'</span>;
-    dueDatePassedClause.value = (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()).getTime();
-    dueDatePassedClause.comparator = Clause.COMPARATORS.LTE
-    Update(Todo).set({isDone: <span class="hljs-literal">true</span>}).where(dueDatePassedClause).exec().subscribe(...);
-
-    <span class="hljs-comment">// alternativelly you could do undone task in one week</span>
-    Update(Todo)
-      .set({dueDate: onWeekLaterDate.getTime()})
-      .where(dueDatePassedClause).where({isDone: <span class="hljs-literal">false</span>})
-      .exec().subscribe(...);
-</code></pre>
-				<h3 id="delete">Delete</h3>
-				<p>  Delete is an helper to delete a single model:</p>
-				<pre><code class="lang-typescript">    Update(todo).exec().subscribe(...);
-</code></pre>
-				<p>  but you should prefer use <code>todo.delete()</code>;</p>
-				<p>  Otherwise it could be used to delete multiple entries in one query:</p>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// delete done todos</span>
-    Delete(Todo).where({isDone: <span class="hljs-literal">true</span>}).exec().subscribe(...);
-
-    <span class="hljs-comment">// delete all todos</span>
-    Delete(Todo).exec().subscribe(...);
-</code></pre>
-				<h3 id="rawquery">RawQuery</h3>
-				<p>  RawQuery allow integrators to start unmanaged queries but it is strongly deprecated
-				to use it only this API. This could totally suppress the interest of using this module.</p>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// Select des todo dont l'état done est défini dans la table config</span>
-    <span class="hljs-comment">// Les requête imbriqué n'étant pas encore géré, on peut imaginer une requête</span>
-    <span class="hljs-comment">// de ce type</span>
-    RawQuery(<span class="hljs-string">'SELECT * FROM Todo WHERE isDone ='</span> +
-      <span class="hljs-string">'(SELECT value FROM Config WHERE name = (?))'</span>,
-      [<span class="hljs-string">'defaultDoneState'</span>], <span class="hljs-comment">// params of the query</span>
-      <span class="hljs-number">50</span>, <span class="hljs-comment">// page size of the query</span>
-      <span class="hljs-number">0</span>);
-</code></pre>
-				<p>  It&#39;s planed to manage complex query soon, be carefull about updates to benefit
-				optimizations and code lisibility.</p>
-				<h2 id="mastering-clauses">Mastering Clauses</h2>
-				<h3 id="standard-clauses-manipulation">Standard Clauses manipulation</h3>
-				<h3 id="semantic-use-of-clauses">Semantic use of clauses</h3>
-				<pre><code>Feature will be added <span class="hljs-keyword">on</span> future release
-</code></pre><h3 id="clause-imbrication">Clause imbrication</h3>
-				<pre><code>Feature will be added <span class="hljs-keyword">on</span> future release
-</code></pre><h3 id="query-imbrication-in-clause">Query imbrication in clause</h3>
-				<pre><code>Feature will be added <span class="hljs-keyword">on</span> future release
-</code></pre><h2 id="connectors">Connectors</h2>
-				<h3 id="cordova-sqlite-storage">cordova-sqlite-storage</h3>
-				<p><code>cordova-sqlite-storage</code> is the most use plugin by mobile developper using cordova. This connector
-				could be the most use with this module. This how to set it up:</p>
-				<pre><code class="lang-typescript">  <span class="hljs-keyword">import</span> { NgDbHelperModuleConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { CordovaSqliteConnector } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { CordovaSqliteConnectorConfiguration } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-
-  <span class="hljs-comment">// Create a function that build the module configuration</span>
-  <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDbHelperModuleConfiguration</span>(<span class="hljs-params"></span>): <span class="hljs-title">NgDbHelperModuleConfig</span> </span>{
-    <span class="hljs-comment">// This configuration is for CordovaSqliteConnector</span>
-    <span class="hljs-keyword">const</span> connectorConfig = <span class="hljs-keyword">new</span> CordovaSqliteConnectorConfiguration();
-
-    <span class="hljs-comment">// Set up the configuration on the connector</span>
-    <span class="hljs-keyword">const</span> connector = <span class="hljs-keyword">new</span> CordovaSqliteConnector(connectorConfig);
-
-    <span class="hljs-comment">// create the module configuration instance</span>
-    <span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfig();
-
-    <span class="hljs-comment">// Default module connectors are model migration managers too. you</span>
-    <span class="hljs-comment">// can override migration behaviour from connector's configurations</span>
-    config.modelMigration = connector;
-    config.queryConnector = connector;
-
-    config.version = <span class="hljs-string">'1'</span>;
-    <span class="hljs-keyword">return</span> config;
-  }
-</code></pre>
-				<p>As default configuration database will be created in the standard directory and at each version
-					change, new tables are created. This is options given to you by
-				CordovaSqliteConnectorConfiguration by customizing its properties:</p>
+				<!--  -->
+				<h2 id="usage-index">Usage index</h2>
 				<ul>
-					<li><code>dbName</code> : filename for database on target device, default value is <code>&#39;database.db&#39;</code>,</li>
-					<li><code>doCopyDb</code> : flag to create database by copy, other configurations provides source informations, default value is false,</li>
-					<li><code>sourceDbName</code> : the db name to copy from the project files, default value is <code>&#39;www/assets/&#39;</code>,</li>
-					<li><code>sourceDbPath</code> : path to the db relative to the root of the project, default is <code>&#39;database.db&#39;</code>,</li>
-					<li><code>location</code> : see <code>cordova-sqlite-storage</code> location parameter on database open method, default is <code>&#39;location&#39;</code>,</li>
-					<li><code>initDatamodel</code> : function called on model initialization, if you add your custom logic, part of previous configuration will not be needed, method signature: <code>(dataModel: DataModel, db: SQLiteDatabase) =&gt; Observable&lt;any&gt;</code></li>
-					<li><p><code>upgradeDataModel</code> : this function is the function to replace to manage model migration, see the method signature: <code>(dataModel: DataModel, db: SQLiteDatabase, oldVarsion: number) =&gt; Observable&lt;any&gt;</code>. New data model share the new version number and old version is passed too. DataModel object is generated from annotation and the version putted from the configuration, all is here to write migration script.</p>
-						<h3 id="websql-connector">Websql connector</h3>
-					</li>
+					<li><a href="./chapters/initialization.md">Initialization</a></li>
 				</ul>
-				<p><code>Websql</code> is the standard sql storage for browser, see W3C specification. This connector is the only usable for browser. Be carefull on targer browser, some old browser do not support this API. In this case, the connecto will raise an error.</p>
-				<pre><code class="lang-typescript">  <span class="hljs-keyword">import</span> { NgDbHelperModuleConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { WebsqlConnector } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { WebsqlConnectorConfiguration } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-
-  <span class="hljs-comment">// Create a function that build the module configuration</span>
-  <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDbHelperModuleConfiguration</span>(<span class="hljs-params"></span>): <span class="hljs-title">NgDbHelperModuleConfig</span> </span>{
-    <span class="hljs-comment">// This configuration is for CordovaSqliteConnector</span>
-    <span class="hljs-keyword">const</span> connectorConfig = <span class="hljs-keyword">new</span> WebsqlConnectorConfiguration();
-
-    <span class="hljs-comment">// Set up the configuration on the connector</span>
-    <span class="hljs-keyword">const</span> connector = <span class="hljs-keyword">new</span> WebsqlConnector(connectorConfig);
-
-    <span class="hljs-comment">// create the module configuration instance</span>
-    <span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfig();
-
-    <span class="hljs-comment">// Default module connectors are model migration managers too. you</span>
-    <span class="hljs-comment">// can override migration behaviour from connector's configurations</span>
-    config.modelMigration = connector;
-    config.queryConnector = connector;
-
-    config.version = <span class="hljs-string">'1'</span>;
-    <span class="hljs-keyword">return</span> config;
-  }
-</code></pre>
-				<p>As default configuration database will be created in the standard directory and at each version
-					change, new tables are created. This is options given to you by
-				CordovaSqliteConnectorConfiguration by customizing its properties:</p>
-				<ul>
-					<li><code>dbName</code> : filename for database,</li>
-					<li><code>initDatamodel</code> : function called on model initialization, method signature: <code>(dataModel: DataModel, db: SQLiteDatabase) =&gt; Observable&lt;any&gt;</code></li>
-					<li><p><code>upgradeDataModel</code> : this function is the function to replace to manage model migration, see the method signature: <code>(dataModel: DataModel, db: SQLiteDatabase, oldVarsion: number) =&gt; Observable&lt;any&gt;</code>. New data model share the new version number and old version is passed too. DataModel object is generated from annotation and the version putted from the configuration, all is here to write migration script.</p>
-						<h3 id="mixed-cordova-websql-connector">Mixed cordova-websql connector</h3>
-					</li>
-				</ul>
-				<p>This connector is the most adaptive connector. It switch on one of the previous connector considering support and is cordova first.
-				As WebsqlConnectorConfiguration is inclusive compared to CordovaSqliteConnectorConfiguration, it is the second configuration that is used to configure the connector :</p>
-				<pre><code class="lang-typescript">  <span class="hljs-keyword">import</span> { NgDbHelperModuleConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { MixedCordovaSqliteWebsqlConnector } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-  <span class="hljs-keyword">import</span> { CordovaSqliteConnectorConfiguration } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-db-helper'</span>;
-
-  <span class="hljs-comment">// Create a function that build the module configuration</span>
-  <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDbHelperModuleConfiguration</span>(<span class="hljs-params"></span>): <span class="hljs-title">NgDbHelperModuleConfig</span> </span>{
-    <span class="hljs-comment">// This configuration is for CordovaSqliteConnector</span>
-    <span class="hljs-keyword">const</span> connectorConfig = <span class="hljs-keyword">new</span> CordovaSqliteConnectorConfiguration();
-
-    <span class="hljs-comment">// Set up the configuration on the connector</span>
-    <span class="hljs-keyword">const</span> connector = <span class="hljs-keyword">new</span> MixedCordovaSqliteWebsqlConnector(connectorConfig);
-
-    <span class="hljs-comment">// create the module configuration instance</span>
-    <span class="hljs-keyword">const</span> config = <span class="hljs-keyword">new</span> NgDbHelperModuleConfig();
-
-    <span class="hljs-comment">// Default module connectors are model migration managers too. you</span>
-    <span class="hljs-comment">// can override migration behaviour from connector's configurations</span>
-    config.modelMigration = connector;
-    config.queryConnector = connector;
-
-    config.version = <span class="hljs-string">'1'</span>;
-    <span class="hljs-keyword">return</span> config;
-  }
-</code></pre>
-				<p>As default configuration database will be created in the standard directory and at each version
-					change, new tables are created. This is options given to you by
-				CordovaSqliteConnectorConfiguration by customizing its properties:</p>
-				<ul>
-					<li><code>dbName</code> : filename for database on target device, default value is <code>&#39;database.db&#39;</code>,</li>
-					<li><code>doCopyDb</code> : flag to create database by copy, other configurations provides source informations, default value is false,</li>
-					<li><code>sourceDbName</code> : the db name to copy from the project files, default value is <code>&#39;www/assets/&#39;</code>,</li>
-					<li><code>sourceDbPath</code> : path to the db relative to the root of the project, default is <code>&#39;database.db&#39;</code>,</li>
-					<li><code>location</code> : see <code>cordova-sqlite-storage</code> location parameter on database open method, default is <code>&#39;location&#39;</code>,</li>
-					<li><code>initDatamodel</code> : function called on model initialization, if you add your custom logic, part of previous configuration will not be needed, method signature: <code>(dataModel: DataModel, db: SQLiteDatabase) =&gt; Observable&lt;any&gt;</code></li>
-					<li><p><code>upgradeDataModel</code> : this function is the function to replace to manage model migration, see the method signature: <code>(dataModel: DataModel, db: SQLiteDatabase, oldVarsion: number) =&gt; Observable&lt;any&gt;</code>. New data model share the new version number and old version is passed too. DataModel object is generated from annotation and the version putted from the configuration, all is here to write migration script.</p>
-						<h3 id="customize-your-own-connector">Customize your own connector</h3>
-					</li>
-				</ul>
-				<p>if you need to have your own connector, an interface is provided to build it. See QueryConnector documentation.</p>
-				<h2 id="modelmigration">ModelMigration</h2>
-				<h3 id="understand-migration-workflow">Understand migration workflow</h3>
-				<h3 id="existing-migration">Existing migration</h3>
-				<h3 id="customize-your-migrations">Customize your migrations</h3>
-				<h1 id="todos">Todos</h1>
-				<p>  Contact me to suggest missing things on this todo list!</p>
-				<ul>
-					<li>[-] Queries<ul>
-							<li>[x] select</li>
-							<li>[x] insert</li>
-							<li>[x] update</li>
-							<li>[x] delete</li>
-							<li>[-] Add batch queries feature</li>
-							<li>[-] Manage join tables</li>
-							<li>[-] Add sub queries management to clauses</li>
-							<li>[-] Add sub clause group</li>
-							<li>[-] Allow semantic clause complexity</li>
-							<li>[-] Batch queries</li>
-						</ul>
-					</li>
-					<li>[-] Models<ul>
-							<li>[x] Table annotation</li>
-							<li>[x] Column annotation</li>
-							<li>[-] Foreign models</li>
-							<li>[-] Foreign keys</li>
-							<li>[-] Manage more types like Date</li>
-							<li>[-] constraint management</li>
-							<li>[-] Create a base service with usefull generic functions</li>
-						</ul>
-					</li>
-					<li>[-] Connectors<ul>
-							<li>[x] standard interface</li>
-							<li>[x] plugable connector on init config</li>
-							<li>[x] cordova-sqlite-storage connector</li>
-							<li>[x] Websql connector</li>
-							<li>[x] Hybrid connector detecting cordova-sqlite-storage or Websql connector support and activate it</li>
-							<li>[-] Batch queries</li>
-							<li>[-] Default connector configuration</li>
-						</ul>
-					</li>
-					<li>[-] Design<ul>
-							<li>[-] Pass some possible values for field to enum</li>
-						</ul>
-					</li>
-				</ul>
-				<h1 id="authors">Authors</h1>
-				<ul>
-					<li>Olivier Margarit</li>
-				</ul>
-				<h1 id="license">License</h1>
+				<h2 id="license">License</h2>
 				<p>This project is licensed under the MIT License - see <a href="LICENSE">LICENSE</a> file for details.</p>
 			</div>
 		</div>
@@ -725,19 +159,19 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/pendingdbquery.html" class="tsd-kind-icon">Pending<wbr>DbQuery</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="classes/querycount.html" class="tsd-kind-icon">Query<wbr>Count</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-private tsd-is-external">
+					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/querycreate.html" class="tsd-kind-icon">Query<wbr>Create</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="classes/querydelete.html" class="tsd-kind-icon">Query<wbr>Delete</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/queryerror.html" class="tsd-kind-icon">Query<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="classes/queryinsert.html" class="tsd-kind-icon">Query<wbr>Insert</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
@@ -752,13 +186,13 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					<li class=" tsd-kind-class tsd-is-private tsd-is-external">
 						<a href="classes/queryresultwrapper.html" class="tsd-kind-icon">Query<wbr>Result<wbr>Wrapper</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="classes/queryselect.html" class="tsd-kind-icon">Query<wbr>Select</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="classes/queryupdate.html" class="tsd-kind-icon">Query<wbr>Update</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-external">
+					<li class=" tsd-kind-class tsd-is-private tsd-is-external">
 						<a href="classes/relationtype.html" class="tsd-kind-icon">Relation<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
@@ -779,13 +213,13 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/websqlconnectorconfiguration.html" class="tsd-kind-icon">Websql<wbr>Connector<wbr>Configuration</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-private tsd-is-external">
 						<a href="interfaces/iclause.html" class="tsd-kind-icon">IClause</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-private tsd-is-external">
 						<a href="interfaces/ijoin.html" class="tsd-kind-icon">IJoin</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-private tsd-is-external">
 						<a href="interfaces/iqueryhelper.html" class="tsd-kind-icon">IQuery<wbr>Helper</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
@@ -818,7 +252,7 @@ annotation. You have <span class="hljs-keyword">to</span> declare compatible<spa
 					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
 						<a href="globals.html#join" class="tsd-kind-icon">Join</a>
 					</li>
-					<li class=" tsd-kind-function tsd-is-external">
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
 						<a href="globals.html#primarykey" class="tsd-kind-icon">Primary<wbr>Key</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external">

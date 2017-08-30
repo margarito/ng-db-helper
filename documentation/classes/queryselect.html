@@ -70,9 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>QuerySelect is private part of the APi.
-								For design reasons this class should not be used directly and
-							will move later. Use this class with <a href="../globals.html#select">Select</a> function.</p>
+						<dd><p>QuerySelect</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>For design reasons this class should not be used directly. Use this class with <a href="../globals.html#select">Select</a> function.</p>
 						</dd>
 						<dt>example</dt>
 						<dd><pre><code class="lang-typescript"><span class="hljs-comment">// select todos</span>
@@ -99,7 +100,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<h4>T<span class="tsd-signature-symbol">: </span><a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>exdends DbHelperModel, a model declared with table and column annotations</p>
+								<p>@extends DbHelperModel a model declared with table and column annotations</p>
 							</div>
 						</div>
 					</li>
@@ -129,10 +130,10 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="queryselect.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-external">
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="queryselect.html#alias" class="tsd-kind-icon">alias</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="queryselect.html#alias" class="tsd-kind-icon">alias</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="queryselect.html#grpby" class="tsd-kind-icon">grp<wbr>By</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="queryselect.html#joins" class="tsd-kind-icon">joins</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="queryselect.html#model" class="tsd-kind-icon">model</a></li>
@@ -177,7 +178,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L88">lib/core/models/queries/select.model.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L93">lib/core/models/queries/select.model.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -206,7 +207,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L96">lib/core/models/queries/select.model.ts:96</a></li>
+															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L101">lib/core/models/queries/select.model.ts:101</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
@@ -220,18 +221,25 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="alias" class="tsd-anchor"></a>
-					<h3>alias</h3>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> alias</h3>
 					<div class="tsd-signature tsd-kind-icon">alias<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/iqueryhelper.html">IQueryHelper</a>.<a href="../interfaces/iqueryhelper.html#alias">alias</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L88">lib/core/models/queries/select.model.ts:88</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L93">lib/core/models/queries/select.model.ts:93</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>{string} alias the query alias to prevent column collision</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="grpby" class="tsd-anchor"></a>
@@ -239,13 +247,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">grp<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L68">lib/core/models/queries/select.model.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L69">lib/core/models/queries/select.model.ts:69</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>grpBy is the group by condition of the query</p>
+							<dd><p>{string} grpBy is the group by condition of the query</p>
 							</dd>
 						</dl>
 					</div>
@@ -256,13 +264,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">joins<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ijoin.html" class="tsd-signature-type">IJoin</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&lt;IJoin[]&gt;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L49">lib/core/models/queries/select.model.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L51">lib/core/models/queries/select.model.ts:51</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>joins</p>
+							<dd><p>{Array<IJoin>} joins list of join for the query</p>
 							</dd>
 						</dl>
 					</div>
@@ -273,7 +281,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L96">lib/core/models/queries/select.model.ts:96</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L101">lib/core/models/queries/select.model.ts:101</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -293,7 +301,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L96">lib/core/models/queries/select.model.ts:96</a></li>
+												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L101">lib/core/models/queries/select.model.ts:101</a></li>
 											</ul>
 										</aside>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
@@ -308,13 +316,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">ordr<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L74">lib/core/models/queries/select.model.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L75">lib/core/models/queries/select.model.ts:75</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>ordrBy order by condition for the query</p>
+							<dd><p>{string} ordrBy order by condition for the query</p>
 							</dd>
 						</dl>
 					</div>
@@ -325,13 +333,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L86">lib/core/models/queries/select.model.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L87">lib/core/models/queries/select.model.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>page, the paginated number of the query select</p>
+							<dd><p>{number} page the paginated number of the query select</p>
 							</dd>
 						</dl>
 					</div>
@@ -342,13 +350,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">proj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L62">lib/core/models/queries/select.model.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L63">lib/core/models/queries/select.model.ts:63</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>proj is the query projection</p>
+							<dd><p>{Array<string>} proj is the query projection</p>
 							</dd>
 						</dl>
 					</div>
@@ -359,7 +367,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1000</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L80">lib/core/models/queries/select.model.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L81">lib/core/models/queries/select.model.ts:81</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -373,17 +381,16 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;SELECT&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"SELECT"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;SELECT&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L44">lib/core/models/queries/select.model.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L45">lib/core/models/queries/select.model.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>whereClauses is <a href="clausegroup.html">ClauseGroup</a> instance containing
-								where clauses</p>
+							<dt>constant</dt>
+							<dd><p>{string} type query type</p>
 							</dd>
 						</dl>
 					</div>
@@ -394,14 +401,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<div class="tsd-signature tsd-kind-icon">where<wbr>Clauses<span class="tsd-signature-symbol">:</span> <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L56">lib/core/models/queries/select.model.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L57">lib/core/models/queries/select.model.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>whereClauses is <a href="clausegroup.html">ClauseGroup</a> instance containing
-								where clauses</p>
+							<dd><p>{ClauseGroup} whereClauses clause group instance containing where clauses</p>
 							</dd>
 						</dl>
 					</div>
@@ -419,7 +425,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L282">lib/core/models/queries/select.model.ts:282</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L315">lib/core/models/queries/select.model.ts:315</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -445,10 +451,21 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L98">lib/core/models/queries/select.model.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L111">lib/core/models/queries/select.model.ts:111</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>copy method to copy QuerySelect</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>the query select copy</p>
 						</li>
 					</ul>
 				</section>
@@ -462,7 +479,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L320">lib/core/models/queries/select.model.ts:320</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L353">lib/core/models/queries/select.model.ts:353</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -473,7 +490,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>observable to subscribe</p>
+							<p>observable to subscribe and retrieve typed result</p>
 						</li>
 					</ul>
 				</section>
@@ -487,10 +504,21 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L326">lib/core/models/queries/select.model.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L367">lib/core/models/queries/select.model.ts:367</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>exec to execute the query and asynchronously retreive result.</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>observable to subscribe and retrieve result</p>
 						</li>
 					</ul>
 				</section>
@@ -504,10 +532,18 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L260">lib/core/models/queries/select.model.ts:260</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L293">lib/core/models/queries/select.model.ts:293</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>getJoinProjection get the projection of join query</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>the projection</p>
 						</li>
 					</ul>
 				</section>
@@ -521,10 +557,18 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L206">lib/core/models/queries/select.model.ts:206</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L233">lib/core/models/queries/select.model.ts:233</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>getProjectedTable get virtual table representing the result table expected</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="dbtable.html" class="tsd-signature-type">DbTable</a></h4>
+							<p>the virtual table</p>
 						</li>
 					</ul>
 				</section>
@@ -538,7 +582,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L162">lib/core/models/queries/select.model.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L183">lib/core/models/queries/select.model.ts:183</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -572,16 +616,27 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L118">lib/core/models/queries/select.model.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L139">lib/core/models/queries/select.model.ts:139</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>join add query join to query select</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>joinQuery: <a href="../interfaces/ijoin.html" class="tsd-signature-type">IJoin</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ijoin.html" class="tsd-signature-type">IJoin</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>join query or list of join queries</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>the instance itself to chain operation</p>
 						</li>
 					</ul>
 				</section>
@@ -595,7 +650,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L175">lib/core/models/queries/select.model.ts:175</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L196">lib/core/models/queries/select.model.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -629,7 +684,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L113">lib/core/models/queries/select.model.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L126">lib/core/models/queries/select.model.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -664,7 +719,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L188">lib/core/models/queries/select.model.ts:188</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L209">lib/core/models/queries/select.model.ts:209</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -698,7 +753,7 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L201">lib/core/models/queries/select.model.ts:201</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L222">lib/core/models/queries/select.model.ts:222</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -726,29 +781,29 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 					<a name="where" class="tsd-anchor"></a>
 					<h3>where</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/select.model.ts#L146">lib/core/models/queries/select.model.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/select.model.ts#L167">lib/core/models/queries/select.model.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<dl class="tsd-comment-tags">
 									<dt>method</dt>
 									<dd><p>where is the method to add clauses to the where statement of the query
-										see <a href="clause.html">Clause</a> or <a href="clausegroup.html">ClauseGroup</a></p>
+										see <a href="clause.html">Clause</a> or <a href="clausegroup.html">ClauseGroup</a> or <a href="compositeclause.html">CompositeClause</a></p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>ClauseGroup, Clause, Clause list of dictionnary of clauses</p>
+										<p>where clauses</p>
 									</div>
 								</li>
 							</ul>
@@ -771,13 +826,13 @@ Select(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().su
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="queryselect.html" class="tsd-kind-icon">Query<wbr>Select</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
 								<a href="queryselect.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="queryselect.html#alias" class="tsd-kind-icon">alias</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">

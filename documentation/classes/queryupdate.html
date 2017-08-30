@@ -70,9 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>QueryUpdate is private part of the APi.
-								For design reasons this class should not be used directly and
-							will move later. Use this class with <a href="../globals.html#update">Update</a> function.</p>
+						<dd><p>QueryUpdate</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>For design reasons this class should not be used directly. Use this class with <a href="../globals.html#update">Update</a> function.</p>
 						</dd>
 						<dt>example</dt>
 						<dd><pre><code class="lang-typescript"><span class="hljs-comment">// update todo object</span>
@@ -99,7 +100,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<h4>T<span class="tsd-signature-symbol">: </span><a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>exdends <a href="dbhelpermodel.html">DbHelperModel</a>, a model declared with table and column annotations</p>
+								<p>@extends DbHelperModel a model declared with table and column annotations</p>
 							</div>
 						</div>
 					</li>
@@ -158,7 +159,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L54">lib/core/models/queries/update.model.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L56">lib/core/models/queries/update.model.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -174,7 +175,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 									<h5>model: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>extention</p>
+											<p>model instance or model</p>
 										</div>
 									</div>
 								</li>
@@ -192,28 +193,28 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L62">lib/core/models/queries/update.model.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L64">lib/core/models/queries/update.model.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>extention</p>
+							<p>model instance or model</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;UPDATE&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"UPDATE"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;UPDATE&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L40">lib/core/models/queries/update.model.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L42">lib/core/models/queries/update.model.ts:42</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>type the type of statement, should not be modified</p>
+							<dt>constant</dt>
+							<dd><p>{string} type the type of statement, should not be modified</p>
 							</dd>
 						</dl>
 					</div>
@@ -224,13 +225,13 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 					<div class="tsd-signature tsd-kind-icon">value<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L54">lib/core/models/queries/update.model.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L56">lib/core/models/queries/update.model.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>valueSet, set of values where key are column name and value,
+							<dd><p>{{[index: string]: any}} valueSet set of values where key are column name and value,
 								the value to update.</p>
 							</dd>
 						</dl>
@@ -250,13 +251,13 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 					<div class="tsd-signature tsd-kind-icon">where<wbr>Clauses<span class="tsd-signature-symbol">:</span> <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L47">lib/core/models/queries/update.model.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L49">lib/core/models/queries/update.model.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>whereClauses is <a href="clausegroup.html">ClauseGroup</a> instance containing
+							<dd><p>{ClauseGroup} whereClauses clause group instance containing
 								where clauses</p>
 							</dd>
 						</dl>
@@ -275,7 +276,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L171">lib/core/models/queries/update.model.ts:171</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L173">lib/core/models/queries/update.model.ts:173</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -301,7 +302,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L218">lib/core/models/queries/update.model.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L220">lib/core/models/queries/update.model.ts:220</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -326,7 +327,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L117">lib/core/models/queries/update.model.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L119">lib/core/models/queries/update.model.ts:119</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -351,7 +352,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L153">lib/core/models/queries/update.model.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L155">lib/core/models/queries/update.model.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -376,7 +377,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L93">lib/core/models/queries/update.model.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L95">lib/core/models/queries/update.model.ts:95</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -395,6 +396,9 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 							<ul class="tsd-parameters">
 								<li>
 									<h5>dict: <span class="tsd-signature-type">object</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>map of column and values to update.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-index-signature">
 											<h5><span class="tsd-signature-symbol">[</span>index: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
@@ -411,13 +415,13 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 					<a name="where" class="tsd-anchor"></a>
 					<h3>where</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="queryupdate.html" class="tsd-signature-type">QueryUpdate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="queryupdate.html" class="tsd-signature-type">QueryUpdate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/update.model.ts#L73">lib/core/models/queries/update.model.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/update.model.ts#L75">lib/core/models/queries/update.model.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,9 +435,9 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>ClauseGroup, Clause, Clause list of dictionnary of clauses</p>
+										<p>where clauses</p>
 									</div>
 								</li>
 							</ul>
@@ -456,7 +460,7 @@ Update(todo).exec().subscribe(<span class="hljs-function">(<span class="hljs-par
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="queryupdate.html" class="tsd-kind-icon">Query<wbr>Update</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">

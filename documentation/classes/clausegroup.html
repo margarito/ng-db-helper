@@ -70,7 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>ClauseGroup is a group of clause computed at the same
+						<dd><p>ClauseGroup</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>is a group of clause computed at the same
 								level. Clause group are used for where statement of Select, Update
 							and Delete statement.</p>
 						</dd>
@@ -148,13 +151,13 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Clause<wbr>Group<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">?: </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Clause<wbr>Group<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">?: </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause-group.model.ts#L43">lib/core/models/queries/clause-group.model.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause-group.model.ts#L51">lib/core/models/queries/clause-group.model.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -167,10 +170,10 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clauses: <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> clauses: <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>ClauseGroup, Clause, Clause list of dictionnary of clauses</p>
+											<p>clauses to add to the group</p>
 										</div>
 									</div>
 								</li>
@@ -188,9 +191,16 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">clauses<span class="tsd-signature-symbol">:</span> <a href="../interfaces/iclause.html" class="tsd-signature-type">IClause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&lt;IClause[]&gt;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause-group.model.ts#L43">lib/core/models/queries/clause-group.model.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause-group.model.ts#L51">lib/core/models/queries/clause-group.model.ts:51</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>{Array<IClause>} clauses array of clause to append in the same group</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
@@ -199,13 +209,13 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<a name="add" class="tsd-anchor"></a>
 					<h3>add</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/iclause.html" class="tsd-signature-type">IClause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/iclause.html" class="tsd-signature-type">IClause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause-group.model.ts#L76">lib/core/models/queries/clause-group.model.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause-group.model.ts#L84">lib/core/models/queries/clause-group.model.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -229,9 +239,9 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>clauses: <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/iclause.html" class="tsd-signature-type">IClause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+									<h5>clauses: <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/iclause.html" class="tsd-signature-type">IClause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>ClauseGroup, Clause, Clause list of dictionnary of clauses</p>
+										<p>clauses to add to the clause group</p>
 									</div>
 								</li>
 							</ul>
@@ -249,7 +259,7 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause-group.model.ts#L103">lib/core/models/queries/clause-group.model.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause-group.model.ts#L111">lib/core/models/queries/clause-group.model.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

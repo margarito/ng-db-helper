@@ -70,13 +70,15 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>QueryCount is private part of the APi.
-								For design reasons this class should not be used directly and
-							will move later. Use this class with <a href="../globals.html#count">Count</a> function.</p>
+						<dd><p>QueryCount</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>For design reasons this class should not be used directly.
+							Prefer use <a href="../globals.html#count">Count</a> function.</p>
 						</dd>
 						<dt>example</dt>
 						<dd><pre><code class="lang-typescript"><span class="hljs-comment">// count todos</span>
-Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().subscribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;<span class="hljs-built_in">number</span>&gt;</span>) =&gt;</span> {
+Count(Select(Todo).where({isDone: <span class="hljs-literal">false</span>}})).exec().subscribe(<span class="hljs-function">(<span class="hljs-params">cout: <span class="hljs-built_in">number</span></span>) =&gt;</span> {
      <span class="hljs-comment">// do something with the result...</span>
 }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
      <span class="hljs-comment">// do something with the error...</span>
@@ -87,7 +89,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<dd><p>Olivier Margarit</p>
 						</dd>
 						<dt>since</dt>
-						<dd><p>0.1</p>
+						<dd><p>0.2</p>
 						</dd>
 					</dl>
 				</div>
@@ -99,7 +101,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<h4>T<span class="tsd-signature-symbol">: </span><a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>exdends <a href="dbhelpermodel.html">DbHelperModel</a>, a model declared with table and column annotations</p>
+								<p>@extends DbHelperModel a model declared with table and column annotations</p>
 							</div>
 						</div>
 					</li>
@@ -151,13 +153,25 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L34">lib/core/models/queries/count.model.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/count.model.ts#L36">lib/core/models/queries/count.model.ts:36</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>constructor</dt>
+									<dd><p>create instance of QueryCount</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>querySelect: <a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the query to count the result</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="querycount.html" class="tsd-signature-type">QueryCount</a></h4>
@@ -173,9 +187,14 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Select<span class="tsd-signature-symbol">:</span> <a href="queryselect.html" class="tsd-signature-type">QuerySelect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L36">lib/core/models/queries/count.model.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/count.model.ts#L43">lib/core/models/queries/count.model.ts:43</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>the query to count the result</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
@@ -190,7 +209,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L45">lib/core/models/queries/count.model.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/count.model.ts#L52">lib/core/models/queries/count.model.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,7 +235,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/count.model.ts#L55">lib/core/models/queries/count.model.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/count.model.ts#L62">lib/core/models/queries/count.model.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -227,7 +246,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>observable to subscribe</p>
+							<p>observable to subscribe and returning a count number as result</p>
 						</li>
 					</ul>
 				</section>
@@ -245,7 +264,7 @@ Count(Todo).where({isDone: <span class="hljs-literal">false</span>}}).exec().sub
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="querycount.html" class="tsd-kind-icon">Query<wbr>Count</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">

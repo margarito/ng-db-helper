@@ -70,7 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>QueryPart is private part of the API.
+						<dd><p>QueryPart</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>This class is private part of the API.
 							It is an intermidiate query object for builded query parts</p>
 						</dd>
 						<dt>author</dt>
@@ -120,13 +123,13 @@
 					<div class="tsd-signature tsd-kind-icon">content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/query-part.model.ts#L15">lib/core/models/queries/query-part.model.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/query-part.model.ts#L19">lib/core/models/queries/query-part.model.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>content, this string part of the query</p>
+							<dd><p>{string} content string part of the query</p>
 							</dd>
 						</dl>
 					</div>
@@ -137,13 +140,13 @@
 					<div class="tsd-signature tsd-kind-icon">params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&lt;any[]&gt;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/query-part.model.ts#L21">lib/core/models/queries/query-part.model.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/query-part.model.ts#L25">lib/core/models/queries/query-part.model.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>params, the parametrs of this part of query</p>
+							<dd><p>{Array<any>} params the parameters of this part of query</p>
 							</dd>
 						</dl>
 					</div>
@@ -161,7 +164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/query-part.model.ts#L32">lib/core/models/queries/query-part.model.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/query-part.model.ts#L36">lib/core/models/queries/query-part.model.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -177,7 +180,7 @@
 								<li>
 									<h5>queryPart: <a href="querypart.html" class="tsd-signature-type">QueryPart</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>another query part</p>
+										<p>another query part to append</p>
 									</div>
 								</li>
 							</ul>
@@ -196,16 +199,30 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/query-part.model.ts#L52">lib/core/models/queries/query-part.model.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/query-part.model.ts#L76">lib/core/models/queries/query-part.model.ts:76</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>appendContent append query content to the query part</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>content: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the string part to append</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="querypart.html" class="tsd-signature-type">QueryPart</a></h4>
+							<p>the query part instance to chain operation</p>
 						</li>
 					</ul>
 				</section>
@@ -219,16 +236,30 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/query-part.model.ts#L38">lib/core/models/queries/query-part.model.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/query-part.model.ts#L52">lib/core/models/queries/query-part.model.ts:52</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>appendSub append sub query part</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>queryPart: <a href="querypart.html" class="tsd-signature-type">QueryPart</a><span class="tsd-signature-symbol"> | </span><a href="dbquery.html" class="tsd-signature-type">DbQuery</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the query part to append</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="querypart.html" class="tsd-signature-type">QueryPart</a></h4>
+							<p>the query part instance to chain operation</p>
 						</li>
 					</ul>
 				</section>

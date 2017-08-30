@@ -70,9 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>QueryInsert is private part of the API.
-								For design reasons this class should not be used directly and
-								will move later. Use this class with <a href="../globals.html#insert">Insert</a> function.
+						<dd><p>QueryInsert</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>For design reasons this class should not be used directly. Use this class with <a href="../globals.html#insert">Insert</a> function.
 								Prefer use of save() method instead of Insert for a single entry.
 							Insert optimize multiple entry insertion with bulk mecanisme for example.</p>
 						</dd>
@@ -119,7 +120,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 						<h4>T<span class="tsd-signature-symbol">: </span><a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>exdends <a href="dbhelpermodel.html">DbHelperModel</a>, a model declared with table and column annotations</p>
+								<p>@extends DbHelperModel a model declared with table and column annotations</p>
 							</div>
 						</div>
 					</li>
@@ -173,7 +174,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/insert.model.ts#L72">lib/core/models/queries/insert.model.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/insert.model.ts#L73">lib/core/models/queries/insert.model.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -189,7 +190,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 									<h5>model: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>extention</p>
+											<p>DbHelper model or list of models</p>
 										</div>
 									</div>
 								</li>
@@ -207,28 +208,28 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/insert.model.ts#L80">lib/core/models/queries/insert.model.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/insert.model.ts#L81">lib/core/models/queries/insert.model.ts:81</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>extention</p>
+							<p>DbHelper model or list of models</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;INSERT&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"INSERT"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;INSERT&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/insert.model.ts#L72">lib/core/models/queries/insert.model.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/insert.model.ts#L73">lib/core/models/queries/insert.model.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>type, statement type</p>
+							<dt>constant</dt>
+							<dd><p>{string} type statement type</p>
 							</dd>
 						</dl>
 					</div>
@@ -236,18 +237,18 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
 					<a name="sqlite_prams_limit" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> SQLITE_<wbr>PRAMS_<wbr>LIMIT</h3>
-					<div class="tsd-signature tsd-kind-icon">SQLITE_<wbr>PRAMS_<wbr>LIMIT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;999</span></div>
+					<div class="tsd-signature tsd-kind-icon">SQLITE_<wbr>PRAMS_<wbr>LIMIT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">999</span><span class="tsd-signature-symbol"> =&nbsp;999</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/insert.model.ts#L66">lib/core/models/queries/insert.model.ts:66</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/insert.model.ts#L67">lib/core/models/queries/insert.model.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>static</dt>
 							<dd></dd>
-							<dt>property</dt>
-							<dd><p>SQLITE_PRAMS_LIMIT is a standard SQLite driver limit
+							<dt>constant</dt>
+							<dd><p>{number} SQLITE_PRAMS_LIMIT is a standard SQLite driver limit
 									this parameter will probably be customizable in a futrue
 								release</p>
 							</dd>
@@ -267,7 +268,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/insert.model.ts#L90">lib/core/models/queries/insert.model.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/insert.model.ts#L91">lib/core/models/queries/insert.model.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +294,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/insert.model.ts#L139">lib/core/models/queries/insert.model.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/insert.model.ts#L140">lib/core/models/queries/insert.model.ts:140</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -304,7 +305,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>observable to subscribe</p>
+							<p>observable to subscribe and manage results</p>
 						</li>
 					</ul>
 				</section>
@@ -322,7 +323,7 @@ Insert(todos).exec().subscribe(<span class="hljs-function">(<span class="hljs-pa
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="queryinsert.html" class="tsd-kind-icon">Query<wbr>Insert</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">

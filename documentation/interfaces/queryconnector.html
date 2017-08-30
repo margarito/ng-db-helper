@@ -70,9 +70,11 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>interface</dt>
-						<dd><p>QueryConnector is an interface allowing to customize connector
-								This interface allow to switch between rdb solution like cordova-sqlite-storage
-								or Websql.
+						<dd><p>QueryConnector</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>This interface allow to customize connector
+								It switch between rdb solution like cordova-sqlite-storage or Websql.
 							The purpose is to be able to switch platform without modifying any line of the application code.</p>
 						</dd>
 						<dt>author</dt>
@@ -129,7 +131,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-connector.interface.ts#L53">lib/core/interfaces/query-connector.interface.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-connector.interface.ts#L65">lib/core/interfaces/query-connector.interface.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -141,7 +143,7 @@
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>Observable   passing string version after version is checked</p>
+							<p>passing string version after version is checked</p>
 						</li>
 					</ul>
 				</section>
@@ -155,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-connector.interface.ts#L35">lib/core/interfaces/query-connector.interface.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-connector.interface.ts#L47">lib/core/interfaces/query-connector.interface.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -181,7 +183,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-connector.interface.ts#L45">lib/core/interfaces/query-connector.interface.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-connector.interface.ts#L57">lib/core/interfaces/query-connector.interface.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -194,7 +196,7 @@
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>Observable   passing true if connector is ready
+							<p>passing true if connector is ready
 							passing false if connector will never be ready</p>
 						</li>
 					</ul>
@@ -209,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-connector.interface.ts#L25">lib/core/interfaces/query-connector.interface.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-connector.interface.ts#L28">lib/core/interfaces/query-connector.interface.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -225,12 +227,12 @@
 									<h5>dbQuery: <a href="../classes/dbquery.html" class="tsd-signature-type">DbQuery</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>DbQuery object containing query and query params.
-										see <a href="../classes/dbquery.html">DbQuery</a></p>
+										@see {DbQuery}</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>Obsevable   passing {@link QueryResult<any>} on query success
+							<p>passing {@link QueryResult<any>} on query success
 							passing <a href="../classes/queryerror.html">QueryError</a> on query error</p>
 						</li>
 					</ul>
@@ -245,16 +247,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-connector.interface.ts#L27">lib/core/interfaces/query-connector.interface.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-connector.interface.ts#L39">lib/core/interfaces/query-connector.interface.ts:39</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>queryBatch connector method to fire many queries in a single transaction</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>dbQueries: <a href="../classes/dbquery.html" class="tsd-signature-type">DbQuery</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>DbQuery object containing query and query params.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>passing {@link QueryResult<any>} on query success
+							passing <a href="../classes/queryerror.html">QueryError</a> on query error</p>
 						</li>
 					</ul>
 				</section>

@@ -70,9 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>QueryDelete is private part of the API.
-								For design reasons this class should not be used directly and
-							will move later. Use this class through <a href="../globals.html#delete">Delete</a> function.</p>
+						<dd><p>QueryDelete</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>For design reasons this class should not be used directly. Use this class through <a href="../globals.html#delete">Delete</a> function.</p>
 						</dd>
 						<dt>example</dt>
 						<dd><pre><code class="lang-typesrcript">// Delete a specific model using Delete
@@ -107,7 +108,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 						<h4>T<span class="tsd-signature-symbol">: </span><a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>exdends <a href="dbhelpermodel.html">DbHelperModel</a>, a model declared with table
+								<p>@extends DbHelperModel a model declared with table
 								and column annotations</p>
 							</div>
 						</div>
@@ -163,7 +164,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L54">lib/core/models/queries/delete.model.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L56">lib/core/models/queries/delete.model.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -197,7 +198,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L62">lib/core/models/queries/delete.model.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L64">lib/core/models/queries/delete.model.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -209,16 +210,16 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;DELETE&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"DELETE"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;DELETE&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L47">lib/core/models/queries/delete.model.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L49">lib/core/models/queries/delete.model.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
-							<dt>property</dt>
-							<dd><p>type the type of statement, should not be modified</p>
+							<dt>constant</dt>
+							<dd><p>{string} type the type of statement, should not be modified</p>
 							</dd>
 						</dl>
 					</div>
@@ -229,13 +230,13 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 					<div class="tsd-signature tsd-kind-icon">where<wbr>Clauses<span class="tsd-signature-symbol">:</span> <a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L54">lib/core/models/queries/delete.model.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L56">lib/core/models/queries/delete.model.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>whereClauses is <a href="clausegroup.html">ClauseGroup</a> instance containing
+							<dd><p>{ClauseGroup} whereClauses is <a href="clausegroup.html">ClauseGroup</a> instance containing
 								where clauses</p>
 							</dd>
 						</dl>
@@ -254,7 +255,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L88">lib/core/models/queries/delete.model.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L90">lib/core/models/queries/delete.model.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -280,7 +281,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L118">lib/core/models/queries/delete.model.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L120">lib/core/models/queries/delete.model.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -291,7 +292,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/queryresult.html" class="tsd-signature-type">QueryResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>observable to subscribe</p>
+							<p>observable to subscribe and retrieve results</p>
 						</li>
 					</ul>
 				</section>
@@ -299,13 +300,13 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 					<a name="where" class="tsd-anchor"></a>
 					<h3>where</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querydelete.html" class="tsd-signature-type">QueryDelete</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>clauses<span class="tsd-signature-symbol">: </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querydelete.html" class="tsd-signature-type">QueryDelete</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/delete.model.ts#L73">lib/core/models/queries/delete.model.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/delete.model.ts#L75">lib/core/models/queries/delete.model.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -319,9 +320,9 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span></h5>
+									<h5>clauses: <a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol"> | </span><a href="clause.html" class="tsd-signature-type">Clause</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="clausegroup.html" class="tsd-signature-type">ClauseGroup</a><span class="tsd-signature-symbol"> | </span><a href="compositeclause.html" class="tsd-signature-type">CompositeClause</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>ClauseGroup, Clause, Clause list of dictionnary of clauses</p>
+										<p>list of clauses</p>
 									</div>
 								</li>
 							</ul>
@@ -344,7 +345,7 @@ Delete(Todo).where({isDone: true}).exec().subscribe((qr: QueryResult&lt;any&gt;)
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-private tsd-is-external">
+					<li class="current tsd-kind-class tsd-has-type-parameter tsd-is-external">
 						<a href="querydelete.html" class="tsd-kind-icon">Query<wbr>Delete</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">

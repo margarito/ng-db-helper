@@ -70,7 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>Clause is a single clause for where statement.</p>
+						<dd><p>Clause</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>This entity is a single clause for where statement.</p>
 						</dd>
 						<dt>example</dt>
 						<dd><pre><code class="lang-typescript"><span class="hljs-comment">// Create a group of clauses</span>
@@ -167,16 +170,36 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L124">lib/core/models/queries/clause.model.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L168">lib/core/models/queries/clause.model.ts:168</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>constructor</dt>
+									<dd><p>create a new instance of Clause</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> key: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the clause key</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the clause value</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="clause.html" class="tsd-signature-type">Clause</a></h4>
@@ -192,14 +215,17 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">comparator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;ClauseComparators.EQ</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L124">lib/core/models/queries/clause.model.ts:124</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L168">lib/core/models/queries/clause.model.ts:168</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>comparator is a comparator that define the type of
+							<dd><p>{string} comparator is a comparator that define the type of
 								relation with the value to compare with and the result.</p>
+							</dd>
+							<dt>default</dt>
+							<dd><p>ClauseComparators.EQ</p>
 							</dd>
 						</dl>
 					</div>
@@ -210,7 +236,7 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">key<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L51">lib/core/models/queries/clause.model.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L57">lib/core/models/queries/clause.model.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -220,13 +246,13 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">not<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L117">lib/core/models/queries/clause.model.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L159">lib/core/models/queries/clause.model.ts:159</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>not is an additionnal operator to invert condition</p>
+							<dd><p>{boolean} not is an additionnal operator to invert condition</p>
 							</dd>
 						</dl>
 					</div>
@@ -238,13 +264,16 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/iclause.html">IClause</a>.<a href="../interfaces/iclause.html#operator">operator</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L49">lib/core/models/queries/clause.model.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L55">lib/core/models/queries/clause.model.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>operator is used as join clause condition</p>
+							<dd><p>{string} operator is used as join clause condition</p>
+							</dd>
+							<dt>default</dt>
+							<dd><p>ClauseOperators.AND</p>
 							</dd>
 						</dl>
 					</div>
@@ -255,13 +284,13 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L111">lib/core/models/queries/clause.model.ts:111</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L153">lib/core/models/queries/clause.model.ts:153</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>value is the column value to compare with</p>
+							<dd><p>{any} value is the column value to compare with</p>
 							</dd>
 						</dl>
 					</div>
@@ -280,7 +309,7 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L103">lib/core/models/queries/clause.model.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L145">lib/core/models/queries/clause.model.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -296,14 +325,49 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L58">lib/core/models/queries/clause.model.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L100">lib/core/models/queries/clause.model.ts:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<dl class="tsd-comment-tags">
 									<dt>method</dt>
 									<dd><p>key is table column name corresponding to the field
-										to compare with</p>
+											to compare with. Since 0.2, key support complex values. You can use an appended key with
+											[optional]operator + [optional]not + column name + [optional]comparator with space separator
+											or double underscore (__).
+											Be carefull, get key will not return the value set for key. The get method only retrieve the column
+										informations.</p>
+									</dd>
+									<dt>example:</dt>
+									<dd><pre><code class="lang-typescript"> <span class="hljs-comment">// function to quickly get current timestamp</span>
+ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">now</span>(<span class="hljs-params"></span>): <span class="hljs-title">number</span> </span>{
+     <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()).getTime()
+ }
+
+ <span class="hljs-comment">// Select all done or passed todo</span>
+ Select(Todo).where({isDone: <span class="hljs-literal">true</span>, or__dueDate__lt: now()}).subcribe(<span class="hljs-function">(<span class="hljs-params">qr: QueryResult&lt;Todo&gt;</span>) =&gt;</span> {
+     <span class="hljs-keyword">const</span> ids = &lt;<span class="hljs-built_in">number</span>[]&gt;[];
+     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; qr.rows.length; i++) {
+         <span class="hljs-comment">// check if todo really need to be deleted ...</span>
+         ids.push(qr.rows.item(i).id);
+     }
+
+     Delete(Todo).where(id__in:ids).exec().subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+         <span class="hljs-comment">// todos are delete</span>
+     }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+         <span class="hljs-built_in">console</span>.error(err);
+     })
+ }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+     <span class="hljs-built_in">console</span>.error(err);
+ });
+
+ <span class="hljs-comment">// delete directly without check</span>
+ Delete(Todo).where({isDone: <span class="hljs-literal">true</span>, or__dueDate__lt: now()}).subcribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+     <span class="hljs-comment">// delete done</span>
+ }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+     <span class="hljs-built_in">console</span>.error(err);
+ });
+</code></pre>
 									</dd>
 								</dl>
 							</div>
@@ -331,7 +395,7 @@ Select(Todo).where(group).exec().subscribe(<span class="hljs-function">(<span cl
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iclause.html">IClause</a>.<a href="../interfaces/iclause.html#build">build</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/queries/clause.model.ts#L142">lib/core/models/queries/clause.model.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/queries/clause.model.ts#L194">lib/core/models/queries/clause.model.ts:194</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

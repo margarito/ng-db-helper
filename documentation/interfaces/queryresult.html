@@ -70,7 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>interface</dt>
-						<dd><p>QueryResult is an interface to standardize query result
+						<dd><p>QueryResult</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>This interface standardize query result
 								In many case this could be any, but this allow to return typed object
 							on Select queries.</p>
 						</dd>
@@ -134,13 +137,13 @@
 					<div class="tsd-signature tsd-kind-icon">insert<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-result.interface.ts#L21">lib/core/interfaces/query-result.interface.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-result.interface.ts#L25">lib/core/interfaces/query-result.interface.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>insertId, rowid of the last inserted model</p>
+							<dd><p>{number} insertId rowid of the last inserted model</p>
 							</dd>
 						</dl>
 					</div>
@@ -151,9 +154,16 @@
 					<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-result.interface.ts#L22">lib/core/interfaces/query-result.interface.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-result.interface.ts#L30">lib/core/interfaces/query-result.interface.ts:30</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>{Object} rows rows accessor</p>
+							</dd>
+						</dl>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -162,7 +172,7 @@
 								<div class="tsd-comment tsd-typography">
 									<dl class="tsd-comment-tags">
 										<dt>property</dt>
-										<dd><p>length, number of rows of the query result</p>
+										<dd><p>{number} length number of rows of the query result</p>
 										</dd>
 									</dl>
 								</div>
@@ -176,7 +186,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-result.interface.ts#L35">lib/core/interfaces/query-result.interface.ts:35</a></li>
+												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-result.interface.ts#L43">lib/core/interfaces/query-result.interface.ts:43</a></li>
 											</ul>
 										</aside>
 										<div class="tsd-comment tsd-typography">
@@ -190,10 +200,13 @@
 										<ul class="tsd-parameters">
 											<li>
 												<h5>i: <span class="tsd-signature-type">number</span></h5>
+												<div class="tsd-comment tsd-typography">
+													<p>the index row, index must verify 0 &lt;= i &lt; length</p>
+												</div>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
-										<p>T, the model returned by query</p>
+										<p>the model returned by query</p>
 									</li>
 							</ul>        </li>
 							<li class="tsd-parameter">
@@ -205,10 +218,21 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-result.interface.ts#L37">lib/core/interfaces/query-result.interface.ts:37</a></li>
+												<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-result.interface.ts#L52">lib/core/interfaces/query-result.interface.ts:52</a></li>
 											</ul>
 										</aside>
+										<div class="tsd-comment tsd-typography">
+											<dl class="tsd-comment-tags">
+												<dt>method</dt>
+												<dd><p>toArray convert the rows to an array of items</p>
+												</dd>
+												<dt>since</dt>
+												<dd><p>0.2</p>
+												</dd>
+											</dl>
+										</div>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
+										<p>an array of templated object.</p>
 									</li>
 							</ul>        </li>
 						</ul>
@@ -220,13 +244,13 @@
 					<div class="tsd-signature tsd-kind-icon">rows<wbr>Affected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/interfaces/query-result.interface.ts#L16">lib/core/interfaces/query-result.interface.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/interfaces/query-result.interface.ts#L20">lib/core/interfaces/query-result.interface.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>rowsAffected, number of rows modified by the query</p>
+							<dd><p>{number} rowsAffected number of rows modified by the query</p>
 							</dd>
 						</dl>
 					</div>

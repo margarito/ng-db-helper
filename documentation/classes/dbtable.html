@@ -70,8 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>DbTable extends <a href="tableconfig.html">TableConfig</a> is a table model
-							to help model migration to do his soup</p>
+						<dd><p>DbTable</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>This class is a table model to help model migration to do his soup</p>
 						</dd>
 						<dt>author</dt>
 						<dd><p>Olivier Margarit</p>
@@ -129,13 +131,13 @@
 					<div class="tsd-signature tsd-kind-icon">column<wbr>List<span class="tsd-signature-symbol">:</span> <a href="dbcolumn.html" class="tsd-signature-type">DbColumn</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&lt;DbColumn[]&gt;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L32">lib/core/models/structure/db-table.model.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L44">lib/core/models/structure/db-table.model.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>columnList is an array of DbColumn listing each column
+							<dd><p>{Array<DbColumn>} columnList is an array of DbColumn listing each column
 								sql properties</p>
 							</dd>
 						</dl>
@@ -147,13 +149,13 @@
 					<div class="tsd-signature tsd-kind-icon">columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;&lt;{[index: string]: DbColumn}&gt;{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L37">lib/core/models/structure/db-table.model.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L50">lib/core/models/structure/db-table.model.ts:50</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>column</p>
+							<dd><p>{{[index: string]: DbColumn}} column key/value column list with column name as key</p>
 							</dd>
 						</dl>
 					</div>
@@ -172,13 +174,13 @@
 					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;&lt;{[index: string]: DbColumn}&gt;{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L42">lib/core/models/structure/db-table.model.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L56">lib/core/models/structure/db-table.model.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>fields</p>
+							<dd><p>{{[index: string]: DbColumn}} fields key/value column list with field name as key</p>
 							</dd>
 						</dl>
 					</div>
@@ -197,13 +199,13 @@
 					<div class="tsd-signature tsd-kind-icon">model<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L47">lib/core/models/structure/db-table.model.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L62">lib/core/models/structure/db-table.model.ts:62</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>modelName</p>
+							<dd><p>{string} modelName the model name</p>
 							</dd>
 						</dl>
 					</div>
@@ -214,13 +216,13 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L21">lib/core/models/structure/db-table.model.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L31">lib/core/models/structure/db-table.model.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>name cannot be an option information and is the table
+							<dd><p>{string} name cannot be an option information and is the table
 								name in database</p>
 							</dd>
 						</dl>
@@ -232,9 +234,17 @@
 					<div class="tsd-signature tsd-kind-icon">relations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;&lt;{[index: string]: {[index: string]: DbRelationModel}}&gt;{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L49">lib/core/models/structure/db-table.model.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L69">lib/core/models/structure/db-table.model.ts:69</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>{{[index: string]: {[index: string]: DbRelationModel}}} relations two dimensional relation access by
+								model name and relation key</p>
+							</dd>
+						</dl>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -255,13 +265,13 @@
 					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L26">lib/core/models/structure/db-table.model.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L37">lib/core/models/structure/db-table.model.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>version, the table model version, information to help migration</p>
+							<dd><p>{number} version, the table model version, information to help migration</p>
 							</dd>
 						</dl>
 					</div>
@@ -269,12 +279,21 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
 					<a name="relations_default_key" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> RELATIONS_<wbr>DEFAULT_<wbr>KEY</h3>
-					<div class="tsd-signature tsd-kind-icon">RELATIONS_<wbr>DEFAULT_<wbr>KEY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;default&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">RELATIONS_<wbr>DEFAULT_<wbr>KEY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"default"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;default&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L16">lib/core/models/structure/db-table.model.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L24">lib/core/models/structure/db-table.model.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>constant</dt>
+							<dd><p>{string} RELATIONS_DEFAULT_KEY the default relation key</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
@@ -289,13 +308,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L83">lib/core/models/structure/db-table.model.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L145">lib/core/models/structure/db-table.model.ts:145</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>addRelation add relation to table model</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>model: <span class="tsd-signature-type">object</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the target model of the relation</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
@@ -306,7 +338,7 @@
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L83">lib/core/models/structure/db-table.model.ts:83</a></li>
+															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L145">lib/core/models/structure/db-table.model.ts:145</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-returns-title">Returns <a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
@@ -316,9 +348,15 @@
 								</li>
 								<li>
 									<h5>relation: <a href="dbrelationmodel.html" class="tsd-signature-type">DbRelationModel</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the relation</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> key: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>optional key to manage multiple relations to the same model</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -335,13 +373,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L51">lib/core/models/structure/db-table.model.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L79">lib/core/models/structure/db-table.model.ts:79</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>configure methode to configure table from configurator object</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>config: <a href="tableconfig.html" class="tsd-signature-type">TableConfig</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the configurator</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -358,10 +409,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L73">lib/core/models/structure/db-table.model.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L125">lib/core/models/structure/db-table.model.ts:125</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>getPrimaryColumns get column playing primary role among table&#39;s columns</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="dbcolumn.html" class="tsd-signature-type">DbColumn</a><span class="tsd-signature-symbol">[]</span></h4>
+							<p>the structured primary column list</p>
 						</li>
 					</ul>
 				</section>
@@ -375,13 +437,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L94">lib/core/models/structure/db-table.model.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L167">lib/core/models/structure/db-table.model.ts:167</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>getRelation get relation from the targetted model and the optionale relation key</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>model: <span class="tsd-signature-type">object</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the target model of the relation</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
@@ -392,7 +467,7 @@
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L94">lib/core/models/structure/db-table.model.ts:94</a></li>
+															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L167">lib/core/models/structure/db-table.model.ts:167</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-returns-title">Returns <a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
@@ -402,12 +477,16 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> key: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>optional key to manage multiple relations to the same model</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="dbrelationmodel.html" class="tsd-signature-type">DbRelationModel</a>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
 							</h4>
+							<p>the relation matching to the properties, return is null if no relation matches</p>
 						</li>
 					</ul>
 				</section>
@@ -421,10 +500,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L55">lib/core/models/structure/db-table.model.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L91">lib/core/models/structure/db-table.model.ts:91</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>hasAutoIncrementedPrimaryKey check if table has auto increment column</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>true if table has auto increment column</p>
 						</li>
 					</ul>
 				</section>
@@ -438,10 +528,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/models/structure/db-table.model.ts#L64">lib/core/models/structure/db-table.model.ts:64</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/models/structure/db-table.model.ts#L108">lib/core/models/structure/db-table.model.ts:108</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>hasNoPrimaryKey check if table has no primary key</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>0.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>return true if table has no primary key</p>
 						</li>
 					</ul>
 				</section>

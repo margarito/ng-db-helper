@@ -70,7 +70,10 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>ModelManager, this class is a singleton collecting data model
+						<dd><p>ModelManager</p>
+						</dd>
+						<dt>description</dt>
+						<dd><p>This class is a singleton collecting data model
 								This manager has not to be exposed, it is used to provide DataModel
 							every time it is necessary</p>
 						</dd>
@@ -127,13 +130,13 @@
 					<div class="tsd-signature tsd-kind-icon">models<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L42">lib/core/managers/model-manager.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L45">lib/core/managers/model-manager.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>models, hashmap of model names with theirs linked table name</p>
+							<dd><p>{{[index: string]: string}} models hashmap of model names with theirs linked table name</p>
 							</dd>
 						</dl>
 					</div>
@@ -152,13 +155,13 @@
 					<div class="tsd-signature tsd-kind-icon">tables<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L36">lib/core/managers/model-manager.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L39">lib/core/managers/model-manager.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
 							<dt>property</dt>
-							<dd><p>tables, hashmap of table names to their datamodel</p>
+							<dd><p>{{[index: string]: DbTable}} tables hashmap of table names to their datamodel</p>
 							</dd>
 						</dl>
 					</div>
@@ -177,7 +180,7 @@
 					<div class="tsd-signature tsd-kind-icon">instance<span class="tsd-signature-symbol">:</span> <a href="modelmanager.html" class="tsd-signature-type">ModelManager</a><span class="tsd-signature-symbol"> =&nbsp;new ModelManager()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L30">lib/core/managers/model-manager.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L33">lib/core/managers/model-manager.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -185,7 +188,7 @@
 							<dt>static</dt>
 							<dd></dd>
 							<dt>property</dt>
-							<dd><p>instance, private reference to the model manager instance</p>
+							<dd><p>{ModelManager} instance private reference to the model manager instance</p>
 							</dd>
 						</dl>
 					</div>
@@ -196,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L23">lib/core/managers/model-manager.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L26">lib/core/managers/model-manager.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -204,8 +207,8 @@
 							<dt>static</dt>
 							<dd></dd>
 							<dt>property</dt>
-							<dd><p>version of the current data model, this is provided by the
-								module configuration</p>
+							<dd><p>{string} version the current data model version, this is provided by the
+								module configuration, @see NgDbHelperModuleConfig</p>
 							</dd>
 						</dl>
 					</div>
@@ -223,7 +226,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L62">lib/core/managers/model-manager.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L65">lib/core/managers/model-manager.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -238,6 +241,9 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>dbTable: <a href="dbtable.html" class="tsd-signature-type">DbTable</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>newModel model extending DbHelperModel</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -254,7 +260,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L76">lib/core/managers/model-manager.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L81">lib/core/managers/model-manager.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -283,7 +289,7 @@
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L76">lib/core/managers/model-manager.ts:76</a></li>
+															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L81">lib/core/managers/model-manager.ts:81</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-returns-title">Returns <a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
@@ -299,6 +305,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>the column name for field &quot;fieldName&quot; of the model &quot;model&quot;</p>
 						</li>
 					</ul>
 				</section>
@@ -312,7 +319,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L100">lib/core/managers/model-manager.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L105">lib/core/managers/model-manager.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -323,7 +330,7 @@
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="datamodel.html" class="tsd-signature-type">DataModel</a></h4>
-							<p>DataModel generated by decorators</p>
+							<p>data model generated by decorators</p>
 						</li>
 					</ul>
 				</section>
@@ -337,7 +344,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L122">lib/core/managers/model-manager.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L129">lib/core/managers/model-manager.ts:129</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -352,11 +359,12 @@
 								<li>
 									<h5>model: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>model extending DbHelperModel</p>
+										<p>reference to the model</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="dbtable.html" class="tsd-signature-type">DbTable</a></h4>
+							<p>the table declared for the model</p>
 						</li>
 					</ul>
 				</section>
@@ -370,7 +378,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L112">lib/core/managers/model-manager.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L117">lib/core/managers/model-manager.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -397,7 +405,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L138">lib/core/managers/model-manager.ts:138</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L147">lib/core/managers/model-manager.ts:147</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -424,7 +432,7 @@
 												<li class="tsd-description">
 													<aside class="tsd-sources">
 														<ul>
-															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L138">lib/core/managers/model-manager.ts:138</a></li>
+															<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L147">lib/core/managers/model-manager.ts:147</a></li>
 														</ul>
 													</aside>
 													<h4 class="tsd-returns-title">Returns <a href="dbhelpermodel.html" class="tsd-signature-type">DbHelperModel</a></h4>
@@ -434,6 +442,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>table name</p>
 						</li>
 					</ul>
 				</section>
@@ -447,7 +456,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/39a7bed/lib/core/managers/model-manager.ts#L51">lib/core/managers/model-manager.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/margarito/ng-db-helper/blob/164d082/lib/core/managers/model-manager.ts#L54">lib/core/managers/model-manager.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -455,12 +464,12 @@
 									<dt>static</dt>
 									<dd></dd>
 									<dt>method</dt>
-									<dd><p>getInstance, methode that return the manager instance</p>
+									<dd><p>getInstance methode that return the manager instance</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="modelmanager.html" class="tsd-signature-type">ModelManager</a></h4>
-							<p>ModelManager unique instance</p>
+							<p>the unique instance</p>
 						</li>
 					</ul>
 				</section>
