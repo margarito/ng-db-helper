@@ -1,8 +1,8 @@
-import { QueryError } from '../../core/errors/query.error';
+import { QueryError } from 'ts-db-helper';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { Create } from '../../core/models/queries/create.model';
-import { DataModel } from '../../core/models/structure/data-model.model';
+import { Create } from 'ts-db-helper';
+import { DataModel } from 'ts-db-helper';
 
 import 'rxjs/add/observable/concat';
 

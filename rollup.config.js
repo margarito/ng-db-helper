@@ -1,3 +1,6 @@
+import commonjs from 'rollup-plugin-commonjs';
+import nodeResolve from 'rollup-plugin-node-resolve';
+
 export default {
     entry: 'dist/index.js',
     dest: 'dist/bundles/ng-db-helper.umd.js',
@@ -6,6 +9,8 @@ export default {
     moduleName: 'NgDbHelperModule',
     globals: {
         '@angular/core': 'ng.core',
+        'ts-db-helper': 'ts-db-helper',
+        'ts-db-helper/src/core/managers/query-manager': 'QueryManager',
         'rxjs/Observable': 'Rx',
         'rxjs/Observer': 'Rx',
         'rxjs/Subject': 'Rx',
@@ -23,5 +28,12 @@ export default {
         'rxjs/add/operator/map',
         'rxjs/add/operator/share',
         'rxjs/add/observable/concat'
+    ],
+    plugins: [
+        nodeResolve({
+            jsnext: true,
+            main: true
+        }),
+        commonjs()
     ]
-}
+};

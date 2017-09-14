@@ -25,8 +25,9 @@ about how easy it is !
 
 ## Usage index
 
-- [Initialization](./chapters/initialization.md)
-- [Create your models](./chapters/model-creation.md)
+- Get started
+  - [Initialization](./chapters/initialization.md)
+  - [Create your models](./chapters/model-creation.md)
 - Queries
   - [Select](./chapters/query-select.md)
   - [Insert](./chapters/query-insert.md)

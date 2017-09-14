@@ -1,14 +1,14 @@
 import { QueryResultWrapper } from './query-result-wrapper';
-import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
-import { ModelMigration } from '../core/interfaces/model-migration.interface';
-import { QueryError } from '../core/errors/query.error';
+import { UnsatisfiedRequirementError } from 'ts-db-helper';
+import { ModelMigration } from 'ts-db-helper';
+import { QueryError } from 'ts-db-helper';
 import { CordovaSqliteConnectorConfiguration } from './configurations/cordova-sqlite-connector-configuration';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { QueryResult } from '../core/interfaces/query-result.interface';
-import { DbQuery } from '../core/models/db-query.model';
-import { DataModel } from '../core/models/structure/data-model.model';
-import { QueryConnector } from '../core/interfaces/query-connector.interface';
+import { QueryResult } from 'ts-db-helper';
+import { DbQuery } from 'ts-db-helper';
+import { DataModel } from 'ts-db-helper';
+import { QueryConnector } from 'ts-db-helper';
 
 /**
  * @class CordovaSqliteConnector

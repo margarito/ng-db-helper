@@ -3,9 +3,7 @@
     "version": "0.2.0",
     "license": "MIT",
     "description": "Simple db helper for typescript like an orm with plugable connectors.",
-    "author": {
-        "name": "Olivier Margarit"
-    },
+    "author": "Olivier Margarit",
     "keywords": [
         "angular",
         "angular 2",
@@ -43,6 +41,7 @@
         "@angular/core": "^4.0.0",
         "core-js": "^2.4.1",
         "rxjs": "^5.1.0",
+        "ts-db-helper": "0.0.1",
         "zone.js": "^0.8.4"
     },
     "devDependencies": {
@@ -52,6 +51,8 @@
         "copyfiles": "^1.2.0",
         "rimraf": "^2.6.1",
         "rollup": "~0.41.6",
+        "rollup-plugin-commonjs": "^8.2.1",
+        "rollup-plugin-node-resolve": "^3.0.0",
         "tslint": "^5.6.0",
         "typedoc": "^0.8.0",
         "typescript": "^2.2.2",

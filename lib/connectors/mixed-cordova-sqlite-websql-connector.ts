@@ -4,12 +4,12 @@ import { WebsqlConnectorConfiguration } from './configurations/websql-connector-
 import { CordovaSqliteConnectorConfiguration } from './configurations/cordova-sqlite-connector-configuration';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { QueryResult } from '../core/interfaces/query-result.interface';
-import { DbQuery } from '../core/models/db-query.model';
-import { ModelMigration } from '../core/interfaces/model-migration.interface';
-import { QueryConnector } from '../core/interfaces/query-connector.interface';
-import { DataModel } from '../core/models/structure/data-model.model';
-import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
+import { QueryResult } from 'ts-db-helper';
+import { DbQuery } from 'ts-db-helper';
+import { ModelMigration } from 'ts-db-helper';
+import { QueryConnector } from 'ts-db-helper';
+import { DataModel } from 'ts-db-helper';
+import { UnsatisfiedRequirementError } from 'ts-db-helper';
 
 /**
  * @class MixedCordovaSqliteWebsqlConnector

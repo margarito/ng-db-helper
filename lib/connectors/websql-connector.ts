@@ -1,15 +1,15 @@
 import { toArray } from 'rxjs/operator/toArray';
 import { QueryResultWrapper } from './query-result-wrapper';
-import { UnsatisfiedRequirementError } from '../core/errors/unsatisfied-requirement.error';
-import { QueryError } from '../core/errors/query.error';
-import { DbQuery } from '../core/models/db-query.model';
+import { UnsatisfiedRequirementError } from 'ts-db-helper';
+import { QueryError } from 'ts-db-helper';
+import { DbQuery } from 'ts-db-helper';
 import { WebsqlConnectorConfiguration } from './configurations/websql-connector-configuration';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { DataModel } from '../core/models/structure/data-model.model';
-import { QueryConnector } from '../core/interfaces/query-connector.interface';
-import { ModelMigration } from '../core/interfaces/model-migration.interface';
-import { QueryResult } from '../core/interfaces/query-result.interface';
+import { DataModel } from 'ts-db-helper';
+import { QueryConnector } from 'ts-db-helper';
+import { ModelMigration } from 'ts-db-helper';
+import { QueryResult } from 'ts-db-helper';
 
 /**
  * @class WebsqlConnector
