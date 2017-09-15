@@ -1,5 +1,8 @@
 # Mixed cordova-websql connector
 
+/!\ Requirements: this connector will work only if you add the following cordova plugins in your application,
+cordova-sqlite-storage, cordova-plugin-file, cordova-plugin-device or deploy the application on WebSQL capable browser.
+
 This connector is the most adaptive connector. It switch on one of the previous connector considering support and is cordova first. 
 As WebsqlConnectorConfiguration is inclusive compared to CordovaSqliteConnectorConfiguration, it is the second configuration that is used to configure the connector :
 

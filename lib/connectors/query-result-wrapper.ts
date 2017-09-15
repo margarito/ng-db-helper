@@ -1,4 +1,4 @@
-import { QueryResult } from 'ts-db-helper';
+import { QueryResult } from '../ts-db-helper/index';
 
 /**
  * @private

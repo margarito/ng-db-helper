@@ -1,5 +1,5 @@
-import { QueryConnector } from 'ts-db-helper';
-import { ModelMigration } from 'ts-db-helper';
+import { QueryConnector } from './ts-db-helper/index';
+import { ModelMigration } from './ts-db-helper/index';
 
 /**
  * @class NgDbHelperModuleConfig is a config model for the module.

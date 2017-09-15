@@ -1,5 +1,5 @@
 export * from './ng-db-helper.module';
-export * from 'ts-db-helper';
+export * from './ts-db-helper/index';
 export { CordovaSqliteConnector } from './connectors/cordova-sqlite-connector';
 export { MixedCordovaSqliteWebsqlConnector } from './connectors/mixed-cordova-sqlite-websql-connector';
 export { WebsqlConnector } from './connectors/websql-connector';

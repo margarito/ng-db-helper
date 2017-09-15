@@ -13,6 +13,7 @@
             "rxjs/*": ["node_modules/rxjs/*"],
             "ts-db-helper": ["node_modules/ts-db-helper"]
         },
+
         "rootDir": ".",
         "outDir": "dist",
         "sourceMap": true,
@@ -24,6 +25,9 @@
             "dom"
         ]
     },
+    "include": [
+        "node_modules/ts-db-helper/**/*"
+    ],
     "files": [
         "index.ts"
     ],

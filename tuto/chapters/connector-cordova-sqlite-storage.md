@@ -1,5 +1,8 @@
 # cordova-sqlite-storage connector
 
+/!\ Requirements: this connector will work only if you add the following cordova plugins in your application,
+cordova-sqlite-storage, cordova-plugin-file, cordova-plugin-device
+
 `cordova-sqlite-storage` is the most use plugin by mobile developper using cordova. This connector
 could be the most use with this module. This how to set it up:
 
