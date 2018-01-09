@@ -1,6 +1,6 @@
 import { NgDbHelperModuleConfig } from './ng-db-helper-module-config';
 import { ModuleWithProviders, NgModule, Optional } from '@angular/core';
-import { QueryManager } from './ts-db-helper/index';
+import { QueryManager } from 'ts-db-helper';
 
 /**
  * @module NgDbHelperModule the awesome module to help developers to manage their

@@ -13,9 +13,11 @@ for (const field of fieldsToCopy) {
     distPackage[field] = package[field];
 }
 
+distPackage.dependencies = {};
+distPackage.dependencies['ts-db-helper'] = package.dependencies['ts-db-helper'];
+
 distPackage.peerDependencies = {
     '@angular/core': '^4.0.0',
-    'ts-db-helper': '^0.0.1',
     'rxjs': '^5.1.0'
 };
 

@@ -1,15 +1,17 @@
 import { toArray } from 'rxjs/operator/toArray';
 import { QueryResultWrapper } from './query-result-wrapper';
-import { UnsatisfiedRequirementError } from '../ts-db-helper/index';
-import { QueryError } from '../ts-db-helper/index';
-import { DbQuery } from '../ts-db-helper/index';
+import {
+  UnsatisfiedRequirementError,
+  QueryError,
+  DbQuery,
+  DataModel,
+  QueryConnector,
+  ModelMigration,
+  QueryResult
+} from 'ts-db-helper';
 import { WebsqlConnectorConfiguration } from './configurations/websql-connector-configuration';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { DataModel } from '../ts-db-helper/index';
-import { QueryConnector } from '../ts-db-helper/index';
-import { ModelMigration } from '../ts-db-helper/index';
-import { QueryResult } from '../ts-db-helper/index';
 
 /**
  * @class WebsqlConnector
@@ -67,7 +69,9 @@ export class WebsqlConnector implements QueryConnector, ModelMigration {
             this.dbValue = (window as {[index: string]: any}).openDatabase(this.config.dbName, '', this.config.dbName, 10000000);
         }
         return this.dbValue;
-    };
+    }
+
+    public supportRowid = true;
 
     /**
      * @constructor

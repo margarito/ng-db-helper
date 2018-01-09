@@ -1,6 +1,6 @@
 {
     "name": "ng-db-helper",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "license": "MIT",
     "description": "Simple db helper for typescript like an orm with plugable connectors.",
     "author": "Olivier Margarit",
@@ -41,6 +41,7 @@
         "@angular/core": "^4.0.0",
         "core-js": "^2.4.1",
         "rxjs": "^5.1.0",
+        "ts-db-helper": "0.0.14",
         "zone.js": "^0.8.4"
     },
     "devDependencies": {
