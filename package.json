@@ -41,7 +41,7 @@
         "@angular/core": "^4.0.0",
         "core-js": "^2.4.1",
         "rxjs": "^5.1.0",
-        "ts-db-helper": "0.0.14",
+        "ts-db-helper": "0.0.15",
         "zone.js": "^0.8.4"
     },
     "devDependencies": {
