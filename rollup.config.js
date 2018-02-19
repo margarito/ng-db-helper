@@ -5,6 +5,7 @@ export default {
     format: 'umd',
     moduleName: 'NgDbHelperModule',
     globals: {
+        'ts-db-helper': 'TsDbHelper',
         '@angular/core': 'ng.core',
         'rxjs/Observable': 'Rx',
         'rxjs/Observer': 'Rx',
@@ -15,6 +16,7 @@ export default {
         'rxjs/add/observable/concat': 'Rx.Observable.prototype'
     },
     external: [
+        'ts-db-helper',
         '@angular/core',
         'rxjs/Observable',
         'rxjs/Observer',
